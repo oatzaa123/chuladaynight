@@ -40,8 +40,10 @@ export default {
     width: 100%;
     height: 100%;
     .menu {
-        float: right;
+        position: absolute;
+        right: 0;
         cursor: pointer;
+        z-index: 100;
     }
 }
 </style>

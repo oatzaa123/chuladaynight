@@ -132,7 +132,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.default {
+    background-image: url('../../assets/images/home/section1/Rectangle 47.png') !important;
+}
 .container {
     padding-top: var(--bs-gutter-x, 1.75rem);
     .title {

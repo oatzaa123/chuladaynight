@@ -130,7 +130,15 @@ export default {
         return {
             ...toRefs(state),
             bgToggle,
-            rangeValue: computed(() => store.getters['showRangeValue']),
+            rangeValue: computed({
+                get() {
+                    return store.getters['showRangeValue']
+                },
+                set(newValue) {
+                    // set something
+                    store.commit('setRangeValue', newValue)
+                },
+            }),
             isNight: computed(() => store.getters['showIsNight']),
         }
     },
