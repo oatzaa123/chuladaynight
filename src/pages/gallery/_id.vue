@@ -1,21 +1,27 @@
 <template>
     <div class="main-gallery-id">
         <div class="left-arrow">
-            <button class="btn btn-light customButton">
+            <button
+                @click.prevent="onBackwardClick"
+                class="btn btn-light customButton"
+            >
                 <div class="arrow"></div>
                 <div class="left"></div>
             </button>
         </div>
         <div class="right-arrow">
-            <button class="btn btn-light customButton">
+            <button
+                @click.prevent="onForwardClick"
+                class="btn btn-light customButton"
+            >
                 <div class="arrow"></div>
                 <div class="right"></div>
             </button>
         </div>
-        <div class="container">
+        <div class="container" v-for="item in data" :key="item.id">
             <div class="title-sub-gallery">
                 <div class="text-title">
-                    <p>CHULA FAHMAI</p>
+                    <p>{{ item.title }}</p>
                     <div class="d-flex mb-auto">
                         <div class="live">
                             <span class="dotted"></span>
@@ -37,23 +43,135 @@
                             width="20"
                             class="hover-img"
                         />
-                        POOM JAI ARTIST
+                        {{ item.author }}
                     </p>
-                    <p>POOM JAI ART GROUP</p>
+                    <p>{{ item.group }}</p>
                 </div>
             </div>
+            <div class="live-view"></div>
             <div class="content-sub-gallery">
+                <div class="content-img">
+                    <img :src="item.path" />
+                </div>
+                <div class="content-description">
+                    <p>{{ item.description }}</p>
+                </div>
+            </div>
+            <div class="showreel"></div>
+            <div class="gallery-footer">
                 <img
-                    :src="require('../../assets/images/gallery/Image 44.svg')"
+                    class="profile"
+                    :src="
+                        require('../../assets/images/gallery/Image 44@3X.png')
+                    "
+                    height="120"
                 />
+                <div class="footer-description">
+                    <p>{{ item.author }}</p>
+                    <p>{{ item.group }}</p>
+                    <p>
+                        <img
+                            :src="
+                                require('../../assets/images/icons/phone-icon-18-ffffff-16.png')
+                            "
+                            width="15"
+                            class="hover-img"
+                        />
+                        090 000 0000
+                    </p>
+                    <div class="footer-icon">
+                        <div
+                            class="footer-icon-img"
+                            v-for="item in ['1', '2', '3', '4', '5']"
+                            :key="item"
+                        >
+                            <img
+                                :src="
+                                    require('../../assets/images/icons/Group 327@2x.png')
+                                "
+                                width="35"
+                                height="35"
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+// import useRoute from './../../hooks/useRoute'
+import { computed, ref, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 export default {
-    setup() {},
+    name: 'Gallery-id',
+    setup() {
+        const router = useRouter()
+        const route = useRoute()
+        const store = useStore()
+
+        const data = computed(() => {
+            return store.getters['showGalleryList']
+        })
+
+        const gallery = ref([])
+
+        const onForwardClick = () => {
+            const id = route.params.id
+            const currentIndex = data.value.findIndex(
+                (item) => item.id.toString() === id
+            )
+
+            if (
+                data.value[parseInt(currentIndex) + 1] &&
+                data.value[parseInt(currentIndex) + 1].id
+            ) {
+                router.push({
+                    name: 'Gallery-id',
+                    params: { id: data.value[parseInt(currentIndex) + 1].id },
+                })
+            }
+
+            gallery.value = [data.value[parseInt(currentIndex) + 1]]
+
+            console.log(gallery.value)
+        }
+
+        const onBackwardClick = () => {
+            const id = route.params.id
+            const currentIndex = data.value.findIndex(
+                (item) => item.id.toString() === id
+            )
+
+            if (
+                data.value[parseInt(currentIndex) - 1] &&
+                data.value[parseInt(currentIndex) - 1].id
+            ) {
+                router.push({
+                    name: 'Gallery-id',
+                    params: { id: data.value[parseInt(currentIndex) - 1].id },
+                })
+            }
+
+            gallery.value = [data.value[parseInt(currentIndex) - 1]]
+
+            console.log(gallery.value)
+        }
+
+        onMounted(() => {
+            gallery.value = data.value.filter(
+                (item) => item.id === route.params.id
+            )
+        })
+
+        return {
+            onForwardClick,
+            onBackwardClick,
+            data: gallery,
+        }
+    },
 }
 </script>
 
@@ -66,12 +184,74 @@ export default {
     // backdrop-filter: blur(14px) !important;
     // -webkit-backdrop-filter: blur(14px) !important;
 }
+
+@media (min-width: 576px) {
+    .container,
+    .container-sm {
+        max-width: 540px;
+    }
+}
+@media (min-width: 768px) {
+    .container,
+    .container-md,
+    .container-sm {
+        max-width: 720px;
+    }
+}
+@media (min-width: 992px) {
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm {
+        max-width: 960px;
+    }
+}
+@media (min-width: 1200px) {
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl {
+        max-width: 1060px;
+    }
+}
+@media (min-width: 1400px) {
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl,
+    .container-xxl {
+        max-width: 1140px;
+    }
+}
+.container,
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl,
+.container-xxl {
+    width: 100%;
+    padding-right: var(--bs-gutter-x, 0);
+    padding-left: var(--bs-gutter-x, 0);
+    margin-right: auto;
+    margin-left: auto;
+}
 .main-gallery-id {
+    font-family: 'Kanit-Regular';
+    .container::-webkit-scrollbar {
+        display: none;
+    }
     .container {
         background-image: url('../../assets/images/gallery/BACKGROUND.svg') !important;
-        padding-top: var(--bs-gutter-x, 2rem);
-        min-height: 100vh;
+        padding-top: var(--bs-gutter-x, 3rem);
+        overflow-y: auto;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none;
+        max-height: 100vh;
         .title-sub-gallery {
+            margin: 0 35px;
             .text-title {
                 display: flex;
                 justify-content: space-between;
@@ -127,22 +307,61 @@ export default {
                     hue-rotate(276deg) brightness(103%) contrast(108%);
             }
         }
-        .content-sub-gallery {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .content-sub-gallery,
+        .live-view,
+        .showreel {
+            .content-img {
+                img {
+                    width: 100%;
+                }
+            }
+            .content-description {
+                font-size: 14px;
+                margin: 25px 40px;
+                color: #ffffff;
+            }
+        }
+        .gallery-footer {
+            display: flex;
+            margin: 25px 40px;
+            .profile {
+                margin-right: 25px;
+            }
+            .footer-description {
+                font-size: 14px;
+                color: #ffffff;
+                p {
+                    margin-bottom: 0;
+                }
+                p:nth-child(1) {
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: #ba1bff;
+                }
+                p:nth-child(3) {
+                    margin-bottom: 10px;
+                    img {
+                        margin: auto;
+                    }
+                }
+                .footer-icon {
+                    display: flex;
+                    .footer-icon-img {
+                        margin: 0 3px;
+                    }
+                }
+            }
         }
     }
     position: relative;
     .left-arrow {
         position: fixed;
-        left: 2%;
+        left: 5%;
         top: 50%;
     }
     .right-arrow {
         position: fixed;
-        right: 2%;
+        right: 5%;
         top: 50%;
     }
     .customButton {

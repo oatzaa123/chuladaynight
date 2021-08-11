@@ -41,7 +41,7 @@ export default {
     height: 100%;
     .menu {
         position: absolute;
-        right: 0;
+        right: 6%;
         cursor: pointer;
         z-index: 100;
     }

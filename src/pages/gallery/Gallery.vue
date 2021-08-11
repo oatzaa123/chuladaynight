@@ -36,7 +36,7 @@
                                 </p>
                                 <p>{{ item.group }}</p>
                             </div>
-                            <span>{{ item.discription }}</span>
+                            <span>{{ item.description }}</span>
                         </div>
                     </div>
                 </div>
@@ -48,55 +48,10 @@
 <script>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 export default {
     setup() {
-        const data = ref([
-            {
-                id: 1,
-                path: require('../../assets/images/gallery/Image 49.svg'),
-                title: 'INNOVATION ART 4',
-                author: 'POOM JAI ARTIST',
-                group: 'POOM JAI ART GROUP',
-                discription:
-                    'โครงการ “Chula Art Town” เป็นความร่วมมือกันระหว่างสำนักงานจัดการทรัพย์สิน จุฬาลงกรณ์มหาวิทยาลัย (PMCU), บริษัท อุไรพาณิชย์ จำกัด และ ATM Spray ซึ่งให้การสนับสนุนอุปกรณ์สีสำหรับสร้างสรรค์ผลงาน เนื่องในวาระครบรอบ 36 ปี ของคณะศิลปกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย',
-            },
-            {
-                id: 2,
-                path: require('../../assets/images/gallery/Image 49.svg'),
-                title: 'aaa',
-                author: 'aaa',
-                group: 'aaa',
-                discription:
-                    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident aliquid impedit, placeat minima eos laborum modi. Recusandae natus distinctio aut reprehenderit tempora accusamus possimus quaerat soluta! Voluptas ad in a!',
-            },
-            {
-                id: 3,
-                path: require('../../assets/images/gallery/Image 49.svg'),
-                title: 'aaa',
-                author: 'aaa',
-                group: 'aaa',
-                discription:
-                    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident aliquid impedit, placeat minima eos laborum modi. Recusandae natus distinctio aut reprehenderit tempora accusamus possimus quaerat soluta! Voluptas ad in a!',
-            },
-            {
-                id: 4,
-                path: require('../../assets/images/gallery/Image 49.svg'),
-                title: 'aaa',
-                author: 'aaa',
-                group: 'aaa',
-                discription:
-                    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident aliquid impedit, placeat minima eos laborum modi. Recusandae natus distinctio aut reprehenderit tempora accusamus possimus quaerat soluta! Voluptas ad in a!',
-            },
-            {
-                id: 5,
-                path: require('../../assets/images/gallery/Image 49.svg'),
-                title: 'aaa',
-                author: 'aaa',
-                group: 'aaa',
-                discription:
-                    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident aliquid impedit, placeat minima eos laborum modi. Recusandae natus distinctio aut reprehenderit tempora accusamus possimus quaerat soluta! Voluptas ad in a!',
-            },
-        ])
+        const store = useStore()
 
         const map = ref([
             { path: require('../../assets/images/gallery/Group 294.svg') },
@@ -117,15 +72,15 @@ export default {
             router.push({ name: 'Gallery-id', params: { id } })
         }
 
-        const pictureHover = computed(() => {
-            return map.value[position.value].path
-        })
-
         return {
-            data: data.value,
+            data: computed(() => {
+                return store.getters['showGalleryList']
+            }),
             position: position.value,
             hoverImage,
-            pictureHover,
+            pictureHover: computed(() => {
+                return map.value[position.value].path
+            }),
             onHandleClick,
         }
     },
