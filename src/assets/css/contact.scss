@@ -1,3 +1,17 @@
+$urlImage: "../assets/images";
+.contact-bg {
+  background-image: url("#{$urlImage}/home/section1/BACKGROUND@1X.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  margin: -1.5rem;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  &.bgnight {
+    background-image: url("#{$urlImage}/home/section1/Rectangle 47.png");
+  }
+}
 #contact {
   position: absolute;
   left: 50%;
@@ -44,6 +58,7 @@
             transition: font-size 0.5s;
             font-size: 45.6px;
             margin: 15px 0px 10px 0px;
+            cursor: pointer;
             &.active {
               font-size: 64px;
               margin: 9px 0px 12px 0px;
@@ -56,6 +71,7 @@
             color: $color;
             transition: font-size 0.5s;
             text-shadow: 0px 0px 10px $color;
+            cursor: pointer;
             &.active {
               font-size: 43.2px;
               box-shadow: 0 6px 2px -2px $color;
@@ -64,7 +80,7 @@
           .n {
             position: absolute;
             right: -50px;
-            bottom: -12px;
+            bottom: -40px;
             font-family: "Savoye Regular";
             font-weight: 100;
             color: #1ba7ff;
