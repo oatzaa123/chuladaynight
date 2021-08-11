@@ -61,7 +61,6 @@ import { useStore } from "vuex";
 export default {
   setup() {
     const state = reactive({
-      isNight: true,
       icon: [
         {
           path: require("../assets/images/home/footer/Group 118@2X.png"),
@@ -92,19 +91,6 @@ export default {
     onBeforeMount(() => {
       getTime();
     });
-
-    // watch(
-    //   () => store.getters["showRangeValue"],
-    //   (rangeValue) => {
-    //     var value = ((rangeValue - 0) / (24 - 0)) * 100;
-    //     state.rangeStyle = `background: linear-gradient(to right, #b51bff 0%, #b51bff ${value}%, #fff ${value}%, #fff 100%);`;
-    //     if (rangeValue <= 12) {
-    //       bgToggle(false);
-    //     } else {
-    //       bgToggle(true);
-    //     }
-    //   }
-    // );
 
     return {
       ...toRefs(state),
