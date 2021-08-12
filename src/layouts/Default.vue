@@ -29,6 +29,7 @@ export default {
 
 <style lang="scss" scoped>
 .default {
+    font-family: 'Kanit-Regular';
     padding: 1.5rem;
     background-image: url('../assets/images/home/section1/Rectangle 47.png');
     min-height: 100vh;
