@@ -68,7 +68,15 @@ const routes = [
                 name: 'Workshop',
                 component: () =>
                     import(
-                        /* webpackChunkName: "Workshop" */ '../pages/Workshop.vue'
+                        /* webpackChunkName: "Workshop" */ '../pages/Workshop/Workshop.vue'
+                    ),
+            },
+            {
+                path: '/Workshop/:id',
+                name: 'Workshop-id',
+                component: () =>
+                    import(
+                        /* webpackChunkName: "Workshop" */ '../pages/Workshop/_id.vue'
                     ),
             },
         ],
