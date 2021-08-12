@@ -53,7 +53,8 @@
         :src="require('../../assets/images/home/section1/L_DN2_20202.png')"
       />
 
-      <div>
+      <div class="slide-bar">
+        <span class="slide-text">&lt; เลื่อน &gt;</span>
         <input
           type="range"
           class="points"
@@ -76,8 +77,7 @@ export default {
   setup() {
     const state = reactive({
       // rangeValue: 12,
-      rangeStyle:
-        "background: linear-gradient(to right, #b51bff 0%, #b51bff 50%, #fff 50%, #fff 100%);",
+      rangeStyle: "",
       // isNight: true,
       Menu: [
         { name: "Menu", path: "/Home" },
@@ -92,8 +92,12 @@ export default {
     const store = useStore();
 
     const getTime = () => {
-      const date = new Date().getHours();
+      var date = new Date().getHours();
       store.commit("setRangeValue", date);
+
+      var value = ((date - 0) / (24 - 0)) * 100;
+      state.rangeStyle = `background: linear-gradient(to right, #b51bff 0%, #b51bff ${value}%, #fff ${value}%, #fff 100%);`;
+
       setTimeout(() => {
         getTime();
       }, 1000 * 60 * 60);
