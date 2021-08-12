@@ -316,11 +316,21 @@ $urlImage: "../../assets/images";
   .sub-section1 {
     position: relative;
     img {
-      display: none;
+      // display: none;
       width: 100%;
       height: auto;
-      &.active {
-        display: block;
+      // &.active {
+      //   display: block;
+      // }
+      &:nth-child(2) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        transition: width 0.5s;
+        object-fit: cover;
+        object-position: left;
       }
     }
 

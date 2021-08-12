@@ -45,12 +45,11 @@
     </div>
     <div class="sub-section1">
       <img
-        :class="{ active: isNight }"
-        :src="require('../../assets/images/home/section1/L_DN2N_20202.png')"
+        :src="require('../../assets/images/home/section1/L_DN2_20202.png')"
       />
       <img
-        :class="{ active: !isNight }"
-        :src="require('../../assets/images/home/section1/L_DN2_20202.png')"
+        :style="widthRange"
+        :src="require('../../assets/images/home/section1/L_DN2N_20202.png')"
       />
 
       <div class="slide-bar">
@@ -78,6 +77,7 @@ export default {
     const state = reactive({
       // rangeValue: 12,
       rangeStyle: "",
+      widthRange: "",
       // isNight: true,
       Menu: [
         { name: "Menu", path: "/Home" },
@@ -94,10 +94,9 @@ export default {
     const getTime = () => {
       var date = new Date().getHours();
       store.commit("setRangeValue", date);
-
       var value = ((date - 0) / (24 - 0)) * 100;
       state.rangeStyle = `background: linear-gradient(to right, #b51bff 0%, #b51bff ${value}%, #fff ${value}%, #fff 100%);`;
-
+      state.widthRange = `width: ${value}%;`;
       setTimeout(() => {
         getTime();
       }, 1000 * 60 * 60);
@@ -116,6 +115,7 @@ export default {
       (rangeValue) => {
         var value = ((rangeValue - 0) / (24 - 0)) * 100;
         state.rangeStyle = `background: linear-gradient(to right, #b51bff 0%, #b51bff ${value}%, #fff ${value}%, #fff 100%);`;
+        state.widthRange = `width: ${value}%;`;
         if (rangeValue <= 12) {
           bgToggle(false);
         } else {
