@@ -100,12 +100,27 @@ export default {
     const store = useStore();
 
     const getTime = () => {
-      var date = new Date().getHours();
-      store.commit("setRangeValue", date);
-      var value = ((date - 0) / (24 - 0)) * 100;
+      var day = range(6, 17);
+      var night = [...range(18, 24), ...range(1, 5)];
+      var hour = new Date().getHours();
+      var value = 0;
+
+      if (night.includes(hour)) {
+        let key = Object.keys(night).filter((i) => night[i] == hour);
+        value = ((parseInt(key[0]) + 1) / 12) * 100;
+        console.log("night", hour, value);
+      }
+
+      if (day.includes(hour)) {
+        let key = Object.keys(day).filter((i) => day[i] == hour);
+        value = 100 - ((parseInt(key[0]) + 1) / 12) * 100;
+        console.log("day", hour, value);
+      }
+
       state.rangeStyle = `background: linear-gradient(to right, #b51bff 0%, #b51bff ${value}%, #fff ${value}%, #fff 100%);`;
       state.widthRange = `width: ${value}%;`;
       state.dashStyle = `left: ${value}%`;
+
       setTimeout(() => {
         getTime();
       }, 1000 * 60 * 60);
@@ -129,6 +144,12 @@ export default {
       );
     };
 
+    const range = (start, end) => {
+      return Array(end - start + 1)
+        .fill()
+        .map((_, idx) => start + idx);
+    };
+
     onBeforeMount(() => {
       getTime();
     });
@@ -139,7 +160,7 @@ export default {
         var value = ((rangeValue - 0) / (24 - 0)) * 100;
         state.rangeStyle = `background: linear-gradient(to right, #b51bff 0%, #b51bff ${value}%, #fff ${value}%, #fff 100%);`;
         state.widthRange = `width: ${value}%;`;
-        if (rangeValue <= 12) {
+        if (rangeValue >= 6 && rangeValue <= 18) {
           bgToggle(false);
         } else {
           bgToggle(true);
