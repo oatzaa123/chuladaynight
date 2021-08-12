@@ -19,7 +19,7 @@
                     @mouseover="hoverImage(index)"
                     @click.stop="onHandleClick(item.id)"
                 >
-                    <img :src="item.path" width="570" />
+                    <img :src="item.profile" width="570" />
                     <div class="overlay">
                         <div class="text">
                             <p class="text-title">{{ item.title }}</p>
@@ -36,7 +36,7 @@
                                 </p>
                                 <p>{{ item.group }}</p>
                             </div>
-                            <span>{{ item.description }}</span>
+                            <span>{{ item.content[0].description }}</span>
                         </div>
                     </div>
                 </div>

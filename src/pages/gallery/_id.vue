@@ -49,12 +49,16 @@
                 </div>
             </div>
             <div class="live-view"></div>
-            <div class="content-sub-gallery">
+            <div
+                class="content-sub-gallery"
+                v-for="gallery in item.content"
+                :key="gallery"
+            >
                 <div class="content-img">
-                    <img :src="item.path" />
+                    <img :src="gallery.image" />
                 </div>
                 <div class="content-description">
-                    <p>{{ item.description }}</p>
+                    <p>{{ gallery.description }}</p>
                 </div>
             </div>
             <div class="showreel"></div>
@@ -77,7 +81,7 @@
                             width="15"
                             class="hover-img"
                         />
-                        090 000 0000
+                        {{ item.phone }}
                     </p>
                     <div class="footer-icon">
                         <div
@@ -132,11 +136,16 @@ export default {
                     name: 'Gallery-id',
                     params: { id: data.value[parseInt(currentIndex) + 1].id },
                 })
+
+                gallery.value = [data.value[parseInt(currentIndex) + 1]]
+            } else {
+                router.push({
+                    name: 'Gallery-id',
+                    params: { id: data.value[0].id },
+                })
+
+                gallery.value = [data.value[0]]
             }
-
-            gallery.value = [data.value[parseInt(currentIndex) + 1]]
-
-            console.log(gallery.value)
         }
 
         const onBackwardClick = () => {
@@ -153,11 +162,16 @@ export default {
                     name: 'Gallery-id',
                     params: { id: data.value[parseInt(currentIndex) - 1].id },
                 })
+
+                gallery.value = [data.value[parseInt(currentIndex) - 1]]
+            } else {
+                router.push({
+                    name: 'Gallery-id',
+                    params: { id: data.value[data.value.length - 1].id },
+                })
+
+                gallery.value = [data.value[data.value.length - 1]]
             }
-
-            gallery.value = [data.value[parseInt(currentIndex) - 1]]
-
-            console.log(gallery.value)
         }
 
         onMounted(() => {
