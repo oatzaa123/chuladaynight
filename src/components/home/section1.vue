@@ -65,6 +65,13 @@
           :style="rangeStyle"
         />
       </div>
+
+      <div
+        class="slide-dash"
+        :style="dashStyle"
+        draggable="true"
+        @dragstart="dragstart()"
+      ></div>
     </div>
   </div>
 </template>
@@ -77,6 +84,7 @@ export default {
     const state = reactive({
       // rangeValue: 12,
       rangeStyle: "",
+      dashStyle: "",
       widthRange: "",
       // isNight: true,
       Menu: [
@@ -97,6 +105,7 @@ export default {
       var value = ((date - 0) / (24 - 0)) * 100;
       state.rangeStyle = `background: linear-gradient(to right, #b51bff 0%, #b51bff ${value}%, #fff ${value}%, #fff 100%);`;
       state.widthRange = `width: ${value}%;`;
+      state.dashStyle = `left: ${value}%`;
       setTimeout(() => {
         getTime();
       }, 1000 * 60 * 60);
@@ -104,6 +113,20 @@ export default {
 
     const bgToggle = (boolean) => {
       store.commit("setIsNight", boolean);
+    };
+
+    const dragstart = () => {
+      document.addEventListener(
+        "dragover",
+        function (e) {
+          e = e || window.event;
+          var dragX = e.pageX;
+          var value = (dragX * 100) / window.innerWidth;
+          state.dashStyle = `left: ${value}%;`;
+          state.widthRange = `width: ${value}%;`;
+        },
+        false
+      );
     };
 
     onBeforeMount(() => {
@@ -127,6 +150,7 @@ export default {
     return {
       ...toRefs(state),
       bgToggle,
+      dragstart,
       rangeValue: computed({
         get() {
           return store.getters["showRangeValue"];
