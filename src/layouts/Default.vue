@@ -1,11 +1,11 @@
 <template>
-  <div class="overlay" :class="{ show: state.show }" @click="showMenu"></div>
   <div
     class="default"
     :style="{
       backgroundImage: `url('${globalStore.state.mainBackground}')`,
     }"
   >
+    <div class="overlay" :class="{ show: state.show }" @click="showMenu"></div>
     <div class="menu" @click="showMenu">
       <img :src="require('../assets/images/MENU@1X.png')" />
       <Menu :class="{ show: state.show }" />
@@ -25,7 +25,6 @@ export default {
   setup: () => {
     const state = reactive({ show: false });
     const showMenu = () => {
-      console.log("show");
       state.show = !state.show;
     };
 
@@ -43,13 +42,13 @@ export default {
 <style lang="scss" scoped>
 .overlay {
   position: absolute;
-  z-index: -1;
-  //   z-index: 1;
-  right: 0;
+  left: 0;
+  top: 0;
+  opacity: 0.6;
   width: 100%;
   height: 100%;
   background: black;
-  opacity: 0.6;
+  z-index: -1;
   &.show {
     z-index: 1;
   }
