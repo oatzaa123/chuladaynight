@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { reactive, toRefs, computed } from "vue";
+import { reactive, toRefs, computed, inject, onMounted } from "vue";
 import { useStore } from "vuex";
 export default {
   setup() {
@@ -87,6 +87,18 @@ export default {
     });
 
     const store = useStore();
+
+    const globalStore = inject("globalStore");
+
+    const setBackgroundImage = () => {
+      globalStore.changeBackground(
+        require("@/assets/images/home/section1/Rectangle 47.png")
+      );
+    };
+
+    onMounted(() => {
+      setBackgroundImage();
+    });
 
     return {
       ...toRefs(state),
