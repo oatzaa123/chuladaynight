@@ -23,18 +23,32 @@
                     </p>
                 </div>
                 <div class="icon">
+                    <img
+                        :src="require('@/assets/images/gallery/Group 128.svg')"
+                        width="40"
+                        height="40"
+                    />
                     <div class="icon-img" v-for="item in icon" :key="item">
-                        <!-- <div style="position: relative"> -->
-                        <!-- <img
+                        <div style="position: relative">
+                            <img
                                 style="position: relative; top: 0; left: 0"
                                 :src="
                                     require('@/assets/images/icons/Path 19@4X.png')
                                 "
                                 width="40"
                                 height="40"
-                            /> -->
-                        <img :src="item.path" width="40" height="40" />
-                        <!-- </div> -->
+                            />
+                            <img
+                                style="
+                                    position: absolute;
+                                    top: 10px;
+                                    left: 10px;
+                                "
+                                :src="item.path"
+                                width="20"
+                                height="20"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,16 +64,13 @@ export default {
         const state = reactive({
             icon: [
                 {
-                    path: require('@/assets/images/gallery/Group 128.svg'),
-                },
-                {
-                    path: require('@/assets/images/icons/Group 327@2x.png'),
+                    path: require('@/assets/images/icons/White and black Facebook icon.png'),
                 },
                 {
                     path: require('@/assets/images/icons/instagram_icon_125245.png'),
                 },
                 {
-                    path: require('@/assets/images/icons/Group 327@2x.png'),
+                    path: require('@/assets/images/icons/Group 121@4X.png'),
                 },
             ],
             data: [
@@ -212,12 +223,13 @@ export default {
         position: absolute;
         bottom: 2%;
         display: flex;
-        .icon-img {
+        img:nth-child(1) {
             margin: 0 10px;
-            // border: 1px solid white;
-            // border-width: none;
-            // border-radius: 100%;
-            // background-color: white;
+        }
+        .icon-img {
+            img {
+                margin: 0 10px;
+            }
         }
     }
 }

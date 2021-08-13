@@ -46,12 +46,13 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, inject, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 export default {
     setup() {
         const store = useStore()
+        const globalStore = inject('globalStore')
 
         const map = ref([
             { path: require('../../assets/images/gallery/Group 294.svg') },
@@ -72,6 +73,16 @@ export default {
             router.push({ name: 'Gallery-id', params: { id } })
         }
 
+        const setBackgroundImage = () => {
+            globalStore.changeBackground(
+                require('@/assets/images/home/section1/Rectangle 47.png')
+            )
+        }
+
+        onMounted(() => {
+            setBackgroundImage()
+        })
+
         return {
             data: computed(() => {
                 return store.getters['showGalleryList']
@@ -88,9 +99,6 @@ export default {
 </script>
 
 <style lang="scss">
-.default {
-    background-image: url('../../assets/images/home/section1/Rectangle 47.png') !important;
-}
 .container {
     padding-top: var(--bs-gutter-x, 1.75rem);
     .title {

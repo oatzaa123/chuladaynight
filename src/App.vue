@@ -9,10 +9,14 @@
 </template>
 
 <script>
+import { provide } from 'vue'
+import globalStore from '@/globalStore/index.js'
 export default {
     name: 'App',
     components: {},
-    setup() {},
+    setup() {
+        provide('globalStore', globalStore)
+    },
 }
 </script>
 

@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, inject, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 export default {
     setup() {
@@ -78,6 +78,17 @@ export default {
         ])
 
         const router = useRouter()
+        const globalStore = inject('globalStore')
+
+        const setBackgroundImage = () => {
+            globalStore.changeBackground(
+                require('@/assets/images/home/section1/Rectangle 47.png')
+            )
+        }
+
+        onMounted(() => {
+            setBackgroundImage()
+        })
 
         const onHandleClick = (id) => {
             router.push({ name: 'Workshop-id', params: { id } })
@@ -90,9 +101,6 @@ export default {
 
 <style lang="scss">
 @import '@/assets/css/container.scss';
-.default {
-    background-image: url('../../assets/images/home/section1/Rectangle 47.png') !important;
-}
 .workshop {
     .workshop-title {
         padding-bottom: 2rem;

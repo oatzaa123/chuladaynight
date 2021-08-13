@@ -86,16 +86,29 @@
                     <div class="footer-icon">
                         <div
                             class="footer-icon-img"
-                            v-for="item in ['1', '2', '3', '4', '5']"
+                            v-for="item in icon"
                             :key="item"
                         >
-                            <img
-                                :src="
-                                    require('../../assets/images/icons/Group 327@2x.png')
-                                "
-                                width="35"
-                                height="35"
-                            />
+                            <div style="position: relative">
+                                <img
+                                    style="position: relative; top: 0; left: 0"
+                                    :src="
+                                        require('@/assets/images/icons/Path 19@4X.png')
+                                    "
+                                    width="35"
+                                    height="35"
+                                />
+                                <img
+                                    style="
+                                        position: absolute;
+                                        top: 7px;
+                                        left: 7px;
+                                    "
+                                    :src="item.path"
+                                    width="20"
+                                    height="20"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -106,7 +119,7 @@
 
 <script>
 // import useRoute from './../../hooks/useRoute'
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref, onMounted, inject } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 export default {
@@ -115,6 +128,18 @@ export default {
         const router = useRouter()
         const route = useRoute()
         const store = useStore()
+
+        const icon = ref([
+            {
+                path: require('@/assets/images/icons/White and black Facebook icon.png'),
+            },
+            {
+                path: require('@/assets/images/icons/instagram_icon_125245.png'),
+            },
+            {
+                path: require('@/assets/images/icons/Group 121@4X.png'),
+            },
+        ])
 
         const data = computed(() => {
             return store.getters['showGalleryList']
@@ -146,6 +171,8 @@ export default {
 
                 gallery.value = [data.value[0]]
             }
+
+            setBackgroundImage(gallery.value[0].content[0].image)
         }
 
         const onBackwardClick = () => {
@@ -172,18 +199,30 @@ export default {
 
                 gallery.value = [data.value[data.value.length - 1]]
             }
+
+            console.log(gallery.value[0].content[0].image)
+
+            setBackgroundImage(gallery.value[0].content[0].image)
+        }
+
+        const globalStore = inject('globalStore')
+
+        const setBackgroundImage = (background) => {
+            globalStore.changeBackground(background)
         }
 
         onMounted(() => {
             gallery.value = data.value.filter(
                 (item) => item.id === route.params.id
             )
+            setBackgroundImage(gallery.value[0].content[0].image)
         })
 
         return {
             onForwardClick,
             onBackwardClick,
             data: gallery,
+            icon: icon.value,
         }
     },
 }
@@ -191,15 +230,6 @@ export default {
 
 <style lang="scss">
 @import '@/assets/css/container.scss';
-.default {
-    background-image: url('../../assets/images/gallery/Image 44.svg') !important;
-    // background-repeat: no-repeat !important;
-    // background-size: 100% !important;
-    // background-position: center !important;
-    // backdrop-filter: blur(14px) !important;
-    // -webkit-backdrop-filter: blur(14px) !important;
-}
-
 .main-gallery-id {
     font-family: 'Kanit-Regular';
     .container::-webkit-scrollbar {
@@ -285,6 +315,7 @@ export default {
                 margin-right: 25px;
             }
             .footer-description {
+                position: relative;
                 font-size: 14px;
                 color: #ffffff;
                 p {
@@ -302,9 +333,14 @@ export default {
                     }
                 }
                 .footer-icon {
+                    position: absolute;
+                    bottom: 5%;
                     display: flex;
                     .footer-icon-img {
-                        margin: 0 3px;
+                        // margin: 0 3px;
+                        img {
+                            margin: 0 3px;
+                        }
                     }
                 }
             }
