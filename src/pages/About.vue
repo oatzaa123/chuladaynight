@@ -104,6 +104,18 @@ export default {
             setBackgroundImage()
         })
 
+        const globalStore = inject('globalStore')
+
+        const setBackgroundImage = () => {
+            globalStore.changeBackground(
+                require('@/assets/images/home/section1/Rectangle 47.png')
+            )
+        }
+
+        onMounted(() => {
+            setBackgroundImage()
+        })
+
         return {
             ...toRefs(state),
             isNight: computed(() => store.getters['showIsNight']),
