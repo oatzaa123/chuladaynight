@@ -3,7 +3,7 @@
         <div class="overlay"></div>
         <img
             class="footer-bg"
-            :src="require('../../assets/images/home/footer/ve@2x.png')"
+            :src="require('@/assets/images/home/footer/ve@2x.png')"
         />
         <div class="content">
             <div class="vego-group">
