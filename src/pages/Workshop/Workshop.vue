@@ -82,7 +82,7 @@ export default {
 
         const setBackgroundImage = () => {
             globalStore.changeBackground(
-                require('@/assets/images/home/section1/Rectangle 47.png')
+                require('@/assets/images/BACKGROUND@2X.png')
             )
         }
 

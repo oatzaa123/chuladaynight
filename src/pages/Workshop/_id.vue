@@ -29,26 +29,7 @@
                         height="40"
                     />
                     <div class="icon-img" v-for="item in icon" :key="item">
-                        <div style="position: relative">
-                            <img
-                                style="position: relative; top: 0; left: 0"
-                                :src="
-                                    require('@/assets/images/icons/Path 19@4X.png')
-                                "
-                                width="40"
-                                height="40"
-                            />
-                            <img
-                                style="
-                                    position: absolute;
-                                    top: 10px;
-                                    left: 10px;
-                                "
-                                :src="item.path"
-                                width="20"
-                                height="20"
-                            />
-                        </div>
+                        <img :src="item.path" width="40" height="40" />
                     </div>
                 </div>
             </div>
@@ -57,20 +38,20 @@
 </template>
 
 <script>
-import { reactive, toRefs, computed } from 'vue'
+import { reactive, toRefs, computed, inject, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 export default {
     setup() {
         const state = reactive({
             icon: [
                 {
-                    path: require('@/assets/images/icons/White and black Facebook icon.png'),
+                    path: require('@/assets/images/icons/Group 327@2x.png'),
                 },
                 {
-                    path: require('@/assets/images/icons/instagram_icon_125245.png'),
+                    path: require('@/assets/images/icons/Group 344@2x.png'),
                 },
                 {
-                    path: require('@/assets/images/icons/Group 121@4X.png'),
+                    path: require('@/assets/images/icons/Group 328.svg'),
                 },
             ],
             data: [
@@ -183,6 +164,18 @@ export default {
                     image: require('@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png'),
                 },
             ],
+        })
+
+        const globalStore = inject('globalStore')
+
+        const setBackgroundImage = () => {
+            globalStore.changeBackground(
+                require('@/assets/images/workshop/Rectangle 47@2x.png')
+            )
+        }
+
+        onMounted(() => {
+            setBackgroundImage()
         })
 
         const route = useRoute()

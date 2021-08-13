@@ -89,26 +89,7 @@
                             v-for="item in icon"
                             :key="item"
                         >
-                            <div style="position: relative">
-                                <img
-                                    style="position: relative; top: 0; left: 0"
-                                    :src="
-                                        require('@/assets/images/icons/Path 19@4X.png')
-                                    "
-                                    width="35"
-                                    height="35"
-                                />
-                                <img
-                                    style="
-                                        position: absolute;
-                                        top: 7px;
-                                        left: 7px;
-                                    "
-                                    :src="item.path"
-                                    width="20"
-                                    height="20"
-                                />
-                            </div>
+                            <img :src="item.path" width="35" height="35" />
                         </div>
                     </div>
                 </div>
@@ -131,13 +112,13 @@ export default {
 
         const icon = ref([
             {
-                path: require('@/assets/images/icons/White and black Facebook icon.png'),
+                path: require('@/assets/images/icons/Group 327@2x.png'),
             },
             {
-                path: require('@/assets/images/icons/instagram_icon_125245.png'),
+                path: require('@/assets/images/icons/Group 344@2x.png'),
             },
             {
-                path: require('@/assets/images/icons/Group 121@4X.png'),
+                path: require('@/assets/images/icons/Group 328.svg'),
             },
         ])
 
@@ -199,8 +180,6 @@ export default {
 
                 gallery.value = [data.value[data.value.length - 1]]
             }
-
-            console.log(gallery.value[0].content[0].image)
 
             setBackgroundImage(gallery.value[0].content[0].image)
         }

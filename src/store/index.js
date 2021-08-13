@@ -15,19 +15,19 @@ export default createStore({
         galleryList: [
             {
                 id: '1aa',
-                profile: require('@/assets/images/gallery/Image 25@4X.png'),
+                profile: require('@/assets/images/gallery/Image 1@2x.png'),
                 title: 'INNOVATION ART 4',
                 author: 'POOM JAI ARTIST',
                 group: 'POOM JAI ART GROUP',
                 phone: '090 000 0000',
                 content: [
                     {
-                        image: require('@/assets/images/gallery/Image 25@4X.png'),
+                        image: require('@/assets/images/gallery/Image 1@2x.png'),
                         description:
                             'โครงการ “Chula Art Town” เป็นความร่วมมือกันระหว่างสำนักงานจัดการทรัพย์สิน จุฬาลงกรณ์มหาวิทยาลัย (PMCU), บริษัท อุไรพาณิชย์ จำกัด และ ATM Spray ซึ่งให้การสนับสนุนอุปกรณ์สีสำหรับสร้างสรรค์ผลงาน เนื่องในวาระครบรอบ 36 ปี ของคณะศิลปกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย',
                     },
                     {
-                        image: require('@/assets/images/gallery/Image 25@4X.png'),
+                        image: require('@/assets/images/gallery/Image 1@2x.png'),
                         description:
                             'โครงการ “Chula Art Town” เป็นความร่วมมือกันระหว่างสำนักงานจัดการทรัพย์สิน จุฬาลงกรณ์มหาวิทยาลัย (PMCU), บริษัท อุไรพาณิชย์ จำกัด และ ATM Spray ซึ่งให้การสนับสนุนอุปกรณ์สีสำหรับสร้างสรรค์ผลงาน เนื่องในวาระครบรอบ 36 ปี ของคณะศิลปกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย',
                     },

@@ -58,4 +58,7 @@ export default {
         z-index: 100;
     }
 }
+.default::backdrop {
+    filter: blur(6px);
+}
 </style>
