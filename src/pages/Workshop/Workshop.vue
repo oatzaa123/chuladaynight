@@ -158,115 +158,14 @@ export default {
                 height: 58px;
                 background: #ef1286;
                 filter: blur(12px);
+                animation: animationblur_27 2s infinite;
             }
             .star {
                 width: 27px;
                 height: 27px;
                 background: #ef1286;
                 filter: blur(6px);
-                animation: animationstar_27 1s infinite;
-            }
-        }
-
-        &:nth-child(3) {
-            top: 65%;
-            left: 18%;
-            width: 30px;
-            height: 30px;
-            .blur {
-                width: 30px;
-                height: 30px;
-                background: #e17cff;
-                filter: blur(12px);
-            }
-            .star {
-                width: 20px;
-                height: 20px;
-                background: #e17cff;
-                filter: blur(1px);
-                animation: animationstar_20 1s infinite;
-            }
-        }
-
-        &:nth-child(4) {
-            top: 75%;
-            left: 52%;
-            width: 30px;
-            height: 30px;
-            opacity: 0.6;
-            .blur {
-                width: 15px;
-                height: 15px;
-                background: #ef1286;
-                filter: blur(4px);
-            }
-            .star {
-                width: 10px;
-                height: 10px;
-                background: #ef1286;
-                animation: animationstar_10 1s infinite;
-            }
-        }
-
-        &:nth-child(5) {
-            top: 65%;
-            left: 82%;
-            width: 30px;
-            height: 30px;
-            .blur {
-                width: 30px;
-                height: 30px;
-                background: #ef1286;
-                filter: blur(12px);
-            }
-            .star {
-                width: 20px;
-                height: 20px;
-                background: #ef1286;
-                filter: blur(1px);
-                animation: animationstar_20 1s infinite;
-            }
-        }
-
-        &:nth-child(6) {
-            top: 89%;
-            left: 27%;
-            width: 30px;
-            height: 30px;
-            opacity: 0.6;
-            .blur {
-                width: 30px;
-                height: 30px;
-                background: #ef1286;
-                filter: blur(12px);
-            }
-            .star {
-                width: 20px;
-                height: 20px;
-                background: #ef1286;
-                filter: blur(2px);
-                animation: animationstar_20 1s infinite;
-            }
-        }
-
-        &:nth-child(7) {
-            top: 84%;
-            left: 65%;
-            width: 30px;
-            height: 30px;
-            opacity: 0.6;
-            .blur {
-                width: 30px;
-                height: 30px;
-                background: #ef1286;
-                filter: blur(12px);
-            }
-            .star {
-                width: 17px;
-                height: 17px;
-                background: #ef1286;
-                filter: blur(1px);
-                animation: animationstar_17 1s infinite;
+                animation: animationstar_27 2s infinite;
             }
         }
     }
@@ -323,6 +222,21 @@ export default {
     }
 }
 
+@keyframes animationblur_27 {
+    0% {
+        width: 27px;
+        height: 27px;
+    }
+    50% {
+        width: 17px;
+        height: 17px;
+    }
+    100% {
+        width: 27px;
+        height: 27px;
+    }
+}
+
 @keyframes animationstar_20 {
     0% {
         width: 20px;
@@ -344,42 +258,12 @@ export default {
         height: 50px;
     }
     50% {
-        width: 200px;
-        height: 170px;
+        width: 130px;
+        height: 100px;
     }
     100% {
         width: 100px;
         height: 50px;
-    }
-}
-
-@keyframes animationstar_17 {
-    0% {
-        width: 17px;
-        height: 17px;
-    }
-    50% {
-        width: 12px;
-        height: 12px;
-    }
-    100% {
-        width: 17px;
-        height: 17px;
-    }
-}
-
-@keyframes animationstar_10 {
-    0% {
-        width: 10px;
-        height: 10px;
-    }
-    50% {
-        width: 5px;
-        height: 5px;
-    }
-    100% {
-        width: 10px;
-        height: 10px;
     }
 }
 </style>
