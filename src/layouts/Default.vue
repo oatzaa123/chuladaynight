@@ -1,16 +1,14 @@
 <template>
+  <div
+    class="default"
+    :style="{
+      backgroundImage: `url('${globalStore.state.mainBackground}')`,
+    }"
+  >
     <div class="overlay" :class="{ show: state.show }" @click="showMenu"></div>
-    <div
-        class="default"
-        :style="{
-            backgroundImage: `url('${globalStore.state.mainBackground}')`,
-        }"
-    >
-        <div class="menu" @click="showMenu">
-            <img :src="require('../assets/images/MENU@1X.png')" />
-            <Menu :class="{ show: state.show }" />
-        </div>
-        <router-view />
+    <div class="menu" @click="showMenu">
+      <img :src="require('../assets/images/MENU@1X.png')" />
+      <Menu :class="{ show: state.show }" />
     </div>
 </template>
 
@@ -18,15 +16,15 @@
 import { reactive, inject } from 'vue'
 import Menu from './../components/menu/menu.vue'
 export default {
-    name: 'default',
-    components: {
-        Menu,
-    },
-    setup: () => {
-        const state = reactive({ show: false })
-        const showMenu = () => {
-            state.show = !state.show
-        }
+  name: "default",
+  components: {
+    Menu,
+  },
+  setup: () => {
+    const state = reactive({ show: false });
+    const showMenu = () => {
+      state.show = !state.show;
+    };
 
         const globalStore = inject('globalStore')
 
@@ -41,17 +39,17 @@ export default {
 
 <style lang="scss" scoped>
 .overlay {
-    position: absolute;
-    z-index: -1;
-    //   z-index: 1;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background: black;
-    opacity: 0.6;
-    &.show {
-        z-index: 1;
-    }
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.6;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: -1;
+  &.show {
+    z-index: 1;
+  }
 }
 .default {
     font-family: 'Kanit-Regular';
