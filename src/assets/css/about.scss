@@ -135,6 +135,8 @@ $urlImage: "../assets/images";
           color: white;
           font-family: "Kanit-SemiBold";
           font-size: 31px;
+          line-height: 0.5;
+          padding-left: 30px;
           &::before {
             content: "";
             position: absolute;
