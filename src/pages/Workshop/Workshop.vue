@@ -137,7 +137,7 @@ export default {
                 background: #ef1286;
                 transform: rotate(45deg);
                 filter: blur(30px);
-                animation: animationblur_20 2s infinite;
+                animation: animationblur_20 5s infinite;
             }
             .star {
                 width: 20px;
@@ -148,8 +148,8 @@ export default {
         }
 
         &:nth-child(2) {
-            top: 10%;
-            left: 70%;
+            bottom: 0;
+            right: 0;
             width: 58px;
             height: 58px;
             opacity: 0.8;
@@ -158,7 +158,7 @@ export default {
                 height: 58px;
                 background: #ef1286;
                 filter: blur(12px);
-                animation: animationblur_27 2s infinite;
+                animation: animationblur_27 2s infinite linear;
             }
             .star {
                 width: 27px;
@@ -224,16 +224,16 @@ export default {
 
 @keyframes animationblur_27 {
     0% {
-        width: 27px;
-        height: 27px;
+        width: 100px;
+        height: 50px;
     }
     50% {
-        width: 17px;
-        height: 17px;
+        width: 130px;
+        height: 100px;
     }
     100% {
-        width: 27px;
-        height: 27px;
+        width: 100px;
+        height: 50px;
     }
 }
 
