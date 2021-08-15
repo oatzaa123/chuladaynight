@@ -1,0 +1,127 @@
+.default {
+  overflow: hidden;
+}
+.workshop {
+  position: relative;
+  .star-group {
+    position: absolute;
+    display: block;
+    .blur,
+    .star {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+    }
+
+    $top: -1.75rem, 95%;
+    $left: -1.75rem, 100%;
+    $size: 30px, 58px;
+    $opacity: 1, 1;
+    $starColor: #ef1286;
+    $blurSize: 30px, 58px;
+    $blurFilter: blur(12px), blur(12px);
+    $starSize: 30px, 27px;
+    @for $i from 1 to length($top) + 1 {
+      &:nth-child(#{$i}) {
+        top: nth($top, $i);
+        left: nth($left, $i);
+        width: nth($size, $i);
+        height: nth($size, $i);
+        opacity: nth($opacity, $i);
+        .blur {
+          width: nth($blurSize, $i);
+          height: nth($blurSize, $i);
+          background: $starColor;
+          filter: nth($blurFilter, $i);
+        }
+        .star {
+          width: nth($starSize, $i);
+          height: nth($starSize, $i);
+          background: $starColor;
+        }
+      }
+    } // end @for
+
+    &:nth-child(1) {
+      animation: animationstar_1 2s infinite;
+      .blur {
+        width: 60px;
+        height: 60px;
+        top: 25%;
+        left: 25%;
+        transform: translate(0px, 0px);
+        filter: blur(3px);
+        opacity: 0.5;
+        &::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          background: #ef1286;
+          opacity: 0.9;
+          filter: blur(12px);
+        }
+      }
+      .star {
+        top: 0%;
+        left: 0%;
+        transform: translate(0px, 0px);
+        box-shadow: 1px 1px 8px 3px #ef1286;
+      }
+    }
+
+    &:nth-child(2) {
+      .blur {
+        width: 60px;
+        height: 60px;
+        top: 25%;
+        left: -25%;
+        transform: translate(0px, 0px);
+        filter: blur(3px);
+        opacity: 0.5;
+        &::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          background: #ef1286;
+          opacity: 0.9;
+          filter: blur(12px);
+        }
+      }
+      .star {
+        top: 0%;
+        left: 0%;
+        transform: translate(0px, 0px);
+        box-shadow: 1px 1px 8px 3px #ef1286;
+      }
+    }
+  } // end .star-group
+
+  @keyframes animationstar_1 {
+    0% {
+      display: none;
+      opacity: 1;
+    }
+
+    50% {
+      display: block;
+      opacity: 0;
+    }
+
+    100% {
+      display: block;
+      opacity: 1;
+    }
+  }
+} // end .workshop
