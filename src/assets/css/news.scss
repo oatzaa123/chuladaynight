@@ -1,0 +1,93 @@
+.news {
+  .container {
+    position: relative;
+    padding-top: var(--bs-gutter-x, 0rem);
+    font-family: "Kanit-Regular";
+    .dot {
+      content: "";
+      position: fixed;
+      top: 145px;
+      left: 42.85%;
+      width: 10px;
+      height: 10px;
+      border: 3px solid #ba1bff;
+      border-radius: 50%;
+      background: #ba1bff;
+    }
+    .news-title {
+      padding-bottom: 3rem;
+    }
+    .new-content {
+      // display: flex;
+      // justify-content: space-around;
+      .new-img {
+        height: 250px;
+        display: flex;
+        align-items: center;
+        border-right: 2px solid #ba25ff;
+        justify-content: flex-end;
+        padding-bottom: 25px;
+        padding-right: 25px;
+        img {
+          height: 100%;
+          width: auto;
+        }
+      }
+      .new-content-text {
+        position: relative;
+        margin-top: -10px;
+        margin-bottom: 10px;
+        padding-left: 25px;
+        overflow-wrap: break-word;
+        span {
+          font-size: 12px;
+          color: #ba1bff;
+        }
+        p {
+          color: rgba(255, 255, 255, 0.6);
+          font-size: 14px;
+        }
+        h3 {
+          font-weight: bold;
+          font-size: 18px;
+        }
+        // &::before {
+        //   content: "";
+        //   position: absolute;
+        //   top: 10px;
+        //   left: -6px;
+        //   width: 10px;
+        //   height: 10px;
+        //   border: 3px solid #ba1bff;
+        //   border-width: none;
+        //   border-radius: 50%;
+        //   background: #ba1bff;
+        // }
+      }
+    }
+    color: #ffffff;
+    h1 {
+      position: relative;
+      font-size: 58px;
+      font-weight: 600;
+      color: #ffffff;
+      text-align: center;
+      letter-spacing: 0px;
+      text-shadow: 1px 1px 1px white, 0 0 5px white, 0 0 5px white;
+    }
+    .n {
+      position: absolute;
+      font-family: "Savoye Regular";
+      font-weight: 100;
+      color: #b61bff;
+      left: 37.8%;
+      font-size: 60px;
+      top: 40%;
+      text-shadow: none;
+    }
+    .paginate-left {
+      border-right: 2px solid #ba25ff;
+      height: 200px;
+    }
+  }
+}
