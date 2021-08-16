@@ -1,7 +1,7 @@
 <template>
     <div class="news">
         <div class="container" @scroll="scroll($event)">
-            <div class="dot" :style="dot"></div>
+            <!-- <div class="dot" :style="dot"></div> -->
             <div class="news-title">
                 <h1>
                     NEWS & EVENT
