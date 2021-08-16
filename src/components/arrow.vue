@@ -2,7 +2,7 @@
     <div class="left-arrow" :style="customClassLeft">
         <button
             @click.prevent="onBackwardClick"
-            class="btn btn-light customButton"
+            class="btn customButton"
         >
             <div class="arrow"></div>
             <div class="left"></div>
@@ -14,7 +14,7 @@
         <slot name="right-text" />
         <button
             @click.prevent="onForwardClick"
-            class="btn btn-light customButton"
+            class="btn customButton"
         >
             <div class="arrow"></div>
             <div class="right"></div>
