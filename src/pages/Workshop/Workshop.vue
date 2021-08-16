@@ -145,4 +145,63 @@ export default {
     }
   }
 }
+@keyframes animationstar_27 {
+  0% {
+    width: 27px;
+    height: 27px;
+  }
+  50% {
+    width: 17px;
+    height: 17px;
+  }
+  100% {
+    width: 27px;
+    height: 27px;
+  }
+}
+
+@keyframes animationblur_27 {
+  0% {
+    width: 100px;
+    height: 50px;
+  }
+  50% {
+    width: 130px;
+    height: 100px;
+  }
+  100% {
+    width: 100px;
+    height: 50px;
+  }
+}
+
+@keyframes animationstar_20 {
+  0% {
+    width: 20px;
+    height: 20px;
+  }
+  50% {
+    width: 10px;
+    height: 10px;
+  }
+  100% {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@keyframes animationblur_20 {
+  0% {
+    width: 100px;
+    height: 50px;
+  }
+  50% {
+    width: 130px;
+    height: 100px;
+  }
+  100% {
+    width: 100px;
+    height: 50px;
+  }
+}
 </style>

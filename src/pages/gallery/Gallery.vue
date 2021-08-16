@@ -100,6 +100,7 @@ export default {
 
 <style lang="scss">
 .container {
+    font-family: 'Kanit-Regular';
     padding-top: var(--bs-gutter-x, 1.75rem);
     .title {
         font: size 25px;
@@ -110,13 +111,16 @@ export default {
             width: fit-content;
             display: inline-block;
             .customText {
+                font-size: 40px;
                 letter-spacing: 0px;
                 text-shadow: 1px 1px 1px white, 0 0 5px white, 0 0 5px white;
             }
             .sup {
                 text-align: left;
+                font-size: 14px;
             }
             .sub {
+                font-size: 21px;
                 text-align: right;
                 color: #b61bff;
                 text-shadow: 1px 1px 1px #b61bff, 0 0 5px #b61bff,
