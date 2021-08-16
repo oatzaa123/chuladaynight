@@ -53,16 +53,16 @@
                     font-size: 18px;
                 }
                 &::before {
-                  content: "";
-                  position: absolute;
-                  top: 10px;
-                  left: -6px;
-                  width: 10px;
-                  height: 10px;
-                  border: 3px solid #ba1bff;
-                  border-width: none;
-                  border-radius: 50%;
-                  background: #ba1bff;
+                    content: '';
+                    position: absolute;
+                    top: 10px;
+                    left: -6px;
+                    width: 10px;
+                    height: 10px;
+                    border: 3px solid #ba1bff;
+                    border-width: none;
+                    border-radius: 50%;
+                    background: #ba1bff;
                 }
             }
         }
@@ -81,7 +81,7 @@
             font-family: 'Savoye Regular';
             font-weight: 100;
             color: #b61bff;
-            left: 37.8%;
+            left: 39%;
             font-size: 60px;
             top: 40%;
             text-shadow: none;
@@ -89,6 +89,12 @@
         .paginate-left {
             border-right: 2px solid #ba25ff;
             height: 200px;
+            &.parent {
+                height: 20px;
+            }
+        }
+        .paginate-right {
+            padding-left: 25px;
         }
     }
 }

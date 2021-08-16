@@ -125,9 +125,8 @@ export default {
         const pages = computed(() => fetchPageNumbers())
 
         onMounted(() => {
-            gotoPage(route.params.id || 1)
+            gotoPage(route.query.pageNumber || 1)
         })
-        console.log(pages.value)
 
         return {
             pageNumber: computed(() => pageNumber.value),

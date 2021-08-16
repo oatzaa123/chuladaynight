@@ -170,6 +170,7 @@ export default {
         }
     }
     .news-id-footer {
+        font-family: 'Prompt';
         padding-top: 3rem;
         display: flex;
         justify-content: space-between;
@@ -178,7 +179,9 @@ export default {
             background-color: #7948e6;
             color: #fff;
             border: 1px solid #7948e6;
-            padding: 10px 20px;
+            padding: 0px 20px;
+            width: 160px;
+            height: 40px;
         }
     }
 }
