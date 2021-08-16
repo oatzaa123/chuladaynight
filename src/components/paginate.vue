@@ -20,13 +20,13 @@
 
 <script>
 import { ref, computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 export default {
     props: ['totalItems', 'pageLimit', 'pageNeighbours', 'onPageChanged'],
     setup(props) {
         // console.log(props)
         const route = useRoute()
-        // const router = useRouter()
+        const router = useRouter()
         const pageNumber = ref(route.query.pageNumber || 1)
 
         const totalPages = computed(() => {
@@ -115,10 +115,10 @@ export default {
         }
 
         const onHandleClick = (page) => {
-            // router.push({
-            //     name: 'News',
-            //     query: { pageNumber: page },
-            // })
+            router.push({
+                name: 'News',
+                query: { pageNumber: page },
+            })
             gotoPage(page)
         }
 

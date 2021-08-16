@@ -95,6 +95,71 @@ export default createStore({
                 ],
             },
         ],
+        newsList: [
+            {
+                id: 1,
+                titleImage: require('@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png'),
+                titleText: 'งานเปิดตัวโครงการศิปละที่ยิ่งใหญ่แห่งปี 2020',
+                newsDate: '12 มกราคม 2064',
+                titleDescription: 'lorem',
+                content: [
+                    {
+                        contentType: 'text',
+                        contentText: '...',
+                    },
+                    {
+                        contentType: 'image',
+                        contentText: require('@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png'),
+                    },
+                    {
+                        contentType: 'text',
+                        contentText: '...',
+                    },
+                ],
+            },
+            {
+                id: 2,
+                titleImage: require('@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png'),
+                titleText: 'งานเปิดตัวโครงการศิปละที่ยิ่งใหญ่แห่งปี 2020',
+                newsDate: '12 มกราคม 2065',
+                titleDescription: 'lorem',
+                content: [
+                    {
+                        contentType: 'text',
+                        contentText: '...',
+                    },
+                    {
+                        contentType: 'image',
+                        contentText: require('@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png'),
+                    },
+                    {
+                        contentType: 'text',
+                        contentText: '...',
+                    },
+                ],
+            },
+            {
+                id: 3,
+                titleImage: require('@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png'),
+                titleText: 'งานเปิดตัวโครงการศิปละที่ยิ่งใหญ่แห่งปี 2020',
+                newsDate: '12 มกราคม 2066',
+                titleDescription: 'lorem',
+                content: [
+                    {
+                        contentType: 'text',
+                        contentText: '...',
+                    },
+                    {
+                        contentType: 'image',
+                        contentText: require('@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png'),
+                    },
+                    {
+                        contentType: 'text',
+                        contentText: '...',
+                    },
+                ],
+            },
+        ],
     },
     mutations: {
         setRangeValue: (state, payload) => {
@@ -117,6 +182,9 @@ export default createStore({
         },
         showGalleryList(state) {
             return state.galleryList
+        },
+        showNewsList(state) {
+            return state.newsList
         },
     },
     modules: {},
