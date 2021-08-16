@@ -27,9 +27,10 @@
                 <div class="paginate-left col-5 col-sm-5"></div>
                 <div class="col-7 col-sm-7">
                     <Paginate
-                        @page="onChangePage"
-                        :totalItems="totalItems"
-                        :perPage="perPage"
+                        totalItems="100"
+                        :pageLimit="pageLimit"
+                        pageNeighbours="1"
+                        :onPageChanged="onPageChanged"
                     />
                 </div>
             </div>
@@ -46,7 +47,9 @@ export default {
     },
     setup() {
         const globalStore = inject('globalStore')
-        const perPage = ref(5)
+        const pageLimit = ref(5)
+        const currentPage = ref(null)
+        const totalPages = ref(null)
 
         const setBackgroundImage = () => {
             globalStore.changeBackground(
@@ -54,7 +57,7 @@ export default {
             )
         }
 
-        const data = ref([
+        const content = ref([
             {
                 createAt: '12 มกราคม 2064',
                 image: require('@/assets/images/workshop/image-workshop.png'),
@@ -129,24 +132,30 @@ export default {
 
         const newData = ref([])
 
-        const onChangePage = (val = 1) => {
-            const start = (val - 1) * perPage.value + 1 - 1
-            const end = val * perPage.value - 1
-            newData.value = data.value.filter(
-                (_, index) => index >= start && index <= end
-            )
+        const onPageChanged = (data) => {
+            const {
+                currentPage: cPage,
+                totalPages: totalPage,
+                pageLimit,
+            } = data
+            const offset = (cPage - 1) * pageLimit
+            const currentData = content.value.slice(offset, offset + pageLimit)
+            currentPage.value = cPage
+            totalPages.value = totalPage
+            newData.value = currentData
         }
 
         onMounted(() => {
             setBackgroundImage()
-            onChangePage()
         })
 
         return {
             data: computed(() => newData.value),
-            totalItems: data.value.length,
-            perPage: perPage.value,
-            onChangePage,
+            totalItems: content.value.length,
+            totalPages: totalPages.value,
+            currentPage: currentPage.value,
+            pageLimit: pageLimit.value,
+            onPageChanged,
         }
     },
 }

@@ -1,105 +1,139 @@
 <template>
     <!-- <slot name="data" :pageNumber="pageNumber" /> -->
     <div class="paginate">
-        <ul v-for="(item, index) in totalPages" :key="index">
-            <!-- <li :key="index" v-if="item === LEFT_PAGE">
+        <ul v-for="(item, index) in pages" :key="index">
+            <li v-if="item === 'LEFT' || item === 'RIGHT'">
                 <a>
                     <span aria-hidden="true">...</span>
                 </a>
             </li>
-            <li :key="index" v-if="item === RIGHT_PAGE">
-                <a>
-                    <span aria-hidden="true">...</span>
-                </a>
-            </li> -->
             <li
-                @click="onHandleClick(index + 1)"
-                :class="{ active: index + 1 === +pageNumber }"
+                v-else
+                @click="onHandleClick(item)"
+                :class="{ active: item === +pageNumber }"
             >
-                {{ index + 1 }}
+                {{ item }}
             </li>
         </ul>
     </div>
 </template>
 
 <script>
-import { ref, computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref, computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 export default {
-    props: ['totalItems', 'perPage'],
-    setup(props, { emit }) {
+    props: ['totalItems', 'pageLimit', 'pageNeighbours', 'onPageChanged'],
+    setup(props) {
+        // console.log(props)
         const route = useRoute()
-        const router = useRouter()
+        // const router = useRouter()
         const pageNumber = ref(route.query.pageNumber || 1)
-        // const defaultPagesToDisplay = ref(5)
 
-        const totalPages = computed(() =>
-            Math.ceil(props.totalItems / props.perPage)
-        )
+        const totalPages = computed(() => {
+            return Math.ceil(props.totalItems / props.pageLimit)
+        })
 
-        // const perPages = computed(() => {
-        //     return totalPages.value > 0 &&
-        //         totalPages.value < defaultPagesToDisplay.value
-        //         ? totalPages.value
-        //         : defaultPagesToDisplay.value
-        // })
+        const LEFT_PAGE = ref('LEFT')
+        const RIGHT_PAGE = ref('RIGHT')
 
-        // const minPage = computed(() => {
-        //     if (pageNumber.value >= perPages.value) {
-        //         const pagesToAdd = Math.floor(perPages.value / 2)
-        //         const newMaxPage = pagesToAdd + pageNumber.value
-        //         if (newMaxPage > totalPages.value) {
-        //             return totalPages.value - perPages.value + 1
-        //         }
-        //         return pageNumber.value - pagesToAdd
-        //     } else {
-        //         return 1
-        //     }
-        // })
+        const fetchPageNumbers = () => {
+            const totalPages = Math.ceil(props.totalItems / props.pageLimit)
+            const currentPage = pageNumber.value
+            const pageNeighbours = +props.pageNeighbours
 
-        // const maxPage = computed(() => {
-        //     if (pageNumber.value >= perPages.value) {
-        //         const pagesToAdd = Math.floor(perPages.value / 2)
-        //         const newMaxPage = pagesToAdd + pageNumber.value
-        //         if (newMaxPage < totalPages.value) {
-        //             return newMaxPage
-        //         } else {
-        //             return totalPages.value
-        //         }
-        //     } else {
-        //         return perPages.value
-        //     }
-        // })
+            const totalNumbers = pageNeighbours * 2 + 3
+            const totalBlocks = totalNumbers + 2
 
-        // const range = (from, to, step = 1) => {
-        //     let i = from
-        //     const range = []
+            if (totalPages > totalBlocks) {
+                let pages = []
 
-        //     while (i <= to) {
-        //         range.push(i)
-        //         i += step
-        //     }
+                const leftBound = currentPage - pageNeighbours
+                const rightBound = currentPage + pageNeighbours
+                const beforeLastPage = totalPages - 1
 
-        //     return range
-        // }
+                const startPage = leftBound > 2 ? leftBound : 2
+                const endPage =
+                    rightBound < beforeLastPage ? rightBound : beforeLastPage
+
+                pages = range(startPage, endPage)
+
+                const pagesCount = pages.length
+                const singleSpillOffset = totalNumbers - pagesCount - 1
+
+                const leftSpill = startPage > 2
+                const rightSpill = endPage < beforeLastPage
+
+                const leftSpillPage = LEFT_PAGE.value
+                const rightSpillPage = RIGHT_PAGE.value
+
+                if (leftSpill && !rightSpill) {
+                    const extraPages = range(
+                        startPage - singleSpillOffset,
+                        startPage - 1
+                    )
+                    pages = [leftSpillPage, ...extraPages, ...pages]
+                } else if (!leftSpill && rightSpill) {
+                    const extraPages = range(
+                        endPage + 1,
+                        endPage + singleSpillOffset
+                    )
+                    pages = [...pages, ...extraPages, rightSpillPage]
+                } else if (leftSpill && rightSpill) {
+                    pages = [leftSpillPage, ...pages, rightSpillPage]
+                }
+
+                return [1, ...pages, totalPages]
+            }
+
+            return range(1, totalPages)
+        }
+
+        const range = (from, to, step = 1) => {
+            let i = from
+            const range = []
+
+            while (i <= to) {
+                range.push(i)
+                i += step
+            }
+
+            return range
+        }
+
+        const gotoPage = (page) => {
+            const currentPage = Math.max(0, Math.min(page, totalPages.value))
+
+            const paginationData = {
+                currentPage,
+                totalPages: totalPages.value,
+                pageLimit: props.pageLimit,
+                totalItems: props.totalItems,
+            }
+            pageNumber.value = currentPage
+
+            props.onPageChanged(paginationData)
+        }
 
         const onHandleClick = (page) => {
-            pageNumber.value = page
-            emit('page', pageNumber.value)
-            router.push({
-                name: 'News',
-                query: { pageNumber: pageNumber.value },
-            })
+            // router.push({
+            //     name: 'News',
+            //     query: { pageNumber: page },
+            // })
+            gotoPage(page)
         }
+
+        const pages = computed(() => fetchPageNumbers())
+
+        onMounted(() => {
+            gotoPage(route.params.id || 1)
+        })
+        console.log(pages.value)
 
         return {
             pageNumber: computed(() => pageNumber.value),
-            // minPage: minPage.value,
-            // maxPage: maxPage.value,
-            // perPage: perPages.value,
             onHandleClick,
             totalPages: totalPages.value,
-            // range,
+            pages,
         }
     },
 }
