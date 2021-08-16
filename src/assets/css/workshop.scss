@@ -3,6 +3,43 @@
 }
 .workshop {
   position: relative;
+  .workshop-title {
+    padding-bottom: 2rem;
+    h1 {
+      position: relative;
+      font-size: 58px;
+      font-weight: 600;
+      color: #ffffff;
+      text-align: center;
+      letter-spacing: 0px;
+      text-shadow: 1px 1px 1px white, 0 0 5px white, 0 0 5px white;
+    }
+    .n {
+      position: absolute;
+      font-family: "Savoye Regular";
+      font-weight: 100;
+      color: #b61bff;
+      left: 55.8%;
+      font-size: 60px;
+      top: 35%;
+      text-shadow: none;
+    }
+  }
+  .container {
+    padding-top: var(--bs-gutter-x, 0);
+    .workshop-content {
+      margin: 5px -5px;
+      img {
+        width: 100%;
+        height: 100%;
+        image-rendering: auto;
+        image-rendering: pixelated;
+      }
+      img:hover {
+        cursor: pointer;
+      }
+    }
+  }
   .star-group {
     position: absolute;
     display: block;
@@ -77,6 +114,7 @@
     }
 
     &:nth-child(2) {
+      animation: infinite-spinning 1s infinite, totop 7s infinite;
       .blur {
         width: 60px;
         height: 60px;
@@ -110,7 +148,7 @@
 
   @keyframes animationstar_1 {
     0% {
-      display: none;
+      display: block;
       opacity: 1;
     }
 
@@ -122,6 +160,26 @@
     100% {
       display: block;
       opacity: 1;
+    }
+  }
+
+  @keyframes infinite-spinning {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes totop {
+    0% {
+      top: 100%;
+    }
+    50% {
+      top: 50%;
+    }
+    100% {
+      top: 0%;
     }
   }
 } // end .workshop
