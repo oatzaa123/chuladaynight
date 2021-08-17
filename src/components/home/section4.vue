@@ -64,7 +64,7 @@
 // import CarouselSlide from "@/components/slide/carouselSlide";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import { ref, computed } from "vue";
+import { ref /*computed*/ } from "vue";
 export default {
   components: {
     // CarouselSlide,
@@ -90,7 +90,7 @@ export default {
       { path: require("../../assets/images/gallery/Group 294.svg") },
       { path: require("../../assets/images/gallery/Group 294.svg") },
     ]);
-    const slideCurrent = ref(0);
+    // const slideCurrent = ref(0);
     const onForwardClick = () => {
       let next = document.getElementsByClassName("section4-next");
       next[0].click();
@@ -114,7 +114,7 @@ export default {
     return {
       onForwardClick,
       onBackwardClick,
-      slideCurrent: computed(() => slideCurrent.value),
+      //   slideCurrent: computed(() => slideCurrent.value),
       blocks: blocks.value,
       slideOptions,
     };
