@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="animation-cloud"></div>
-    <div class="section-1" :class="{ bgnight: isNight }">
+    <div class="section1" :class="{ bgnight: isNight }">
       <div v-for="i in 7" :key="i" class="star-group">
         <div class="blur"></div>
         <div class="star"></div>

@@ -1,5 +1,5 @@
 <template>
-  <div id="section2" :style="section2Height">
+  <div class="section2" :style="section2Height">
     <div class="container">
       <div class="title">
         โครงการ “Chula Art Town”
