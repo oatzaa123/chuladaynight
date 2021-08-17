@@ -108,6 +108,9 @@
         .customDiscription {
           font-size: calc(14px * #{nth($mediaSize, $i)});
         }
+        .btn-outline-primary {
+          font-size: calc(16px * 0.9);
+        }
       }
     }
   }
