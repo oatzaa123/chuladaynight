@@ -96,14 +96,15 @@
       border-radius: 50%;
     }
 
-    $top: 10%, 10%, 65%, 75%, 65%;
-    $left: 40%, 70%, 18%, 52%, 82%;
+    $top: 10%, 15%, 10%, 80%, 65%;
+    $left: 10%, 38%, 97%, 8%, 86%;
     $size: 30px, 58px, 30px, 30px, 30px;
-    $opacity: 1, 0.8, 1, 1, 1;
+    $opacity: 0.6, 0.6, 0.6, 0.6, 0.6;
     $starColor: #ef1286;
-    $blurSize: 30px, 58px, 30px, 15px, 30px;
+    $blurSize: 100px, 40px, 100px, 40px, 80px;
     $blurFilter: blur(12px), blur(12px), blur(12px), blur(4px), blur(12px);
-    $starSize: 20px, 27px, 20px, 10px, 20px;
+    $starSize: 0px, 27px, 0px, 20px, 20px;
+    $starOpacity: 1, 0.1, 1, 1, 1;
 
     @for $i from 1 to length($top) + 1 {
       &:nth-child(#{$i}) {
@@ -122,6 +123,7 @@
           width: nth($starSize, $i);
           height: nth($starSize, $i);
           background: $starColor;
+          opacity: nth($starOpacity, $i);
         }
       }
     }
