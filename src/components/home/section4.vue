@@ -89,6 +89,7 @@ export default {
       rewind: true,
       pagination: false,
       autoplay: true,
+      gap: "1rem",
       classes: {
         prev: "splide__arrow--prev section4-prev",
         next: "splide__arrow--next section4-next",
