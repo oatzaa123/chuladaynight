@@ -1,5 +1,5 @@
 <template>
-  <div id="section-6">
+  <div class="section6">
     <!-- <div class="container"> -->
     <div class="header">PARNTER</div>
     <div class="slide">
@@ -62,6 +62,11 @@ export default {
         perPage: 5,
         rewind: true,
         pagination: false,
+        breakpoints: {
+          768: {
+            perPage: 3,
+          },
+        },
       },
     });
 

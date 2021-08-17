@@ -1,36 +1,50 @@
-#section-6 {
-    min-height: 50vh;
-    background-color: black;
-    //   padding: 50px 0;
-    padding: 4rem;
-    .header {
+.section6 {
+  min-height: 50vh;
+  background-color: black;
+  //   padding: 50px 0;
+  padding: 4rem;
+  .header {
+    text-align: center;
+    color: white;
+    font-family: "Kanit-SemiBold";
+    font-size: 57px;
+  }
+  .slide {
+    .splide__arrow {
+      display: none;
+    }
+    .slide-items {
+      .img {
+        width: 200px;
+        height: 200px;
+        margin: auto;
+        background-color: white;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .name {
         text-align: center;
         color: white;
-        font-family: 'Kanit-SemiBold';
-        font-size: 57px;
+        font-family: "Kanit-Medium";
+        padding: 10px 0;
+      }
     }
-    .slide {
-        .splide__arrow {
-            display: none;
+  }
+  $media: 768px;
+  $mediaSize: 0.7;
+  @for $i from 1 to length($media) + 1 {
+    @media screen and (max-width: nth($media, $i)) {
+      .header {
+        font-size: calc(57px * #{nth($mediaSize, $i)});
+      }
+      .slide {
+        .name {
+          font-size: calc(16px * #{nth($mediaSize, $i)});
         }
-        .slide-items {
-            .img {
-                width: 200px;
-                height: 200px;
-                margin: auto;
-                background-color: white;
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-            }
-            .name {
-                text-align: center;
-                color: white;
-                font-family: 'Kanit-Medium';
-                padding: 10px 0;
-            }
-        }
+      }
     }
+  }
 }
