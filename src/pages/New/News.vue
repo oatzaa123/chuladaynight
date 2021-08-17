@@ -30,14 +30,23 @@
                 </div>
             </div>
             <div class="row">
-                <div class="paginate-left col-5 col-sm-5"></div>
-                <div class="col-7 col-sm-7">
+                <div
+                    class="paginate-left col-5 col-sm-5"
+                    :class="[parent ? 'parent' : '']"
+                ></div>
+                <div class="col-7 col-sm-7 paginate-right">
                     <Paginate
-                        totalItems="100"
+                        v-show="!parent"
+                        :totalItems="totalItems"
                         :pageLimit="pageLimit"
                         pageNeighbours="1"
                         :onPageChanged="onPageChanged"
                     />
+                    <router-link to="/News">
+                        <button class="btn btn-custom" v-if="parent">
+                            ดูข่าวสารทั้งหมด &#8594;
+                        </button>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -52,9 +61,18 @@ export default {
     components: {
         Paginate,
     },
-    setup() {
+    props: {
+        limit: {
+            type: Number,
+            default: 5,
+        },
+        parent: {
+            type: String,
+            default: null,
+        },
+    },
+    setup(props) {
         const globalStore = inject('globalStore')
-        const pageLimit = ref(5)
         const currentPage = ref(null)
         const totalPages = ref(null)
         const router = useRouter()
@@ -187,7 +205,7 @@ export default {
             totalItems: content.value.length,
             totalPages: totalPages.value,
             currentPage: currentPage.value,
-            pageLimit: pageLimit.value,
+            pageLimit: props.limit,
             onPageChanged,
             scroll,
             dot: computed(() => dot.value),
@@ -200,4 +218,33 @@ export default {
 <style lang="scss">
 @import '@/assets/css/container.scss';
 @import '@/assets/css/news.scss';
+.news {
+    .container {
+        padding-top: var(--bs-gutter-x, 0);
+        overflow-y: unset;
+        max-height: unset;
+        .btn-custom {
+            position: relative;
+            font-size: 15px;
+            font-family: 'Prompt';
+            border-radius: 20px;
+            background-color: #7948e6;
+            color: #fff;
+            border: 1px solid #7948e6;
+            padding: 8px 15px;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 15px;
+                left: -32px;
+                width: 10px;
+                height: 10px;
+                border: 3px solid #ba1bff;
+                border-width: none;
+                border-radius: 50%;
+                background: #ba1bff;
+            }
+        }
+    }
+}
 </style>
