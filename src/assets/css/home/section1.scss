@@ -1,4 +1,13 @@
 $urlImage: "../../assets/images";
+
+//FS Font-size
+$FStitle: 100px;
+$FSsub: 36px;
+$FSday: 57px;
+$FSdayActive: 80px;
+$FSnight: 42px;
+$FSnightActive: 54px;
+
 .home {
   display: flex;
   flex-direction: column;
@@ -30,7 +39,7 @@ $urlImage: "../../assets/images";
   .section1 {
     background-image: url("#{$urlImage}/home/section1/BACKGROUND@1X.png");
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: auto;
     background-position: center;
     min-height: 100vh;
     width: 100%;
@@ -40,7 +49,7 @@ $urlImage: "../../assets/images";
     &.bgnight {
       background-image: url("#{$urlImage}/home/section1/Rectangle 47.png");
       background-repeat: no-repeat;
-      background-size: 100%;
+      background-size: auto;
       background-position: center;
       .star-group {
         display: block;
@@ -396,6 +405,62 @@ $urlImage: "../../assets/images";
       width: 4px;
       border-right: 4px dashed grey;
       z-index: 3;
+    }
+  }
+
+  $media: 768px;
+  $mediaSize: 0.5;
+  @for $i from 1 to length($media) + 1 {
+    @media screen and (max-width: nth($media, $i)) {
+      .section1 .logo-block {
+        .left {
+          margin-right: 10px;
+          .logo {
+            .title {
+              font-size: calc(109px * #{nth($mediaSize, $i)});
+            }
+            .sub {
+              font-size: calc(36px * #{nth($mediaSize, $i)});
+            }
+          }
+          .toggle {
+            width: calc(160px * #{nth($mediaSize, $i)});
+
+            &.day .n {
+              font-size: calc(90px * #{nth($mediaSize, $i)});
+              right: calc(-50px * #{nth($mediaSize, $i)});
+              top: 45px;
+            }
+            &.night .n {
+              font-size: calc(100px * #{nth($mediaSize, $i)});
+              top: calc(22px * #{nth($mediaSize, $i)});
+              right: calc(-22px * #{nth($mediaSize, $i)});
+            }
+            .day {
+              font-size: calc(57px * #{nth($mediaSize, $i)});
+              margin: calc(15px * #{nth($mediaSize, $i)}) 0px
+                calc(10px * #{nth($mediaSize, $i)}) 0px;
+              &.active {
+                font-size: calc(80px * #{nth($mediaSize, $i)});
+                margin: calc(9px * #{nth($mediaSize, $i)}) 0px
+                  calc(12px * #{nth($mediaSize, $i)}) 0px;
+                box-shadow: 0 4px 2px -2px white;
+              }
+            }
+            .night {
+              font-size: calc(42px * #{nth($mediaSize, $i)});
+              &.active {
+                font-size: calc(54px * #{nth($mediaSize, $i)});
+                box-shadow: 0 4px 2px -2px #e17cff;
+              }
+            }
+          }
+        }
+        .right {
+          margin-top: calc(15px * #{nth($mediaSize, $i)});
+          font-size: calc(17px * #{nth($mediaSize, $i)});
+        }
+      }
     }
   }
 }
