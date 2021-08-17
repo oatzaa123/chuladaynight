@@ -1,7 +1,88 @@
 #section2 {
+  padding: 2rem 0;
   min-height: 100vh;
   background-color: #030024;
   position: relative;
+  .title {
+    color: white;
+    text-align: center;
+    font-family: "Roboto-Bold";
+    font-size: 14px;
+  }
+
+  .content {
+    color: white;
+    display: flex;
+    min-height: 100vh;
+    position: relative;
+    .map {
+      height: 50vh;
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .left-top,
+    .right-top,
+    .left-bottom,
+    .right-bottom {
+      display: flex;
+      position: absolute;
+      padding: 25px;
+      p {
+        font-size: 12px;
+        font-family: "Roboto-Bold";
+        position: absolute;
+        bottom: 0;
+        z-index: 2;
+      }
+      .logo {
+        z-index: 2;
+      }
+      .path {
+        position: absolute;
+        z-index: 1;
+      }
+    }
+
+    .left-top {
+      top: 11.5%;
+      left: 7%;
+      .path {
+        top: 36%;
+        left: 48%;
+        transform: translate(-33%, 0%);
+      }
+    }
+
+    .right-top {
+      top: 11.5%;
+      right: 9%;
+      .path {
+        top: 38%;
+        left: 48%;
+        transform: translate(-50%, -12%);
+      }
+    }
+    .left-bottom {
+      bottom: 8%;
+      left: 5%;
+      .path {
+        top: 60%;
+        left: 53%;
+        transform: translate(-33%, -50%);
+      }
+    }
+    .right-bottom {
+      bottom: 6%;
+      right: 5%;
+      .path {
+        top: 50%;
+        right: 50%;
+        transform: translate(33%, -60%);
+      }
+    }
+  }
 
   .star-group {
     position: absolute;
