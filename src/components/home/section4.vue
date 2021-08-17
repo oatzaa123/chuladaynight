@@ -84,26 +84,11 @@ export default {
     setup() {
         const router = useRouter()
         const blocks = ref([
-            {
-                id: 1,
-                path: require('@/assets/images/workshop/image-workshop.png'),
-            },
-            {
-                id: 2,
-                path: require('../../assets/images/gallery/Image 49.svg'),
-            },
-            {
-                id: 3,
-                path: require('@/assets/images/workshop/image-workshop.png'),
-            },
-            {
-                id: 4,
-                path: require('../../assets/images/gallery/Group 294.svg'),
-            },
-            {
-                id: 5,
-                path: require('../../assets/images/gallery/Group 294.svg'),
-            },
+            { path: require('@/assets/images/workshop/image-workshop.png') },
+            { path: require('../../assets/images/gallery/Image 49.svg') },
+            { path: require('@/assets/images/workshop/image-workshop.png') },
+            { path: require('../../assets/images/gallery/Group 294.svg') },
+            { path: require('../../assets/images/gallery/Group 294.svg') },
         ])
         const slideOptions = ref({
             type: 'loop',
