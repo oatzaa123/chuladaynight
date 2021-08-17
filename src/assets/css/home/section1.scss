@@ -39,7 +39,7 @@ $FSnightActive: 54px;
   .section1 {
     background-image: url("#{$urlImage}/home/section1/BACKGROUND@1X.png");
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: 100%;
     background-position: center;
     min-height: 100vh;
     width: 100%;
@@ -49,7 +49,7 @@ $FSnightActive: 54px;
     &.bgnight {
       background-image: url("#{$urlImage}/home/section1/Rectangle 47.png");
       background-repeat: no-repeat;
-      background-size: auto;
+      background-size: 100%;
       background-position: center;
       .star-group {
         display: block;
