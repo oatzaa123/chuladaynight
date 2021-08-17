@@ -1,9 +1,6 @@
 <template>
     <div class="left-arrow" :style="customClassLeft">
-        <button
-            @click.prevent="onBackwardClick"
-            class="btn customButton"
-        >
+        <button @click.prevent="onBackwardClick" class="btn customButton">
             <div class="arrow"></div>
             <div class="left"></div>
         </button>
@@ -12,10 +9,7 @@
     <slot name="middle-button"></slot>
     <div class="right-arrow" :style="customClassRight">
         <slot name="right-text" />
-        <button
-            @click.prevent="onForwardClick"
-            class="btn customButton"
-        >
+        <button @click.prevent="onForwardClick" class="btn customButton">
             <div class="arrow"></div>
             <div class="right"></div>
         </button>
@@ -112,7 +106,7 @@ export default {
     background-color: #7948e6;
     color: #ffffff;
     border-radius: 100%;
-    border: none;
+    // border: none;
     position: relative;
     width: 48px;
     height: 48px;
