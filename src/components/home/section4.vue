@@ -42,7 +42,12 @@
                             จำกัด และ ATM Spray
                             ซึ่งให้การสนับสนุนอุปกรณ์สีสำหรับสร้างสรรค์ผลงาน
                         </p>
-                        <button class="btn btn-outline-primary">more</button>
+                        <button
+                            class="btn btn-outline-primary"
+                            @click="onPageChanged"
+                        >
+                            more
+                        </button>
                     </div>
                 </div>
             </div>
@@ -53,11 +58,13 @@
 <script>
 import CarouselSlide from '@/components/slide/carouselSlide'
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 export default {
     components: {
         CarouselSlide,
     },
     setup() {
+        const router = useRouter()
         const blocks = ref([
             { path: require('@/assets/images/workshop/image-workshop.png') },
             { path: require('../../assets/images/gallery/Image 49.svg') },
@@ -82,9 +89,14 @@ export default {
             slideCurrent.value--
         }
 
+        const onPageChanged = () => {
+            router.push({ name: 'Workshop' })
+        }
+
         return {
             onForwardClick,
             onBackwardClick,
+            onPageChanged,
             slideCurrent: computed(() => slideCurrent.value),
             blocks: blocks.value,
         }
@@ -132,7 +144,7 @@ export default {
             .btn-outline-primary {
                 border-radius: 20px;
                 color: #e17cff;
-                border: 1px solid #e17cff;
+                border: 2px solid #e17cff;
                 width: 187px;
                 height: 37px;
                 &:hover {
@@ -148,12 +160,12 @@ export default {
     .left-arrow {
         position: absolute;
         left: 3%;
-        top: 50%;
+        top: 40%;
     }
     .right-arrow {
         position: absolute;
         right: 3%;
-        top: 50%;
+        top: 40%;
     }
     .customButton {
         background-color: #7948e6;
