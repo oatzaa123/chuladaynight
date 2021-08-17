@@ -3,6 +3,7 @@
     min-height: 100vh;
     background-color: #030024;
     position: relative;
+    overflow: hidden;
     .title {
         color: white;
         text-align: center;
@@ -14,131 +15,116 @@
         color: white;
         display: flex;
         min-height: 100vh;
-        background-color: #030024;
         position: relative;
-        .title {
-            color: white;
-            text-align: center;
-            font-family: 'Roboto-Bold';
-            font-size: 14px;
-        }
-
-        .content {
-            color: white;
-            display: flex;
-            min-height: 100vh;
-            position: relative;
-            .map {
-                height: 65vh;
-                position: absolute;
-                top: 60%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-            .left-top,
-            .right-top,
-            .left-bottom,
-            .right-bottom {
-                display: flex;
-                position: absolute;
-                padding: 25px;
-                p {
-                    font-size: 12px;
-                    font-family: 'Roboto-Bold';
-                    position: absolute;
-                    bottom: 0;
-                    z-index: 2;
-                }
-                .logo {
-                    z-index: 2;
-                }
-                .path {
-                    position: absolute;
-                    z-index: 1;
-                }
-            }
-
-            .left-top {
-                top: 11.5%;
-                left: 7%;
-                .path {
-                    top: 36%;
-                    left: 48%;
-                    transform: translate(-33%, 0%);
-                }
-            }
-
-            .right-top {
-                top: 11.5%;
-                right: 9%;
-                .path {
-                    top: 38%;
-                    left: 48%;
-                    transform: translate(-50%, -12%);
-                }
-            }
-            .left-bottom {
-                bottom: 8%;
-                left: 5%;
-                .path {
-                    top: 60%;
-                    left: 53%;
-                    transform: translate(-33%, -50%);
-                }
-            }
-            .right-bottom {
-                bottom: 6%;
-                right: 5%;
-                .path {
-                    top: 50%;
-                    right: 50%;
-                    transform: translate(33%, -60%);
-                }
-            }
-        }
-
-        .star-group {
+        .map {
+            height: 65vh;
             position: absolute;
-            display: block;
-            .blur,
-            .star {
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .left-top,
+        .right-top,
+        .left-bottom,
+        .right-bottom {
+            display: flex;
+            position: absolute;
+            padding: 25px;
+            p {
+                font-size: 12px;
+                font-family: 'Roboto-Bold';
                 position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                border-radius: 50%;
+                bottom: 0;
+                z-index: 2;
             }
+            .logo {
+                z-index: 2;
+            }
+            .path {
+                position: absolute;
+                z-index: 1;
+            }
+        }
 
-            $top: 10%, 15%, 10%, 80%, 65%;
-            $left: 10%, 38%, 95%, 8%, 86%;
-            $size: 30px, 58px, 30px, 30px, 30px;
-            $opacity: 0.6, 0.6, 0.6, 0.6, 0.6;
-            $starColor: #ef1286;
-            $blurSize: 100px, 40px, 100px, 40px, 80px;
-            $blurFilter: blur(12px), blur(12px), blur(12px), blur(4px),
-                blur(12px);
-            $starSize: 0px, 27px, 0px, 20px, 20px;
-            $starOpacity: 1, 0.1, 1, 1, 1;
+        .left-top {
+            top: 11.5%;
+            left: 7%;
+            .path {
+                top: 36%;
+                left: 48%;
+                transform: translate(-33%, 0%);
+            }
+        }
 
-            @for $i from 1 to length($top) + 1 {
-                &:nth-child(#{$i}) {
-                    top: nth($top, $i);
-                    left: nth($left, $i);
-                    width: nth($size, $i);
-                    height: nth($size, $i);
-                    opacity: nth($opacity, $i);
-                    .blur {
-                        width: nth($blurSize, $i);
-                        height: nth($blurSize, $i);
-                        background: $starColor;
-                        filter: nth($blurFilter, $i);
-                    }
-                    .star {
-                        width: nth($starSize, $i);
-                        height: nth($starSize, $i);
-                        background: $starColor;
-                        opacity: nth($starOpacity, $i);
-                    }
+        .right-top {
+            top: 11.5%;
+            right: 9%;
+            .path {
+                top: 38%;
+                left: 48%;
+                transform: translate(-50%, -12%);
+            }
+        }
+        .left-bottom {
+            bottom: 8%;
+            left: 5%;
+            .path {
+                top: 60%;
+                left: 53%;
+                transform: translate(-33%, -50%);
+            }
+        }
+        .right-bottom {
+            bottom: 6%;
+            right: 5%;
+            .path {
+                top: 50%;
+                right: 50%;
+                transform: translate(33%, -60%);
+            }
+        }
+    }
+
+    .star-group {
+        position: absolute;
+        display: block;
+        .blur,
+        .star {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+
+        $top: 10%, 15%, 10%, 80%, 65%;
+        $left: 10%, 38%, 97%, 8%, 86%;
+        $size: 30px, 58px, 30px, 30px, 30px;
+        $opacity: 0.6, 0.6, 0.6, 0.6, 0.6;
+        $starColor: #ef1286;
+        $blurSize: 100px, 40px, 100px, 40px, 80px;
+        $blurFilter: blur(12px), blur(12px), blur(12px), blur(4px), blur(12px);
+        $starSize: 0px, 27px, 0px, 20px, 20px;
+        $starOpacity: 1, 0.1, 1, 1, 1;
+
+        @for $i from 1 to length($top) + 1 {
+            &:nth-child(#{$i}) {
+                top: nth($top, $i);
+                left: nth($left, $i);
+                width: nth($size, $i);
+                height: nth($size, $i);
+                opacity: nth($opacity, $i);
+                .blur {
+                    width: nth($blurSize, $i);
+                    height: nth($blurSize, $i);
+                    background: $starColor;
+                    filter: nth($blurFilter, $i);
+                }
+                .star {
+                    width: nth($starSize, $i);
+                    height: nth($starSize, $i);
+                    background: $starColor;
+                    opacity: nth($starOpacity, $i);
                 }
             }
         }
