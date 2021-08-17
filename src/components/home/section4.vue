@@ -52,7 +52,9 @@
               จุฬาลงกรณ์มหาวิทยาลัย (PMCU), บริษัท อุไรพาณิชย์ จำกัด และ ATM
               Spray ซึ่งให้การสนับสนุนอุปกรณ์สีสำหรับสร้างสรรค์ผลงาน
             </p>
-            <button class="btn btn-outline-primary">more</button>
+            <button class="btn btn-outline-primary" @click="onPageChanged">
+              more
+            </button>
           </div>
         </div>
       </div>
@@ -64,7 +66,8 @@
 // import CarouselSlide from "@/components/slide/carouselSlide";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import { ref /*computed*/ } from "vue";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 export default {
   components: {
     // CarouselSlide,
@@ -72,6 +75,14 @@ export default {
     SplideSlide,
   },
   setup() {
+    const router = useRouter();
+    const blocks = ref([
+      { path: require("@/assets/images/workshop/image-workshop.png") },
+      { path: require("../../assets/images/gallery/Image 49.svg") },
+      { path: require("@/assets/images/workshop/image-workshop.png") },
+      { path: require("../../assets/images/gallery/Group 294.svg") },
+      { path: require("../../assets/images/gallery/Group 294.svg") },
+    ]);
     const slideOptions = ref({
       type: "loop",
       perPage: 3,
@@ -83,13 +94,6 @@ export default {
         next: "splide__arrow--next section4-next",
       },
     });
-    const blocks = ref([
-      { path: require("@/assets/images/workshop/image-workshop.png") },
-      { path: require("../../assets/images/gallery/Image 49.svg") },
-      { path: require("@/assets/images/workshop/image-workshop.png") },
-      { path: require("../../assets/images/gallery/Group 294.svg") },
-      { path: require("../../assets/images/gallery/Group 294.svg") },
-    ]);
     // const slideCurrent = ref(0);
     const onForwardClick = () => {
       let next = document.getElementsByClassName("section4-next");
@@ -111,9 +115,14 @@ export default {
       //   slideCurrent.value--;
     };
 
+    const onPageChanged = () => {
+      router.push({ name: "Workshop" });
+    };
+
     return {
       onForwardClick,
       onBackwardClick,
+      onPageChanged,
       //   slideCurrent: computed(() => slideCurrent.value),
       blocks: blocks.value,
       slideOptions,
