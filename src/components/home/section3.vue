@@ -1,5 +1,17 @@
 <template>
     <div class="section3">
+        <div class="left-arrow">
+            <button class="btn customButton">
+                <div class="arrow"></div>
+                <div class="left"></div>
+            </button>
+        </div>
+        <div class="right-arrow">
+            <button class="btn customButton">
+                <div class="arrow"></div>
+                <div class="right"></div>
+            </button>
+        </div>
         <!-- <div class="overlay"></div> -->
         <!-- <div class="sec3-img" @mousedown="clickImg($event)">
       <img

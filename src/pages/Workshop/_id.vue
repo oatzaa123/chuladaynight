@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { reactive, toRefs, computed, inject, onMounted } from 'vue'
+import { reactive, toRefs, computed, inject } from 'vue'
 import { useRoute } from 'vue-router'
 export default {
     setup() {
@@ -168,15 +168,9 @@ export default {
 
         const globalStore = inject('globalStore')
 
-        const setBackgroundImage = () => {
-            globalStore.changeBackground(
-                require('@/assets/images/workshop/Rectangle 47@2x.png')
-            )
-        }
-
-        onMounted(() => {
-            setBackgroundImage()
-        })
+        globalStore.changeBackground(
+            require('@/assets/images/workshop/Rectangle 47@2x.png')
+        )
 
         const route = useRoute()
 

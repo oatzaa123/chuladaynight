@@ -26,9 +26,8 @@
 </template>
 
 <script>
-import { ref, inject, onMounted } from 'vue'
+import { ref, inject } from 'vue'
 import { useRouter } from 'vue-router'
-import useAxios from '@/hooks/useAxios'
 export default {
     setup() {
         const image = ref([
@@ -82,22 +81,12 @@ export default {
             },
         ])
 
-        const { data } = useAxios('/workshop', 'GET')
-
-        console.log(data)
-
         const router = useRouter()
         const globalStore = inject('globalStore')
 
-        const setBackgroundImage = () => {
-            globalStore.changeBackground(
-                require('@/assets/images/BACKGROUND@2X.png')
-            )
-        }
-
-        onMounted(() => {
-            setBackgroundImage()
-        })
+        globalStore.changeBackground(
+            require('@/assets/images/BACKGROUND@2X.png')
+        )
 
         const onHandleClick = (id) => {
             router.push({ name: 'Workshop-id', params: { id } })

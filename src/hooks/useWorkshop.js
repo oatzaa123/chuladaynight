@@ -1,21 +1,22 @@
-import { ref, toRefs, reactive } from '@vue/composition-api'
+import { toRefs, reactive } from 'vue'
 import useAxios from './useAxios'
 export default function () {
-    const breweries = reactive({
-        list: [],
+    const workshops = reactive({
+        data: [],
         errorMessage: null,
         isFetching: false,
     })
-    const val = ref('')
     const submitted = async () => {
         const { data, errorMessage, fetchData, isFetching } = useAxios(
-            `https://api.openbrewerydb.org/breweries/?by_name=${val.value}`,
+            `/workshop`,
             'GET'
         )
+
         fetchData()
-        breweries.list = data
-        breweries.errorMessage = errorMessage
-        breweries.isFetching = isFetching
+
+        workshops.data = data
+        workshops.errorMessage = errorMessage
+        workshops.isFetching = isFetching
     }
-    return { submitted, ...toRefs(breweries), val }
+    return { submitted, ...toRefs(workshops) }
 }
