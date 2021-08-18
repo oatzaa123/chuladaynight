@@ -21,10 +21,8 @@
         @mousemove="mousemove($event)"
       >
         <div class="item">
-          <!-- <img :src="require('@/assets/images/gallery/Image 1.png')" /> -->
         </div>
         <div class="item">
-          <!-- <img :src="require('@/assets/images/gallery/Image 1.png')" /> -->
         </div>
       </div>
     </div>
