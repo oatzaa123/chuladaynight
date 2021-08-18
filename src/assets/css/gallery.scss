@@ -1,0 +1,223 @@
+.container {
+    font-family: 'Kanit-Regular';
+    padding-top: var(--bs-gutter-x, 1.75rem);
+    .title {
+        font: size 25px;
+        color: #ffffff;
+        font-weight: bold;
+        text-align: center;
+        .group-title {
+            width: fit-content;
+            display: inline-block;
+            .customText {
+                font-size: 40px;
+                letter-spacing: 0px;
+                text-shadow: 1px 1px 1px white, 0 0 5px white, 0 0 5px white;
+            }
+            .sup {
+                text-align: left;
+                font-size: 14px;
+            }
+            .sub {
+                font-size: 21px;
+                text-align: right;
+                color: #b61bff;
+                text-shadow: 1px 1px 1px #b61bff, 0 0 5px #b61bff,
+                    0 0 5px #b61bff;
+            }
+        }
+    }
+    .content {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+        .map {
+            position: relative;
+
+            $top: 0% 0% 0% 31% 32% 33% 28% 28.5% 29% 23% 7% 10% 7% 8.5% 6% 10%;
+            $left: 0% 15% 17% 18% 25% 35% 32% 37% 42% 26% 39% 43% 32% 33.5% 41%
+                40%;
+            $right: 27% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 27%;
+            $bottom: 25% 42% 54% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 25%;
+            @for $i from 1 through 16 {
+                .pin:nth-child(16n + #{$i}) {
+                    @if $i == 1 {
+                        bottom: nth($bottom, $i);
+                        right: nth($right, $i);
+                        position: absolute;
+                    } @else if $i == 2 {
+                        bottom: nth($bottom, $i);
+                        left: nth($left, $i);
+                        position: absolute;
+                    } @else if $i == 3 {
+                        bottom: nth($bottom, $i);
+                        left: nth($left, $i);
+                        position: absolute;
+                    } @else {
+                        top: nth($top, $i);
+                        bottom: nth($bottom, $i);
+                        left: nth($left, $i);
+                        right: nth($right, $i);
+                        position: absolute;
+                    }
+                }
+            }
+            @media screen and (max-width: 1440px) {
+                @for $i from 1 through 16 {
+                    .pin:nth-child(16n + #{$i}) {
+                        @if $i == 1 {
+                            bottom: calc(#{nth($bottom, $i)} - 20%);
+                            right: nth($right, $i);
+                            position: absolute;
+                        } @else if $i == 2 {
+                            bottom: calc(#{nth($bottom, $i)} - 15%);
+                            left: nth($left, $i);
+                            position: absolute;
+                        } @else if $i == 3 {
+                            bottom: calc(#{nth($bottom, $i)} - 12%);
+                            left: calc(#{nth($left, $i)} - 3%);
+                            position: absolute;
+                        } @else if $i >= 4 and $i <= 6 {
+                            top: calc(#{nth($top, $i)} + 9%);
+                            left: calc(#{nth($left, $i)} - 3%);
+                            position: absolute;
+                        } @else if $i >= 7 and $i <= 9 {
+                            top: calc(#{nth($top, $i)} + 6%);
+                            left: nth($left, $i);
+                            position: absolute;
+                        } @else if $i == 12 {
+                            top: calc(#{nth($top, $i)} + 3%);
+                            left: nth($left, $i);
+                            position: absolute;
+                        } @else if $i == 13 {
+                            top: calc(#{nth($top, $i)} + 1%);
+                            left: nth($left, $i);
+                            position: absolute;
+                        } @else if $i >= 14 and $i <= 15 {
+                            top: calc(#{nth($top, $i)} + 2%);
+                            left: nth($left, $i);
+                            position: absolute;
+                        } @else {
+                            top: calc(#{nth($top, $i)} + 3%);
+                            left: nth($left, $i);
+                            position: absolute;
+                        }
+                    }
+                }
+            }
+            @media screen and (max-width: 1440px) {
+                @for $i from 1 through 16 {
+                    .pin:nth-child(16n + #{$i}) {
+                        @if $i == 1 {
+                            bottom: calc(#{nth($bottom, $i)} - 20%);
+                            right: nth($right, $i);
+                            position: absolute;
+                        } @else if $i == 2 {
+                            bottom: calc(#{nth($bottom, $i)} - 15%);
+                            left: nth($left, $i);
+                            position: absolute;
+                        } @else if $i == 3 {
+                            bottom: calc(#{nth($bottom, $i)} - 12%);
+                            left: calc(#{nth($left, $i)} - 3%);
+                            position: absolute;
+                        } @else if $i >= 4 and $i <= 6 {
+                            top: calc(#{nth($top, $i)} + 9%);
+                            left: calc(#{nth($left, $i)} - 3%);
+                            position: absolute;
+                        } @else if $i >= 7 and $i <= 10 {
+                            top: calc(#{nth($top, $i)} + 6%);
+                            left: nth($left, $i);
+                            position: absolute;
+                        } @else if $i == 12 {
+                            top: calc(#{nth($top, $i)} + 3%);
+                            left: nth($left, $i);
+                            position: absolute;
+                        } @else if $i == 13 {
+                            top: calc(#{nth($top, $i)} + 1%);
+                            left: nth($left, $i);
+                            position: absolute;
+                        } @else if $i >= 14 and $i <= 15 {
+                            top: calc(#{nth($top, $i)} + 2%);
+                            left: nth($left, $i);
+                            position: absolute;
+                        } @else {
+                            top: calc(#{nth($top, $i)} + 3%);
+                            left: nth($left, $i);
+                            position: absolute;
+                        }
+                    }
+                }
+            }
+            @media screen and (max-width: 768px) {
+                display: none;
+            }
+        }
+        .content-view {
+            overflow-y: auto;
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none;
+            max-height: 100vh;
+            .image-view {
+                position: relative;
+            }
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition: 0.5s ease;
+            background-color: #0c0c0c;
+            .text {
+                color: white;
+                font-size: 14px;
+                position: absolute;
+                margin: 40px 40px 0 25px;
+                font-weight: bold;
+                // top: 50%;
+                // left: 50%;
+                // transform: translate(-50%, -50%);
+                // -ms-transform: translate(-50%, -50%);
+                text-align: center;
+
+                span {
+                    text-indent: 30%;
+                    text-align: left;
+                }
+
+                .text-title {
+                    margin-right: 25px;
+                    color: #ba1bff;
+                    font-size: 18px;
+                    text-align: left;
+                }
+
+                .sub-text {
+                    display: flex;
+                    justify-content: left;
+                    align-items: center;
+                    p:nth-child(1) {
+                        margin-right: 25px;
+                        color: #ba1bff;
+                    }
+                }
+
+                .hover-img {
+                    filter: invert(19%) sepia(87%) saturate(4315%)
+                        hue-rotate(276deg) brightness(103%) contrast(108%);
+                }
+            }
+        }
+        .image-view:hover > .overlay {
+            opacity: 0.5;
+            cursor: pointer;
+        }
+        .content-view::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}

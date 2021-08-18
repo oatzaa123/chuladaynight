@@ -9,7 +9,23 @@
         </div>
         <div class="content">
             <div class="map">
-                <img :src="pictureHover" />
+                <div class="pin" v-for="(i, index) in 16" :key="index">
+                    <img
+                        v-if="position === index"
+                        :src="require('@/assets/images/gallery/Group 295.svg')"
+                    />
+                    <img
+                        v-else
+                        :src="
+                            require('@/assets/images/gallery/Group 295 (1).svg')
+                        "
+                    />
+                </div>
+                <img
+                    :src="
+                        require('../../assets/images/gallery/Group 828 (1).svg')
+                    "
+                />
             </div>
             <div class="content-view">
                 <div
@@ -55,11 +71,11 @@ export default {
         const globalStore = inject('globalStore')
 
         const map = ref([
-            { path: require('../../assets/images/gallery/Group 294.svg') },
-            { path: require('../../assets/images/gallery/Image 49.svg') },
-            { path: require('../../assets/images/gallery/Group 294.svg') },
-            { path: require('../../assets/images/gallery/Group 294.svg') },
-            { path: require('../../assets/images/gallery/Group 294.svg') },
+            { path: require('../../assets/images/gallery/Group 828 (1).svg') },
+            { path: require('../../assets/images/gallery/Group 828 (1).svg') },
+            { path: require('../../assets/images/gallery/Group 828 (1).svg') },
+            { path: require('../../assets/images/gallery/Group 828 (1).svg') },
+            { path: require('../../assets/images/gallery/Group 828 (1).svg') },
         ])
 
         const position = ref(0)
@@ -87,7 +103,7 @@ export default {
             data: computed(() => {
                 return store.getters['showGalleryList']
             }),
-            position: position.value,
+            position: computed(() => position.value),
             hoverImage,
             pictureHover: computed(() => {
                 return map.value[position.value].path
@@ -99,106 +115,5 @@ export default {
 </script>
 
 <style lang="scss">
-.container {
-    font-family: 'Kanit-Regular';
-    padding-top: var(--bs-gutter-x, 1.75rem);
-    .title {
-        font: size 25px;
-        color: #ffffff;
-        font-weight: bold;
-        text-align: center;
-        .group-title {
-            width: fit-content;
-            display: inline-block;
-            .customText {
-                font-size: 40px;
-                letter-spacing: 0px;
-                text-shadow: 1px 1px 1px white, 0 0 5px white, 0 0 5px white;
-            }
-            .sup {
-                text-align: left;
-                font-size: 14px;
-            }
-            .sub {
-                font-size: 21px;
-                text-align: right;
-                color: #b61bff;
-                text-shadow: 1px 1px 1px #b61bff, 0 0 5px #b61bff,
-                    0 0 5px #b61bff;
-            }
-        }
-    }
-    .content {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 20px;
-        .content-view {
-            overflow-y: auto;
-            -ms-overflow-style: none; /* IE and Edge */
-            scrollbar-width: none;
-            max-height: 100vh;
-            .image-view {
-                position: relative;
-            }
-        }
-        .overlay {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            width: 100%;
-            opacity: 0;
-            transition: 0.5s ease;
-            background-color: #0c0c0c;
-            .text {
-                color: white;
-                font-size: 14px;
-                position: absolute;
-                margin: 40px 40px 0 25px;
-                font-weight: bold;
-                // top: 50%;
-                // left: 50%;
-                // transform: translate(-50%, -50%);
-                // -ms-transform: translate(-50%, -50%);
-                text-align: center;
-
-                span {
-                    text-indent: 30%;
-                    text-align: left;
-                }
-
-                .text-title {
-                    margin-right: 25px;
-                    color: #ba1bff;
-                    font-size: 18px;
-                    text-align: left;
-                }
-
-                .sub-text {
-                    display: flex;
-                    justify-content: left;
-                    align-items: center;
-                    p:nth-child(1) {
-                        margin-right: 25px;
-                        color: #ba1bff;
-                    }
-                }
-
-                .hover-img {
-                    filter: invert(19%) sepia(87%) saturate(4315%)
-                        hue-rotate(276deg) brightness(103%) contrast(108%);
-                }
-            }
-        }
-        .image-view:hover > .overlay {
-            opacity: 0.5;
-            cursor: pointer;
-        }
-        .content-view::-webkit-scrollbar {
-            display: none;
-        }
-    }
-}
+@import '@/assets/css/gallery.scss';
 </style>
