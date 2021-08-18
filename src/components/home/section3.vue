@@ -1,6 +1,6 @@
 <template>
     <div class="section3">
-        <div class="overlay"></div>
+        <!-- <div class="overlay"></div> -->
         <div class="sec3-img">
             <img :src="require('@/assets/images/gallery/Image 1@2x.png')" />
         </div>
@@ -71,7 +71,8 @@ export default {
     .sec3-img {
         width: 100%;
         max-width: 1520px;
-        height: 614px;
+        object-fit: cover;
+        // height: 614px;
         overflow-x: scroll;
         overflow-y: auto;
         z-index: 3;
