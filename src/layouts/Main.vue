@@ -1,17 +1,17 @@
 <template>
-    <div class="main">
-        <router-view />
-        <Footer />
-    </div>
+  <div class="main">
+    <router-view />
+    <Footer />
+  </div>
 </template>
 
 <script>
-import Footer from '@/components/footer/footer.vue'
+import Footer from "@/components/footer/footer.vue";
 export default {
-    components: {
-        Footer,
-    },
-}
+  components: {
+    Footer,
+  },
+};
 </script>
 
 <style lang="scss">

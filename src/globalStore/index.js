@@ -1,16 +1,16 @@
-import { reactive } from 'vue'
+import { reactive } from "vue";
 
 const state = reactive({
-    mainBackground: null,
-})
+  mainBackground: null,
+});
 
 const methods = {
-    changeBackground: (background) => {
-        state.mainBackground = background
-    },
-}
+  changeBackground: (background) => {
+    state.mainBackground = background;
+  },
+};
 
 export default {
-    state,
-    ...methods,
-}
+  state,
+  ...methods,
+};

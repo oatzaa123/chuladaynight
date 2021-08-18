@@ -6,7 +6,16 @@
         <div class="blur"></div>
         <div class="star"></div>
       </div>
-      <div class="lang"><span>TH</span> | <span>EN</span></div>
+      <div class="lang">
+        <div>
+          <input type="radio" id="th" value="th" v-model="$i18n.locale" /> TH
+        </div>
+        &nbsp;|&nbsp;
+        <div>
+          <input type="radio" id="en" value="en" v-model="$i18n.locale" />EN
+        </div>
+      </div>
+
       <div class="logo-block">
         <div class="left">
           <div class="logo">
@@ -108,13 +117,11 @@ export default {
       if (night.includes(hour)) {
         let key = Object.keys(night).filter((i) => night[i] == hour);
         value = ((parseInt(key[0]) + 1) / 12) * 100;
-        console.log("night", hour, value);
       }
 
       if (day.includes(hour)) {
         let key = Object.keys(day).filter((i) => day[i] == hour);
         value = 100 - ((parseInt(key[0]) + 1) / 12) * 100;
-        console.log("day", hour, value);
       }
 
       state.rangeStyle = `background: linear-gradient(to right, #b51bff 0%, #b51bff ${value}%, #fff ${value}%, #fff 100%);`;
@@ -150,6 +157,11 @@ export default {
         .map((_, idx) => start + idx);
     };
 
+    const setLang = (lang) => {
+      console.log(`lang: ${lang}`);
+      // <input type="text" class="inputlang" v-model="$i18n.locale" />
+    };
+
     onBeforeMount(() => {
       getTime();
     });
@@ -172,6 +184,7 @@ export default {
       ...toRefs(state),
       bgToggle,
       dragstart,
+      setLang,
       rangeValue: computed({
         get() {
           return store.getters["showRangeValue"];
