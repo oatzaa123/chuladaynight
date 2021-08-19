@@ -1,3 +1,9 @@
 {
-    "message": "hello"
-  }
+  "message": "hello",
+  "Home": "Home",
+  "Gallery": "Gallery",
+  "WorkShop": "WorkShop",
+  "News": "News",
+  "About": "About",
+  "Contact": "Contact"
+}
