@@ -97,30 +97,6 @@ export default {
             return `http://localhost:5000/images/${imageName}`
         }
 
-        // const blocks = ref([])
-
-        // const blocks = ref([
-        //     {
-        //         id: 1,
-        //         path: require('@/assets/images/workshop/image-workshop.png'),
-        //     },
-        //     {
-        //         id: 2,
-        //         path: require('../../assets/images/gallery/Image 49.svg'),
-        //     },
-        //     {
-        //         id: 3,
-        //         path: require('@/assets/images/workshop/image-workshop.png'),
-        //     },
-        //     {
-        //         id: 4,
-        //         path: require('../../assets/images/gallery/Group 294.svg'),
-        //     },
-        //     {
-        //         id: 5,
-        //         path: require('../../assets/images/gallery/Group 294.svg'),
-        //     },
-        // ])
         const slideOptions = ref({
             type: 'loop',
             perPage: 3,
