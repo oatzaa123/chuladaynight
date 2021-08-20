@@ -42,17 +42,15 @@ exports.addWorkshop = catchAsync(async (req, res, next) => {
     if (req.files) {
         if (req.files.coverImage) {
             coverImage = req.files.coverImage || ''
-            coverImageName = coverImage !== '' ? req.files.coverImage.name : ''
-            const newCoverImage = uploadFile(coverImageName, coverImage)
-            if (newCoverImage)
+            coverImageName = await uploadFile(coverImage)
+            if (!coverImageName)
                 return next(new ErrorHandler(`Fail to upload image.`, 400))
         }
 
         if (req.files.image) {
             image = req.files.image || ''
-            imageName = image !== '' ? req.files.image.name : ''
-            const newImage = uploadFile(imageName, image)
-            if (newImage)
+            imageName = await uploadFile(image)
+            if (!imageName)
                 return next(new ErrorHandler(`Fail to upload image.`, 400))
         }
 
