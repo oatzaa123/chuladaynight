@@ -6,10 +6,22 @@
             :key="item.key"
             class="menu-link"
         >
-            <div>{{ item.name }}</div>
+            <div>{{ $t(item.name) }}</div>
         </router-link>
         <div class="menu-lang">
-            <span class="th">TH</span>&nbsp;|&nbsp;<span class="en">EN</span>
+            <div>
+                <input type="radio" id="th" value="th" v-model="$i18n.locale" />
+                TH
+            </div>
+            &nbsp;|&nbsp;
+            <div>
+                <input
+                    type="radio"
+                    id="en"
+                    value="en"
+                    v-model="$i18n.locale"
+                />EN
+            </div>
         </div>
     </div>
 </template>
@@ -42,6 +54,7 @@ export default {
     &.show {
         opacity: 1;
         height: auto;
+        width: 100%;
         overflow: unset;
     }
     .menu-link {
@@ -57,6 +70,16 @@ export default {
         text-decoration: unset;
         span:nth-child(1) {
             margin-right: 1px;
+        }
+        div {
+            position: relative;
+            input[type='radio'] {
+                cursor: pointer;
+                opacity: 0;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
         }
     }
 }
