@@ -41,7 +41,7 @@
             $left: 0% 15% 15% 18% 25% 32% 32% 37% 42% 26% 39% 43% 32% 33.5% 41%
                 40%;
             $right: 27% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 27%;
-            $bottom: 25% 26% 41.5% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 25%;
+            $bottom: 5% 26% 41.5% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 25%;
             @for $i from 1 through 16 {
                 .pin:nth-child(16n + #{$i}) {
                     @if $i == 1 {
@@ -69,7 +69,7 @@
                 @for $i from 1 through 16 {
                     .pin:nth-child(16n + #{$i}) {
                         @if $i == 1 {
-                            bottom: calc(#{nth($bottom, $i)} - 20%);
+                            bottom: nth($bottom, $i);
                             right: nth($right, $i);
                             position: absolute;
                         } @else if $i == 2 {
