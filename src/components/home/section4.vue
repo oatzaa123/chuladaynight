@@ -27,7 +27,7 @@
             <img :src="block.path" />
           </div>
         </CarouselSlide> -->
-                <splide :options="slideOptions">
+                <splide :options="slideOptions" v-if="blocks.Workshop">
                     <splide-slide
                         v-for="slide in blocks.Workshop"
                         :key="slide._id"
@@ -35,6 +35,7 @@
                     >
                         <div class="img col-sm">
                             <img
+                                v-if="slide.coverImage"
                                 @click="onPageChanged(slide._id)"
                                 :src="getImage(slide.coverImage)"
                             />
@@ -73,7 +74,7 @@
 // import CarouselSlide from "@/components/slide/carouselSlide";
 import { Splide, SplideSlide } from '@splidejs/vue-splide'
 import '@splidejs/splide/dist/css/themes/splide-default.min.css'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import useWorkshop from '@/hooks/useWorkshop'
 export default {
@@ -172,7 +173,7 @@ export default {
             onBackwardClick,
             onPageChanged,
             //   slideCurrent: computed(() => slideCurrent.value),
-            blocks: data,
+            blocks: computed(() => data.value),
             slideOptions,
             getImage,
         }
