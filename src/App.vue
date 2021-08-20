@@ -24,6 +24,9 @@ export default {
 @import "./assets/css/font.scss";
 
 /** route transition */
+#app {
+  overflow: hidden;
+}
 
 .route-enter-from {
   opacity: 0;
