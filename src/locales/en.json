@@ -1,3 +1,9 @@
 {
-    "message": "hello"
-  }
+  "message": "hello",
+  "menu_Home": "Home",
+  "menu_Gallery": "Gallery",
+  "menu_WorkShop": "WorkShop",
+  "menu_News": "News",
+  "menu_About": "About",
+  "menu_Contact": "Contact"
+}

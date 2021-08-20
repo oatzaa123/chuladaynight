@@ -1,3 +1,9 @@
 {
-  "message": "สวัสดี"
+  "message": "สวัสดี",
+  "menu_Home": "หน้าหลัก",
+  "menu_Gallery": "แกลลอรี่",
+  "menu_WorkShop": "เวิร์คชอป",
+  "menu_News": "ข่าว",
+  "menu_About": "เกี่ยวกับ",
+  "menu_Contact": "ติดต่อเรา"
 }

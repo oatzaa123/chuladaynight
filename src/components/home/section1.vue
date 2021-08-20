@@ -47,7 +47,7 @@
             :key="item.key"
             class="menu-link"
           >
-            <div>{{ item.name }}</div>
+            <div>{{ $t(item.name) }}</div>
           </router-link>
         </div>
       </div>
@@ -97,12 +97,12 @@ export default {
       widthRange: "",
       // isNight: true,
       Menu: [
-        { name: "Menu", path: "/Home" },
-        { name: "Gallery", path: "/Gallery" },
-        { name: "WorkShop", path: "/WorkShop" },
-        { name: "News", path: "/News" },
-        { name: "About", path: "/About" },
-        { name: "Contact", path: "/Contact" },
+        { name: "menu_Home", path: "/Home" },
+        { name: "menu_Gallery", path: "/Gallery" },
+        { name: "menu_WorkShop", path: "/WorkShop" },
+        { name: "menu_News", path: "/News" },
+        { name: "menu_About", path: "/About" },
+        { name: "menu_Contact", path: "/Contact" },
       ],
     });
 
