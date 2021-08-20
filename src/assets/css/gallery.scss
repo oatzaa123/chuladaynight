@@ -84,49 +84,6 @@
                             top: calc(#{nth($top, $i)} + 9%);
                             left: calc(#{nth($left, $i)} - 3%);
                             position: absolute;
-                        } @else if $i >= 7 and $i <= 9 {
-                            top: calc(#{nth($top, $i)} + 6%);
-                            left: nth($left, $i);
-                            position: absolute;
-                        } @else if $i == 12 {
-                            top: calc(#{nth($top, $i)} + 3%);
-                            left: nth($left, $i);
-                            position: absolute;
-                        } @else if $i == 13 {
-                            top: calc(#{nth($top, $i)} + 1%);
-                            left: nth($left, $i);
-                            position: absolute;
-                        } @else if $i >= 14 and $i <= 15 {
-                            top: calc(#{nth($top, $i)} + 2%);
-                            left: nth($left, $i);
-                            position: absolute;
-                        } @else {
-                            top: calc(#{nth($top, $i)} + 3%);
-                            left: nth($left, $i);
-                            position: absolute;
-                        }
-                    }
-                }
-            }
-            @media screen and (max-width: 1440px) {
-                @for $i from 1 through 16 {
-                    .pin:nth-child(16n + #{$i}) {
-                        @if $i == 1 {
-                            bottom: calc(#{nth($bottom, $i)} - 20%);
-                            right: nth($right, $i);
-                            position: absolute;
-                        } @else if $i == 2 {
-                            bottom: calc(#{nth($bottom, $i)} - 15%);
-                            left: nth($left, $i);
-                            position: absolute;
-                        } @else if $i == 3 {
-                            bottom: calc(#{nth($bottom, $i)} - 12%);
-                            left: calc(#{nth($left, $i)} - 3%);
-                            position: absolute;
-                        } @else if $i >= 4 and $i <= 6 {
-                            top: calc(#{nth($top, $i)} + 9%);
-                            left: calc(#{nth($left, $i)} - 3%);
-                            position: absolute;
                         } @else if $i >= 7 and $i <= 10 {
                             top: calc(#{nth($top, $i)} + 6%);
                             left: nth($left, $i);
