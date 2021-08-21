@@ -189,7 +189,7 @@ export default {
             globalStore.changeBackground(background)
         }
 
-        data.Gallery && setBackgroundImage(data.Gallery)
+        data && setBackgroundImage(data)
 
         return {
             data,

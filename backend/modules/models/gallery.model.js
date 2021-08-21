@@ -35,11 +35,11 @@ const gallerySchema = mongoose.Schema({
     },
     createdAt: {
         type: String,
-        default: moment(Date.now()).format('DD/MM/YYYY hh:mm:ss'),
+        default: new Date(Date.now()),
     },
     updatedAt: {
         type: String,
-        default: moment(Date.now()).format('DD/MM/YYYY hh:mm:ss'),
+        default: new Date(Date.now()),
     },
 })
 
