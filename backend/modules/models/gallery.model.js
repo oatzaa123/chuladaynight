@@ -2,26 +2,37 @@ const mongoose = require('mongoose')
 const moment = require('moment')
 
 const gallerySchema = mongoose.Schema({
+    title: { type: String, required: [true, 'title is not be empty'] },
+    author: {
+        name: { type: String, required: [true, 'author name is not be empty'] },
+        image: { type: String },
+        group: { type: String },
+        contact: {
+            facebook: { type: String },
+            line: { type: String },
+            email: { type: String },
+            phone: { type: String },
+        },
+    },
+    shortDescription: { type: String },
     coverImage: {
         type: String,
         required: [true, 'coverImage is not be empty'],
     },
-    coverTitle: {
-        type: String,
-        required: [true, 'coverTitle is not be empty'],
+    location: {
+        latitude: String,
+        longitude: String,
     },
-    title: { type: String, required: [true, 'title is not be empty'] },
-    subTitle: { type: String, required: [true, 'subTitle is not be empty'] },
-    content: [
-        {
-            _id: false,
-            image: { type: String, required: [true, 'image is not be empty'] },
-            description: {
-                type: String,
-                required: [true, 'description is not be empty'],
-            },
+    content: {
+        _id: false,
+        image: [{ name: String }],
+        description: {
+            type: String,
+            required: [true, 'description is not be empty'],
         },
-    ],
+        modelImage: [{ name: String }],
+        video: [{ name: String }],
+    },
     createdAt: {
         type: String,
         default: moment(Date.now()).format('DD/MM/YYYY hh:mm:ss'),

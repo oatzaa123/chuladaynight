@@ -2,7 +2,7 @@ const catchAsync = require('../../../helpers/catchAsync')
 const APIFeatures = require('../../../utils/apiFeatures')
 const ErrorHandler = require('../../../helpers/errorHandler')
 const Gallery = require('./../../models/gallery.model')
-const uploadFile = require('./../../../middleware/upload')
+const { uploadFile, uploadVideo } = require('./../../../middleware/upload')
 
 exports.getGalleries = catchAsync(async (req, res, next) => {
     const featuresGallery = new APIFeatures(Gallery.find(), req.query)
@@ -36,38 +36,61 @@ exports.getGallery = catchAsync(async (req, res, next) => {
 })
 
 exports.addGallery = catchAsync(async (req, res, next) => {
-    let coverImageName, coverImage, image, imageName, gallery
-    const content = JSON.parse(req.body.content)
+    let coverImageName, authorImageName, gallery
+    let videoName = []
+    let contentImageName = []
+
+    const { author, content } = JSON.parse(req.body.data)
 
     if (req.files) {
-        if (req.files.coverImage) {
-            coverImage = req.files.coverImage || ''
-            coverImageName = coverImage !== '' ? req.files.coverImage.name : ''
-            const newCoverImage = uploadFile(coverImageName, coverImage)
-            if (newCoverImage)
+        const { coverImage, authorImage, video, contentImage } = req.files
+        if (coverImage || authorImage || contentImage) {
+            if (contentImage.length > 0) {
+                await Promise.all(
+                    contentImage.map(async (item, index) => {
+                        contentImageName.push({ name: await uploadFile(item) })
+                    })
+                )
+            } else if (contentImage) {
+                contentImageName.push({ name: await uploadFile(contentImage) })
+            }
+            coverImageName = await uploadFile(coverImage)
+            authorImageName = await uploadFile(authorImage)
+            if (!coverImageName || !authorImageName || !contentImageName)
                 return next(new ErrorHandler(`Fail to upload image.`, 400))
         }
 
-        if (req.files.image) {
-            image = req.files.image || ''
-            imageName = image !== '' ? req.files.image.name : ''
-            const newImage = uploadFile(imageName, image)
-            if (newImage)
-                return next(new ErrorHandler(`Fail to upload image.`, 400))
+        if (video) {
+            if (video.length > 0) {
+                await Promise.all(
+                    video.map(async (item, index) => {
+                        videoName.push({ name: await uploadVideo(item) })
+                    })
+                )
+            } else {
+                videoName.push({ name: await uploadVideo(video) })
+            }
+            if (!videoName)
+                return next(new ErrorHandler(`Fail to upload video.`, 400))
         }
 
         let obj = {
-            ...req.body,
+            ...JSON.parse(req.body.data),
             coverImage: coverImageName,
+            author: {
+                ...author,
+                image: authorImageName,
+            },
             content: {
-                image: imageName,
+                image: contentImageName,
                 description: content.description,
+                video: videoName,
             },
         }
 
         gallery = await Gallery.create(obj)
     } else {
-        gallery = await Gallery.create({ ...req.body, content })
+        gallery = await Gallery.create({ ...JSON.parse(req.body.data) })
     }
 
     res.status(201).json({

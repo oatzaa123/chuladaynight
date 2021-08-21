@@ -10,7 +10,14 @@ const app = express()
 require('./configs/express')(app)
 app.use('/api', AppRoutes)
 
-app.use('/images', express.static(path.join(__dirname, './assets/uploads')))
+app.use(
+    '/images',
+    express.static(path.join(__dirname, './assets/uploads/images'))
+)
+app.use(
+    '/videos',
+    express.static(path.join(__dirname, './assets/uploads/videos'))
+)
 
 app.all('*', (req, res, next) => {
     next(

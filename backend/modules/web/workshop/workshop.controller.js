@@ -2,7 +2,7 @@ const catchAsync = require('../../../helpers/catchAsync')
 const APIFeatures = require('../../../utils/apiFeatures')
 const ErrorHandler = require('../../../helpers/errorHandler')
 const Workshop = require('./../../models/workshop.model')
-const uploadFile = require('./../../../middleware/upload')
+const { uploadFile } = require('./../../../middleware/upload')
 
 exports.getWorkshops = catchAsync(async (req, res, next) => {
     const featuresWorkshop = new APIFeatures(Workshop.find(), req.query)
