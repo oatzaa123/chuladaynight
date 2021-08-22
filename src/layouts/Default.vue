@@ -14,7 +14,14 @@
             <img :src="require('../assets/images/MENU@1X.png')" />
             <Menu :class="{ show: state.show }" />
         </div>
-        <router-view />
+        <Suspense>
+            <template #default>
+                <router-view />
+            </template>
+            <template #fallback>
+                <span>Loading...</span>
+            </template>
+        </Suspense>
     </div>
 </template>
 

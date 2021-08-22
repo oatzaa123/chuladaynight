@@ -1,7 +1,8 @@
 const path = require('path')
 const sharp = require('sharp')
+const fs = require('fs')
 
-const uploadFile = async (file) => {
+const uploadFile = async (file, pathFolder) => {
     const { mimetype, name } = await file
     if (
         ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'].indexOf(
@@ -15,9 +16,19 @@ const uploadFile = async (file) => {
 
     const storePath = path.join(
         __dirname,
-        '/../assets/uploads/images/',
+        `/../assets/uploads/images/${pathFolder}/`,
         imageName
     )
+
+    if (
+        !fs.existsSync(
+            path.join(__dirname, `/../assets/uploads/images/${pathFolder}/`)
+        )
+    ) {
+        fs.mkdirSync(
+            path.join(__dirname, `/../assets/uploads/images/${pathFolder}/`)
+        )
+    }
 
     file.mv(storePath, (err) => {
         if (err) {
@@ -34,7 +45,7 @@ const uploadFile = async (file) => {
     return img ? imageName : null
 }
 
-const uploadVideo = async (file) => {
+const uploadVideo = async (file, pathFolder) => {
     const { mimetype, name } = await file
     if (['video/mp4'].indexOf(mimetype) < 0) {
         return false
@@ -44,9 +55,19 @@ const uploadVideo = async (file) => {
 
     const storePath = path.join(
         __dirname,
-        '/../assets/uploads/videos/',
+        `/../assets/uploads/videos/${pathFolder}/`,
         videoName
     )
+
+    if (
+        !fs.existsSync(
+            path.join(__dirname, `/../assets/uploads/videos/${pathFolder}/`)
+        )
+    ) {
+        fs.mkdirSync(
+            path.join(__dirname, `/../assets/uploads/videos/${pathFolder}/`)
+        )
+    }
 
     file.mv(storePath, (err) => {
         if (err) return false

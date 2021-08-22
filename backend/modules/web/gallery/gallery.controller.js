@@ -3,7 +3,6 @@ const APIFeatures = require('../../../utils/apiFeatures')
 const ErrorHandler = require('../../../helpers/errorHandler')
 const Gallery = require('./../../models/gallery.model')
 const { uploadFile, uploadVideo } = require('./../../../middleware/upload')
-const moment = require('moment')
 
 exports.getGalleries = catchAsync(async (req, res, next) => {
     const featuresGallery = new APIFeatures(Gallery.find(), req.query)
@@ -85,26 +84,43 @@ exports.perviousGallery = catchAsync(async (req, res, next) => {
 
 exports.addGallery = catchAsync(async (req, res, next) => {
     let coverImageName, authorImageName, gallery
-    let videoName = []
-    let contentImageName = []
+    // let videoName = []
+    // let contentImageName = []
+    const contents = []
 
-    const { author, content } = JSON.parse(req.body.data)
+    const { author, path, description } = JSON.parse(req.body.data)
 
     if (req.files) {
         const { coverImage, authorImage, video, contentImage } = req.files
         if (coverImage || authorImage || contentImage) {
             if (contentImage.length > 0) {
                 await Promise.all(
-                    contentImage.map(async (item, index) => {
-                        contentImageName.push({ name: await uploadFile(item) })
+                    contentImage.map(async (item) => {
+                        contents.push({
+                            path,
+                            contentType: 'Image',
+                            contentValue: await uploadFile(item, path),
+                        })
                     })
                 )
             } else if (contentImage) {
-                contentImageName.push({ name: await uploadFile(contentImage) })
+                contents.push({
+                    path,
+                    contentType: 'Image',
+                    contentValue: await uploadFile(contentImage, path),
+                })
             }
-            coverImageName = await uploadFile(coverImage)
-            authorImageName = await uploadFile(authorImage)
-            if (!coverImageName || !authorImageName || !contentImageName)
+
+            coverImageName = { path, name: await uploadFile(coverImage, path) }
+            authorImageName = {
+                path,
+                name: await uploadFile(authorImage, path),
+            }
+            if (
+                !coverImageName.name ||
+                !authorImageName.name ||
+                contents.length === 0
+            )
                 return next(new ErrorHandler(`Fail to upload image.`, 400))
         }
 
@@ -112,14 +128,26 @@ exports.addGallery = catchAsync(async (req, res, next) => {
             if (video.length > 0) {
                 await Promise.all(
                     video.map(async (item, index) => {
-                        videoName.push({ name: await uploadVideo(item) })
+                        contents.push({
+                            path,
+                            contentType: 'Video',
+                            contentValue: await uploadVideo(item, path),
+                        })
                     })
                 )
             } else {
-                videoName.push({ name: await uploadVideo(video) })
+                contents.push({
+                    path,
+                    contentType: 'Video',
+                    contentValue: await uploadVideo(video, path),
+                })
             }
-            if (!videoName)
-                return next(new ErrorHandler(`Fail to upload video.`, 400))
+
+            contents.map(
+                (item) =>
+                    item.contentType !== 'Video' &&
+                    next(new ErrorHandler(`Fail to upload video.`, 400))
+            )
         }
 
         let obj = {
@@ -129,14 +157,19 @@ exports.addGallery = catchAsync(async (req, res, next) => {
                 ...author,
                 image: authorImageName,
             },
-            content: {
-                image: contentImageName,
-                description: content.description,
-                video: videoName,
-            },
         }
 
-        gallery = await Gallery.create(obj)
+        gallery = new Gallery({
+            ...obj,
+            content: contents,
+        })
+
+        gallery.content.push({
+            contentType: 'Text',
+            contentValue: description,
+        })
+
+        await gallery.save()
     } else {
         gallery = await Gallery.create({ ...JSON.parse(req.body.data) })
     }

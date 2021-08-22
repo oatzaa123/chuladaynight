@@ -6,28 +6,52 @@ export default function () {
         errorMessage: null,
         isFetching: false,
     })
-    const getAll = () => {
+    const getAll = async () => {
         const { data, errorMessage, fetchData, isFetching } =
             useAxios(`/gallery`)
 
-        fetchData()
+        await fetchData()
 
         gallery.data = data
         gallery.errorMessage = errorMessage
         gallery.isFetching = isFetching
     }
 
-    const getOne = (id) => {
+    const getOne = async (id) => {
         const { data, errorMessage, fetchData, isFetching } = useAxios(
             `/gallery/${id}`
         )
 
-        fetchData()
+        await fetchData()
 
         gallery.data = data
         gallery.errorMessage = errorMessage
         gallery.isFetching = isFetching
     }
 
-    return { getAll, getOne, ...toRefs(gallery) }
+    const nextPage = async (id) => {
+        const { data, errorMessage, fetchData, isFetching } = useAxios(
+            `/gallery/${id}/nextGallery`
+        )
+
+        await fetchData()
+
+        gallery.data = data
+        gallery.errorMessage = errorMessage
+        gallery.isFetching = isFetching
+    }
+
+    const perviousPage = async (id) => {
+        const { data, errorMessage, fetchData, isFetching } = useAxios(
+            `/gallery/${id}/perviousGallery`
+        )
+
+        await fetchData()
+
+        gallery.data = data
+        gallery.errorMessage = errorMessage
+        gallery.isFetching = isFetching
+    }
+
+    return { getAll, getOne, nextPage, perviousPage, ...toRefs(gallery) }
 }

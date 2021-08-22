@@ -40,7 +40,9 @@
                     @click.stop="onHandleClick(item._id)"
                 >
                     <img
-                        :src="getImage(item.coverImage)"
+                        :src="
+                            getImage(item.coverImage.name, item.coverImage.path)
+                        "
                         width="570"
                         height="336"
                     />
@@ -84,8 +86,8 @@ export default {
             throw new Error(errorMessage)
         }
 
-        const getImage = (imageName) => {
-            return `http://localhost:5000/images/${imageName}`
+        const getImage = (imageName, imagePath) => {
+            return `http://localhost:5000/images/${imagePath}/${imageName}`
         }
 
         const position = ref(0)

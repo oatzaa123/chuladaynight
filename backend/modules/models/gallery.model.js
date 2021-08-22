@@ -1,11 +1,10 @@
 const mongoose = require('mongoose')
-const moment = require('moment')
 
 const gallerySchema = mongoose.Schema({
     title: { type: String, required: [true, 'title is not be empty'] },
     author: {
         name: { type: String, required: [true, 'author name is not be empty'] },
-        image: { type: String },
+        image: { path: String, name: String },
         group: { type: String },
         contact: {
             facebook: { type: String },
@@ -16,23 +15,21 @@ const gallerySchema = mongoose.Schema({
     },
     shortDescription: { type: String },
     coverImage: {
-        type: String,
-        required: [true, 'coverImage is not be empty'],
+        path: String,
+        name: String,
     },
     location: {
         latitude: String,
         longitude: String,
     },
-    content: {
-        _id: false,
-        image: [{ name: String }],
-        description: {
-            type: String,
-            required: [true, 'description is not be empty'],
+    content: [
+        {
+            _id: false,
+            path: String,
+            contentType: String,
+            contentValue: String,
         },
-        modelImage: [{ name: String }],
-        video: [{ name: String }],
-    },
+    ],
     createdAt: {
         type: String,
         default: new Date(Date.now()),

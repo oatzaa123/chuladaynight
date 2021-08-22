@@ -1,24 +1,24 @@
 <template>
-    <div class="gallery-bg">
+    <!-- <div class="gallery-bg">
         <img :src="globalStore.state.mainBackground" alt="" />
-    </div>
+    </div> -->
     <div class="main-gallery-id">
         <div class="left-arrow">
-            <button class="btn btn-light customButton">
+            <button class="btn btn-light customButton" @click="onBackwardClick">
                 <div class="arrow"></div>
                 <div class="left"></div>
             </button>
         </div>
         <div class="right-arrow">
-            <button class="btn btn-light customButton">
+            <button class="btn btn-light customButton" @click="onForwardClick">
                 <div class="arrow"></div>
                 <div class="right"></div>
             </button>
         </div>
-        <div class="container" v-for="item in data" :key="item._id">
+        <div class="container">
             <div class="title-sub-gallery">
                 <div class="text-title">
-                    <p>{{ item.title }}</p>
+                    <p>{{ data.title }}</p>
                     <div class="d-flex mb-auto">
                         <div class="live">
                             <span class="dotted"></span>
@@ -40,34 +40,49 @@
                             width="20"
                             class="hover-img"
                         />
-                        {{ item.author.name }}
+                        {{ data.author.name }}
                     </p>
-                    <p>{{ item.author.group }}</p>
+                    <p>{{ data.author.group }}</p>
                 </div>
             </div>
             <div class="live-view"></div>
-            <div class="content-sub-gallery">
-                <div
-                    class="content-img"
-                    v-for="gallery in item.content.image"
-                    :key="gallery"
-                >
-                    <img :src="getImage(gallery.name)" />
+            <div class="3d-view"></div>
+            <div
+                class="content-sub-gallery"
+                v-for="gallery in data.content"
+                :key="gallery"
+            >
+                <div class="content-img">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <img
+                                v-if="gallery.contentType === 'Image'"
+                                :src="
+                                    getImage(gallery.contentValue, gallery.path)
+                                "
+                            />
+                        </div>
+                    </div>
                 </div>
-                <div class="content-description">
-                    <p>{{ item.content.description }}</p>
+                <div
+                    class="content-description"
+                    v-if="gallery.contentType === 'Text'"
+                >
+                    <p>{{ gallery.contentValue }}</p>
                 </div>
             </div>
             <div class="showreel"></div>
             <div class="gallery-footer">
                 <img
                     class="profile"
-                    :src="getImage(item.author.image)"
+                    :src="
+                        getImage(data.author.image.name, data.author.image.path)
+                    "
                     height="120"
                 />
                 <div class="footer-description">
-                    <p>{{ item.author.name }}</p>
-                    <p>{{ item.author.group }}</p>
+                    <p>{{ data.author.name }}</p>
+                    <p>{{ data.author.group }}</p>
                     <p>
                         <img
                             :src="
@@ -76,15 +91,31 @@
                             width="15"
                             class="hover-img"
                         />
-                        {{ item.author.contact.phone }}
+                        {{ data.author.contact.phone }}
                     </p>
                     <div class="footer-icon">
-                        <div
-                            class="footer-icon-img"
-                            v-for="item in icon"
-                            :key="item"
-                        >
-                            <img :src="item.path" width="35" height="35" />
+                        <div class="footer-icon-img">
+                            <img
+                                :src="
+                                    require('@/assets/images/icons/Group 327@2x.png')
+                                "
+                                width="35"
+                                height="35"
+                            />
+                            <img
+                                :src="
+                                    require('@/assets/images/icons/Group 344@2x.png')
+                                "
+                                width="35"
+                                height="35"
+                            />
+                            <img
+                                :src="
+                                    require('@/assets/images/icons/Group 328.svg')
+                                "
+                                width="35"
+                                height="35"
+                            />
                         </div>
                     </div>
                 </div>
@@ -94,108 +125,80 @@
 </template>
 
 <script>
-import { ref, inject } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import useGallery from '@/hooks/useGallery'
+// import useGallery from '@/hooks/useGallery'
+import axios from '@/configs/axios'
 export default {
     name: 'Gallery-id',
-    setup() {
+    async setup() {
         const router = useRouter()
-        console.log(router)
         const route = useRoute()
-        const { data, getOne, errorMessage } = useGallery()
+        // const { data, getOne, perviousPage, errorMessage } = useGallery()
+
+        const gallery = ref(null)
 
         try {
-            getOne(route.params.id)
+            // getOne(route.params.id)
+            const id = route.params.id
+            const res = await axios.get(`/gallery/${id}`)
+            gallery.value = res.data.data.gallery
         } catch (error) {
-            throw new Error(errorMessage)
+            throw new Error(error)
         }
 
-        const getImage = (imageName) => {
-            return `http://localhost:5000/images/${imageName}`
+        const getImage = (imageName, imagePath) => {
+            return `http://localhost:5000/images/${imagePath}/${imageName}`
         }
 
-        const icon = ref([
-            {
-                path: require('@/assets/images/icons/Group 327@2x.png'),
-            },
-            {
-                path: require('@/assets/images/icons/Group 344@2x.png'),
-            },
-            {
-                path: require('@/assets/images/icons/Group 328.svg'),
-            },
-        ])
+        const onForwardClick = async () => {
+            const id = route.params.id
+            try {
+                // nextPage(id)
+                const res = await axios.get(`/gallery/${id}/nextGallery`)
+                gallery.value = res.data.data.gallery
+                if (res.data.data) {
+                    router.push({
+                        name: 'Gallery-id',
+                        params: { id: gallery.value._id },
+                    })
+                }
+            } catch (error) {
+                throw new Error(error)
+            }
+        }
 
-        // const onForwardClick = () => {
-        //     const id = route.params.id
-        //     const currentIndex = data.value.findIndex(
-        //         (item) => item.id.toString() === id
-        //     )
+        const onBackwardClick = async () => {
+            const id = route.params.id
+            try {
+                // perviousPage(id)
+                const res = await axios.get(`/gallery/${id}/perviousGallery`)
+                gallery.value = res.data.data.gallery
+                if (res.data.data) {
+                    router.push({
+                        name: 'Gallery-id',
+                        params: { id: gallery.value._id },
+                    })
+                }
+            } catch (error) {
+                throw new Error(error)
+            }
+        }
 
-        //     if (
-        //         data.value[parseInt(currentIndex) + 1] &&
-        //         data.value[parseInt(currentIndex) + 1].id
-        //     ) {
-        //         router.push({
-        //             name: 'Gallery-id',
-        //             params: { id: data.value[parseInt(currentIndex) + 1].id },
-        //         })
+        // const globalStore = inject('globalStore')
 
-        //         gallery.value = [data.value[parseInt(currentIndex) + 1]]
-        //     } else {
-        //         router.push({
-        //             name: 'Gallery-id',
-        //             params: { id: data.value[0].id },
-        //         })
-
-        //         gallery.value = [data.value[0]]
-        //     }
-
-        //     setBackgroundImage(gallery.value[0].content[0].image)
+        // const setBackgroundImage = (background) => {
+        //     globalStore.changeBackground(background)
         // }
 
-        // const onBackwardClick = () => {
-        //     const id = route.params.id
-        //     const currentIndex = data.value.findIndex(
-        //         (item) => item.id.toString() === id
-        //     )
-
-        //     if (
-        //         data.value[parseInt(currentIndex) - 1] &&
-        //         data.value[parseInt(currentIndex) - 1].id
-        //     ) {
-        //         router.push({
-        //             name: 'Gallery-id',
-        //             params: { id: data.value[parseInt(currentIndex) - 1].id },
-        //         })
-
-        //         gallery.value = [data.value[parseInt(currentIndex) - 1]]
-        //     } else {
-        //         router.push({
-        //             name: 'Gallery-id',
-        //             params: { id: data.value[data.value.length - 1].id },
-        //         })
-
-        //         gallery.value = [data.value[data.value.length - 1]]
-        //     }
-
-        //     setBackgroundImage(gallery.value[0].content[0].image)
-        // }
-
-        const globalStore = inject('globalStore')
-
-        const setBackgroundImage = (background) => {
-            globalStore.changeBackground(background)
-        }
-
-        data && setBackgroundImage(data)
+        // setBackgroundImage()
 
         return {
-            data,
-            icon: icon.value,
-            globalStore,
+            data: computed(() => gallery.value),
+            // globalStore,
             getImage,
+            onForwardClick,
+            onBackwardClick,
         }
     },
 }
@@ -325,6 +328,7 @@ export default {
                     .footer-icon-img {
                         // margin: 0 3px;
                         img {
+                            cursor: pointer;
                             margin: 0 3px;
                         }
                     }
