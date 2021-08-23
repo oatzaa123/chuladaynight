@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="live-view"></div>
-            <div class="modelView sketchfab-embed-wrapper">
+            <div class="modelView">
                 <!-- <canvas id="c"></canvas> -->
                 <Canvas />
                 <!-- <model-obj src="static/models/obj/model1.obj" /> -->

@@ -1,19 +1,33 @@
 <template>
     <canvas id="c"></canvas>
+    <x-model
+        class="obj3d model"
+        src="static/models/obj/3D Model ประแจจีน.obj"
+    ></x-model>
 </template>
 
 <script>
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'
-// import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/build/three.module.js'
-// import { OrbitControls } from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/controls/OrbitControls.js'
-// import { DDSLoader } from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/loaders/DDSLoader.js'
-// import { OBJLoader } from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/loaders/OBJLoader.js'
-// import { MTLLoader } from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/examples/jsm/loaders/MTLLoader.js'
+// import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js'
+// import { DDSLoader } from 'three/examples/jsm/loaders/DDSLoader.js'
 export default {
-    setup() {
-        const main = () => {
+    data() {
+        return {
+            // scene: null,
+            // camera: null,
+            // renderer: null,
+            // controls: null,
+            // keyLight: null,
+            // fillLight: null,
+            // backLight: null,
+            // mtlLoader: null,
+            // objLoader: null,
+        }
+    },
+    methods: {
+        async main() {
             const canvas = document.querySelector('#c')
             const renderer = new THREE.WebGLRenderer({ canvas })
 
@@ -26,10 +40,11 @@ export default {
 
             const controls = new OrbitControls(camera, canvas)
             controls.target.set(0, 5, 0)
+            controls.enableDamping = true
             controls.update()
 
             const scene = new THREE.Scene()
-            scene.background = new THREE.Color('black')
+            // scene.background = new THREE.Color('black')
 
             {
                 const planeSize = 40
@@ -78,36 +93,41 @@ export default {
 
             {
                 const objLoader = new OBJLoader()
-                objLoader.load(
-                    'static/models/obj/3D Model ประแจจีน.obj',
+                await objLoader.load(
+                    './../../assets/3d/windmill.obj',
                     (root) => {
+                        console.log(root)
                         scene.add(root)
-                    }
+                    },
+                    onProgress,
+                    onError
                 )
-                // const onProgress = function (xhr) {
-                //     if (xhr.lengthComputable) {
-                //         const percentComplete = (xhr.loaded / xhr.total) * 100
-                //         console.log(
-                //             Math.round(percentComplete, 2) + '% downloaded'
-                //         )
-                //     }
-                // }
+                const onProgress = (xhr) => {
+                    if (xhr.lengthComputable) {
+                        const percentComplete = (xhr.loaded / xhr.total) * 100
+                        console.log(
+                            Math.round(percentComplete, 2) + '% downloaded'
+                        )
+                    }
+                }
 
-                // const onError = function () {}
+                const onError = () => {
+                    console.log('xxx')
+                }
+
                 // const manager = new THREE.LoadingManager()
                 // manager.addHandler(/\.dds$/i, new DDSLoader())
-                // new MTLLoader(manager)
-                //     .setPath('static/models/obj/')
-                //     .load('3D Model ประแจจีน.mtl', function (materials) {
+                // new MTLLoader()
+                //     .setPath('/public/static/models/obj/')
+                //     .load('3D Model ประแจจีน.mtl', (materials) => {
                 //         materials.preload()
 
-                //         new OBJLoader(manager)
+                //         new OBJLoader()
                 //             .setMaterials(materials)
-                //             .setPath('static/models/obj/')
+                //             .setPath('/public/static/models/obj/')
                 //             .load(
-                //                 '3D Model ประแจจีน.obj',
-                //                 function (object) {
-                //                     object.position.y = -95
+                //                 'windmill.obj',
+                //                 (object) => {
                 //                     scene.add(object)
                 //                 },
                 //                 onProgress,
@@ -116,24 +136,24 @@ export default {
                 //     })
             }
 
-            // function resizeRendererToDisplaySize(renderer) {
-            //     const canvas = renderer.domElement
-            //     const width = '500px'
-            //     const height = '500px'
-            //     const needResize =
-            //         canvas.width !== width || canvas.height !== height
-            //     if (needResize) {
-            //         renderer.setSize(width, height, false)
-            //     }
-            //     return needResize
-            // }
+            function resizeRendererToDisplaySize(renderer) {
+                const canvas = renderer.domElement
+                const width = canvas.clientWidth
+                const height = canvas.clientHeight
+                const needResize =
+                    canvas.width !== width || canvas.height !== height
+                if (needResize) {
+                    renderer.setSize(width, height, false)
+                }
+                return needResize
+            }
 
             function render() {
-                // if (resizeRendererToDisplaySize(renderer)) {
-                //     const canvas = renderer.domElement
-                //     camera.aspect = canvas.clientWidth / canvas.clientHeight
-                //     camera.updateProjectionMatrix()
-                // }
+                if (resizeRendererToDisplaySize(renderer)) {
+                    const canvas = renderer.domElement
+                    camera.aspect = canvas.clientWidth / canvas.clientHeight
+                    camera.updateProjectionMatrix()
+                }
 
                 renderer.render(scene, camera)
 
@@ -141,11 +161,74 @@ export default {
             }
 
             requestAnimationFrame(render)
-        }
+        },
+        // onInit() {
+        //     this.scene = new THREE.Scene()
 
-        main()
+        //     this.camera = new THREE.PerspectiveCamera(
+        //         75,
+        //         window.innerWidth / window.innerHeight,
+        //         0.1,
+        //         1000
+        //     )
+        //     this.camera.position.z = 200
 
-        return {}
+        //     this.renderer = new THREE.WebGLRenderer()
+        //     this.renderer.setSize(window.innerWidth, window.innerHeight)
+        //     document.body.appendChild(this.renderer.domElement)
+
+        //     this.controls = new OrbitControls(
+        //         this.camera,
+        //         this.renderer.domElement
+        //     )
+        //     this.controls.enableDamping = true
+        //     this.controls.dampingFactor = 0.25
+        //     this.controls.enableZoom = true
+
+        //     this.keyLight = new THREE.DirectionalLight(
+        //         new THREE.Color('hsl(30, 100%, 75%)'),
+        //         1.0
+        //     )
+        //     this.keyLight.position.set(-100, 0, 100)
+
+        //     this.fillLight = new THREE.DirectionalLight(
+        //         new THREE.Color('hsl(240, 100%, 75%)'),
+        //         0.75
+        //     )
+        //     this.fillLight.position.set(100, 0, 100)
+
+        //     this.backLight = new THREE.DirectionalLight(0xffffff, 1.0)
+        //     this.backLight.position.set(100, 0, -100).normalize()
+
+        //     this.scene.add(this.keyLight)
+        //     this.scene.add(this.fillLight)
+        //     this.scene.add(this.backLight)
+
+        //     this.mtlLoader = new MTLLoader()
+        //     this.mtlLoader.setTexturePath('@/assets/3d/3D Model ประแจจีน.mtl')
+        //     this.mtlLoader.setPath('@/assets/3d/3D Model ประแจจีน.mtl')
+        //     this.mtlLoader.load('3D Model ประแจจีน.mtl', function (materials) {
+        //         materials.preload()
+
+        //         this.objLoader = new OBJLoader()
+        //         this.objLoader.setMaterials(materials)
+        //         this.objLoader.setPath('@/assets/3d/3D Model ประแจจีน.obj')
+        //         this.objLoader.load('3D Model ประแจจีน.obj', function (object) {
+        //             this.scene.add(object)
+        //             object.position.y -= 60
+        //         })
+        //     })
+        // },
+        // animate() {
+        //     requestAnimationFrame(this.animate)
+        //     this.controls.update()
+        //     this.renderer.render(this.scene, this.camera)
+        // },
+    },
+    mounted() {
+        // window.requestAnimationFrame(this.animate)
+        this.main()
+        // this.animate()
     },
 }
 </script>
