@@ -7,10 +7,14 @@
                 <sub class="sub"><h5>SCULTURE</h5></sub>
             </div>
         </div>
-        <div class="content">
+        <div class="content" v-if="data.Gallery">
             <div class="map">
                 <div class="mappin">
-                    <div class="pin" v-for="(i, index) in 16" :key="index">
+                    <div
+                        class="pin"
+                        v-for="(i, index) in data.Gallery.length"
+                        :key="index"
+                    >
                         <img
                             v-if="position === index"
                             :src="

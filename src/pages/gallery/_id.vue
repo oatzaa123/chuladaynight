@@ -46,23 +46,37 @@
                 </div>
             </div>
             <div class="live-view"></div>
-            <div class="3d-view"></div>
+            <div class="modelView sketchfab-embed-wrapper">
+                <!-- <canvas id="c"></canvas> -->
+                <Canvas />
+                <!-- <model-obj src="static/models/obj/model1.obj" /> -->
+                <!-- <iframe
+                    type="text/html"
+                    id="3dviewerplayer"
+                    width="640"
+                    height="480"
+                    src="https://3dwarehouse.sketchup.com/embed/06471c11-7c12-4d03-812b-c5023cb8959a"
+                    frameborder="0"
+                    scrolling="no"
+                    allowfullscreen
+                    webkitallowfullscreen
+                    mozallowfullscreen
+                ></iframe> -->
+            </div>
             <div
                 class="content-sub-gallery"
                 v-for="gallery in data.content"
                 :key="gallery"
             >
                 <div class="content-img">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <img
-                                v-if="gallery.contentType === 'Image'"
-                                :src="
-                                    getImage(gallery.contentValue, gallery.path)
-                                "
-                            />
-                        </div>
-                    </div>
+                    <!-- <div class="row">
+                        <div class="col-sm-6"> -->
+                    <img
+                        v-if="gallery.contentType === 'Image'"
+                        :src="getImage(gallery.contentValue, gallery.path)"
+                    />
+                    <!-- </div>
+                    </div> -->
                 </div>
                 <div
                     class="content-description"
@@ -74,10 +88,17 @@
             <div class="showreel"></div>
             <div class="gallery-footer">
                 <img
+                    v-if="data.author.image"
                     class="profile"
                     :src="
                         getImage(data.author.image.name, data.author.image.path)
                     "
+                    height="120"
+                />
+                <img
+                    v-else
+                    class="profile"
+                    :src="require('@/assets/images/defaultuser.png')"
                     height="120"
                 />
                 <div class="footer-description">
@@ -127,10 +148,13 @@
 <script>
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import Canvas from '@/components/3d/canvas'
 // import useGallery from '@/hooks/useGallery'
 import axios from '@/configs/axios'
+// import { ModelObj } from 'vue-3d-model'
 export default {
     name: 'Gallery-id',
+    components: { Canvas },
     async setup() {
         const router = useRouter()
         const route = useRoute()
@@ -295,6 +319,11 @@ export default {
                 font-size: 14px;
                 margin: 25px 40px;
                 color: #ffffff;
+            }
+        }
+        .modelView {
+            iframe {
+                width: 100%;
             }
         }
         .gallery-footer {

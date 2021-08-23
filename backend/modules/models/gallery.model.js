@@ -31,12 +31,12 @@ const gallerySchema = mongoose.Schema({
         },
     ],
     createdAt: {
-        type: String,
-        default: new Date(Date.now()),
+        type: Number,
+        default: Date.now(),
     },
     updatedAt: {
-        type: String,
-        default: new Date(Date.now()),
+        type: Number,
+        default: Date.now(),
     },
 })
 

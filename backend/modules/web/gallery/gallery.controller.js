@@ -66,13 +66,16 @@ exports.perviousGallery = catchAsync(async (req, res, next) => {
 
     if (!gallery) return next(new ErrorHandler('Data not found', 404))
 
-    const perviousId = await Gallery.findOne({
-        createdAt: { $lt: gallery.createdAt },
-    })
+    // const perviousId = await Gallery.findOne({
+    //     createdAt: { $lt: gallery.createdAt },
+    // })
 
-    const perviousGallery = perviousId
-        ? perviousId
-        : AllGallery.find((_, index) => index === AllGallery.length - 1)
+    const perviousId = AllGallery.findIndex((item) => item._id === gallery._id)
+
+    const perviousGallery =
+        perviousId > 0
+            ? AllGallery.find((_, index) => index === perviousId - 1)
+            : AllGallery.find((_, index) => index === AllGallery.length - 1)
 
     res.status(200).json({
         status: 'success',
@@ -84,8 +87,6 @@ exports.perviousGallery = catchAsync(async (req, res, next) => {
 
 exports.addGallery = catchAsync(async (req, res, next) => {
     let coverImageName, authorImageName, gallery
-    // let videoName = []
-    // let contentImageName = []
     const contents = []
 
     const { author, path, description } = JSON.parse(req.body.data)
@@ -111,17 +112,19 @@ exports.addGallery = catchAsync(async (req, res, next) => {
                 })
             }
 
-            coverImageName = { path, name: await uploadFile(coverImage, path) }
-            authorImageName = {
-                path,
-                name: await uploadFile(authorImage, path),
+            if (coverImage) {
+                coverImageName = {
+                    path,
+                    name: await uploadFile(coverImage, path),
+                }
             }
-            if (
-                !coverImageName.name ||
-                !authorImageName.name ||
-                contents.length === 0
-            )
-                return next(new ErrorHandler(`Fail to upload image.`, 400))
+
+            if (authorImage) {
+                authorImageName = {
+                    path,
+                    name: await uploadFile(authorImage, path),
+                }
+            }
         }
 
         if (video) {
@@ -142,12 +145,6 @@ exports.addGallery = catchAsync(async (req, res, next) => {
                     contentValue: await uploadVideo(video, path),
                 })
             }
-
-            contents.map(
-                (item) =>
-                    item.contentType !== 'Video' &&
-                    next(new ErrorHandler(`Fail to upload video.`, 400))
-            )
         }
 
         let obj = {
@@ -162,16 +159,31 @@ exports.addGallery = catchAsync(async (req, res, next) => {
         gallery = new Gallery({
             ...obj,
             content: contents,
+            createdAt: Date.now(),
+            updatedAt: Date.now(),
         })
 
-        gallery.content.push({
-            contentType: 'Text',
-            contentValue: description,
-        })
+        if (typeof description !== 'string') {
+            description.map((item) => {
+                gallery.content.push({
+                    contentType: 'Text',
+                    contentValue: item,
+                })
+            })
+        } else {
+            gallery.content.push({
+                contentType: 'Text',
+                contentValue: description,
+            })
+        }
 
         await gallery.save()
     } else {
-        gallery = await Gallery.create({ ...JSON.parse(req.body.data) })
+        gallery = await Gallery.create({
+            ...JSON.parse(req.body.data),
+            createdAt: Date.now(),
+            updatedAt: Date.now(),
+        })
     }
 
     res.status(201).json({

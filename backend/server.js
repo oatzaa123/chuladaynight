@@ -14,9 +14,15 @@ app.use(
     '/images',
     express.static(path.join(__dirname, './assets/uploads/images'))
 )
+
 app.use(
     '/videos',
     express.static(path.join(__dirname, './assets/uploads/videos'))
+)
+
+app.use(
+    '/modelImage',
+    express.static(path.join(__dirname, './assets/uploads/modelImage'))
 )
 
 app.all('*', (req, res, next) => {
