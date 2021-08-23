@@ -30,7 +30,6 @@ import { onMounted, reactive, toRefs } from 'vue'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
-import Stats from 'three/examples/jsm/libs/stats.module'
 
 export default {
     components: {
@@ -76,81 +75,75 @@ export default {
                     },
                 },
             },
-            scene: null,
-            light: null,
-            camera: null,
-            renderer: null,
-            controls: null,
-            objLoader: null,
-            stats: null,
         })
 
-        const init = () => {
-            let container = document.getElementById('section6container')
+        const scene = new THREE.Scene()
+        scene.add(new THREE.AxesHelper(5))
 
-            state.scene = new THREE.Scene()
-            state.scene.add(new THREE.AxesHelper(5))
+        const light = new THREE.PointLight()
+        light.position.set(2.5, 7.5, 15)
+        scene.add(light)
 
-            state.light = new THREE.PointLight()
-            state.light.position.set(2.5, 7.5, 15)
-            state.scene.add(state.light)
+        const camera = new THREE.PerspectiveCamera(
+            75,
+            window.innerWidth / window.innerHeight,
+            0.1,
+            1000
+        )
+        camera.position.z = 100
 
-            state.camera = new THREE.PerspectiveCamera(
-                75,
-                container.clientWidth / container.clientHeight,
-                0.1,
-                1000
-            )
-            state.camera.position.z = 3
+        const renderer = new THREE.WebGLRenderer()
+        renderer.setClearColor('Gainsboro')
+        renderer.setSize(500, 500)
 
-            state.renderer = new THREE.WebGLRenderer()
-            state.renderer.setSize(window.innerWidth, window.innerHeight)
-            container.appendChild(state.renderer.domElement)
+        const controls = new OrbitControls(camera, renderer.domElement)
+        controls.enableDamping = true
 
-            state.controls = new OrbitControls(
-                state.camera,
-                state.renderer.domElement
-            )
-            state.controls.enableDamping = true
+        const objLoader = new OBJLoader()
+        const file = 'static/models/obj/windmill.obj'
+        objLoader.load(
+            file,
+            (object) => {
+                // (object.children[0] as THREE.Mesh).material = material
+                // object.traverse(function (child) {
+                //     if ((child as THREE.Mesh).isMesh) {
+                //         (child as THREE.Mesh).material = material
+                //     }
+                // })
+                console.log('obj', object)
+                scene.add(object)
+            },
+            (xhr) => {
+                console.log('xhr', xhr)
+                console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+            },
+            (error) => {
+                console.log(error)
+            }
+        )
 
-            state.objLoader = new OBJLoader()
-            state.objLoader.load(
-                'public/static/models/obj/3D Model ประแจจีน.obj',
-                (object) => {
-                    // (object.children[0] as THREE.Mesh).material = material
-                    // object.traverse(function (child) {
-                    //     if ((child as THREE.Mesh).isMesh) {
-                    //         (child as THREE.Mesh).material = material
-                    //     }
-                    // })
-                    console.log(object)
-                    state.scene.add(object)
-                },
-                (xhr) => {
-                    console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-                },
-                (error) => {
-                    console.log(error)
-                }
-            )
-
-            state.stats = Stats()
-            container.appendChild(state.stats.dom)
+        window.addEventListener('resize', onWindowResize, false)
+        function onWindowResize() {
+            camera.aspect = 500 / 500
+            camera.updateProjectionMatrix()
+            renderer.setSize(500, 500)
+            render()
         }
 
         const animate = () => {
             requestAnimationFrame(animate)
-            state.controls.update()
+            controls.update()
             render()
-            state.stats.update()
         }
 
         const render = () => {
-            state.renderer.render(state.scene, state.camera)
+            renderer.render(scene, camera)
         }
 
         onMounted(() => {
-            init()
+            let container = document.getElementById('section6container')
+            container.appendChild(renderer.domElement)
+
             animate()
         })
 
