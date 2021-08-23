@@ -12,7 +12,9 @@ const uploadFile = async (file, pathFolder) => {
         return false
     }
 
-    const imageName = `${Date.now()}.${name.split('.')[1]}`
+    const imageName = `${Date.now()}.${
+        name.split('.')[name.split('.').length - 1]
+    }`
 
     const storePath = path.join(
         __dirname,
@@ -51,7 +53,9 @@ const uploadVideo = async (file, pathFolder) => {
         return false
     }
 
-    const videoName = `${Date.now()}.${name.split('.')[1]}`
+    const videoName = `${Date.now()}.${
+        name.split('.')[name.split('.').length - 1]
+    }`
 
     const storePath = path.join(
         __dirname,
