@@ -5,9 +5,10 @@
 <script>
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js'
-import { DDSLoader } from 'three/examples/jsm/loaders/DDSLoader.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+// import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'
+// import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js'
+// import { DDSLoader } from 'three/examples/jsm/loaders/DDSLoader.js'
 export default {
     props: {
         path: {
@@ -83,6 +84,34 @@ export default {
                 scene.add(light.target)
             }
 
+            function frameArea(sizeToFitOnScreen, boxSize, boxCenter, camera) {
+                const halfSizeToFitOnScreen = sizeToFitOnScreen * 0.5
+                const halfFovY = THREE.MathUtils.degToRad(camera.fov * 0.5)
+                const distance = halfSizeToFitOnScreen / Math.tan(halfFovY)
+                // compute a unit vector that points in the direction the camera is now
+                // in the xz plane from the center of the box
+                const direction = new THREE.Vector3()
+                    .subVectors(camera.position, boxCenter)
+                    .multiply(new THREE.Vector3(1, 0, 1))
+                    .normalize()
+
+                // move the camera to a position distance units way from the center
+                // in whatever direction the camera was from the center already
+                camera.position.copy(
+                    direction.multiplyScalar(distance).add(boxCenter)
+                )
+
+                // pick some near and far values for the frustum that
+                // will contain the box.
+                camera.near = boxSize / 100
+                camera.far = boxSize * 100
+
+                camera.updateProjectionMatrix()
+
+                // point the camera to look at the center of the box
+                camera.lookAt(boxCenter.x, boxCenter.y, boxCenter.z)
+            }
+
             {
                 // const objLoader = new OBJLoader()
                 // const file = this.getModel(this.name, this.path)
@@ -94,38 +123,60 @@ export default {
                 //     onProgress,
                 //     onError
                 // )
-                const onProgress = (xhr) => {
-                    if (xhr.lengthComputable) {
-                        const percentComplete = (xhr.loaded / xhr.total) * 100
-                        console.log(
-                            Math.round(percentComplete, 2) + '% downloaded'
-                        )
-                    }
-                }
+                // const onProgress = (xhr) => {
+                //     if (xhr.lengthComputable) {
+                //         const percentComplete = (xhr.loaded / xhr.total) * 100
+                //         console.log(
+                //             Math.round(percentComplete, 2) + '% downloaded'
+                //         )
+                //     }
+                // }
 
-                const onError = () => {
-                    console.log('xxx')
-                }
+                // const onError = () => {
+                //     console.log('xxx')
+                // }
 
-                const manager = new THREE.LoadingManager()
-                manager.addHandler(/\.dds$/i, new DDSLoader())
-                new MTLLoader()
-                    // .setPath('/public/static/models/obj/')
-                    .load(this.getModel('All.mtl', this.path), (materials) => {
-                        materials.preload()
+                const gltfLoader = new GLTFLoader()
+                const file = this.getModel(this.name, this.path)
+                gltfLoader.load(file, (gltf) => {
+                    const root = gltf.scene
+                    scene.add(root)
 
-                        new OBJLoader()
-                            .setMaterials(materials)
-                            // .setPath('/public/static/models/obj/')
-                            .load(
-                                this.getModel(this.name, this.path),
-                                (object) => {
-                                    scene.add(object)
-                                },
-                                onProgress,
-                                onError
-                            )
-                    })
+                    // compute the box that contains all the stuff
+                    // from root and below
+                    const box = new THREE.Box3().setFromObject(root)
+
+                    const boxSize = box.getSize(new THREE.Vector3()).length()
+                    const boxCenter = box.getCenter(new THREE.Vector3())
+
+                    // set the camera to frame the box
+                    frameArea(boxSize, boxSize, boxCenter, camera)
+
+                    // update the Trackball controls to handle the new size
+                    controls.maxDistance = boxSize * 10
+                    controls.target.copy(boxCenter)
+                    controls.update()
+                })
+
+                // const manager = new THREE.LoadingManager()
+                // manager.addHandler(/\.dds$/i, new DDSLoader())
+                // new MTLLoader()
+                //     // .setPath('/public/static/models/obj/')
+                //     .load(this.getModel('All.mtl', this.path), (materials) => {
+                //         materials.preload()
+
+                //         new OBJLoader()
+                //             .setMaterials(materials)
+                //             // .setPath('/public/static/models/obj/')
+                //             .load(
+                //                 this.getModel(this.name, this.path),
+                //                 (object) => {
+                //                     scene.add(object)
+                //                 },
+                //                 onProgress,
+                //                 onError
+                //             )
+                //     })
             }
 
             function resizeRendererToDisplaySize(renderer) {
@@ -155,7 +206,7 @@ export default {
             requestAnimationFrame(render)
         },
         getModel(name, path) {
-            return `http://localhost:5000/modelImage/${path}/${name}`
+            return `http://localhost:5000/models/${path}/${name}`
         },
     },
     mounted() {

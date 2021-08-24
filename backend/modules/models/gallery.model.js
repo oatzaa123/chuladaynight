@@ -1,11 +1,17 @@
 const mongoose = require('mongoose')
 
 const gallerySchema = mongoose.Schema({
-    title: { type: String, required: [true, 'title is not be empty'] },
+    title_th: { type: String, required: [true, 'title is not be empty'] },
+    title_en: { type: String, required: [true, 'title is not be empty'] },
     author: {
-        name: { type: String, required: [true, 'author name is not be empty'] },
+        name_th: {
+            type: String,
+            required: [true, 'author name is not be empty'],
+        },
+        name_en: { type: String },
         image: { path: String, name: String },
-        group: { type: String },
+        group_th: { type: String },
+        group_en: { type: String },
         contact: {
             facebook: { type: String },
             line: { type: String },
@@ -13,7 +19,8 @@ const gallerySchema = mongoose.Schema({
             phone: { type: String },
         },
     },
-    shortDescription: { type: String },
+    shortDescription_th: { type: String },
+    shortDescription_en: { type: String },
     coverImage: {
         path: String,
         name: String,
@@ -27,7 +34,8 @@ const gallerySchema = mongoose.Schema({
             _id: false,
             path: String,
             contentType: String,
-            contentValue: String,
+            contentValue_th: String,
+            contentValue_en: String,
         },
     ],
     createdAt: {

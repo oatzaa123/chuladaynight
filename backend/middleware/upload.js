@@ -80,4 +80,37 @@ const uploadVideo = async (file, pathFolder) => {
     return videoName
 }
 
-module.exports = { uploadFile, uploadVideo }
+const uploadModel = async (file, pathFolder) => {
+    const { mimetype, name } = await file
+    if (['model/glb', 'model/gltf-binary'].indexOf(mimetype) < 0) {
+        return false
+    }
+
+    const modelName = `${Date.now()}.${
+        name.split('.')[name.split('.').length - 1]
+    }`
+
+    const storePath = path.join(
+        __dirname,
+        `/../assets/uploads/models/${pathFolder}/`,
+        modelName
+    )
+
+    if (
+        !fs.existsSync(
+            path.join(__dirname, `/../assets/uploads/models/${pathFolder}/`)
+        )
+    ) {
+        fs.mkdirSync(
+            path.join(__dirname, `/../assets/uploads/models/${pathFolder}/`)
+        )
+    }
+
+    file.mv(storePath, (err) => {
+        if (err) return false
+    })
+
+    return modelName
+}
+
+module.exports = { uploadFile, uploadVideo, uploadModel }

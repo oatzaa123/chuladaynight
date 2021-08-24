@@ -21,8 +21,8 @@ app.use(
 )
 
 app.use(
-    '/modelImage',
-    express.static(path.join(__dirname, './assets/uploads/modelImage'))
+    '/models',
+    express.static(path.join(__dirname, './assets/uploads/models'))
 )
 
 app.all('*', (req, res, next) => {
