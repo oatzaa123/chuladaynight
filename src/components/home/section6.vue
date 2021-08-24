@@ -100,7 +100,9 @@ export default {
         controls.enableDamping = true
 
         const objLoader = new OBJLoader()
-        const file = 'static/models/obj/windmill.obj'
+        // const file = 'static/models/obj/windmill.obj'
+        const file =
+            'http://localhost:5000/modelImage/Way of life and faith/All.obj'
         objLoader.load(
             file,
             (object) => {

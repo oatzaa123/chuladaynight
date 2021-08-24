@@ -46,35 +46,18 @@
                 </div>
             </div>
             <div class="live-view"></div>
-            <div class="modelView">
-                <!-- <canvas id="c"></canvas> -->
-                <Canvas />
-                <!-- <model-obj src="static/models/obj/model1.obj" /> -->
-                <!-- <iframe
-                    type="text/html"
-                    id="3dviewerplayer"
-                    width="640"
-                    height="480"
-                    src="https://3dwarehouse.sketchup.com/embed/06471c11-7c12-4d03-812b-c5023cb8959a"
-                    frameborder="0"
-                    scrolling="no"
-                    allowfullscreen
-                    webkitallowfullscreen
-                    mozallowfullscreen
-                ></iframe> -->
-            </div>
             <div
                 class="content-sub-gallery"
                 v-for="gallery in data.content"
                 :key="gallery"
             >
-                <div class="content-img">
+                <div class="modelView" v-if="gallery.contentType === 'Model'">
+                    <Canvas :path="gallery.path" :name="gallery.contentValue" />
+                </div>
+                <div class="content-img" v-if="gallery.contentType === 'Image'">
                     <!-- <div class="row">
                         <div class="col-sm-6"> -->
-                    <img
-                        v-if="gallery.contentType === 'Image'"
-                        :src="getImage(gallery.contentValue, gallery.path)"
-                    />
+                    <img :src="getImage(gallery.contentValue, gallery.path)" />
                     <!-- </div>
                     </div> -->
                 </div>
@@ -84,8 +67,14 @@
                 >
                     <p>{{ gallery.contentValue }}</p>
                 </div>
+                <div class="showreel" v-if="gallery.contentType === 'Video'">
+                    <iframe
+                        class="embed-responsive-item"
+                        :src="getVideo(gallery.contentValue, gallery.path)"
+                        allowfullscreen
+                    ></iframe>
+                </div>
             </div>
-            <div class="showreel"></div>
             <div class="gallery-footer">
                 <img
                     v-if="data.author.image"
@@ -175,6 +164,10 @@ export default {
             return `http://localhost:5000/images/${imagePath}/${imageName}`
         }
 
+        const getVideo = (videoName, videoPath) => {
+            return `http://localhost:5000/videos/${videoPath}/${videoName}`
+        }
+
         const onForwardClick = async () => {
             const id = route.params.id
             try {
@@ -221,6 +214,7 @@ export default {
             data: computed(() => gallery.value),
             // globalStore,
             getImage,
+            getVideo,
             onForwardClick,
             onBackwardClick,
         }
