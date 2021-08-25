@@ -22,7 +22,6 @@
     "vue-feather": "^2.0.0-rc",
     "vue-i18n": "^9.1.0",
     "vue-router": "^4.0.10",
-    "vue-skeletor": "^1.0.6",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
