@@ -90,8 +90,16 @@ exports.perviousGallery = catchAsync(async (req, res, next) => {
 })
 
 exports.addGallery = catchAsync(async (req, res, next) => {
-    const { title, author, path, shortDescription, location, description } =
-        req.body
+    const {
+        title_th,
+        title_en,
+        author,
+        path,
+        shortDescription_th,
+        shortDescription_en,
+        location,
+        description,
+    } = req.body
 
     var contentImages = []
     var contentVideos = []
@@ -229,19 +237,23 @@ exports.addGallery = catchAsync(async (req, res, next) => {
                 contentValue: vdo[0].contentValue,
             })
         } else {
+            const { th, en } = JSON.parse(item)
             contents.push({
                 contentType: 'Text',
-                contentValue: item,
+                contentValue_th: th,
+                contentValue_en: en,
             })
         }
     })
 
     var gallery = new Gallery({
-        title,
+        title_th,
+        title_en,
         author: { ...JSON.parse(author), image: authorImageName },
         coverImage: coverImageName,
         path,
-        shortDescription,
+        shortDescription_th,
+        shortDescription_en,
         location: JSON.parse(location),
         content: contents,
         createdAt: Date.now(),
