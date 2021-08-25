@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const gallerySchema = mongoose.Schema({
     title_th: { type: String, required: [true, 'title is not be empty'] },
-    title_en: { type: String, required: [true, 'title is not be empty'] },
+    title_en: { type: String },
     author: {
         name_th: {
             type: String,
@@ -34,6 +34,7 @@ const gallerySchema = mongoose.Schema({
             _id: false,
             path: String,
             contentType: String,
+            contentValue: String,
             contentValue_th: String,
             contentValue_en: String,
         },

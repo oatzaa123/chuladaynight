@@ -52,7 +52,7 @@
                     />
                     <div class="overlay">
                         <div class="text">
-                            <p class="text-title">{{ item.title }}</p>
+                            <p class="text-title">{{ item.title_th }}</p>
                             <div class="sub-text">
                                 <p>
                                     <img
@@ -62,11 +62,11 @@
                                         width="20"
                                         class="hover-img"
                                     />
-                                    {{ item.author.name }}
+                                    {{ item.author.name_th }}
                                 </p>
-                                <p>{{ item.author.group }}</p>
+                                <p>{{ item.author.group_th }}</p>
                             </div>
-                            <span>{{ item.shortDescription }}</span>
+                            <span>{{ item.shortDescription_th }}</span>
                         </div>
                     </div>
                 </div>

@@ -39,12 +39,13 @@ const uploadFile = async (file, pathFolder) => {
         }
     })
 
-    const img = await sharp(file.data)
-        .resize(328, 328, { fit: 'fill' })
-        .png()
-        .toFile(storePath)
+    // const img = await sharp(file.data)
+    //     .resize(500, 500, { fit: 'fill' })
+    //     .png()
+    //     .toFile(storePath)
 
-    return img ? imageName : null
+    // return img ? imageName : null
+    return imageName
 }
 
 const uploadVideo = async (file, pathFolder) => {

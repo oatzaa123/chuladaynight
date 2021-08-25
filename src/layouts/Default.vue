@@ -16,10 +16,15 @@
         </div>
         <Suspense>
             <template #default>
-                <router-view />
+                <router-view :key="$route.fullPath" />
             </template>
             <template #fallback>
-                <span>Loading...</span>
+                <!-- <span>Loading...</span> -->
+                <Loading
+                    :active="true"
+                    :can-cancel="true"
+                    :is-full-page="true"
+                ></Loading>
             </template>
         </Suspense>
     </div>
@@ -27,14 +32,21 @@
 
 <script>
 import { reactive, inject } from 'vue'
+import Loading from 'vue3-loading-overlay'
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 import Menu from './../components/menu/menu.vue'
 export default {
     name: 'default',
     components: {
         Menu,
+        Loading,
     },
     setup: () => {
-        const state = reactive({ show: false })
+        const state = reactive({
+            show: false,
+            isLoading: false,
+            fullPage: true,
+        })
         const showMenu = () => {
             state.show = !state.show
         }

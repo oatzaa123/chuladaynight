@@ -1,6 +1,11 @@
 <template>
     <div class="gallery-bg">
-        <img :src="backgroundImage" alt="" />
+        <img v-if="backgroundImage" :src="backgroundImage" alt="" />
+        <img
+            v-else
+            :src="require('@/assets/images/home/section1/BACKGROUND@1X.png')"
+            alt=""
+        />
     </div>
     <div class="main-gallery-id">
         <div class="left-arrow">
@@ -18,7 +23,7 @@
         <div class="container">
             <div class="title-sub-gallery">
                 <div class="text-title">
-                    <p>{{ data.title }}</p>
+                    <p>{{ data.title_th }}</p>
                     <div class="d-flex mb-auto">
                         <div class="live">
                             <span class="dotted"></span>
@@ -40,9 +45,9 @@
                             width="20"
                             class="hover-img"
                         />
-                        {{ data.author.name }}
+                        {{ data.author.name_th }}
                     </p>
-                    <p>{{ data.author.group }}</p>
+                    <p>{{ data.author.group_th }}</p>
                 </div>
             </div>
             <div class="live-view"></div>
@@ -55,29 +60,21 @@
                     <Canvas :path="gallery.path" :name="gallery.contentValue" />
                 </div>
                 <div class="content-img" v-if="gallery.contentType === 'Image'">
-                    <!-- <div class="row">
-                        <div class="col-sm-6"> -->
-                    <img :src="getImage(gallery.contentValue, gallery.path)" />
-                    <!-- </div>
-                    </div> -->
+                    <ImageView
+                        :imagePath="gallery.path"
+                        :imageName="gallery.contentValue"
+                    />
                 </div>
                 <div
                     class="content-description"
                     v-if="gallery.contentType === 'Text'"
                 >
-                    <p>{{ gallery.contentValue }}</p>
+                    <p>{{ gallery.contentValue_th }}</p>
                 </div>
                 <div class="showreel" v-if="gallery.contentType === 'Video'">
-                    <video
-                        class="video"
-                        height="500"
-                        controls
-                        autoplay
-                        muted
-                        loop
-                    >
+                    <video class="video" height="500" controls muted loop>
                         <source
-                            src="http://localhost:5000/videos/Aura of the Chinese dragon/13391305395885.MP4"
+                            :src="getVideo(gallery.contentValue, gallery.path)"
                             type="video/mp4"
                         />
                     </video>
@@ -92,15 +89,21 @@
                     "
                     height="120"
                 />
+                <!-- <ImageView
+                    class="profile"
+                    :style="{ height: '120px' }"
+                    :imagePath="data.author.image.path"
+                    :imageName="data.author.image.name"
+                /> -->
                 <img
                     v-else
                     class="profile"
-                    :src="require('@/assets/images/defaultuser.png')"
+                    :src="getImage('defaultuser.png', 'common')"
                     height="120"
                 />
                 <div class="footer-description">
-                    <p>{{ data.author.name }}</p>
-                    <p>{{ data.author.group }}</p>
+                    <p>{{ data.author.name_th }}</p>
+                    <p>{{ data.author.group_th }}</p>
                     <p>
                         <img
                             :src="
@@ -147,18 +150,17 @@ import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import Canvas from '@/components/3d/canvas'
+import ImageView from '@/components/ImageView'
 // import useGallery from '@/hooks/useGallery'
 import axios from '@/configs/axios'
-// import { ModelObj } from 'vue-3d-model'
 export default {
     name: 'Gallery-id',
-    components: { Canvas },
+    components: { Canvas, ImageView },
     async setup() {
         const router = useRouter()
         const route = useRoute()
         const store = useStore()
         // const { data, getOne, perviousPage, errorMessage } = useGallery()
-
         const gallery = ref(null)
 
         try {
@@ -171,11 +173,11 @@ export default {
         }
 
         const getImage = (imageName, imagePath) => {
-            return `http://localhost:5000/images/${imagePath}/${imageName}`
+            return `${process.env.VUE_APP_PATH_IMAGE}/${imagePath}/${imageName}`
         }
 
         const getVideo = (videoName, videoPath) => {
-            return `http://localhost:5000/videos/${videoPath}/${videoName}`
+            return `${process.env.VUE_APP_PATH_VIDEO}/${videoPath}/${videoName}`
         }
 
         const onForwardClick = async () => {
@@ -212,25 +214,17 @@ export default {
             }
         }
 
-        // const globalStore = inject('globalStore')
-
-        // const setBackgroundImage = (background) => {
-        //     globalStore.changeBackground(background)
-        // }
-
-        store.commit(
-            'setBackgroundImage',
-            getImage(
-                gallery.value.author.image.name,
-                gallery.value.author.image.path
-            )
-        )
-
-        // setBackgroundImage()
+        gallery.value.content.map((item) => {
+            if (item.contentType === 'Image') {
+                store.commit(
+                    'setBackgroundImage',
+                    getImage(item.contentValue, item.path)
+                )
+            }
+        })
 
         return {
             data: computed(() => gallery.value),
-            // globalStore,
             backgroundImage: computed(
                 () => store.getters['showBackgroundImage']
             ),
@@ -332,7 +326,8 @@ export default {
             .content-img {
                 img {
                     width: 100%;
-                    height: 500px;
+                    object-fit: fill;
+                    // height: 500px;
                 }
             }
             .content-description {
