@@ -160,6 +160,7 @@ export default createStore({
                 ],
             },
         ],
+        backgroundImage: null,
     },
     mutations: {
         setRangeValue: (state, payload) => {
@@ -167,6 +168,9 @@ export default createStore({
         },
         setIsNight: (state, payload) => {
             state.isNight = payload
+        },
+        setBackgroundImage: (state, payload) => {
+            state.backgroundImage = payload
         },
     },
     actions: {},
@@ -185,6 +189,9 @@ export default createStore({
         },
         showNewsList(state) {
             return state.newsList
+        },
+        showBackgroundImage(state) {
+            return state.backgroundImage
         },
     },
     modules: {},

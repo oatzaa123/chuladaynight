@@ -166,7 +166,6 @@ exports.addGallery = catchAsync(async (req, res, next) => {
                 })
             })
         )
-        console.log(arrModel)
     }
 
     var arrImg = []

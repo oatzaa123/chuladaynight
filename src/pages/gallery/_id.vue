@@ -1,7 +1,7 @@
 <template>
-    <!-- <div class="gallery-bg">
-        <img :src="globalStore.state.mainBackground" alt="" />
-    </div> -->
+    <div class="gallery-bg">
+        <img :src="backgroundImage" alt="" />
+    </div>
     <div class="main-gallery-id">
         <div class="left-arrow">
             <button class="btn btn-light customButton" @click="onBackwardClick">
@@ -68,11 +68,19 @@
                     <p>{{ gallery.contentValue }}</p>
                 </div>
                 <div class="showreel" v-if="gallery.contentType === 'Video'">
-                    <iframe
-                        class="embed-responsive-item"
-                        :src="getVideo(gallery.contentValue, gallery.path)"
-                        allowfullscreen
-                    ></iframe>
+                    <video
+                        class="video"
+                        height="500"
+                        controls
+                        autoplay
+                        muted
+                        loop
+                    >
+                        <source
+                            src="http://localhost:5000/videos/Aura of the Chinese dragon/13391305395885.MP4"
+                            type="video/mp4"
+                        />
+                    </video>
                 </div>
             </div>
             <div class="gallery-footer">
@@ -137,6 +145,7 @@
 <script>
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 import Canvas from '@/components/3d/canvas'
 // import useGallery from '@/hooks/useGallery'
 import axios from '@/configs/axios'
@@ -147,6 +156,7 @@ export default {
     async setup() {
         const router = useRouter()
         const route = useRoute()
+        const store = useStore()
         // const { data, getOne, perviousPage, errorMessage } = useGallery()
 
         const gallery = ref(null)
@@ -208,11 +218,22 @@ export default {
         //     globalStore.changeBackground(background)
         // }
 
+        store.commit(
+            'setBackgroundImage',
+            getImage(
+                gallery.value.author.image.name,
+                gallery.value.author.image.path
+            )
+        )
+
         // setBackgroundImage()
 
         return {
             data: computed(() => gallery.value),
             // globalStore,
+            backgroundImage: computed(
+                () => store.getters['showBackgroundImage']
+            ),
             getImage,
             getVideo,
             onForwardClick,
@@ -304,20 +325,20 @@ export default {
         .content-sub-gallery,
         .live-view,
         .showreel {
+            video {
+                width: 100%;
+                object-fit: fill;
+            }
             .content-img {
                 img {
                     width: 100%;
+                    height: 500px;
                 }
             }
             .content-description {
                 font-size: 14px;
                 margin: 25px 40px;
                 color: #ffffff;
-            }
-        }
-        .modelView {
-            iframe {
-                width: 100%;
             }
         }
         .gallery-footer {
