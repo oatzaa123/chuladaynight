@@ -24,7 +24,7 @@
     <div class="container-gallery">
       <div class="title-sub-gallery">
         <div class="text-title">
-          <p>{{ data.title_th }}</p>
+          <p>{{ $i18n.locale === 'th' ? data.title_th : data.title_en }}</p>
           <div class="d-flex mb-auto">
             <div class="live">
               <span class="dotted"></span>
