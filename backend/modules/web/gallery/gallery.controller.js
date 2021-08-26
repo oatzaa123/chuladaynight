@@ -180,10 +180,18 @@ exports.addGallery = catchAsync(async (req, res, next) => {
     if (contentImages.length > 0) {
         await Promise.all(
             contentImages.map(async (item) => {
+                const name = await uploadFile(item, path)
+                if (!name)
+                    return next(
+                        new ErrorHandler(
+                            `Can't upload image! please try again.`,
+                            500
+                        )
+                    )
                 arrImg.push({
                     path,
                     contentType: 'Image',
-                    contentValue: await uploadFile(item, path),
+                    contentValue: name,
                     contentName: item.name,
                 })
             })
@@ -194,10 +202,18 @@ exports.addGallery = catchAsync(async (req, res, next) => {
     if (contentVideos.length > 0) {
         await Promise.all(
             contentVideos.map(async (item) => {
+                const name = await uploadVideo(item, path)
+                if (!name)
+                    return next(
+                        new ErrorHandler(
+                            `Can't upload video! please try again.`,
+                            500
+                        )
+                    )
                 arrVdo.push({
                     path,
                     contentType: 'Video',
-                    contentValue: await uploadVideo(item, path),
+                    contentValue: name,
                     contentName: item.name,
                 })
             })

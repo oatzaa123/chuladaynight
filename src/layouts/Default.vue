@@ -24,6 +24,7 @@
                     :active="true"
                     :can-cancel="true"
                     :is-full-page="true"
+                    loader="dots"
                 ></Loading>
             </template>
         </Suspense>

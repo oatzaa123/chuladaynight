@@ -7,7 +7,7 @@
             alt=""
         />
     </div>
-    <div class="main-gallery-id">
+    <div class="main-gallery-id" ref="formContainer">
         <div class="left-arrow">
             <button class="btn btn-light customButton" @click="onBackwardClick">
                 <div class="arrow"></div>
@@ -89,12 +89,6 @@
                     "
                     height="120"
                 />
-                <!-- <ImageView
-                    class="profile"
-                    :style="{ height: '120px' }"
-                    :imagePath="data.author.image.path"
-                    :imageName="data.author.image.name"
-                /> -->
                 <img
                     v-else
                     class="profile"
@@ -151,6 +145,8 @@ import { useRouter, useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import Canvas from '@/components/3d/canvas'
 import ImageView from '@/components/ImageView'
+import { useLoading } from 'vue3-loading-overlay'
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 // import useGallery from '@/hooks/useGallery'
 import axios from '@/configs/axios'
 export default {
@@ -162,13 +158,25 @@ export default {
         const store = useStore()
         // const { data, getOne, perviousPage, errorMessage } = useGallery()
         const gallery = ref(null)
+        const isLoading = ref(false)
+        let loader = useLoading()
+        let formContainer = ref(null)
 
         try {
             // getOne(route.params.id)
+            isLoading.value = true
+            loader.show({
+                // Optional parameters
+                container: isLoading.value ? null : formContainer.value,
+                canCancel: true,
+                loader: 'dots',
+            })
             const id = route.params.id
             const res = await axios.get(`/gallery/${id}`)
             gallery.value = res.data.data.gallery
+            loader.hide()
         } catch (error) {
+            loader.hide()
             throw new Error(error)
         }
 
@@ -232,6 +240,7 @@ export default {
             getVideo,
             onForwardClick,
             onBackwardClick,
+            formContainer,
         }
     },
 }

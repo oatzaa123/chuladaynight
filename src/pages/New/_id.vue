@@ -1,185 +1,214 @@
 <template>
-  <div class="news-id">
-    <div class="container" v-for="item in newData" :key="item.id">
-      <div class="news-id-img">
-        <img :src="item.titleImage" />
-      </div>
-      <div class="news-id-title">
-        <div class="news-id-group-title">
-          <h1>{{ item.titleText }}</h1>
-          <span>{{ item.newsDate }}</span>
+    <div class="news-id">
+        <div class="container" ref="formContainer">
+            <div class="news-id-img">
+                <ImageView
+                    v-if="newData.coverImage"
+                    :imagePath="newData.coverImage.path"
+                    :imageName="newData.coverImage.name"
+                />
+            </div>
+            <div class="news-id-title">
+                <div class="news-id-group-title">
+                    <h1>{{ newData.title_th }}</h1>
+                    <span>{{ formatDate(newData.createdAt) }}</span>
+                </div>
+            </div>
+            <div
+                class="news-id-content"
+                v-for="content in newData.content"
+                :key="content"
+            >
+                <div
+                    class="news-id-content-text"
+                    v-if="content.contentType === 'Text'"
+                >
+                    <p>{{ content.contentValue_th }}</p>
+                </div>
+                <div class="news-id-img" v-if="content.contentType === 'Image'">
+                    <ImageView
+                        v-if="content.contentValue"
+                        :imagePath="content.path"
+                        :imageName="content.contentValue"
+                    />
+                </div>
+            </div>
         </div>
-      </div>
-      <div
-        class="news-id-content"
-        v-for="content in item.content"
-        :key="content"
-      >
-        <div class="news-id-content-text" v-if="content.contentType === 'text'">
-          <p>{{ content.contentText }}</p>
-        </div>
-        <div class="news-id-img" v-if="content.contentType === 'image'">
-          <img :src="content.contentText" />
-        </div>
-      </div>
-    </div>
-    <div class="news-id-footer">
-      <Arrow
-        @show="onSetValue"
-        name="News-id"
-        :data="data"
-        :customClassLeft="customClassLeft"
-        :customClassRight="customClassRight"
-      >
-        <template v-slot:left-text>
-          <span
-            style="
-              margin-left: 20px;
-              font-size: 18px;
-              font-weight: bold;
-              color: #fff;
-            "
-            >ข่าวก่อนหน้า</span
-          >
-        </template>
+        <div class="news-id-footer">
+            <Arrow
+                name="News-id"
+                :customClassLeft="customClassLeft"
+                :customClassRight="customClassRight"
+            >
+                <template v-slot:left-text>
+                    <span
+                        style="
+                            margin-left: 20px;
+                            font-size: 18px;
+                            font-weight: bold;
+                            color: #fff;
+                        "
+                        >ข่าวก่อนหน้า</span
+                    >
+                </template>
 
-        <template v-slot:middle-button>
-          <button @click="onAllContent" class="btn-custom">
-            ดูข่าวสารทั้งหมด
-          </button>
-        </template>
+                <template v-slot:middle-button>
+                    <button @click="onAllContent" class="btn-custom">
+                        ดูข่าวสารทั้งหมด
+                    </button>
+                </template>
 
-        <template v-slot:right-text>
-          <span
-            style="
-              margin-right: 20px;
-              font-size: 18px;
-              font-weight: bold;
-              color: #fff;
-            "
-            >ข่าวถัดไป</span
-          >
-        </template>
-      </Arrow>
+                <template v-slot:right-text>
+                    <span
+                        style="
+                            margin-right: 20px;
+                            font-size: 18px;
+                            font-weight: bold;
+                            color: #fff;
+                        "
+                        >ข่าวถัดไป</span
+                    >
+                </template>
+            </Arrow>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-import { onMounted, inject, ref, computed } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import { useStore } from "vuex";
-import Arrow from "@/components/arrow";
+import { onMounted, inject, ref, computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import Arrow from '@/components/arrow'
+import axios from '@/configs/axios'
+import ImageView from '@/components/ImageView'
+import moment from 'moment'
+import { useLoading } from 'vue3-loading-overlay'
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 export default {
-  name: "News-id",
-  components: {
-    Arrow,
-  },
-  setup() {
-    const globalStore = inject("globalStore");
-    const router = useRouter();
-    const route = useRoute();
-    const store = useStore();
-    const data = computed(() => store.getters["showNewsList"]);
-    const newData = ref([]);
-    const setBackgroundImage = () => {
-      globalStore.changeBackground(
-        require("@/assets/images/home/section1/Rectangle 47.png")
-      );
-    };
+    name: 'News-id',
+    components: {
+        Arrow,
+        ImageView,
+    },
+    async setup() {
+        const globalStore = inject('globalStore')
+        const router = useRouter()
+        const route = useRoute()
+        const isLoading = ref(false)
+        const newData = ref([])
+        let loader = useLoading()
+        let formContainer = ref(null)
+        const setBackgroundImage = () => {
+            globalStore.changeBackground(
+                require('@/assets/images/home/section1/Rectangle 47.png')
+            )
+        }
 
-    const customClassLeft = ref({
-      position: "unset",
-      display: "flex",
-      alignItems: "center",
-    });
-    const customClassRight = ref({
-      position: "unset",
-      display: "flex",
-      alignItems: "center",
-    });
+        onMounted(() => {
+            setBackgroundImage()
+        })
 
-    const onAllContent = () => {
-      router.push({ name: "News" });
-    };
+        try {
+            isLoading.value = true
+            loader.show({
+                // Optional parameters
+                container: isLoading.value ? null : formContainer.value,
+                canCancel: true,
+                loader: 'dots',
+            })
+            const response = await axios.get(`/news/${route.params.id}`)
+            newData.value = response.data.data
+            isLoading.value = false
+            loader.hide()
+        } catch (error) {
+            loader.hide()
+            throw new Error(error)
+        }
 
-    const onSetValue = (val) => {
-      newData.value = val;
-    };
+        const customClassLeft = ref({
+            position: 'unset',
+            display: 'flex',
+            alignItems: 'center',
+        })
+        const customClassRight = ref({
+            position: 'unset',
+            display: 'flex',
+            alignItems: 'center',
+        })
 
-    onMounted(() => {
-      newData.value = data.value.filter(
-        (item) => item.id.toString() === route.params.id
-      );
-      setBackgroundImage();
-    });
+        const onAllContent = () => {
+            router.push({ name: 'News' })
+        }
 
-    return {
-      customClassLeft: customClassLeft.value,
-      customClassRight: customClassRight.value,
-      data: data.value,
-      newData,
-      onAllContent,
-      onSetValue,
-    };
-  },
-};
+        const formatDate = (date) => {
+            return moment(date).locale('th').format('LL')
+        }
+
+        return {
+            customClassLeft: customClassLeft.value,
+            customClassRight: customClassRight.value,
+            newData: computed(() => newData.value.news),
+            onAllContent,
+            formatDate,
+            formContainer,
+        }
+    },
+}
 </script>
 
 <style lang="scss">
-@import "@/assets/css/container.scss";
+@import '@/assets/css/container.scss';
 .news-id {
-  padding-top: 3rem;
-  font-family: "Kanit-Regular";
-  position: relative;
-  .container {
-    padding-top: var(--bs-gutter-x, 0);
-    overflow-y: unset;
-    max-height: unset;
-    background-image: url("./../../assets/images/gallery/BACKGROUND.svg") !important;
-    .news-id-img {
-      img {
-        height: 448px;
-        width: 100%;
-      }
-    }
-    .news-id-title {
-      .news-id-group-title {
-        color: #fff;
-        margin: 25px 40px;
-        h1 {
-          font-size: 32px;
-          font-weight: bold;
-        }
-        span {
-          color: #ba1bff;
-          font-size: 12px;
-        }
-      }
-    }
-    .news-id-content {
-      .news-id-content-text {
-        font-size: 14px;
-        font-weight: bold;
-        margin: 25px 40px;
-        color: #fff;
-      }
-    }
-  }
-  .news-id-footer {
-    font-family: "Prompt";
     padding-top: 3rem;
-    display: flex;
-    justify-content: space-between;
-    .btn-custom {
-      border-radius: 20px;
-      background-color: #7948e6;
-      color: #fff;
-      border: 1px solid #7948e6;
-      padding: 0px 20px;
-      width: 160px;
-      height: 40px;
+    font-family: 'Kanit-Regular';
+    position: relative;
+    .container {
+        padding-top: var(--bs-gutter-x, 0);
+        overflow-y: unset;
+        max-height: unset;
+        background-image: url('./../../assets/images/gallery/BACKGROUND.svg') !important;
+        .news-id-img {
+            img {
+                height: 448px;
+                width: 100%;
+            }
+        }
+        .news-id-title {
+            .news-id-group-title {
+                color: #fff;
+                margin: 25px 40px;
+                h1 {
+                    font-size: 32px;
+                    font-weight: bold;
+                }
+                span {
+                    color: #ba1bff;
+                    font-size: 12px;
+                }
+            }
+        }
+        .news-id-content {
+            .news-id-content-text {
+                font-size: 14px;
+                font-weight: bold;
+                margin: 25px 40px;
+                color: #fff;
+            }
+        }
     }
-  }
+    .news-id-footer {
+        font-family: 'Prompt';
+        padding-top: 3rem;
+        display: flex;
+        justify-content: space-between;
+        .btn-custom {
+            border-radius: 20px;
+            background-color: #7948e6;
+            color: #fff;
+            border: 1px solid #7948e6;
+            padding: 0px 20px;
+            width: 160px;
+            height: 40px;
+        }
+    }
 }
 </style>

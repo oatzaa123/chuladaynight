@@ -91,7 +91,7 @@ export default {
         }
 
         const getImage = (imageName, imagePath) => {
-            return `http://localhost:5000/images/${imagePath}/${imageName}`
+            return `${process.env.VUE_APP_PATH_IMAGE}/${imagePath}/${imageName}`
         }
 
         const position = ref(0)
