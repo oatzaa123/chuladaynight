@@ -343,7 +343,7 @@ export default {
         text-align: center;
         img {
           height: 100%;
-          // width: 100%;
+          max-width: 100%;
           object-fit: scale-down;
           // height: 500px;
         }
