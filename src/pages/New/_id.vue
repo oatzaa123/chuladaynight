@@ -161,7 +161,8 @@ export default {
   .container-news {
     width: 80%;
     margin: auto;
-    padding-top: var(--bs-gutter-x, 0);
+    padding-top: var(--bs-gutter-x, 3rem);
+    padding-bottom: var(--bs-gutter-x, 3rem);
     overflow-y: unset;
     max-height: unset;
     background-image: url("./../../assets/images/gallery/BACKGROUND.svg") !important;
