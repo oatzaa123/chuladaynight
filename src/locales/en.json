@@ -16,5 +16,13 @@
   "section4_customDescription": "section4_customDescription",
   "footer_description1": "footer_description1",
   "footer_description2": "footer_description2",
-  "footer_description3": "footer_description3"
+  "footer_description3": "footer_description3",
+  "workshop_location": "location",
+  "workshop_contact": "contact",
+  "news_btn": "All News",
+  "news_id_pervious": "Pervious",
+  "news_id_next": "Next",
+  "about_title": "ABOUT",
+  "about_description": "about_description",
+  "about_timeline": "Timeline"
 }

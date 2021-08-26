@@ -24,10 +24,20 @@
                     </div>
                     <div class="new-content-text col-7 col-sm-7">
                         <span>{{ formatDate(item.createdAt) }}</span>
-                        <h3>{{ item.title_th }}</h3>
+                        <h3>
+                            {{
+                                $i18n.locale === 'th'
+                                    ? item.title_th
+                                    : item.title_en
+                            }}
+                        </h3>
                         <div v-for="news in item.content" :key="news">
                             <p v-if="news.contentType === 'Text'">
-                                {{ news.contentValue_th }}
+                                {{
+                                    $i18n.locale === 'th'
+                                        ? news.contentValue_th
+                                        : news.contentValue_en
+                                }}
                             </p>
                         </div>
                     </div>
@@ -48,7 +58,7 @@
                     />
                     <router-link to="/News">
                         <button class="btn btn-custom" v-if="parent">
-                            ดูข่าวสารทั้งหมด &#8594;
+                            {{ $t('news_btn') }} &#8594;
                         </button>
                     </router-link>
                 </div>

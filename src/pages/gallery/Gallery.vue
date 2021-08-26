@@ -52,7 +52,13 @@
                     />
                     <div class="overlay">
                         <div class="text">
-                            <p class="text-title">{{ item.title_th }}</p>
+                            <p class="text-title">
+                                {{
+                                    $i18n.locale === 'th'
+                                        ? item.title_th
+                                        : item.title_en
+                                }}
+                            </p>
                             <div class="sub-text">
                                 <p>
                                     <img
@@ -62,11 +68,25 @@
                                         width="20"
                                         class="hover-img"
                                     />
-                                    {{ item.author.name_th }}
+                                    {{
+                                        $i18n.locale === 'th'
+                                            ? item.author.name_th
+                                            : item.author.name_en
+                                    }}
                                 </p>
-                                <p>{{ item.author.group_th }}</p>
+                                <p>
+                                    {{
+                                        $i18n.locale === 'th'
+                                            ? item.author.group_th
+                                            : item.author.group_en
+                                    }}
+                                </p>
                             </div>
-                            <span>{{ item.shortDescription_th }}</span>
+                            <span>{{
+                                $i18n.locale === 'th'
+                                    ? item.shortDescription_th
+                                    : item.shortDescription_en
+                            }}</span>
                         </div>
                     </div>
                 </div>
