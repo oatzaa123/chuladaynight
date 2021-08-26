@@ -1,12 +1,15 @@
 const mongoose = require('mongoose')
-const moment = require('moment')
 
 const workshopSchema = mongoose.Schema({
-    coverImage: { type: String },
-    image: { type: String },
-    title: { type: String },
-    description: { type: String },
-    locationName: { type: String },
+    coverImage: { path: String, name: String },
+    image: { path: String, name: String },
+    title_th: { type: String },
+    title_en: { type: String },
+    description_th: { type: String },
+    description_en: { type: String },
+    locationName_th: { type: String },
+    locationName_en: { type: String },
+    path: { type: String },
     contact: {
         telephone: { type: String },
         location: {
@@ -19,11 +22,11 @@ const workshopSchema = mongoose.Schema({
     },
     createdAt: {
         type: String,
-        default: moment(Date.now()).format('DD/MM/YYYY hh:mm:ss'),
+        default: Date.now(),
     },
     updatedAt: {
         type: String,
-        default: moment(Date.now()).format('DD/MM/YYYY hh:mm:ss'),
+        default: Date.now(),
     },
 })
 

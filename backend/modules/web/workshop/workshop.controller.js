@@ -36,35 +36,50 @@ exports.getWorkshop = catchAsync(async (req, res, next) => {
 })
 
 exports.addWorkshop = catchAsync(async (req, res, next) => {
-    let coverImageName, coverImage, image, imageName, workshop
-    const contact = JSON.parse(req.body.contact)
+    let coverImageName, imageName
+    const { contact, path } = req.body
 
     if (req.files) {
-        if (req.files.coverImage) {
-            coverImage = req.files.coverImage || ''
-            coverImageName = await uploadFile(coverImage)
-            if (!coverImageName)
-                return next(new ErrorHandler(`Fail to upload image.`, 400))
+        const { coverImage, image } = req.files
+        if (coverImage) {
+            const name = await uploadFile(image, path)
+            if (!name)
+                return next(
+                    new ErrorHandler(
+                        `Can't upload image! please try again.`,
+                        500
+                    )
+                )
+            coverImageName = {
+                path,
+                name,
+            }
         }
 
-        if (req.files.image) {
-            image = req.files.image || ''
-            imageName = await uploadFile(image)
-            if (!imageName)
-                return next(new ErrorHandler(`Fail to upload image.`, 400))
+        if (image) {
+            const name = await uploadFile(image, path)
+            if (!name)
+                return next(
+                    new ErrorHandler(
+                        `Can't upload image! please try again.`,
+                        500
+                    )
+                )
+            imageName = {
+                path,
+                name,
+            }
         }
-
-        let obj = {
-            ...req.body,
-            coverImage: coverImageName,
-            image: imageName,
-            contact,
-        }
-
-        workshop = await Workshop.create(obj)
-    } else {
-        workshop = await Workshop.create({ ...req.body, contact })
     }
+
+    let obj = {
+        ...req.body,
+        coverImage: coverImageName,
+        image: imageName,
+        contact: JSON.parse(contact),
+    }
+
+    const workshop = await Workshop.create(obj)
 
     res.status(201).json({
         status: 'success',

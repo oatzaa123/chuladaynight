@@ -20,7 +20,9 @@
                 >
                     <img
                         v-if="item.coverImage"
-                        :src="getImage(item.coverImage)"
+                        :src="
+                            getImage(item.coverImage.name, item.coverImage.path)
+                        "
                     />
                 </div>
             </div>
@@ -44,8 +46,8 @@ export default {
             throw new Error(errorMessage)
         }
 
-        const getImage = (imageName) => {
-            return `http://localhost:5000/images/${imageName}`
+        const getImage = (imageName, imagePath) => {
+            return `${process.env.VUE_APP_PATH_IMAGE}/${imagePath}/${imageName}`
         }
 
         globalStore.changeBackground(

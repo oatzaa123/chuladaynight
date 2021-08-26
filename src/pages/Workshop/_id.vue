@@ -5,7 +5,7 @@
                 <img
                     v-if="item.image"
                     class="workshop-img"
-                    :src="getImage(item.image)"
+                    :src="getImage(item.image.name, item.image.path)"
                 />
             </div>
             <div
@@ -18,9 +18,9 @@
                 "
             >
                 <div>
-                    <h1>{{ item.title }}</h1>
-                    <p>{{ item.description }}</p>
-                    <p>สถานที่ {{ item.locationName }}</p>
+                    <h1>{{ item.title_th }}</h1>
+                    <p>{{ item.description_th }}</p>
+                    <p>สถานที่ {{ item.locationName_th }}</p>
                     <p>
                         ติดต่อสอบถามเพิ่มเติม <br />
                         {{ item.contact.telephone }}
@@ -59,116 +59,6 @@ export default {
                     path: require('@/assets/images/icons/Group 328.svg'),
                 },
             ],
-            // data: [
-            //   {
-            //     id: 1,
-            //     title: "CHULA ART TOWN’S WORKSHOP",
-            //     description:
-            //       "เวิร์คช้อปการสร้างสรรค์ Street Art โดย ศิลปินผู้เชี่ยวชาญ สำหรับ นักเรียน นักศึกษา อายุ 14 ปีขึ้นไป วันที่ 11 พฤษภาคม 2562 ลงทะเบียน 9:30 เริ่มงาน 10:00 - 16:00",
-            //     location: "ตลาดสะพานเหลือง (ถนน 100 ปี จุฬาฯ)",
-            //     tel: "0818035281",
-            //     image: require("@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png"),
-            //   },
-            //   {
-            //     id: 2,
-            //     title: "CHULA ART TOWN’S WORKSHOPs",
-            //     description:
-            //       "เวิร์คช้อปการสร้างสรรค์ Street Art โดย ศิลปินผู้เชี่ยวชาญ สำหรับ นักเรียน นักศึกษา อายุ 14 ปีขึ้นไป วันที่ 11 พฤษภาคม 2562 ลงทะเบียน 9:30 เริ่มงาน 10:00 - 16:00",
-            //     location: "ตลาดสะพานเหลือง (ถนน 100 ปี จุฬาฯ)",
-            //     tel: "0818035281",
-            //     image: require("@/assets/images/workshop/image-workshop.png"),
-            //   },
-            //   {
-            //     id: 3,
-            //     title: "CHULA ART TOWN’S WORKSHOP",
-            //     description:
-            //       "เวิร์คช้อปการสร้างสรรค์ Street Art โดย ศิลปินผู้เชี่ยวชาญ สำหรับ นักเรียน นักศึกษา อายุ 14 ปีขึ้นไป วันที่ 11 พฤษภาคม 2562 ลงทะเบียน 9:30 เริ่มงาน 10:00 - 16:00",
-            //     location: "ตลาดสะพานเหลือง (ถนน 100 ปี จุฬาฯ)",
-            //     tel: "0818035281",
-            //     image: require("@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png"),
-            //   },
-            //   {
-            //     id: 4,
-            //     title: "CHULA ART TOWN’S WORKSHOP",
-            //     description:
-            //       "เวิร์คช้อปการสร้างสรรค์ Street Art โดย ศิลปินผู้เชี่ยวชาญ สำหรับ นักเรียน นักศึกษา อายุ 14 ปีขึ้นไป วันที่ 11 พฤษภาคม 2562 ลงทะเบียน 9:30 เริ่มงาน 10:00 - 16:00",
-            //     location: "ตลาดสะพานเหลือง (ถนน 100 ปี จุฬาฯ)",
-            //     tel: "0818035281",
-            //     image: require("@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png"),
-            //   },
-            //   {
-            //     id: 5,
-            //     title: "CHULA ART TOWN’S WORKSHOP",
-            //     description:
-            //       "เวิร์คช้อปการสร้างสรรค์ Street Art โดย ศิลปินผู้เชี่ยวชาญ สำหรับ นักเรียน นักศึกษา อายุ 14 ปีขึ้นไป วันที่ 11 พฤษภาคม 2562 ลงทะเบียน 9:30 เริ่มงาน 10:00 - 16:00",
-            //     location: "ตลาดสะพานเหลือง (ถนน 100 ปี จุฬาฯ)",
-            //     tel: "0818035281",
-            //     image: require("@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png"),
-            //   },
-            //   {
-            //     id: 6,
-            //     title: "CHULA ART TOWN’S WORKSHOP",
-            //     description:
-            //       "เวิร์คช้อปการสร้างสรรค์ Street Art โดย ศิลปินผู้เชี่ยวชาญ สำหรับ นักเรียน นักศึกษา อายุ 14 ปีขึ้นไป วันที่ 11 พฤษภาคม 2562 ลงทะเบียน 9:30 เริ่มงาน 10:00 - 16:00",
-            //     location: "ตลาดสะพานเหลือง (ถนน 100 ปี จุฬาฯ)",
-            //     tel: "0818035281",
-            //     image: require("@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png"),
-            //   },
-            //   {
-            //     id: 7,
-            //     title: "CHULA ART TOWN’S WORKSHOP",
-            //     description:
-            //       "เวิร์คช้อปการสร้างสรรค์ Street Art โดย ศิลปินผู้เชี่ยวชาญ สำหรับ นักเรียน นักศึกษา อายุ 14 ปีขึ้นไป วันที่ 11 พฤษภาคม 2562 ลงทะเบียน 9:30 เริ่มงาน 10:00 - 16:00",
-            //     location: "ตลาดสะพานเหลือง (ถนน 100 ปี จุฬาฯ)",
-            //     tel: "0818035281",
-            //     image: require("@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png"),
-            //   },
-            //   {
-            //     id: 8,
-            //     title: "CHULA ART TOWN’S WORKSHOP",
-            //     description:
-            //       "เวิร์คช้อปการสร้างสรรค์ Street Art โดย ศิลปินผู้เชี่ยวชาญ สำหรับ นักเรียน นักศึกษา อายุ 14 ปีขึ้นไป วันที่ 11 พฤษภาคม 2562 ลงทะเบียน 9:30 เริ่มงาน 10:00 - 16:00",
-            //     location: "ตลาดสะพานเหลือง (ถนน 100 ปี จุฬาฯ)",
-            //     tel: "0818035281",
-            //     image: require("@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png"),
-            //   },
-            //   {
-            //     id: 9,
-            //     title: "CHULA ART TOWN’S WORKSHOP",
-            //     description:
-            //       "เวิร์คช้อปการสร้างสรรค์ Street Art โดย ศิลปินผู้เชี่ยวชาญ สำหรับ นักเรียน นักศึกษา อายุ 14 ปีขึ้นไป วันที่ 11 พฤษภาคม 2562 ลงทะเบียน 9:30 เริ่มงาน 10:00 - 16:00",
-            //     location: "ตลาดสะพานเหลือง (ถนน 100 ปี จุฬาฯ)",
-            //     tel: "0818035281",
-            //     image: require("@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png"),
-            //   },
-            //   {
-            //     id: 10,
-            //     title: "CHULA ART TOWN’S WORKSHOP",
-            //     description:
-            //       "เวิร์คช้อปการสร้างสรรค์ Street Art โดย ศิลปินผู้เชี่ยวชาญ สำหรับ นักเรียน นักศึกษา อายุ 14 ปีขึ้นไป วันที่ 11 พฤษภาคม 2562 ลงทะเบียน 9:30 เริ่มงาน 10:00 - 16:00",
-            //     location: "ตลาดสะพานเหลือง (ถนน 100 ปี จุฬาฯ)",
-            //     tel: "0818035281",
-            //     image: require("@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png"),
-            //   },
-            //   {
-            //     id: 11,
-            //     title: "CHULA ART TOWN’S WORKSHOP",
-            //     description:
-            //       "เวิร์คช้อปการสร้างสรรค์ Street Art โดย ศิลปินผู้เชี่ยวชาญ สำหรับ นักเรียน นักศึกษา อายุ 14 ปีขึ้นไป วันที่ 11 พฤษภาคม 2562 ลงทะเบียน 9:30 เริ่มงาน 10:00 - 16:00",
-            //     location: "ตลาดสะพานเหลือง (ถนน 100 ปี จุฬาฯ)",
-            //     tel: "0818035281",
-            //     image: require("@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png"),
-            //   },
-            //   {
-            //     id: 12,
-            //     title: "CHULA ART TOWN’S WORKSHOP",
-            //     description:
-            //       "เวิร์คช้อปการสร้างสรรค์ Street Art โดย ศิลปินผู้เชี่ยวชาญ สำหรับ นักเรียน นักศึกษา อายุ 14 ปีขึ้นไป วันที่ 11 พฤษภาคม 2562 ลงทะเบียน 9:30 เริ่มงาน 10:00 - 16:00",
-            //     location: "ตลาดสะพานเหลือง (ถนน 100 ปี จุฬาฯ)",
-            //     tel: "0818035281",
-            //     image: require("@/assets/images/workshop/IMAGE 2563-08-17 153820@2x.png"),
-            //   },
-            // ],
         })
 
         const globalStore = inject('globalStore')
@@ -186,19 +76,14 @@ export default {
             throw new Error(errorMessage)
         }
 
-        const getImage = (imageName) => {
-            return `http://localhost:5000/images/${imageName}`
+        const getImage = (imageName, imagePath) => {
+            return `${process.env.VUE_APP_PATH_IMAGE}/${imagePath}/${imageName}`
         }
 
         return {
             ...toRefs(state),
             data,
             getImage,
-            // data: computed(() => {
-            //     return state.data.filter(
-            //         (item) => item.id.toString() === route.params.id
-            //     )
-            // }),
         }
     },
 }
