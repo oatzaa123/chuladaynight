@@ -20,8 +20,7 @@
         <div class="right"></div>
       </button>
     </div>
-    <!-- <div class="container"> -->
-    <div class="container-gallery">
+    <div class="container">
       <div class="title-sub-gallery">
         <div class="text-title">
           <p>{{ data.title_th }}</p>
@@ -131,7 +130,6 @@
         </div>
       </div>
     </div>
-    <!-- </div> -->
   </div>
 </template>
 
@@ -241,10 +239,7 @@ export default {
 </script>
 
 <style lang="scss">
-// @import "@/assets/css/container.scss";
-.default {
-  padding-bottom: 3rem !important;
-}
+@import "@/assets/css/container.scss";
 .gallery-bg {
   position: absolute;
   left: 0;
@@ -263,13 +258,7 @@ export default {
   .container::-webkit-scrollbar {
     display: none;
   }
-  // .container {
-  .container-gallery {
-    padding-top: var(--bs-gutter-x, 3rem);
-    padding-bottom: var(--bs-gutter-x, 3rem);
-    margin-bottom: 50px;
-    width: 80%;
-    margin: auto;
+  .container {
     background-image: url("../../assets/images/gallery/BACKGROUND.svg") !important;
     .title-sub-gallery {
       margin: 0 35px;
@@ -340,11 +329,9 @@ export default {
         object-fit: fill;
       }
       .content-img {
-        text-align: center;
         img {
-          height: 100%;
-          // width: 100%;
-          object-fit: scale-down;
+          width: 100%;
+          object-fit: fill;
           // height: 500px;
         }
       }
