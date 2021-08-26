@@ -48,6 +48,7 @@
           </div>
         </div>
       </div>
+      <div class="spaceline"></div>
     </div>
   </div>
 </template>
@@ -60,12 +61,12 @@ export default {
       {
         path: require("@/assets/images/icons/Group 327@2x.png"),
         url: "https://www.facebook.com",
-        name: "GridWhiz"
+        name: "GridWhiz",
       },
       {
         path: require("@/assets/images/icons/Group 344@2x.png"),
         url: "https://www.instagram.com",
-        name: "gridwhiz"
+        name: "gridwhiz",
       },
       {
         path: require("@/assets/images/icons/Group 328.svg"),
@@ -144,8 +145,8 @@ export default {
     }
     .contact {
       .contact-group {
-        margin: 50px 50px 100px;
-        padding: 15px;
+        margin: 50px 50px 0px;
+        padding: 30px 15px 15px;
         border-top: 1px solid;
         display: flex;
         flex-direction: row;
@@ -171,6 +172,10 @@ export default {
           }
         }
       }
+    }
+    .spaceline {
+      height: 100px;
+      border-top: 1px solid rgba(100, 100, 100, 0.2);
     }
   }
   @media screen and (max-width: 768px) {
