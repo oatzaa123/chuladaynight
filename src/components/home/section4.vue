@@ -56,11 +56,7 @@
                     </div>
                     <div class="col">
                         <p class="customDiscription">
-                            โครงการ “Chula Art Town”
-                            เป็นความร่วมมือกันระหว่างสำนักงานจัดการทรัพย์สิน
-                            จุฬาลงกรณ์มหาวิทยาลัย (PMCU), บริษัท อุไรพาณิชย์
-                            จำกัด และ ATM Spray
-                            ซึ่งให้การสนับสนุนอุปกรณ์สีสำหรับสร้างสรรค์ผลงาน
+                            {{ $t('section4_customDescription') }}
                         </p>
                         <button
                             class="btn btn-outline-primary"

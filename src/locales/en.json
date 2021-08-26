@@ -5,5 +5,16 @@
   "menu_WorkShop": "WorkShop",
   "menu_News": "News",
   "menu_About": "About",
-  "menu_Contact": "Contact"
+  "menu_Contact": "Contact",
+  "section2_title": "section2_title",
+  "section2_leftTop": "section2_leftTop",
+  "section2_rightTop": "section2_rightTop",
+  "section2_leftBottom": "section2_leftBottom",
+  "section2_rightBottom": "section2_rightBottom",
+  "section3_title": "TITLE",
+  "section3_groupDescription": "section3_groupDescription",
+  "section4_customDescription": "section4_customDescription",
+  "footer_description1": "footer_description1",
+  "footer_description2": "footer_description2",
+  "footer_description3": "footer_description3"
 }
