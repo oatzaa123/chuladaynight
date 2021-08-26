@@ -93,10 +93,42 @@ export default {
         background: linear-gradient(359deg, #030024 20%, rgba(0, 0, 0, 0));
         z-index: 2;
     }
-    .footer-bg {
-        width: 100%;
-        z-index: 1;
+    .contact {
+        .contact-group {
+            margin: 50px 50px 0px;
+            padding: 30px 15px 15px;
+            border-top: 1px solid;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            .box-1,
+            .box-2 {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+            }
+            .box-2 {
+                text-align: center;
+            }
+            .box-3 {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-end;
+                justify-content: flex-end;
+                img {
+                    cursor: pointer;
+                    margin-right: 5px;
+                }
+            }
+        }
     }
+    .spaceline {
+        height: 100px;
+        border-top: 1px solid rgba(100, 100, 100, 0.2);
+    }
+}
+@media screen and (max-width: 768px) {
     .content {
         position: absolute;
         bottom: 0;
