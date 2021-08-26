@@ -32,6 +32,7 @@
               <span>&nbsp; WATCH NOW</span>
             </div>
             <img
+              @click="openUrl(`https://www.google.com/maps/search/?api=1&query=`, {lat: data.location.latitude, lng: data.location.longitude})"
               :src="require('../../assets/images/gallery/Group 128.svg')"
               width="30"
             />
@@ -112,11 +113,13 @@
           <div class="footer-icon">
             <div class="footer-icon-img">
               <img
+                @click="openUrl('https://www.facebook.com', data.author.contact.facebook.trim())"
                 :src="require('@/assets/images/icons/Group 327@2x.png')"
                 width="35"
                 height="35"
               />
               <img
+                @click="openUrl('https://www.instagram.com', data.author.contact.instagram.trim())"
                 :src="require('@/assets/images/icons/Group 344@2x.png')"
                 width="35"
                 height="35"
@@ -218,6 +221,18 @@ export default {
       }
     };
 
+    const openUrl = (url, value) => {
+        console.log(`${url}/${value}`);
+      if (typeof value === 'string') {
+          window.open(`${url}/${value}`, "_blank");
+      } else {
+          window.open(
+            `${url}${value.lat},${value.lng}`,
+            "_blank"
+          );
+      }
+    }
+
     gallery.value.content.map((item) => {
       if (item.contentType === "Image") {
         store.commit(
@@ -235,6 +250,7 @@ export default {
       onForwardClick,
       onBackwardClick,
       formContainer,
+      openUrl
     };
   },
 };
@@ -288,6 +304,7 @@ export default {
           margin-left: 10px;
           filter: invert(24%) sepia(50%) saturate(4728%) hue-rotate(280deg)
             brightness(111%) contrast(119%);
+          cursor: pointer;
         }
         .live {
           border: 1px solid white;
