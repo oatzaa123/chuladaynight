@@ -72,6 +72,7 @@
                     <p>{{ gallery.contentValue_th }}</p>
                 </div>
                 <div class="showreel" v-if="gallery.contentType === 'Video'">
+                    <div class="showreel-text">SHOWREEL</div>
                     <video class="video" height="500" controls muted loop>
                         <source
                             :src="getVideo(gallery.contentValue, gallery.path)"
@@ -89,6 +90,12 @@
                     "
                     height="120"
                 />
+                <!-- <ImageView
+                    class="profile"
+                    :style="{ height: '120px' }"
+                    :imagePath="data.author.image.path"
+                    :imageName="data.author.image.name"
+                /> -->
                 <img
                     v-else
                     class="profile"
@@ -328,6 +335,10 @@ export default {
         .content-sub-gallery,
         .live-view,
         .showreel {
+            .showreel-text {
+                padding: 20px;
+                color: #ba1bff;
+            }
             video {
                 width: 100%;
                 object-fit: fill;
