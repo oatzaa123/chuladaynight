@@ -37,7 +37,12 @@
                             <img
                                 v-if="slide.coverImage"
                                 @click="onPageChanged(slide._id)"
-                                :src="getImage(slide.coverImage)"
+                                :src="
+                                    getImage(
+                                        slide.coverImage.name,
+                                        slide.coverImage.path
+                                    )
+                                "
                             />
                         </div>
                     </splide-slide>
@@ -93,8 +98,8 @@ export default {
             throw new Error(errorMessage)
         }
 
-        const getImage = (imageName) => {
-            return `http://localhost:5000/images/${imageName}`
+        const getImage = (imageName, imagePath) => {
+            return `${process.env.VUE_APP_PATH_IMAGE}/${imagePath}/${imageName}`
         }
 
         const slideOptions = ref({
