@@ -9,12 +9,12 @@
             <div>{{ $t(item.name) }}</div>
         </router-link>
         <div class="menu-lang">
-            <div>
+            <div @click="saveLocale('th')">
                 <input type="radio" id="th" value="th" v-model="$i18n.locale" />
                 TH
             </div>
             &nbsp;|&nbsp;
-            <div>
+            <div @click="saveLocale('en')">
                 <input
                     type="radio"
                     id="en"
@@ -33,8 +33,14 @@ export default {
     setup() {
         const store = useStore()
 
+        const saveLocale = (lang) => {
+            console.log(lang)
+            localStorage.setItem('locale', lang)
+        }
+
         return {
             Menu: computed(() => store.getters['showMenuList']),
+            saveLocale
         }
     },
 }
