@@ -5,14 +5,14 @@
     <div class="slide">
       <splide :options="slideOptions">
         <splide-slide
-          v-for="slide in slides"
+          v-for="(slide, index) in slides"
           :key="slide.src"
           class="slide-items"
         >
           <div class="img">
             <img :src="slide.src" />
           </div>
-          <div class="name">Partner name</div>
+          <div class="name">Partner name {{ index }}</div>
         </splide-slide>
       </splide>
     </div>
@@ -63,6 +63,8 @@ export default {
         perPage: 5,
         rewind: true,
         pagination: false,
+        autoplay: true,
+        pauseOnHover: false,
         breakpoints: {
           768: {
             perPage: 3,

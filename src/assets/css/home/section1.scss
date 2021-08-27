@@ -191,6 +191,9 @@ $FSnightActive: 54px;
         transform: translate(-50%, -50%);
         border-radius: 50%;
       }
+      .star {
+        filter: blur(5px);
+      }
 
       &:nth-child(1) {
         top: 10%;

@@ -5,6 +5,11 @@
 
   $media: 768px;
   $mediaSize: 0.7;
+  .new-content-text:hover {
+    h3 {
+      text-decoration: underline;
+    }
+  }
   @for $i from 1 to length($media) + 1 {
     @media screen and (max-width: nth($media, $i)) {
       .news .container {
