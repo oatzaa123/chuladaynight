@@ -167,6 +167,7 @@ export default {
     color: #ffffff;
     .workshop-img {
         width: 100%;
+        height: 90vh;
     }
     .workshop-content {
         font-size: 14px;

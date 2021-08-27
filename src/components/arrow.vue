@@ -90,7 +90,7 @@ export default {
     height: 48px;
     .arrow {
         border: 0.5px solid white;
-        width: 28px;
+        width: 25px;
         position: absolute;
     }
     .left {
@@ -100,7 +100,7 @@ export default {
         padding: 4px;
         transform: rotate(135deg);
         -webkit-transform: rotate(135deg);
-        top: 20px;
+        top: 19px;
     }
     .right {
         border: solid white;
@@ -109,8 +109,8 @@ export default {
         padding: 4px;
         transform: rotate(135deg);
         -webkit-transform: rotate(135deg);
-        top: 20px;
-        right: 20%;
+        top: 19px;
+        right: 22%;
     }
 }
 </style>
