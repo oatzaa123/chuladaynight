@@ -127,12 +127,27 @@ $urlImage: "../assets/images";
         .image {
           display: flex;
           align-items: center;
-          border-right: 2px solid white;
+          // border-right: 2px solid white;
           justify-content: flex-end;
           padding-bottom: 25px;
-          padding-right: 25px;
+          // padding-right: 25px;
           img {
             width: 100%;
+          }
+        }
+        .line {
+          position: relative;
+          border-right: 2px solid white;
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0px;
+            right: -11px;
+            width: 20px;
+            height: 20px;
+            border: 3px solid black;
+            border-radius: 50%;
+            background: white;
           }
         }
         .year {
@@ -142,17 +157,17 @@ $urlImage: "../assets/images";
           font-size: 31px;
           line-height: 0.5;
           padding-left: 30px;
-          &::before {
-            content: "";
-            position: absolute;
-            top: 0px;
-            left: -11px;
-            width: 20px;
-            height: 20px;
-            border: 3px solid black;
-            border-radius: 50%;
-            background: white;
-          }
+          // &::before {
+          // content: "";
+          // position: absolute;
+          // top: 0px;
+          // left: -11px;
+          // width: 20px;
+          // height: 20px;
+          // border: 3px solid black;
+          // border-radius: 50%;
+          // background: white;
+          // }
         }
         .title {
           color: white;
