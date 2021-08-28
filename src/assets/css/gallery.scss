@@ -45,15 +45,15 @@
       }
       position: relative;
     
-      $top:    unset unset unset 39.0% 41.0% 42.0% 35.0% 35.9% 36.8% 29.8% 9.40% 12.6% 8.40% 10.5% 7.00% 13.0%;
+      $top:    unset unset unset 39.0% 41.0% 42.0% 35.0% 35.9% 36.8% 29.8% 9.40% 12.6% 8.40% 11.0% 8.00% 12.8%;
       $left:   unset 15.0% 15.0% 17.6% 24.0% 32.0% 32.0% 37.8% 43.6% 25.2% 38.0% 43.0% 31.2% 33.5% 41.0% 40.0%;
-      $right:  28.0% unset unset unset unset unset unset unset unset unset unset unset unset unset unset 27.0%;
-      $bottom: 5.00% 25.6% 42.0% unset unset unset unset unset unset unset unset unset unset unset unset 25.0%;
-    
-      $topp:    unset unset unset 38.0% 39.7% 40.8% 34.0% 34.5% 35.5% 28.6% 8.20% 11.3% 6.80% 10.5% 7.00% 13.0%;
-      $leftp:   unset 14.6% 15.0% 17.2% 23.6% 31.6% 31.5% 37.2% 42.8% 24.8% 37.3% 42.6% 30.6% 33.5% 41.0% 40.0%;
-      $rightp:  27.2% unset unset unset unset unset unset unset unset unset unset unset unset unset unset 27.0%;
-      $bottomp: 5.20% 26.8% 42.0% unset unset unset unset unset unset unset unset unset unset unset unset 25.0%;
+      $right:  28.0% unset unset unset unset unset unset unset unset unset unset unset unset unset unset unset;
+      $bottom: 5.00% 25.6% 42.0% unset unset unset unset unset unset unset unset unset unset unset unset unset;
+
+      $topp:    unset unset unset 38.0% 39.7% 40.8% 34.0% 34.5% 35.5% 28.6% 8.20% 11.3% 6.80% 9.80% 6.80% 11.6%;
+      $leftp:   unset 14.6% 15.0% 17.2% 23.6% 31.6% 31.5% 37.2% 42.8% 24.8% 37.3% 42.6% 30.6% 33.0% 40.8% 39.5%;
+      $rightp:  27.2% unset unset unset unset unset unset unset unset unset unset unset unset unset unset unset;
+      $bottomp: 5.20% 26.8% 42.0% unset unset unset unset unset unset unset unset unset unset unset unset unset;
       @for $i from 1 through 16 {
         .pin:nth-child(16n + #{$i}) {
             top: nth($top, $i);
