@@ -23,83 +23,99 @@
         <!-- <div class="container"> -->
         <div class="container-gallery">
             <div class="title-sub-gallery">
-                <div class="text-title">
-                    <p>
-                        {{
-                            $i18n.locale === 'th'
-                                ? data.title_th
-                                : data.title_en
-                        }}
-                    </p>
-                    <div class="d-flex mb-auto">
-                        <div class="live" @click="isOpen = !isOpen">
-                            <span
-                                class="dotted"
-                                :class="{ changeColor: boardCast }"
-                            ></span>
-                            <span :class="{ changeColor: boardCast }"
-                                >BOARDCAST</span
-                            >
-                            <span v-if="!boardCast">&nbsp; WATCH NOW</span>
-                            <span v-else>&nbsp; {{ boardCast }}</span>
-                            <div class="dropdown" :class="{ open: isOpen }">
-                                <div class="dropdown-title">BOARDCAST</div>
-                                <div class="dropdown-body">
-                                    <div
-                                        class="dropdown-group"
-                                        :class="{ selected: index === select }"
-                                        v-for="(i, index) in 5"
-                                        :key="index"
-                                        @click="
-                                            ;(select = index),
-                                                (boardCast =
-                                                    '12 JAN 2021 at 12:00')
-                                        "
-                                    >
-                                        <span
-                                            v-show="index === select"
-                                            class="dotted"
-                                            :style="{
-                                                position: 'absolute',
-                                                top: '15px',
-                                                left: '15px',
+                <div class="text-title row">
+                    <div class="col-12 col-md-9">
+                        <p>
+                            {{
+                                $i18n.locale === 'th'
+                                    ? data.title_th
+                                    : data.title_en
+                            }}
+                        </p>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="d-flex mb-auto">
+                            <div class="live" @click="isOpen = !isOpen">
+                                <span
+                                    class="dotted"
+                                    :class="{ changeColor: boardCast }"
+                                ></span>
+                                <span :class="{ changeColor: boardCast }"
+                                    >BOARDCAST</span
+                                >
+                                <span v-if="!boardCast">&nbsp; WATCH NOW</span>
+                                <span v-else>&nbsp; {{ boardCast }}</span>
+                                <div class="dropdown" :class="{ open: isOpen }">
+                                    <div class="triangle"></div>
+                                    <div class="dropdown-title">BOARDCAST</div>
+                                    <div class="dropdown-body">
+                                        <div
+                                            class="dropdown-group"
+                                            :class="{
+                                                selected: index === select,
                                             }"
-                                        ></span>
-                                        12 JAN 2021 at 12:00
+                                            v-for="(i, index) in 5"
+                                            :key="index"
+                                            @click="
+                                                ;(select = index),
+                                                    (boardCast = '12 JAN 2021')
+                                            "
+                                        >
+                                            <span
+                                                v-show="index === select"
+                                                class="dotted"
+                                                :style="{
+                                                    position: 'absolute',
+                                                    top: '15px',
+                                                    left: '15px',
+                                                }"
+                                            ></span>
+                                            12 JAN 2021 at 12:00
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <img
+                                @click="
+                                    openUrl(
+                                        `https://maps.googleapis.com/maps/api/streetview?parameters`,
+                                        {
+                                            lat: data.location.latitude,
+                                            lng: data.location.longitude,
+                                        }
+                                    )
+                                "
+                                :src="
+                                    require('../../assets/images/gallery/Group 848.svg')
+                                "
+                                width="30"
+                            />
+                            <img
+                                @click="
+                                    openUrl(
+                                        `https://www.google.com/maps/search/?api=1&query=`,
+                                        {
+                                            lat: data.location.latitude,
+                                            lng: data.location.longitude,
+                                        }
+                                    )
+                                "
+                                :src="
+                                    require('../../assets/images/gallery/Group 128.svg')
+                                "
+                                width="30"
+                            />
                         </div>
-                        <img
-                            @click="
-                                openUrl(
-                                    `https://maps.googleapis.com/maps/api/streetview?parameters`,
-                                    {
-                                        lat: data.location.latitude,
-                                        lng: data.location.longitude,
-                                    }
-                                )
-                            "
-                            :src="
-                                require('../../assets/images/gallery/Group 848.svg')
-                            "
-                            width="30"
-                        />
-                        <img
-                            @click="
-                                openUrl(
-                                    `https://www.google.com/maps/search/?api=1&query=`,
-                                    {
-                                        lat: data.location.latitude,
-                                        lng: data.location.longitude,
-                                    }
-                                )
-                            "
-                            :src="
-                                require('../../assets/images/gallery/Group 128.svg')
-                            "
-                            width="30"
-                        />
+                        <div class="views-count">
+                            <img
+                                :src="
+                                    require('../../assets/images/gallery/Group 804.svg')
+                                "
+                                width="12"
+                                height="12"
+                                class="mr-3"
+                            />{{ data.countViews }} views
+                        </div>
                     </div>
                 </div>
                 <div class="sub-text">

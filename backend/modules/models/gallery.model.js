@@ -39,6 +39,10 @@ const gallerySchema = mongoose.Schema({
             contentValue_en: String,
         },
     ],
+    countViews: {
+        type: Number,
+        default: 0,
+    },
     createdAt: {
         type: Number,
         default: Date.now(),

@@ -32,6 +32,10 @@ exports.getGallery = catchAsync(async (req, res, next) => {
 
     if (!gallery) return next(new ErrorHandler('Data not found', 404))
 
+    gallery.countViews += 1
+
+    await gallery.save()
+
     res.status(200).json({
         status: 'success',
         data: {
