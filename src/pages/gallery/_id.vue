@@ -32,59 +32,11 @@
                         }}
                     </p>
                     <div class="d-flex mb-auto">
-                        <div class="live" @click="isOpen = !isOpen">
-                            <span
-                                class="dotted"
-                                :class="{ changeColor: boardCast }"
-                            ></span>
-                            <span :class="{ changeColor: boardCast }"
-                                >BOARDCAST</span
-                            >
-                            <span v-if="!boardCast">&nbsp; WATCH NOW</span>
-                            <span v-else>&nbsp; {{ boardCast }}</span>
-                            <div class="dropdown" :class="{ open: isOpen }">
-                                <div class="dropdown-title">BOARDCAST</div>
-                                <div class="dropdown-body">
-                                    <div
-                                        class="dropdown-group"
-                                        :class="{ selected: index === select }"
-                                        v-for="(i, index) in 5"
-                                        :key="index"
-                                        @click="
-                                            ;(select = index),
-                                                (boardCast =
-                                                    '12 JAN 2021 at 12:00')
-                                        "
-                                    >
-                                        <span
-                                            v-show="index === select"
-                                            class="dotted"
-                                            :style="{
-                                                position: 'absolute',
-                                                top: '15px',
-                                                left: '15px',
-                                            }"
-                                        ></span>
-                                        12 JAN 2021 at 12:00
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="live">
+                            <span class="dotted"></span>
+                            <span>BOARDCAST</span>
+                            <span>&nbsp; WATCH NOW</span>
                         </div>
-                        <img
-                            @click="
-                                openUrl(
-                                    `https://maps.googleapis.com/maps/api/streetview?parameters`,
-                                    {
-                                        lat: data.location.latitude,
-                                        lng: data.location.longitude,
-                                    }
-                                )
-                            "
-                            :src="
-                                require('../../assets/images/gallery/Group 848.svg')
-                            "
-                            width="30"
-                        />
                         <img
                             @click="
                                 openUrl(
@@ -132,6 +84,8 @@
             >
                 <div class="modelView" v-if="gallery.contentType === 'Model'">
                     <Canvas :path="gallery.path" :name="gallery.contentValue" />
+                    <div class="icon-360"></div>
+                    <!-- :src="require('@/assets/images/gallery/icon-360.png')" !-->
                 </div>
                 <div class="content-img" v-if="gallery.contentType === 'Image'">
                     <ImageView
@@ -270,9 +224,6 @@ export default {
         const store = useStore()
         // const { data, getOne, perviousPage, errorMessage } = useGallery()
         const gallery = ref(null)
-        const boardCast = ref(null)
-        const select = ref(null)
-        const isOpen = ref(false)
         const isLoading = ref(false)
         let loader = useLoading()
         let formContainer = ref(null)
@@ -366,9 +317,6 @@ export default {
             onBackwardClick,
             formContainer,
             openUrl,
-            select,
-            isOpen,
-            boardCast: boardCast.value,
         }
     },
 }
@@ -405,7 +353,6 @@ export default {
         width: 80%;
         margin: auto;
         background-image: url('../../assets/images/gallery/BACKGROUND.svg') !important;
-        border-radius: 5px;
         .title-sub-gallery {
             margin: 0 35px;
             .text-title {
@@ -421,24 +368,17 @@ export default {
                 }
                 img {
                     margin-left: 10px;
-                    cursor: pointer;
-                }
-                img:nth-child(3) {
                     filter: invert(24%) sepia(50%) saturate(4728%)
                         hue-rotate(280deg) brightness(111%) contrast(119%);
+                    cursor: pointer;
                 }
                 .live {
                     border: 1px solid white;
                     padding: 0.375rem 0.75rem;
                     border-radius: 50px;
                     margin-bottom: auto;
-                    cursor: pointer;
-                    position: relative;
                     span:nth-child(2) {
                         color: #e17cff;
-                        &.changeColor {
-                            color: #fff;
-                        }
                     }
                     span:nth-child(3) {
                         color: #ffffff;
@@ -451,67 +391,6 @@ export default {
                         display: inline-block;
                         border: 1px solid white;
                         margin-right: 5px;
-                        &.changeColor {
-                            background-color: #fff;
-                            opacity: 40%;
-                        }
-                    }
-                    .dropdown {
-                        display: none;
-                        text-align: center;
-                        color: #fff;
-                        font-size: 14px;
-                        font-family: 'Kanit-Regular';
-                        position: absolute;
-                        top: 170%;
-                        right: 0;
-                        width: 330px;
-                        height: auto;
-                        border: 0.5px solid #ffffff;
-                        background: #030124 0% 0% no-repeat padding-box;
-                        box-shadow: 0px 3px 6px #ffffff29;
-                        border-radius: 12px;
-                        cursor: default;
-                        &:after {
-                            content: '';
-                            position: absolute;
-                            border-style: solid;
-                            border-width: 0px 15px 15px;
-                            border-color: #fff transparent;
-                            right: 20px;
-                            top: -15px;
-                        }
-                        .dropdown-title {
-                            text-align: center;
-                            font-size: 18px;
-                            color: #fff;
-                            margin-top: 25px;
-                            font-family: 'Prompt-Bold';
-                        }
-                        .dropdown-body {
-                            margin: 15px 0 20px 0;
-                            .dropdown-group {
-                                padding: 10px 0px;
-                                border: 1px solid white;
-                                border-radius: 25px;
-                                margin: 20px 25px;
-                                cursor: pointer;
-                                position: relative;
-                                &.selected {
-                                    border-color: #e17cff;
-                                }
-                            }
-                            &.selected {
-                                border-color: #e17cff;
-                            }
-                        }
-                        &.open {
-                            transition: display 1s;
-                            display: block;
-                            height: auto;
-                            width: 330px;
-                            overflow: unset;
-                        }
                     }
                 }
             }
@@ -545,6 +424,7 @@ export default {
             }
             .content-img {
                 text-align: center;
+                background-color: black;
                 img {
                     height: 100%;
                     max-width: 100%;
@@ -593,6 +473,21 @@ export default {
                             margin: 0 3px;
                         }
                     }
+                }
+            }
+        }
+        .content-sub-gallery {
+            .modelView {
+                position: relative;
+                .icon-360 {
+                    position: absolute;
+                    width: 50px;
+                    height: 50px;
+                    right: 15px;
+                    bottom: 15px;
+                    background-color: #e17cff;
+                    mask: url('../../assets/images/gallery/icon-360.png')
+                        center/contain;
                 }
             }
         }
