@@ -135,10 +135,16 @@ export default {
 
     setBackgroundImage();
 
-    onMounted(() => {
+    const setHiehgt = () => {
       var height = document.querySelectorAll(".title")[0].clientHeight;
       height = window.innerHeight - (height + 28 + 24);
       contentView = `max-height: ${height}px`;
+    };
+
+    window.addEventListener("resize", setHiehgt);
+
+    onMounted(() => {
+      setHiehgt;
     });
 
     return {
