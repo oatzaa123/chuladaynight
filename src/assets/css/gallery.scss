@@ -37,38 +37,36 @@
       .mappin {
         position: relative;
         .pin {
-            width: 23px;
-            &.pinn {
-                width: 30px;
-            }
+          width: 4%;
+          &.pinn {
+            width: 5%;
+          }
         }
       }
       position: relative;
-
-      $top: 0% 0% 0% 39% 41% 42% 35% 35.9% 36.8% 29.8% 9.4% 12.6% 8.4% 10.5% 7% 13%;
-      $left: 0% 15% 15% 17.6% 25% 32% 32% 37.8% 43.6% 25.2% 38% 43% 31.2% 33.5% 41% 40%;
-      $right: 28% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 27%;
-      $bottom: 5% 25.6% 42% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 25%;
+    
+      $top:    unset unset unset 39.0% 41.0% 42.0% 35.0% 35.9% 36.8% 29.8% 9.40% 12.6% 8.40% 10.5% 7.00% 13.0%;
+      $left:   unset 15.0% 15.0% 17.6% 24.0% 32.0% 32.0% 37.8% 43.6% 25.2% 38.0% 43.0% 31.2% 33.5% 41.0% 40.0%;
+      $right:  28.0% unset unset unset unset unset unset unset unset unset unset unset unset unset unset 27.0%;
+      $bottom: 5.00% 25.6% 42.0% unset unset unset unset unset unset unset unset unset unset unset unset 25.0%;
+    
+      $topp:    unset unset unset 38.0% 39.7% 40.8% 34.0% 34.5% 35.5% 28.6% 8.20% 11.3% 6.80% 10.5% 7.00% 13.0%;
+      $leftp:   unset 14.6% 15.0% 17.2% 23.6% 31.6% 31.5% 37.2% 42.8% 24.8% 37.3% 42.6% 30.6% 33.5% 41.0% 40.0%;
+      $rightp:  27.2% unset unset unset unset unset unset unset unset unset unset unset unset unset unset 27.0%;
+      $bottomp: 5.20% 26.8% 42.0% unset unset unset unset unset unset unset unset unset unset unset unset 25.0%;
       @for $i from 1 through 16 {
         .pin:nth-child(16n + #{$i}) {
-          @if $i == 1 {
-            bottom: nth($bottom, $i);
-            right: nth($right, $i);
-            position: absolute;
-          } @else if $i == 2 {
-            bottom: nth($bottom, $i);
-            left: nth($left, $i);
-            position: absolute;
-          } @else if $i == 3 {
-            bottom: nth($bottom, $i);
-            left: nth($left, $i);
-            position: absolute;
-          } @else {
             top: nth($top, $i);
-            bottom: nth($bottom, $i);
             left: nth($left, $i);
             right: nth($right, $i);
+            bottom: nth($bottom, $i);
             position: absolute;
+
+          &.pinn {
+            top: nth($topp, $i);
+            left: nth($leftp, $i);
+            right: nth($rightp, $i);
+            bottom: nth($bottomp, $i);
           }
         }
       }

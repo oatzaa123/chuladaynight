@@ -29,11 +29,13 @@
               v-if="position === index"
               :src="require('@/assets/images/gallery/Group 295.svg')"
               class="pin pinn"
+              :class="position"
             />
             <img
               v-else
               :src="require('@/assets/images/gallery/Group 295 (1).svg')"
               class="pin"
+              :class="position"
             />
           </template>
           <img
