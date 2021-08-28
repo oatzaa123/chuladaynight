@@ -86,18 +86,20 @@
     //       background: #b30000;
     //     }
     //   }
-    .container {
+    .text-container {
         padding-top: var(--bs-gutter-x, 0);
         overflow-y: unset;
         max-height: unset;
         position: absolute;
         bottom: 25px;
-        left: 13%;
+        // left: 13%;
+        width: 100%;
         z-index: 4;
         .sec3-content {
             // margin-bottom: 3rem;
             color: #fff;
             .group-discription {
+                padding-right: 40px;
                 p {
                     font-family: 'Roboto-Bold';
                     font-size: 14px;
