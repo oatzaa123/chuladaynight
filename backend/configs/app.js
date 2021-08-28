@@ -4,5 +4,5 @@ dotenv.config()
 module.exports = {
     port: process.env.PORT || 3000,
     mongodbUri: process.env.MONGODB_URI,
-    mongodbUriDemo: process.env.MONGODB_URI_DEMO,
+    mongodbUriDemo: process.env.MONGODB_URI,
 }
