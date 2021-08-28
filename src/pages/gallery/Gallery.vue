@@ -95,14 +95,14 @@
 </template>
 
 <script>
-import { ref, computed, inject } from "vue";
+import { ref, computed, inject, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import useGallery from "@/hooks/useGallery";
 export default {
   setup() {
     const globalStore = inject("globalStore");
     const { data, getAll, errorMessage } = useGallery();
-    var contentView = `max-height: ${window.innerHeight - 200}px;`;
+    var contentView = "";
 
     try {
       getAll();
@@ -132,6 +132,12 @@ export default {
     };
 
     setBackgroundImage();
+
+    onMounted(() => {
+      var height = document.querySelectorAll(".title")[0].clientHeight;
+      height = window.innerHeight - (height + 28 + 24);
+      contentView = `max-height: ${height}px`;
+    });
 
     return {
       data,
