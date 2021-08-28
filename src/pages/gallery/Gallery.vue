@@ -29,6 +29,7 @@
                         />
                     </div>
                     <img
+                        class="map-img"
                         :src="
                             require('../../assets/images/gallery/Group 828 (1).svg')
                         "
