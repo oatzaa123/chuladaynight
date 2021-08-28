@@ -1,188 +1,193 @@
 .container {
-    font-family: 'Kanit-Regular';
-    padding-top: var(--bs-gutter-x, 1.75rem);
-    .title {
-        font: size 25px;
-        color: #ffffff;
-        font-weight: bold;
-        text-align: center;
-        .group-title {
-            width: fit-content;
-            display: inline-block;
-            .customText {
-                font-size: 40px;
-                letter-spacing: 0px;
-                text-shadow: 1px 1px 1px white, 0 0 5px white, 0 0 5px white;
-            }
-            .sup {
-                text-align: left;
-                font-size: 14px;
-            }
-            .sub {
-                font-size: 21px;
-                text-align: right;
-                color: #b61bff;
-                text-shadow: 1px 1px 1px #b61bff, 0 0 5px #b61bff,
-                    0 0 5px #b61bff;
-            }
-        }
+  font-family: "Kanit-Regular";
+  padding-top: var(--bs-gutter-x, 1.75rem);
+  .title {
+    font: size 25px;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    .group-title {
+      width: fit-content;
+      display: inline-block;
+      .customText {
+        font-size: 40px;
+        letter-spacing: 0px;
+        text-shadow: 1px 1px 1px white, 0 0 5px white, 0 0 5px white;
+      }
+      .sup {
+        text-align: left;
+        font-size: 14px;
+      }
+      .sub {
+        font-size: 21px;
+        text-align: right;
+        color: #b61bff;
+        text-shadow: 1px 1px 1px #b61bff, 0 0 5px #b61bff, 0 0 5px #b61bff;
+      }
     }
-    .content {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 20px;
-        .map {
-            .map-img {
-                height: 70vh;
+  }
+  .content {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    .map {
+      .map-img {
+        height: 70vh;
+      }
+      .mappin {
+        position: relative;
+        .pin {
+            width: 23px;
+            &.pinn {
+                width: 30px;
             }
-            .mappin {
-                position: relative;
-            }
-            position: relative;
+        }
+      }
+      position: relative;
 
-            $top: 0% 0% 0% 40% 41% 42% 34% 34.5% 35% 29% 9% 13% 8% 10.5% 7% 13%;
-            $left: 0% 15% 15% 18% 25% 32% 32% 37% 42% 26% 39% 43% 32% 33.5% 41%
-                40%;
-            $right: 27% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 27%;
-            $bottom: 5% 26% 41.5% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 25%;
-            @for $i from 1 through 16 {
-                .pin:nth-child(16n + #{$i}) {
-                    @if $i == 1 {
-                        bottom: nth($bottom, $i);
-                        right: nth($right, $i);
-                        position: absolute;
-                    } @else if $i == 2 {
-                        bottom: nth($bottom, $i);
-                        left: nth($left, $i);
-                        position: absolute;
-                    } @else if $i == 3 {
-                        bottom: nth($bottom, $i);
-                        left: nth($left, $i);
-                        position: absolute;
-                    } @else {
-                        top: nth($top, $i);
-                        bottom: nth($bottom, $i);
-                        left: nth($left, $i);
-                        right: nth($right, $i);
-                        position: absolute;
-                    }
-                }
-            }
-            @media screen and (max-width: 1440px) {
-                @for $i from 1 through 16 {
-                    .pin:nth-child(16n + #{$i}) {
-                        @if $i == 1 {
-                            bottom: nth($bottom, $i);
-                            right: nth($right, $i);
-                            position: absolute;
-                        } @else if $i == 2 {
-                            bottom: calc(#{nth($bottom, $i)} - -1%);
-                            left: nth($left, $i);
-                            position: absolute;
-                        } @else if $i == 3 {
-                            bottom: calc(#{nth($bottom, $i)} - 0%);
-                            left: calc(#{nth($left, $i)} - 0%);
-                            position: absolute;
-                        } @else if $i >= 4 and $i <= 6 {
-                            top: calc(#{nth($top, $i)} + 0%);
-                            left: calc(#{nth($left, $i)} - 0%);
-                            position: absolute;
-                        } @else if $i >= 7 and $i <= 9 {
-                            top: calc(#{nth($top, $i)} + 0%);
-                            left: nth($left, $i);
-                            position: absolute;
-                        } @else if $i == 12 {
-                            top: calc(#{nth($top, $i)} + 0%);
-                            left: nth($left, $i);
-                            position: absolute;
-                        } @else if $i == 13 {
-                            top: calc(#{nth($top, $i)} + 0%);
-                            left: nth($left, $i);
-                            position: absolute;
-                        } @else if $i >= 14 and $i <= 15 {
-                            top: calc(#{nth($top, $i)} + 0%);
-                            left: nth($left, $i);
-                            position: absolute;
-                        } @else {
-                            top: calc(#{nth($top, $i)} + 0%);
-                            left: nth($left, $i);
-                            position: absolute;
-                        }
-                    }
-                }
-            }
-            @media screen and (max-width: 768px) {
-                display: none;
-            }
-        }
-        .content-view {
-            overflow-y: auto;
-            -ms-overflow-style: none; /* IE and Edge */
-            scrollbar-width: none;
-            max-height: 70vh;
-            .image-view {
-                position: relative;
-            }
-        }
-        .overlay {
+      $top: 0% 0% 0% 39% 41% 42% 35% 35.9% 36.8% 29.8% 9.4% 12.6% 8.4% 10.5% 7% 13%;
+      $left: 0% 15% 15% 17.6% 25% 32% 32% 37.8% 43.6% 25.2% 38% 43% 31.2% 33.5% 41% 40%;
+      $right: 28% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 27%;
+      $bottom: 5% 25.6% 42% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 0% 25%;
+      @for $i from 1 through 16 {
+        .pin:nth-child(16n + #{$i}) {
+          @if $i == 1 {
+            bottom: nth($bottom, $i);
+            right: nth($right, $i);
             position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            width: 100%;
-            opacity: 0;
-            transition: 0.5s ease;
-            background-color: #0c0c0c;
-            .text {
-                color: white;
-                font-size: 14px;
-                position: absolute;
-                margin: 40px 40px 0 25px;
-                font-family: 'Roboto-Bold';
-                // top: 50%;
-                // left: 50%;
-                // transform: translate(-50%, -50%);
-                // -ms-transform: translate(-50%, -50%);
-
-                span {
-                    text-indent: 30%;
-                    text-align: left;
-                }
-
-                .text-title {
-                    margin-right: 25px;
-                    color: #ba1bff;
-                    font-size: 18px;
-                    font-family: 'Prompt-Bold';
-                    text-align: left;
-                }
-
-                .sub-text {
-                    display: flex;
-                    font-size: 14px;
-                    font-family: 'Kanit-Regular';
-                    justify-content: left;
-                    align-items: center;
-                    p:nth-child(1) {
-                        margin-right: 25px;
-                        color: #ba1bff;
-                    }
-                }
-
-                .hover-img {
-                    filter: invert(19%) sepia(87%) saturate(4315%)
-                        hue-rotate(276deg) brightness(103%) contrast(108%);
-                }
+          } @else if $i == 2 {
+            bottom: nth($bottom, $i);
+            left: nth($left, $i);
+            position: absolute;
+          } @else if $i == 3 {
+            bottom: nth($bottom, $i);
+            left: nth($left, $i);
+            position: absolute;
+          } @else {
+            top: nth($top, $i);
+            bottom: nth($bottom, $i);
+            left: nth($left, $i);
+            right: nth($right, $i);
+            position: absolute;
+          }
+        }
+      }
+      @media screen and (max-width: 1440px) {
+        @for $i from 1 through 16 {
+          .pin:nth-child(16n + #{$i}) {
+            @if $i == 1 {
+              bottom: nth($bottom, $i);
+              right: nth($right, $i);
+              position: absolute;
+            } @else if $i == 2 {
+              bottom: calc(#{nth($bottom, $i)} - -1%);
+              left: nth($left, $i);
+              position: absolute;
+            } @else if $i == 3 {
+              bottom: calc(#{nth($bottom, $i)} - 0%);
+              left: calc(#{nth($left, $i)} - 0%);
+              position: absolute;
+            } @else if $i >= 4 and $i <= 6 {
+              top: calc(#{nth($top, $i)} + 0%);
+              left: calc(#{nth($left, $i)} - 0%);
+              position: absolute;
+            } @else if $i >= 7 and $i <= 9 {
+              top: calc(#{nth($top, $i)} + 0%);
+              left: nth($left, $i);
+              position: absolute;
+            } @else if $i == 12 {
+              top: calc(#{nth($top, $i)} + 0%);
+              left: nth($left, $i);
+              position: absolute;
+            } @else if $i == 13 {
+              top: calc(#{nth($top, $i)} + 0%);
+              left: nth($left, $i);
+              position: absolute;
+            } @else if $i >= 14 and $i <= 15 {
+              top: calc(#{nth($top, $i)} + 0%);
+              left: nth($left, $i);
+              position: absolute;
+            } @else {
+              top: calc(#{nth($top, $i)} + 0%);
+              left: nth($left, $i);
+              position: absolute;
             }
+          }
         }
-        .image-view:hover > .overlay {
-            opacity: 0.8;
-            cursor: pointer;
-        }
-        .content-view::-webkit-scrollbar {
-            display: none;
-        }
+      }
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
     }
+    .content-view {
+      overflow-y: auto;
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none;
+      max-height: 70vh;
+      .image-view {
+        position: relative;
+        margin-bottom: 15px;
+      }
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      transition: 0.5s ease;
+      background-color: #0c0c0c;
+      .text {
+        color: white;
+        font-size: 14px;
+        position: absolute;
+        margin: 40px 40px 0 25px;
+        font-family: "Roboto-Bold";
+        // top: 50%;
+        // left: 50%;
+        // transform: translate(-50%, -50%);
+        // -ms-transform: translate(-50%, -50%);
+
+        span {
+          text-indent: 30%;
+          text-align: left;
+        }
+
+        .text-title {
+          margin-right: 25px;
+          color: #ba1bff;
+          font-size: 18px;
+          font-family: "Prompt-Bold";
+          text-align: left;
+        }
+
+        .sub-text {
+          display: flex;
+          font-size: 14px;
+          font-family: "Kanit-Regular";
+          justify-content: left;
+          align-items: center;
+          p:nth-child(1) {
+            margin-right: 25px;
+            color: #ba1bff;
+          }
+        }
+
+        .hover-img {
+          filter: invert(19%) sepia(87%) saturate(4315%) hue-rotate(276deg)
+            brightness(103%) contrast(108%);
+        }
+      }
+    }
+    .image-view:hover > .overlay {
+      opacity: 0.8;
+      cursor: pointer;
+    }
+    .content-view::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
