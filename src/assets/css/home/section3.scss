@@ -47,7 +47,7 @@
           img:nth-child(#{$i}) {
             position: absolute;
             width: 180px;
-            top: random(100) + px;
+            top: random(30) + 0%;
             left: #{$left}px;
             $left: $left + 190;
           }
