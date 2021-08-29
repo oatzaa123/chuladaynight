@@ -24,7 +24,7 @@
       />
     </div> -->
 
-    <div class="slide-container">
+    <div class="slide-container" data-test="11">
       <div
         class="items"
         @mousedown="mousedown($event)"
@@ -32,8 +32,20 @@
         @mouseleave="mouseleave()"
         @mousemove="mousemove($event)"
       >
-        <div class="item"></div>
-        <div class="item"></div>
+        <template v-if="data.Gallery">
+          <div
+            class="item"
+            :data-length="data.Gallery.length"
+            data-fesa-num="8"
+          >
+            <template v-for="(i, index) in data.Gallery" :key="index">
+              <ImageView
+                :imagePath="i.coverImage.path"
+                :imageName="i.coverImage.name"
+              />
+            </template>
+          </div>
+        </template>
       </div>
     </div>
 
@@ -61,12 +73,22 @@
 
 <script>
 import { useRouter } from "vue-router";
+import useGallery from "@/hooks/useGallery";
+import ImageView from "@/components/ImageView";
 export default {
+  components: { ImageView },
   setup() {
+    const { data, getAll, errorMessage } = useGallery();
     const router = useRouter();
     const onPageChanged = () => {
       router.push({ name: "Gallery" });
     };
+
+    try {
+      getAll();
+    } catch (error) {
+      throw new Error(errorMessage);
+    }
 
     const ele = document.getElementsByClassName("items");
     let isDown = false;
@@ -104,6 +126,7 @@ export default {
     };
 
     return {
+      data,
       onPageChanged,
       mousedown,
       mouseup,
