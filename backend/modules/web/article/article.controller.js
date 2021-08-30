@@ -2,7 +2,7 @@ const catchAsync = require('../../../helpers/catchAsync')
 const APIFeatures = require('../../../utils/apiFeatures')
 const ErrorHandler = require('../../../helpers/errorHandler')
 const Article = require('./../../models/article.model')
-const uploadFile = require('./../../../middleware/upload')
+const { uploadFile } = require('./../../../middleware/upload')
 
 exports.getArticles = catchAsync(async (req, res, next) => {
     const featuresArticle = new APIFeatures(Article.find(), req.query)
@@ -35,37 +35,28 @@ exports.getArticle = catchAsync(async (req, res, next) => {
 })
 
 exports.addArticle = catchAsync(async (req, res, next) => {
-    let coverImageName, coverImage, logo, logoName, article
-    const location = JSON.parse(req.body.location)
+    let coverImageName
+    const { path } = req.body
 
     if (req.files) {
-        if (req.files.coverImage) {
-            coverImage = req.files.coverImage || ''
-            coverImageName = coverImage !== '' ? req.files.coverImage.name : ''
-            const newCoverImage = uploadFile(coverImageName, coverImage)
-            if (newCoverImage)
+        const { coverImage } = req.files
+        if (coverImage) {
+            const name = await uploadFile(coverImage, path)
+            if (!name)
                 return next(new ErrorHandler(`Fail to upload image.`, 400))
+            coverImageName = {
+                path,
+                name,
+            }
         }
-
-        if (req.files.logo) {
-            logo = req.files.logo || ''
-            logoName = logo !== '' ? req.files.logo.name : ''
-            const newLogo = uploadFile(logoName, logo)
-            if (newLogo)
-                return next(new ErrorHandler(`Fail to upload image.`, 400))
-        }
-
-        let obj = {
-            ...req.body,
-            coverImage: coverImageName,
-            logo: logoName,
-            location,
-        }
-
-        article = await Article.create(obj)
-    } else {
-        article = await Article.create({ ...req.body, location })
     }
+
+    let obj = {
+        ...req.body,
+        coverImage: coverImageName,
+    }
+
+    const article = await Article.create(obj)
 
     res.status(201).json({
         status: 'success',
