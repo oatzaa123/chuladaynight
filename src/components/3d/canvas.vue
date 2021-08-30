@@ -37,7 +37,7 @@ export default {
       controls.update();
 
       const scene = new THREE.Scene();
-      // scene.background = new THREE.Color('black')
+      scene.background = new THREE.Color("#0C0C0C");
 
       {
         const planeSize = 40;
@@ -59,7 +59,7 @@ export default {
         });
         const mesh = new THREE.Mesh(planeGeo, planeMat);
         mesh.rotation.x = Math.PI * -0.5;
-        scene.add(mesh);
+        // scene.add(mesh);
       }
 
       {
