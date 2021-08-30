@@ -453,7 +453,7 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
                 name: await uploadFile(authorImage, path),
             }
 
-            gallery.author = authorImageName
+            gallery.author.image = authorImageName
         }
 
         if (live) {
