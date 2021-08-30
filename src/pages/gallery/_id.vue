@@ -236,6 +236,7 @@
                     </p>
                     <p>
                         <img
+                            v-if="data.author.contact.telephone"
                             :src="
                                 require('../../assets/images/icons/phone-icon-18-ffffff-16.png')
                             "
@@ -247,6 +248,7 @@
                     <div class="footer-icon">
                         <div class="footer-icon-img">
                             <img
+                                v-if="data.author.contact.facebook"
                                 @click="
                                     openUrl(
                                         'https://www.facebook.com',
@@ -260,6 +262,7 @@
                                 height="35"
                             />
                             <img
+                                v-if="data.author.contact.instagram"
                                 @click="
                                     openUrl(
                                         'https://www.instagram.com',
@@ -273,6 +276,7 @@
                                 height="35"
                             />
                             <img
+                                v-if="data.author.contact.email"
                                 :src="
                                     require('@/assets/images/icons/Group 328.svg')
                                 "

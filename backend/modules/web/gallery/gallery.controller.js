@@ -115,6 +115,7 @@ exports.addGallery = catchAsync(async (req, res, next) => {
     var contentImages = []
     var contentVideos = []
     let contentModels = []
+    let descriptions = []
     var coverImageName
     var authorImageName
     const liveVideo = []
@@ -276,7 +277,12 @@ exports.addGallery = catchAsync(async (req, res, next) => {
 
     var contents = []
     if (description && description.length > 0) {
-        await description.map(async (item) => {
+        if (typeof description === 'string') {
+            descriptions.push(description)
+        } else {
+            descriptions = description
+        }
+        await descriptions.map(async (item) => {
             const model = arrModel.filter((i) => {
                 return i.contentName === item
             })

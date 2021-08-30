@@ -162,7 +162,7 @@ export default {
                 { name: 'menu_Contact', path: '/Contact' },
             ],
             lang:
-                localStorage.getItem('locale').toUpperCase() ||
+                localStorage.getItem('locale') ||
                 process.env.VUE_APP_I18N_LOCALE,
             showLang: false,
         })

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const configs = require('./app')
 
-const DB = configs.mongodbUriDemo
+const DB = configs.mongodbUri
 const database = {
     mongoDB() {
         mongoose

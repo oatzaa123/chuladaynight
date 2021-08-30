@@ -6,7 +6,6 @@ const gallerySchema = mongoose.Schema({
     author: {
         name_th: {
             type: String,
-            required: [true, 'author name is not be empty'],
         },
         name_en: { type: String },
         image: { path: String, name: String },
