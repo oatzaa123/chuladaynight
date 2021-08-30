@@ -114,7 +114,7 @@
                                 width="12"
                                 height="12"
                                 class="mr-3"
-                            />{{ data.countViews }} views
+                            />{{ data.countViews.toLocaleString() }} views
                         </div>
                     </div>
                 </div>

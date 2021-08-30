@@ -40,7 +40,7 @@ const uploadFile = async (file, pathFolder) => {
     })
 
     // const img = await sharp(file.data)
-    //     .resize(500, 500, { fit: 'fill' })
+    //     .resize({ height: '500px', fit: 'fill' })
     //     .png()
     //     .toFile(storePath)
 
@@ -50,7 +50,7 @@ const uploadFile = async (file, pathFolder) => {
 
 const uploadVideo = async (file, pathFolder) => {
     const { mimetype, name } = await file
-    if (['video/mp4'].indexOf(mimetype) < 0) {
+    if (['video/mp4', 'video/x-matroska'].indexOf(mimetype) < 0) {
         return false
     }
 
