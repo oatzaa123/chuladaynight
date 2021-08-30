@@ -30,26 +30,29 @@
       overflow-x: scroll;
       overflow-y: hidden;
       white-space: nowrap;
-      background-image: linear-gradient(
-          360deg,
-          #030024,
-          #030024 30%,
-          transparent
-        ),
-        url("../../assets/images/gallery/Image 1.png");
+
       .item {
         display: inline-block;
+        background-image: linear-gradient(
+            360deg,
+            #030024,
+            #030024 30%,
+            transparent
+          ),
+          url("../../assets/images/gallery/Image 1.png");
 
         height: 100vh;
         width: 100%;
         $left: 200;
+        position: relative;
         @for $i from 1 through 500 {
           img:nth-child(#{$i}) {
             position: absolute;
             width: 350px;
-            top: random(30) + 0%;
-            left: #{$left}px;
-            $left: $left + 370 + random(370);
+            top: 10%; // random(10) + 0%;
+            right: 100px;
+            // $left: $left + 370 + 370;
+            // left: #{$left}px;
           }
         }
       }
