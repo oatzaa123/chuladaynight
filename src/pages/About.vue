@@ -41,6 +41,7 @@
                     >
                         <div class="col-5 image">
                             <img
+                                v-if="item.coverImage"
                                 :src="
                                     getImage(
                                         item.coverImage.name,
@@ -49,6 +50,7 @@
                                 "
                                 alt=""
                             />
+                            <div v-else class="default-coverImage"></div>
                         </div>
                         <div class="col-1 line"></div>
                         <div class="col-1 year">

@@ -101,9 +101,12 @@ exports.addNews = catchAsync(async (req, res, next) => {
         const { coverImage, contentImage } = req.files
 
         if (coverImage) {
+            const name = await uploadFile(coverImage, path)
+            if (!name)
+                return next(new ErrorHandler(`Fail to upload image.`, 400))
             coverImageName = {
                 path,
-                name: await uploadFile(coverImage, path),
+                name,
             }
         }
 
@@ -120,10 +123,13 @@ exports.addNews = catchAsync(async (req, res, next) => {
     if (contentImages.length > 0) {
         await Promise.all(
             contentImages.map(async (item) => {
+                const name = await uploadFile(item, path)
+                if (!name)
+                    return next(new ErrorHandler(`Fail to upload image.`, 400))
                 arrImg.push({
                     path,
                     contentType: 'Image',
-                    contentValue: await uploadFile(item, path),
+                    contentValue: name,
                     contentName: item.name,
                 })
             })
@@ -169,7 +175,7 @@ exports.addNews = catchAsync(async (req, res, next) => {
 
 exports.updateNews = catchAsync(async (req, res, next) => {
     const { id } = req.params
-    const { title_th, title_en, path, description } = req.body
+    const { title_th, title_en, path, description, oldFile } = req.body
     const contentImages = []
     let coverImageName
 
@@ -181,9 +187,32 @@ exports.updateNews = catchAsync(async (req, res, next) => {
         const { coverImage, contentImage } = req.files
 
         if (coverImage) {
+            if (
+                JSON.parse(oldFile) &&
+                JSON.parse(oldFile).coverImage &&
+                fs.existsSync(
+                    paths.join(
+                        __dirname,
+                        `../../../assets/uploads/images/${path}/${
+                            JSON.parse(oldFile).coverImage
+                        }`
+                    )
+                )
+            ) {
+                fs.unlinkSync(
+                    paths.join(
+                        __dirname,
+                        `../../../assets/uploads/images/${path}/`,
+                        JSON.parse(oldFile).coverImage
+                    )
+                )
+            }
+            const name = await uploadFile(coverImage, path)
+            if (!name)
+                return next(new ErrorHandler(`Fail to upload image.`, 400))
             coverImageName = {
                 path,
-                name: await uploadFile(coverImage, path),
+                name,
             }
 
             news.coverImage = coverImageName
@@ -202,10 +231,33 @@ exports.updateNews = catchAsync(async (req, res, next) => {
     if (contentImages.length > 0) {
         await Promise.all(
             contentImages.map(async (item) => {
+                if (
+                    JSON.parse(oldFile) &&
+                    JSON.parse(oldFile).contentImage &&
+                    fs.existsSync(
+                        paths.join(
+                            __dirname,
+                            `../../../assets/uploads/images/${path}/${
+                                JSON.parse(oldFile).contentImage
+                            }`
+                        )
+                    )
+                ) {
+                    fs.unlinkSync(
+                        paths.join(
+                            __dirname,
+                            `../../../assets/uploads/images/${path}/`,
+                            JSON.parse(oldFile).contentImage
+                        )
+                    )
+                }
+                const name = await uploadFile(item, path)
+                if (!name)
+                    return next(new ErrorHandler(`Fail to upload image.`, 400))
                 arrImg.push({
                     path,
                     contentType: 'Image',
-                    contentValue: await uploadFile(item, path),
+                    contentValue: name,
                     contentName: item.name,
                 })
             })

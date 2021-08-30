@@ -411,6 +411,8 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
 
         if (coverImage) {
             if (
+                JSON.parse(oldFile) &&
+                JSON.parse(oldFile).coverImage &&
                 fs.existsSync(
                     paths.join(
                         __dirname,
@@ -437,6 +439,8 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
         }
         if (authorImage) {
             if (
+                JSON.parse(oldFile) &&
+                JSON.parse(oldFile).authorImage &&
                 fs.existsSync(
                     paths.join(
                         __dirname,
@@ -466,6 +470,8 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
             const time = JSON.parse(liveTime).liveTime
             if (live.length > 0) {
                 if (
+                    JSON.parse(oldFile) &&
+                    JSON.parse(oldFile).liveVideo &&
                     fs.existsSync(
                         paths.join(
                             __dirname,
@@ -502,6 +508,8 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
                 )
             } else {
                 if (
+                    JSON.parse(oldFile) &&
+                    JSON.parse(oldFile).liveVideo &&
                     fs.existsSync(
                         paths.join(
                             __dirname,
@@ -544,6 +552,8 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
     if (contentModels.length > 0) {
         if (typeof JSON.parse(oldFile).contentModel === 'string') {
             if (
+                JSON.parse(oldFile) &&
+                JSON.parse(oldFile).contentModel &&
                 fs.existsSync(
                     paths.join(
                         __dirname,
@@ -564,6 +574,8 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
         } else {
             JSON.parse(oldFile).contentModel.map((i) => {
                 if (
+                    JSON.parse(oldFile) &&
+                    JSON.parse(oldFile).contentModel &&
                     fs.existsSync(
                         paths.join(
                             __dirname,
@@ -607,6 +619,8 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
     if (contentImages.length > 0) {
         if (typeof JSON.parse(oldFile).contentImage === 'string') {
             if (
+                JSON.parse(oldFile) &&
+                JSON.parse(oldFile).contentImage &&
                 fs.existsSync(
                     paths.join(
                         __dirname,
@@ -627,6 +641,8 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
         } else {
             JSON.parse(oldFile).contentImage.map((i) => {
                 if (
+                    JSON.parse(oldFile) &&
+                    JSON.parse(oldFile).contentImage &&
                     fs.existsSync(
                         paths.join(
                             __dirname,
@@ -670,6 +686,8 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
     if (contentVideos.length > 0) {
         if (typeof JSON.parse(oldFile).contentVideo === 'string') {
             if (
+                JSON.parse(oldFile) &&
+                JSON.parse(oldFile).contentVideo &&
                 fs.existsSync(
                     paths.join(
                         __dirname,
@@ -690,6 +708,7 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
         }
 
         if (
+            JSON.parse(oldFile) &&
             JSON.parse(oldFile).contentVideo &&
             JSON.parse(oldFile).contentVideo.length > 0
         ) {

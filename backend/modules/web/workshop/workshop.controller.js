@@ -116,11 +116,13 @@ exports.updateWorkshop = async (req, res, next) => {
 
         if (coverImage) {
             if (
+                JSON.parse(oldFile) &&
+                JSON.parse(oldFile).coverImage &&
                 fs.existsSync(
                     paths.join(
                         __dirname,
                         `../../../assets/uploads/images/${path}/${
-                            JSON.parse(oldImage).oldImage.coverImage
+                            JSON.parse(oldImage).coverImage
                         }`
                     )
                 )
@@ -129,7 +131,7 @@ exports.updateWorkshop = async (req, res, next) => {
                     paths.join(
                         __dirname,
                         `../../../assets/uploads/images/${path}/`,
-                        JSON.parse(oldImage).oldImage.coverImage
+                        JSON.parse(oldImage).coverImage
                     )
                 )
             }
@@ -151,11 +153,13 @@ exports.updateWorkshop = async (req, res, next) => {
 
         if (image) {
             if (
+                JSON.parse(oldFile) &&
+                JSON.parse(oldFile).contentImage &&
                 fs.existsSync(
                     paths.join(
                         __dirname,
                         `../../../assets/uploads/images/${path}/${
-                            JSON.parse(oldImage).oldImage.contentImage
+                            JSON.parse(oldImage).contentImage
                         }`
                     )
                 )
@@ -164,7 +168,7 @@ exports.updateWorkshop = async (req, res, next) => {
                     paths.join(
                         __dirname,
                         `../../../assets/uploads/images/${path}/`,
-                        JSON.parse(oldImage).oldImage.contentImage
+                        JSON.parse(oldImage).contentImage
                     )
                 )
             }
