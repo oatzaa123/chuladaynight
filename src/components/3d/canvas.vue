@@ -63,8 +63,8 @@ export default {
       }
 
       {
-        const skyColor = "#030124"; // 0xb1e1ff; // light blue
-        const groundColor = "#0C0C0C"; // 0xb97a20; // brownish orange
+        const skyColor = 0xb1e1ff; // light blue
+        const groundColor = 0xb97a20; // brownish orange
         const intensity = 1;
         const light = new THREE.HemisphereLight(
           skyColor,
