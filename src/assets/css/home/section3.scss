@@ -42,14 +42,14 @@
 
         height: 100vh;
         width: 100%;
-        $left: 10;
+        $left: 200;
         @for $i from 1 through 500 {
           img:nth-child(#{$i}) {
             position: absolute;
-            width: 180px;
+            width: 350px;
             top: random(30) + 0%;
             left: #{$left}px;
-            $left: $left + 190;
+            $left: $left + 370 + random(370);
           }
         }
       }
