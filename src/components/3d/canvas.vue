@@ -37,7 +37,7 @@ export default {
       controls.update();
 
       const scene = new THREE.Scene();
-      scene.background = new THREE.Color("#0C0C0C");
+      scene.background = new THREE.Color("#030124");
 
       {
         const planeSize = 40;
