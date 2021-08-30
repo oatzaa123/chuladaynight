@@ -277,6 +277,12 @@
                             />
                             <img
                                 v-if="data.author.contact.email"
+                                @click="
+                                    openUrl(
+                                        'mailto:',
+                                        data.author.contact.email
+                                    )
+                                "
                                 :src="
                                     require('@/assets/images/icons/Group 328.svg')
                                 "

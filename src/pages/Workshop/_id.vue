@@ -88,6 +88,7 @@
                             "
                         />
                         <img
+                            @click="openUrl('mailto:', item.contact.email)"
                             :src="
                                 require('@/assets/images/icons/Group 328.svg')
                             "
