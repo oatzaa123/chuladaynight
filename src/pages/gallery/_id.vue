@@ -44,7 +44,10 @@
                                     >BOARDCAST</span
                                 >
                                 <span v-if="!boardCast">&nbsp; WATCH NOW</span>
-                                <span v-else>&nbsp; {{ boardCast }}</span>
+                                <span v-else
+                                    >&nbsp;
+                                    {{ formatDate(boardCast, 'title') }}</span
+                                >
                                 <div class="dropdown" :class="{ open: isOpen }">
                                     <div class="triangle"></div>
                                     <div class="dropdown-title">BOARDCAST</div>
@@ -54,11 +57,12 @@
                                             :class="{
                                                 selected: index === select,
                                             }"
-                                            v-for="(i, index) in 5"
+                                            v-for="(i, index) in data.live
+                                                .videos"
                                             :key="index"
                                             @click="
                                                 ;(select = index),
-                                                    (boardCast = '12 JAN 2021')
+                                                    (boardCast = i.liveTime)
                                             "
                                         >
                                             <span
@@ -70,7 +74,7 @@
                                                     left: '15px',
                                                 }"
                                             ></span>
-                                            12 JAN 2021 at 12:00
+                                            {{ formatDate(i.liveTime, 'list') }}
                                         </div>
                                     </div>
                                 </div>
@@ -140,7 +144,23 @@
                     </p>
                 </div>
             </div>
-            <div class="live-view"></div>
+            <div class="live-view" v-if="boardCast">
+                <div v-for="i in data.live.videos" :key="i">
+                    <video
+                        class="video"
+                        height="500"
+                        controls
+                        muted
+                        loop
+                        v-if="i.liveTime === boardCast"
+                    >
+                        <source
+                            :src="getVideo(i.name, i.path)"
+                            type="video/mp4"
+                        />
+                    </video>
+                </div>
+            </div>
             <div
                 class="content-sub-gallery"
                 v-for="gallery in data.content"
@@ -276,6 +296,8 @@ import Canvas from '@/components/3d/canvas'
 import ImageView from '@/components/ImageView'
 import { useLoading } from 'vue3-loading-overlay'
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+import { formatMonth } from '@/helpers/formatDate'
+import moment from 'moment'
 // import useGallery from '@/hooks/useGallery'
 import axios from '@/configs/axios'
 export default {
@@ -363,6 +385,17 @@ export default {
             }
         }
 
+        const formatDate = (date, type) => {
+            const newDate = moment(new Date(date)).format('YYYY-MM-DD HH:mm')
+            return type === 'title'
+                ? `${newDate.split('-')[2].split(' ')[0]} ${formatMonth(
+                      newDate.split('-')[1]
+                  )} ${newDate.split('-')[0]}`
+                : `${newDate.split('-')[2].split(' ')[0]} ${formatMonth(
+                      newDate.split('-')[1]
+                  )} ${newDate.split('-')[0]} at ${newDate.split(' ')[1]}`
+        }
+
         gallery.value.content.map((item) => {
             if (item.contentType === 'Image') {
                 store.commit(
@@ -386,6 +419,7 @@ export default {
             select,
             isOpen,
             boardCast: boardCast.value,
+            formatDate,
         }
     },
 }

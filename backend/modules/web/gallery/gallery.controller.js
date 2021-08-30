@@ -109,6 +109,7 @@ exports.addGallery = catchAsync(async (req, res, next) => {
         shortDescription_en,
         location,
         description,
+        liveTime,
     } = req.body
 
     var contentImages = []
@@ -116,6 +117,7 @@ exports.addGallery = catchAsync(async (req, res, next) => {
     let contentModels = []
     var coverImageName
     var authorImageName
+    const liveVideo = []
     if (req.files) {
         const {
             coverImage,
@@ -123,6 +125,7 @@ exports.addGallery = catchAsync(async (req, res, next) => {
             contentVideo,
             contentImage,
             contentModel,
+            live,
         } = req.files
 
         if (contentModel) {
@@ -160,6 +163,47 @@ exports.addGallery = catchAsync(async (req, res, next) => {
             authorImageName = {
                 path,
                 name: await uploadFile(authorImage, path),
+            }
+        }
+
+        if (live) {
+            const time = JSON.parse(liveTime).liveTime
+            if (live.length > 0) {
+                await Promise.all(
+                    live.map(async (i, index) => {
+                        const name = await uploadVideo(i, path)
+                        if (!name)
+                            return next(
+                                new ErrorHandler(
+                                    `Can't upload video! please try again.`,
+                                    500
+                                )
+                            )
+                        liveVideo.push({
+                            path,
+                            name,
+                            liveTime: time[index],
+                        })
+                    })
+                )
+            } else {
+                await Promise.all(
+                    time.map(async (i) => {
+                        const name = await uploadVideo(live, path)
+                        if (!name)
+                            return next(
+                                new ErrorHandler(
+                                    `Can't upload video! please try again.`,
+                                    500
+                                )
+                            )
+                        liveVideo.push({
+                            path,
+                            name,
+                            liveTime: i,
+                        })
+                    })
+                )
             }
         }
     } // req.file
@@ -209,7 +253,7 @@ exports.addGallery = catchAsync(async (req, res, next) => {
     }
 
     var arrVdo = []
-    if (contentVideos.length > 0) {
+    if (contentVideos && contentVideos.length > 0) {
         await Promise.all(
             contentVideos.map(async (item) => {
                 const name = await uploadVideo(item, path)
@@ -231,7 +275,7 @@ exports.addGallery = catchAsync(async (req, res, next) => {
     }
 
     var contents = []
-    if (description.length > 0) {
+    if (description && description.length > 0) {
         await description.map(async (item) => {
             const model = arrModel.filter((i) => {
                 return i.contentName === item
@@ -282,6 +326,9 @@ exports.addGallery = catchAsync(async (req, res, next) => {
         path,
         shortDescription_th,
         shortDescription_en,
+        live: {
+            videos: liveVideo,
+        },
         location: JSON.parse(location),
         content: contents,
         createdAt: Date.now(),
@@ -535,7 +582,6 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
 
     var arrVdo = []
     if (contentVideos.length > 0) {
-        console.log(typeof JSON.parse(oldImage).oldImage.contentVideo)
         if (typeof JSON.parse(oldImage).oldImage.contentVideo === 'string') {
             if (
                 fs.existsSync(

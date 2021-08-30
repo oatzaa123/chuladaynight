@@ -19,6 +19,23 @@ const gallerySchema = mongoose.Schema({
             phone: { type: String },
         },
     },
+    live: {
+        videos: [
+            {
+                path: String,
+                name: String,
+                liveTime: { type: Number, default: Date.now() },
+            },
+        ],
+        createdAt: {
+            type: Number,
+            default: Date.now(),
+        },
+        updatedAt: {
+            type: Number,
+            default: Date.now(),
+        },
+    },
     shortDescription_th: { type: String },
     shortDescription_en: { type: String },
     coverImage: {
