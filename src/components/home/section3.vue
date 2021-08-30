@@ -39,13 +39,11 @@
             data-fesa-num="8"
           >
             <template v-for="(i, index) in data.Gallery" :key="index">
-              <div class="item">
-                <ImageView
-                  v-if="i.coverImage"
-                  :imagePath="i.coverImage.path"
-                  :imageName="i.coverImage.name"
-                />
-              </div>
+              <ImageView
+                v-if="i.coverImage"
+                :imagePath="i.coverImage.path"
+                :imageName="i.coverImage.name"
+              />
             </template>
           </div>
         </template>
