@@ -1,12 +1,13 @@
 <template>
   <div class="section3">
-    <div class="left-arrow">
+    <div class="left-arrow" @mousedown="Arrow(-1)" @mouseup="ArrowStop()">
       <button class="btn customButton">
         <div class="arrow"></div>
         <div class="left"></div>
       </button>
     </div>
-    <div class="right-arrow">
+
+    <div class="right-arrow" @mousedown="Arrow(1)" @mouseup="ArrowStop()">
       <button class="btn customButton">
         <div class="arrow"></div>
         <div class="right"></div>
@@ -95,6 +96,7 @@ export default {
     let isDown = false;
     let startX;
     let scrollLeft;
+    let interval = false;
 
     const mousedown = (e) => {
       const slider = ele[0];
@@ -122,6 +124,21 @@ export default {
       slider.scrollLeft = scrollLeft - walk;
     };
 
+    const Arrow = (pageX) => {
+      if (!interval)
+        interval = setInterval(() => {
+          const slider = ele[0];
+          startX = (startX || 0) + pageX;
+          scrollLeft = (scrollLeft || 0) + pageX;
+          slider.scrollLeft = scrollLeft * 5;
+        }, 30);
+    };
+
+    const ArrowStop = () => {
+      clearInterval(interval);
+      interval = false;
+    };
+
     return {
       data,
       onPageChanged,
@@ -129,6 +146,8 @@ export default {
       mouseup,
       mouseleave,
       mousemove,
+      Arrow,
+      ArrowStop,
       isDown,
       startX,
       scrollLeft,
