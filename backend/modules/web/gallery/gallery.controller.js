@@ -475,7 +475,7 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
                     fs.existsSync(
                         paths.join(
                             __dirname,
-                            `../../../assets/uploads/images/${path}/${
+                            `../../../assets/uploads/videos/${path}/${
                                 JSON.parse(oldFile).liveVideo
                             }`
                         )
@@ -484,7 +484,7 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
                     fs.unlinkSync(
                         paths.join(
                             __dirname,
-                            `../../../assets/uploads/images/${path}/`,
+                            `../../../assets/uploads/videos/${path}/`,
                             JSON.parse(oldFile).liveVideo
                         )
                     )
