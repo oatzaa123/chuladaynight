@@ -11,11 +11,16 @@ module.exports = {
         },
     },
     devServer: {
-        headers: { 'Access-Control-Allow-Origin': '*' },
-        proxy: 'http://localhost:5000',
-        overlay: {
-            warnings: true,
-            errors: true,
+        proxy: {
+            '/api_v1': {
+                target:
+                    process.env.NODE_ENV === 'production'
+                        ? process.env.VUE_APP_PROD_ENDPOINT
+                        : process.env.VUE_APP_LOCAL_ENDPOINT,
+                pathRewrite: { '^/api_v1': '' },
+                changeOrigin: true,
+                secure: false,
+            },
         },
     },
 }

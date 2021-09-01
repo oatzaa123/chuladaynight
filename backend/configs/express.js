@@ -7,7 +7,12 @@ import mongoSanitize from 'express-mongo-sanitize'
 import xss from 'xss-clean'
 import hpp from 'hpp'
 import './database'
+
 const app = express()
+var corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
 export default async function () {
     app.use(helmet())
@@ -20,12 +25,7 @@ export default async function () {
     })
 
     app.use('/', limiter)
-    app.use(
-        cors({
-            origin: '*',
-            optionsSuccessStatus: 200,
-        })
-    )
+    app.use(cors(corsOptions))
 
     app.use(
         fileUpload({
@@ -37,8 +37,9 @@ export default async function () {
         res.header('Access-Control-Allow-Origin', '*')
         res.header(
             'Access-Control-Allow-Headers',
-            'Origin, X-Requested-With, Content-Type, Accept'
+            'Origin, X-Requested-With, Content-Type, Accept, Authorization'
         )
+        res.header('Access-Control-Allow-Methods', 'DELETE, POST, GET, OPTIONS')
         next()
     })
 

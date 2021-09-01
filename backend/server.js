@@ -8,7 +8,7 @@ import './configs/express'
 
 const app = express()
 // (app)
-app.use('/', AppRoutes)
+app.use('/api_v1', AppRoutes)
 
 app.use(
     '/images',

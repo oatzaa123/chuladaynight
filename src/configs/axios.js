@@ -1,8 +1,10 @@
 import axios from 'axios'
 
-axios.defaults.headers.common['Access-Control-Allow-Origin'] =
-    'http://localhost:5000'
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
-axios.defaults.baseURL = 'http://localhost:5000'
+axios.defaults.baseURL =
+    process.env.NODE_ENV === 'production'
+        ? process.env.VUE_APP_PROD_ENDPOINT
+        : process.env.VUE_APP_LOCAL_ENDPOINT
 
 export default axios
