@@ -1,20 +1,21 @@
-const catchAsync = require('../../../helpers/catchAsync')
-const APIFeatures = require('../../../utils/apiFeatures')
-const ErrorHandler = require('../../../helpers/errorHandler')
-const Gallery = require('./../../models/gallery.model')
-const util = require('util')
-const fs = require('fs')
+import catchAsync from '../../../helpers/catchAsync'
+import APIFeatures from '../../../utils/apiFeatures'
+import ErrorHandler from '../../../helpers/errorHandler'
+import Gallery from './../../models/gallery.model'
+import util from 'util'
+import fs from 'fs'
+import paths from 'path'
+
 const readdir = util.promisify(fs.readdir)
 const unlink = util.promisify(fs.unlink)
 const rmdir = util.promisify(fs.rmdir)
-const paths = require('path')
-const {
+import {
     uploadFile,
     uploadVideo,
     uploadModel,
-} = require('./../../../middleware/upload')
+} from './../../../middleware/upload'
 
-exports.getGalleries = catchAsync(async (req, res, next) => {
+export const getGalleries = catchAsync(async (req, res, next) => {
     const featuresGallery = new APIFeatures(Gallery.find(), req.query)
         .filter()
         .limitFields()
@@ -32,7 +33,7 @@ exports.getGalleries = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.getGallery = catchAsync(async (req, res, next) => {
+export const getGallery = catchAsync(async (req, res, next) => {
     const { id } = req.params
     const gallery = await Gallery.findById(id)
 
@@ -50,7 +51,7 @@ exports.getGallery = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.nextGallery = catchAsync(async (req, res, next) => {
+export const nextGallery = catchAsync(async (req, res, next) => {
     const { id } = req.params
     const AllGallery = await Gallery.find()
     const gallery = AllGallery.find((item) => item._id.toString() === id)
@@ -73,7 +74,7 @@ exports.nextGallery = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.perviousGallery = catchAsync(async (req, res, next) => {
+export const perviousGallery = catchAsync(async (req, res, next) => {
     const { id } = req.params
     const AllGallery = await Gallery.find()
     const gallery = AllGallery.find((item) => item._id.toString() === id)
@@ -99,7 +100,7 @@ exports.perviousGallery = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.addGallery = catchAsync(async (req, res, next) => {
+export const addGallery = catchAsync(async (req, res, next) => {
     const {
         title_th,
         title_en,
@@ -349,7 +350,7 @@ exports.addGallery = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.updateGallery = catchAsync(async (req, res, next) => {
+export const updateGallery = catchAsync(async (req, res, next) => {
     const {
         title_th,
         title_en,
@@ -823,7 +824,7 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.deleteGallery = catchAsync(async (req, res, next) => {
+export const deleteGallery = catchAsync(async (req, res, next) => {
     const { id } = req.params
 
     const gallery = await Gallery.findById(id)

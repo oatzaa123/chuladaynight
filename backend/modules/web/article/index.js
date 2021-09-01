@@ -1,2 +1,3 @@
-const articleRoutes = require('./article.routes')
-module.exports = { articleRoutes }
+import articleRoutes from './article.routes'
+
+export { articleRoutes }

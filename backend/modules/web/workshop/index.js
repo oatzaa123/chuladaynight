@@ -1,2 +1,2 @@
-const workshopRoutes = require('./workshop.routes')
-module.exports = { workshopRoutes }
+import workshopRoutes from './workshop.routes'
+export { workshopRoutes }

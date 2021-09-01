@@ -1,15 +1,15 @@
-const express = require('express')
+import express from 'express'
 const router = express.Router()
-const {
+import {
     getArticles,
     getArticle,
     addArticle,
     updateArticle,
     deleteArticle,
-} = require('./article.controller')
+} from './article.controller'
 
 router.route('/').get(getArticles).post(addArticle)
 
 router.route('/:id').get(getArticle).put(updateArticle).delete(deleteArticle)
 
-module.exports = router
+export default router

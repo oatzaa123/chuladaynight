@@ -1,14 +1,14 @@
-const catchAsync = require('../../../helpers/catchAsync')
-const APIFeatures = require('../../../utils/apiFeatures')
-const ErrorHandler = require('../../../helpers/errorHandler')
-const Article = require('./../../models/article.model')
-const { uploadFile } = require('./../../../middleware/upload')
-const fs = require('fs')
-const paths = require('path')
-const util = require('util')
+import catchAsync from '../../../helpers/catchAsync'
+import APIFeatures from '../../../utils/apiFeatures'
+import ErrorHandler from '../../../helpers/errorHandler'
+import Article from './../../models/article.model'
+import { uploadFile } from './../../../middleware/upload'
+import fs from 'fs'
+import paths from 'path'
+import util from 'util'
 const unlink = util.promisify(fs.unlink)
 
-exports.getArticles = catchAsync(async (req, res, next) => {
+export const getArticles = catchAsync(async (req, res, next) => {
     const featuresArticle = new APIFeatures(Article.find(), req.query)
         .filter()
         .limitFields()
@@ -24,7 +24,7 @@ exports.getArticles = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.getArticle = catchAsync(async (req, res, next) => {
+export const getArticle = catchAsync(async (req, res, next) => {
     const { id } = req.params
     const article = await Article.findById(id)
 
@@ -38,7 +38,7 @@ exports.getArticle = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.addArticle = catchAsync(async (req, res, next) => {
+export const addArticle = catchAsync(async (req, res, next) => {
     let coverImageName
     const { path } = req.body
 
@@ -70,7 +70,7 @@ exports.addArticle = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.updateArticle = catchAsync(async (req, res, next) => {
+export const updateArticle = catchAsync(async (req, res, next) => {
     let coverImageName
     const { id } = req.params
     const {
@@ -136,7 +136,7 @@ exports.updateArticle = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.deleteArticle = catchAsync(async (req, res, next) => {
+export const deleteArticle = catchAsync(async (req, res, next) => {
     const { id } = req.params
 
     const article = await Article.findById(id)

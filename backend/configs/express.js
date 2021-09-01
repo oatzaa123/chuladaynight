@@ -1,14 +1,15 @@
-const express = require('express')
-const cors = require('cors')
-const fileUpload = require('express-fileupload')
-const rateLimit = require('express-rate-limit')
-const helmet = require('helmet')
-const mongoSanitize = require('express-mongo-sanitize')
-const xss = require('xss-clean')
-const hpp = require('hpp')
+import express from 'express'
+import cors from 'cors'
+import fileUpload from 'express-fileupload'
+import rateLimit from 'express-rate-limit'
+import helmet from 'helmet'
+import mongoSanitize from 'express-mongo-sanitize'
+import xss from 'xss-clean'
+import hpp from 'hpp'
+import './database'
+const app = express()
 
-module.exports = async (app) => {
-    require('./database')
+export default async function () {
     app.use(helmet())
 
     const limiter = rateLimit({
@@ -18,8 +19,13 @@ module.exports = async (app) => {
             'Too many requests from this IP, please try again in an minutes!',
     })
 
-    app.use('/api', limiter)
-    app.use(cors())
+    app.use('/', limiter)
+    app.use(
+        cors({
+            origin: '*',
+            optionsSuccessStatus: 200,
+        })
+    )
 
     app.use(
         fileUpload({

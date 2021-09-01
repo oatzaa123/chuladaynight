@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const configs = require('./app')
+import mongoose from 'mongoose'
+import configs from './app'
 
 const DB = configs.mongodbUri
 const database = {
@@ -15,4 +15,4 @@ const database = {
     },
 }
 
-module.exports = database.mongoDB()
+export default database.mongoDB()

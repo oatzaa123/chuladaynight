@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const workshopSchema = mongoose.Schema({
     coverImage: { path: String, name: String },
@@ -32,4 +32,4 @@ const workshopSchema = mongoose.Schema({
 
 const WorkShop = mongoose.model('WorkShop', workshopSchema)
 
-module.exports = WorkShop
+export default WorkShop

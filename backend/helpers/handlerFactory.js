@@ -1,10 +1,10 @@
-const config = require('../config')
+import config from '../config'
 
-const catchAsync = require('./catchAsync')
-const ErrorHandler = require('../utils/errorHandler')
-const APIFeatures = require('../utils/apiFeatures')
+import catchAsync from './catchAsync'
+import ErrorHandler from '../utils/errorHandler'
+import APIFeatures from '../utils/apiFeatures'
 
-exports.getOne = (Model, popOptions) =>
+export const getOne = (Model, popOptions) =>
     catchAsync(async (req, res, next) => {
         let query = Model.findById(req.params.id)
         if (popOptions) query = query.populate(popOptions)
@@ -20,7 +20,7 @@ exports.getOne = (Model, popOptions) =>
         })
     })
 
-exports.getAll = (Model) =>
+export const getAll = (Model) =>
     catchAsync(async (req, res, next) => {
         const filter = {}
 
@@ -51,7 +51,7 @@ exports.getAll = (Model) =>
         })
     })
 
-exports.deleteOne = (Model) =>
+export const deleteOne = (Model) =>
     catchAsync(async (req, res, next) => {
         const doc = await Model.findByIdAndDelete(req.params.id)
 
@@ -65,7 +65,7 @@ exports.deleteOne = (Model) =>
         })
     })
 
-exports.updateOne = (Model) =>
+export const updateOne = (Model) =>
     catchAsync(async (req, res, next) => {
         const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
@@ -82,7 +82,7 @@ exports.updateOne = (Model) =>
         })
     })
 
-exports.createOne = (Model) =>
+export const createOne = (Model) =>
     catchAsync(async (req, res, next) => {
         const doc = await Model.create(req.body)
 

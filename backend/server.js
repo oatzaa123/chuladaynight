@@ -1,14 +1,14 @@
-const express = require('express')
-const path = require('path')
-const configs = require('./configs/app')
-const ErrorHandler = require('./helpers/errorHandler')
-const globalErrorHandler = require('./helpers/errorController')
-const AppRoutes = require('./modules/web/index')
+import express from 'express'
+import path from 'path'
+import configs from './configs/app'
+import ErrorHandler from './helpers/errorHandler'
+import globalErrorHandler from './helpers/errorController'
+import AppRoutes from './modules/web/index'
+import './configs/express'
 
 const app = express()
-
-require('./configs/express')(app)
-app.use('/api', AppRoutes)
+// (app)
+app.use('/', AppRoutes)
 
 app.use(
     '/images',

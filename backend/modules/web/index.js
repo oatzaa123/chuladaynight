@@ -1,8 +1,8 @@
-const express = require('express')
-const { galleryRoutes } = require('./gallery/index')
-const { workshopRoutes } = require('./workshop/index')
-const { articleRoutes } = require('./article/index')
-const { newsRoutes } = require('./news/index')
+import express from 'express'
+import { galleryRoutes } from './gallery/index'
+import { workshopRoutes } from './workshop/index'
+import { articleRoutes } from './article/index'
+import { newsRoutes } from './news/index'
 
 const router = express.Router()
 
@@ -11,4 +11,4 @@ router.use('/workshop', workshopRoutes)
 router.use('/article', articleRoutes)
 router.use('/news', newsRoutes)
 
-module.exports = router
+export default router

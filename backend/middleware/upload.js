@@ -1,8 +1,8 @@
-const path = require('path')
-const sharp = require('sharp')
-const fs = require('fs')
+import path from 'path'
+import sharp from 'sharp'
+import fs from 'fs'
 
-const uploadFile = async (file, pathFolder) => {
+export const uploadFile = async (file, pathFolder) => {
     const { mimetype, name } = await file
     if (
         ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'].indexOf(
@@ -48,7 +48,7 @@ const uploadFile = async (file, pathFolder) => {
     return imageName
 }
 
-const uploadVideo = async (file, pathFolder) => {
+export const uploadVideo = async (file, pathFolder) => {
     const { mimetype, name } = await file
     if (['video/mp4', 'video/x-matroska'].indexOf(mimetype) < 0) {
         return false
@@ -81,7 +81,7 @@ const uploadVideo = async (file, pathFolder) => {
     return videoName
 }
 
-const uploadModel = async (file, pathFolder) => {
+export const uploadModel = async (file, pathFolder) => {
     const { mimetype, name } = await file
     if (['model/glb', 'model/gltf-binary'].indexOf(mimetype) < 0) {
         return false
@@ -113,5 +113,3 @@ const uploadModel = async (file, pathFolder) => {
 
     return modelName
 }
-
-module.exports = { uploadFile, uploadVideo, uploadModel }

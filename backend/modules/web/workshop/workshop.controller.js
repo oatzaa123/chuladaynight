@@ -1,14 +1,14 @@
-const catchAsync = require('../../../helpers/catchAsync')
-const APIFeatures = require('../../../utils/apiFeatures')
-const ErrorHandler = require('../../../helpers/errorHandler')
-const Workshop = require('./../../models/workshop.model')
-const { uploadFile } = require('./../../../middleware/upload')
-const paths = require('path')
-const fs = require('fs')
-const util = require('util')
+import catchAsync from '../../../helpers/catchAsync'
+import APIFeatures from '../../../utils/apiFeatures'
+import ErrorHandler from '../../../helpers/errorHandler'
+import Workshop from './../../models/workshop.model'
+import { uploadFile } from './../../../middleware/upload'
+import paths from 'path'
+import fs from 'fs'
+import util from 'util'
 const unlink = util.promisify(fs.unlink)
 
-exports.getWorkshops = catchAsync(async (req, res, next) => {
+export const getWorkshops = catchAsync(async (req, res, next) => {
     const featuresWorkshop = new APIFeatures(Workshop.find(), req.query)
         .filter()
         .limitFields()
@@ -25,7 +25,7 @@ exports.getWorkshops = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.getWorkshop = catchAsync(async (req, res, next) => {
+export const getWorkshop = catchAsync(async (req, res, next) => {
     const { id } = req.params
     const workshop = await Workshop.findById(id)
 
@@ -39,7 +39,7 @@ exports.getWorkshop = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.addWorkshop = catchAsync(async (req, res, next) => {
+export const addWorkshop = catchAsync(async (req, res, next) => {
     let coverImageName, imageName
     const { contact, path } = req.body
 
@@ -93,7 +93,7 @@ exports.addWorkshop = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.updateWorkshop = async (req, res, next) => {
+export const updateWorkshop = async (req, res, next) => {
     const { id } = req.params
     const {
         title_th,
@@ -209,7 +209,7 @@ exports.updateWorkshop = async (req, res, next) => {
     })
 }
 
-exports.deleteWorkshop = catchAsync(async (req, res, next) => {
+export const deleteWorkshop = catchAsync(async (req, res, next) => {
     const { id } = req.params
 
     const workshop = await Workshop.findById(id)

@@ -1,6 +1,6 @@
-const express = require('express')
+import express from 'express'
 const router = express.Router()
-const {
+import {
     getGalleries,
     getGallery,
     addGallery,
@@ -8,7 +8,7 @@ const {
     perviousGallery,
     updateGallery,
     deleteGallery,
-} = require('./gallery.controller')
+} from './gallery.controller'
 
 router.route('/').get(getGalleries).post(addGallery)
 
@@ -16,4 +16,4 @@ router.route('/:id').get(getGallery).put(updateGallery).delete(deleteGallery)
 router.route('/:id/nextGallery').get(nextGallery)
 router.route('/:id/perviousGallery').get(perviousGallery)
 
-module.exports = router
+export default router

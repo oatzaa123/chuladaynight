@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const newsSchema = mongoose.Schema({
     title_th: { type: String, required: [true, 'title is not be empty'] },
@@ -30,4 +30,4 @@ const newsSchema = mongoose.Schema({
 
 const News = mongoose.model('News', newsSchema)
 
-module.exports = News
+export default News

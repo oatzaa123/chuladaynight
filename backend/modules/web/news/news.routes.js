@@ -1,6 +1,6 @@
-const express = require('express')
+import express from 'express'
 const router = express.Router()
-const {
+import {
     getNews,
     getOneNews,
     addNews,
@@ -8,7 +8,7 @@ const {
     perviousNews,
     updateNews,
     deleteNews,
-} = require('./news.controller')
+} from './news.controller'
 
 router.route('/').get(getNews).post(addNews)
 
@@ -16,4 +16,4 @@ router.route('/:id').get(getOneNews).put(updateNews).delete(deleteNews)
 router.route('/:id/nextNews').get(nextNews)
 router.route('/:id/perviousNews').get(perviousNews)
 
-module.exports = router
+export default router

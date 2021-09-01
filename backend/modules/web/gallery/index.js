@@ -1,2 +1,2 @@
-const galleryRoutes = require('./gallery.routes')
-module.exports = { galleryRoutes }
+import galleryRoutes from './gallery.routes'
+export { galleryRoutes }

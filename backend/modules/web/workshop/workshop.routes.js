@@ -1,15 +1,15 @@
-const express = require('express')
+import express from 'express'
 const router = express.Router()
-const {
+import {
     getWorkshops,
     getWorkshop,
     addWorkshop,
     updateWorkshop,
     deleteWorkshop,
-} = require('./workshop.controller')
+} from './workshop.controller'
 
 router.route('/').get(getWorkshops).post(addWorkshop)
 
 router.route('/:id').get(getWorkshop).put(updateWorkshop).delete(deleteWorkshop)
 
-module.exports = router
+export default router

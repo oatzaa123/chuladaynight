@@ -1,2 +1,2 @@
-const newsRoutes = require('./news.routes')
-module.exports = { newsRoutes }
+import newsRoutes from './news.routes'
+export { newsRoutes }

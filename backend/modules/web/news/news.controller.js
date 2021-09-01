@@ -1,16 +1,14 @@
-const catchAsync = require('../../../helpers/catchAsync')
-const APIFeatures = require('../../../utils/apiFeatures')
-const ErrorHandler = require('../../../helpers/errorHandler')
-const News = require('./../../models/news.model')
-const { uploadFile } = require('./../../../middleware/upload')
-const util = require('util')
-const fs = require('fs')
-const readdir = util.promisify(fs.readdir)
+import catchAsync from '../../../helpers/catchAsync'
+import APIFeatures from '../../../utils/apiFeatures'
+import ErrorHandler from '../../../helpers/errorHandler'
+import News from './../../models/news.model'
+import { uploadFile } from './../../../middleware/upload'
+import util from 'util'
+import fs from 'fs'
+import paths from 'path'
 const unlink = util.promisify(fs.unlink)
-const rmdir = util.promisify(fs.rmdir)
-const paths = require('path')
 
-exports.getNews = catchAsync(async (req, res, next) => {
+export const getNews = catchAsync(async (req, res, next) => {
     const featuresNews = new APIFeatures(News.find(), req.query)
         .filter()
         .limitFields()
@@ -31,7 +29,7 @@ exports.getNews = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.getOneNews = catchAsync(async (req, res, next) => {
+export const getOneNews = catchAsync(async (req, res, next) => {
     const { id } = req.params
     const news = await News.findById(id)
 
@@ -45,7 +43,7 @@ exports.getOneNews = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.nextNews = catchAsync(async (req, res, next) => {
+export const nextNews = catchAsync(async (req, res, next) => {
     const { id } = req.params
     const AllNews = await News.find()
     const news = AllNews.find((item) => item._id.toString() === id)
@@ -66,7 +64,7 @@ exports.nextNews = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.perviousNews = catchAsync(async (req, res, next) => {
+export const perviousNews = catchAsync(async (req, res, next) => {
     const { id } = req.params
     const AllNews = await News.find()
     const news = AllNews.find((item) => item._id.toString() === id)
@@ -92,7 +90,7 @@ exports.perviousNews = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.addNews = catchAsync(async (req, res, next) => {
+export const addNews = catchAsync(async (req, res, next) => {
     const { title_th, title_en, path, description } = req.body
     const contentImages = []
     let coverImageName
@@ -173,7 +171,7 @@ exports.addNews = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.updateNews = catchAsync(async (req, res, next) => {
+export const updateNews = catchAsync(async (req, res, next) => {
     const { id } = req.params
     const { title_th, title_en, path, description, oldFile } = req.body
     const contentImages = []
@@ -299,7 +297,7 @@ exports.updateNews = catchAsync(async (req, res, next) => {
     })
 })
 
-exports.deleteNews = catchAsync(async (req, res, next) => {
+export const deleteNews = catchAsync(async (req, res, next) => {
     const { id } = req.params
 
     const news = await News.findById(id)

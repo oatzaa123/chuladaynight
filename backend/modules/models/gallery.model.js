@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const gallerySchema = mongoose.Schema({
     title_th: { type: String, required: [true, 'title is not be empty'] },
@@ -71,4 +71,4 @@ const gallerySchema = mongoose.Schema({
 
 const Gallery = mongoose.model('Gallery', gallerySchema)
 
-module.exports = Gallery
+export default Gallery
