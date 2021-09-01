@@ -8,7 +8,7 @@ const AppRoutes = require('./modules/web/index')
 const app = express()
 
 require('./configs/express')(app)
-app.use('/api', AppRoutes)
+app.use('/api_v1', AppRoutes)
 
 app.use(
     '/images',

@@ -95,7 +95,9 @@ export default {
         }
 
         const getImage = (imageName, imagePath) => {
-            return `${process.env.VUE_APP_PATH_IMAGE}/${imagePath}/${imageName}`
+            return process.env.NODE_ENV === 'production'
+                ? `${process.env.VUE_APP_PATH_IMAGE}/${imagePath}/${imageName}`
+                : `${process.env.VUE_APP_PATH_IMAGE_LOCAL}/${imagePath}/${imageName}`
         }
 
         const slideOptions = ref({

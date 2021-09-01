@@ -1,7 +1,10 @@
-import axios from "axios";
+import axios from 'axios'
 
-axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
-axios.defaults.baseURL = "http://localhost:5000/api";
+axios.defaults.baseURL =
+    process.env.NODE_ENV === 'production'
+        ? process.env.VUE_APP_PROD_ENDPOINT
+        : process.env.VUE_APP_LOCAL_ENDPOINT
 
-export default axios;
+export default axios

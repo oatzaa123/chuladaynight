@@ -18,7 +18,7 @@ module.exports = async (app) => {
             'Too many requests from this IP, please try again in an minutes!',
     })
 
-    app.use('/api', limiter)
+    app.use('/api_v1', limiter)
     app.use(cors())
 
     app.use(

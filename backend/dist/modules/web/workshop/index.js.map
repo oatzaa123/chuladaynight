@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../modules/web/workshop/index.js"],"names":[],"mappings":";;;;;;;;;;;;;;AAAA","sourcesContent":["import workshopRoutes from './workshop.routes'\r\nexport { workshopRoutes }\r\n"],"file":"index.js"}

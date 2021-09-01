@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../modules/web/news/index.js"],"names":[],"mappings":";;;;;;;;;;;;;;AAAA","sourcesContent":["import newsRoutes from './news.routes'\r\nexport { newsRoutes }\r\n"],"file":"index.js"}
