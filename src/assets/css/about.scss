@@ -190,3 +190,63 @@ $urlImage: '../assets/images';
         }
     }
 }
+
+@media screen and (max-width: 1024px) {
+    #about {
+        .about-description {
+            .timeline {
+                .timeline-item {
+                    div:nth-child(4) {
+                        .title {
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #about {
+        justify-content: center;
+        .logo-block {
+            --bs-gutter-x: 1.5rem;
+            --bs-gutter-y: 0;
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: calc(var(--bs-gutter-y) * -1);
+            margin-right: calc(var(--bs-gutter-x) * -0.5);
+            margin-left: calc(var(--bs-gutter-x) * -0.5);
+            .left {
+                justify-content: center;
+                width: 100%;
+                flex: 0 0 auto;
+                width: 100%;
+            }
+            .right {
+                width: 100%;
+                flex: 0 0 auto;
+                width: 100%;
+                .title {
+                    text-align: center;
+                }
+                .description {
+                    text-align: center;
+                    max-width: none;
+                }
+            }
+        }
+        .about-description {
+            .timeline {
+                .timeline-item {
+                    div:nth-child(4) {
+                        .title {
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

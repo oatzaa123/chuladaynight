@@ -161,6 +161,7 @@ export default createStore({
             },
         ],
         backgroundImage: null,
+        isAuthenticated: localStorage.getItem('isAuthenticated') || false,
     },
     mutations: {
         setRangeValue: (state, payload) => {
@@ -171,6 +172,9 @@ export default createStore({
         },
         setBackgroundImage: (state, payload) => {
             state.backgroundImage = payload
+        },
+        setIsAuthenticated: (state, payload) => {
+            state.isAuthenticated = payload
         },
     },
     actions: {},

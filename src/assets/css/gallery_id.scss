@@ -313,3 +313,28 @@
         }
     }
 }
+
+@media screen and (max-width: 1440px) {
+    .main-gallery-id {
+        .container-gallery {
+            .title-sub-gallery {
+                .text-title {
+                    font-size: 10px;
+                    .d-flex {
+                        display: flex !important;
+                        justify-content: flex-end;
+                    }
+                    .views-count {
+                        margin: 10px 0;
+                        text-align: right;
+                    }
+                }
+            }
+            .gallery-footer {
+                .footer-description {
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+}

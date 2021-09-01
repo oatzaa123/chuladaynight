@@ -4,7 +4,7 @@
             <div class="group-title">
                 <sup class="sup"><p>Gallery</p></sup>
                 <h1 class="customText">DIGITAL ART</h1>
-                <sub class="sub"><h5>SCULTURE</h5></sub>
+                <sub class="sub"><h5>SCULPTURE</h5></sub>
             </div>
         </div>
         <div class="content" v-if="data.Gallery">

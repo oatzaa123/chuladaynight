@@ -24,7 +24,7 @@
         <div class="container-gallery">
             <div class="title-sub-gallery">
                 <div class="text-title row">
-                    <div class="col-12 col-md-9">
+                    <div class="col-xl-9 col-md-12 col-sm-12">
                         <p>
                             {{
                                 $i18n.locale === 'th'
@@ -33,7 +33,7 @@
                             }}
                         </p>
                     </div>
-                    <div class="col-6 col-md-3">
+                    <div class="col-xl-3 col-md-12 col-sm-12">
                         <div class="d-flex mb-auto">
                             <div class="live" @click="isOpen = !isOpen">
                                 <span
