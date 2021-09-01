@@ -10,7 +10,7 @@ import './database'
 
 const app = express()
 var corsOptions = {
-    origin: '*',
+    origin: 'http://localhost:5000/api_v1',
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
@@ -24,7 +24,7 @@ export default async function () {
             'Too many requests from this IP, please try again in an minutes!',
     })
 
-    app.use('/', limiter)
+    app.use('/api_v1', limiter)
     app.use(cors(corsOptions))
 
     app.use(
