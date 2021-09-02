@@ -95,7 +95,7 @@ export default {
         }
 
         const getImage = (imageName, imagePath) => {
-            return process.env.NODE_ENV === 'production'
+            return process.env.NODE_ENV.trim() === 'production'
                 ? `${process.env.VUE_APP_PATH_IMAGE}/${imagePath}/${imageName}`
                 : `${process.env.VUE_APP_PATH_IMAGE_LOCAL}/${imagePath}/${imageName}`
         }

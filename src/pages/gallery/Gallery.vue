@@ -79,7 +79,7 @@
                                         : item.title_en
                                 }}
                             </p>
-                            <div class="sub-text">
+                            <div class="sub-text" v-if="item.author">
                                 <p>
                                     <img
                                         :src="
@@ -127,6 +127,7 @@ export default {
 
         try {
             getAll()
+            console.log(data)
         } catch (error) {
             throw new Error(errorMessage)
         }

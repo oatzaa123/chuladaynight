@@ -18,6 +18,7 @@ export default {
     components: { Auth },
     setup() {
         provide('globalStore', globalStore)
+        console.log(process.env.NODE_ENV)
     },
 }
 </script>

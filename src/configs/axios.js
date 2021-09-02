@@ -2,9 +2,6 @@ import axios from 'axios'
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
-axios.defaults.baseURL =
-    process.env.NODE_ENV.trim() === 'production'
-        ? process.env.VUE_APP_PROD_ENDPOINT
-        : process.env.VUE_APP_LOCAL_ENDPOINT
+axios.defaults.baseURL = 'https://www.chulaartpark.art/api_v1'
 
 export default axios

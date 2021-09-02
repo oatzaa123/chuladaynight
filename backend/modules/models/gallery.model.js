@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const gallerySchema = mongoose.Schema({
-    title_th: { type: String, required: [true, 'title is not be empty'] },
+    title_th: { type: String },
     title_en: { type: String },
     author: {
         name_th: {

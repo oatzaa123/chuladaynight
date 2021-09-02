@@ -11,17 +11,17 @@ require('./configs/express')(app)
 app.use('/api_v1', AppRoutes)
 
 app.use(
-    '/images',
+    '/api_v1/images',
     express.static(path.join(__dirname, './assets/uploads/images'))
 )
 
 app.use(
-    '/videos',
+    '/api_v1/videos',
     express.static(path.join(__dirname, './assets/uploads/videos'))
 )
 
 app.use(
-    '/models',
+    '/api_v1/models',
     express.static(path.join(__dirname, './assets/uploads/models'))
 )
 
