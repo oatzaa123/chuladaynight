@@ -133,9 +133,7 @@ export default {
         }
 
         const getImage = (imageName, imagePath) => {
-            return process.env.NODE_ENV === 'production'
-                ? `${process.env.VUE_APP_PATH_IMAGE}/${imagePath}/${imageName}`
-                : `${process.env.VUE_APP_PATH_IMAGE_LOCAL}/${imagePath}/${imageName}`
+            return `${process.env.VUE_APP_PATH_IMAGE}/${imagePath}/${imageName}`
         }
 
         const position = ref(0)
