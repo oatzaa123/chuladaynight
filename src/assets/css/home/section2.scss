@@ -133,3 +133,26 @@
         }
     }
 }
+
+@media screen and (max-width: 1024px) {
+    .section2 {
+        .content {
+            .left-top {
+                top: 11.5%;
+                left: 0%;
+            }
+            .right-top {
+                top: 11.5%;
+                right: 0%;
+            }
+            .left-bottom {
+                bottom: 0%;
+                left: 0%;
+            }
+            .right-bottom {
+                bottom: 0%;
+                right: 0%;
+            }
+        }
+    }
+}

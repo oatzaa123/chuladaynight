@@ -587,3 +587,25 @@ $FSnightActive: 54px;
         height: 10px;
     }
 }
+
+@media screen and (max-width: 1024px) {
+    .home {
+        .section1 {
+            background-size: cover;
+            &.bgnight {
+                background-size: cover;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .home {
+        .section1 {
+            background-size: cover;
+            &.bgnight {
+                background-size: cover;
+            }
+        }
+    }
+}
