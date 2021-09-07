@@ -13,7 +13,7 @@
             ></div>
             <div class="lang">
                 <div @click.stop="showLang = !showLang">
-                    <span>{{ lang }}</span>
+                    <span>{{ lang.toUpperCase() }}</span>
                 </div>
                 <!-- &nbsp;|&nbsp;
                 <div @click="saveLocale('en')">
