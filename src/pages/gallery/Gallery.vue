@@ -120,7 +120,7 @@
             </div>
         </div>
     </div>
-    <FooterContacts :style="{ color: '#fff' }" />
+    <FooterContacts />
 </template>
 
 <script>
@@ -179,6 +179,7 @@ export default {
         const goto = (id) => {
             document.getElementById(id).scrollIntoView({
                 behavior: 'smooth',
+                block: 'end',
             })
 
             position.value = +id.split(' ')[1]
