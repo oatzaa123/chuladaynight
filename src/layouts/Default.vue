@@ -92,7 +92,7 @@ export default {
     height: 100%;
     .menu {
         position: absolute;
-        right: 6%;
+        right: 5%;
         cursor: pointer;
         z-index: 100;
     }
@@ -105,6 +105,13 @@ export default {
     .default {
         .menu {
             right: 3%;
+        }
+    }
+}
+@media screen and (max-width: 768px) {
+    .default {
+        .menu {
+            right: 0;
         }
     }
 }
