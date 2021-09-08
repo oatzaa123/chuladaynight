@@ -6,11 +6,11 @@
             />
         </div>
         <div class="text">
-            <div>Tell us what</div>
-            <div>you think</div>
+            <div>{{ $t('section7') }}</div>
+            <div>{{ $t('section7_2') }}</div>
         </div>
         <div class="button">
-            <button class="btn" @click="link">แสดงความคิดเห็น</button>
+            <button class="btn" @click="link">{{ $t('section7_btn') }}</button>
         </div>
     </div>
 </template>

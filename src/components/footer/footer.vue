@@ -28,11 +28,11 @@
             <div class="contact">
                 <div class="contact-group">
                     <div class="box-1">
-                        <div>GridWhiz (Thailand) Co. Ltd. (Headquarters)</div>
+                        <div>{{ $t('footer_company_name') }}</div>
                         <div>
-                            184/185 Forum Tower 28th Fl. Ratchadapisek Rd.
+                            {{ $t('footer_company_address') }}
                         </div>
-                        <div>Huai Khwang, Bangkok 10310</div>
+                        <div>{{ $t('footer_company_address2') }}</div>
                     </div>
                     <div class="box-2">
                         <div class="icon">
@@ -44,7 +44,7 @@
                             />
                         </div>
                         <div>
-                            <div>You can found me at</div>
+                            <div>{{ $t('footer_description4') }}</div>
                             <div style="color: #1ba7ff">
                                 Google art & Culture
                             </div>
@@ -63,8 +63,8 @@
                 </div>
                 <div class="contact-group">
                     <div class="box-1">
-                        <div>Tel: +66 2061 9519 Fax: +66 2061 9519</div>
-                        <div>Hot-line Support Tel: +66 8 3777 8822</div>
+                        <div>{{ $t('footer_company_address3') }}</div>
+                        <div>{{ $t('footer_company_address4') }}</div>
                     </div>
                     <div class="box-2"></div>
                     <div class="box-3"></div>

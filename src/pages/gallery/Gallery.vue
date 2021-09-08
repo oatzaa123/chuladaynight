@@ -30,19 +30,21 @@
                     >
                         <img
                             v-if="position === index"
+                            @click="goto(`pin ${index}`)"
                             :src="
                                 require('@/assets/images/gallery/Group 295.svg')
                             "
                             class="pin pinn"
-                            :class="position"
+                            :class="[position, { animate: animate }]"
                         />
                         <img
                             v-else
+                            @click="goto(`pin ${index}`)"
                             :src="
                                 require('@/assets/images/gallery/Group 295 (1).svg')
                             "
                             class="pin"
-                            :class="position"
+                            :class="[position, { animate: animate }]"
                         />
                     </template>
                     <img
@@ -68,8 +70,13 @@
                         "
                         width="570"
                         height="336"
+                        :id="`pin ${index}`"
                     />
-                    <div v-else class="default-coverImage"></div>
+                    <div
+                        v-else
+                        :id="`pin ${index}`"
+                        class="default-coverImage"
+                    ></div>
                     <div class="overlay">
                         <div class="text">
                             <p class="text-title">
@@ -127,7 +134,6 @@ export default {
 
         try {
             getAll()
-            console.log(data)
         } catch (error) {
             throw new Error(errorMessage)
         }
@@ -137,10 +143,12 @@ export default {
         }
 
         const position = ref(0)
+        const animate = ref(false)
         const router = useRouter()
 
         const hoverImage = (index) => {
             position.value = index
+            animate.value = true
         }
 
         const onHandleClick = (id) => {
@@ -163,6 +171,14 @@ export default {
 
         window.addEventListener('resize', setHiehgt)
 
+        const goto = (id) => {
+            document.getElementById(id).scrollIntoView({
+                behavior: 'smooth',
+            })
+
+            position.value = +id.split(' ')[1]
+        }
+
         onMounted(() => {
             setHiehgt
         })
@@ -174,6 +190,8 @@ export default {
             onHandleClick,
             getImage,
             contentView,
+            goto,
+            animate,
         }
     },
 }

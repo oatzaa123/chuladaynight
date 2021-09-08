@@ -74,6 +74,24 @@
                         &.changeColor {
                             background-color: #fff;
                             opacity: 40%;
+                            animation: live 1.4s infinite ease-in-out;
+                            animation-fill-mode: both;
+                            animation-delay: 0.42s;
+                            @keyframes live {
+                                0%,
+                                80%,
+                                100% {
+                                    background-color: red;
+                                    opacity: 1;
+                                    transform: scale(0.6);
+                                    -webkit-transform: scale(0.6);
+                                }
+                                40% {
+                                    background-color: red;
+                                    transform: scale(1);
+                                    -webkit-transform: scale(1);
+                                }
+                            }
                         }
                     }
                     .dropdown {
@@ -156,28 +174,26 @@
                         }
                     }
                 }
-                .views-count {
-                    font-size: 14px;
-                    font-family: 'Kanit-Regular';
-                    color: #fff;
-                    margin-top: 20px;
-                    text-align: end;
-                    img {
-                        cursor: default;
-                        margin-right: 5px;
-                    }
-                }
             }
             .sub-text {
                 display: flex;
-                justify-content: left;
-                align-items: center;
+                justify-content: space-between;
                 p:nth-child(1) {
                     margin-right: 25px;
                     color: #ba1bff;
                 }
                 p:nth-child(2) {
                     color: #ffffff;
+                }
+                .views-count {
+                    font-size: 14px;
+                    font-family: 'Kanit-Regular';
+                    color: #fff;
+                    text-align: end;
+                    img {
+                        cursor: default;
+                        margin-right: 5px;
+                    }
                 }
             }
             .hover-img {
@@ -189,7 +205,7 @@
         .live-view,
         .showreel {
             .showreel-text {
-                padding: 20px;
+                margin: 25px 40px;
                 color: #ba1bff;
             }
             video {
@@ -201,6 +217,7 @@
                 img {
                     height: 100%;
                     max-width: 100%;
+                    max-height: 520px;
                     object-fit: scale-down;
                     // height: 500px;
                 }
@@ -323,6 +340,36 @@
                     .d-flex {
                         display: flex !important;
                         justify-content: flex-end;
+                    }
+                    .views-count {
+                        margin: 10px 0;
+                        text-align: right;
+                    }
+                }
+            }
+            .gallery-footer {
+                .footer-description {
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .main-gallery-id {
+        .container-gallery {
+            .title-sub-gallery {
+                .text-title {
+                    p:nth-child(1) {
+                        font-size: 20px;
+                    }
+                    .d-flex {
+                        display: flex !important;
+                        justify-content: flex-end;
+                        .live {
+                            padding: 3px 3px;
+                        }
                     }
                     .views-count {
                         margin: 10px 0;

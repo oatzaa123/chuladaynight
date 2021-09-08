@@ -24,7 +24,7 @@
         <div class="container-gallery">
             <div class="title-sub-gallery">
                 <div class="text-title row">
-                    <div class="col-xl-9 col-md-12 col-sm-12">
+                    <div class="col-xl-9 col-md-8 col-sm-12">
                         <p>
                             {{
                                 $i18n.locale === 'th'
@@ -33,7 +33,7 @@
                             }}
                         </p>
                     </div>
-                    <div class="col-xl-3 col-md-12 col-sm-12">
+                    <div class="col-xl-3 col-md-4 col-sm-12">
                         <div class="d-flex mb-auto">
                             <div class="live" @click="isOpen = !isOpen">
                                 <span
@@ -110,38 +110,42 @@
                                 width="30"
                             />
                         </div>
-                        <div class="views-count">
-                            <img
-                                :src="
-                                    require('../../assets/images/gallery/Group 804.svg')
-                                "
-                                width="12"
-                                height="12"
-                                class="mr-3"
-                            />{{ data.countViews.toLocaleString() }} views
-                        </div>
                     </div>
                 </div>
                 <div class="sub-text">
-                    <p>
+                    <div class="d-flex">
+                        <p>
+                            <img
+                                :src="
+                                    require('../../assets/images/icons/user.png')
+                                "
+                                width="20"
+                                class="hover-img"
+                            />
+                            {{
+                                $i18n.locale === 'th'
+                                    ? data.author.name_th
+                                    : data.author.name_en
+                            }}
+                        </p>
+                        <p>
+                            {{
+                                $i18n.locale === 'th'
+                                    ? data.author.group_th
+                                    : data.author.group_en
+                            }}
+                        </p>
+                    </div>
+                    <div class="views-count">
                         <img
-                            :src="require('../../assets/images/icons/user.png')"
-                            width="20"
-                            class="hover-img"
-                        />
-                        {{
-                            $i18n.locale === 'th'
-                                ? data.author.name_th
-                                : data.author.name_en
-                        }}
-                    </p>
-                    <p>
-                        {{
-                            $i18n.locale === 'th'
-                                ? data.author.group_th
-                                : data.author.group_en
-                        }}
-                    </p>
+                            :src="
+                                require('../../assets/images/gallery/Group 804.svg')
+                            "
+                            width="12"
+                            height="12"
+                            class="mr-3"
+                        />{{ data.countViews.toLocaleString() }} views
+                    </div>
                 </div>
             </div>
             <div class="live-view" v-if="boardCast">
@@ -189,7 +193,9 @@
                     </p>
                 </div>
                 <div class="showreel" v-if="gallery.contentType === 'Video'">
-                    <div class="showreel-text">SHOWREEL</div>
+                    <div class="showreel-text">
+                        {{ $t('gallery_id_showreel') }}
+                    </div>
                     <video class="video" height="500" controls muted loop>
                         <source
                             :src="getVideo(gallery.contentValue, gallery.path)"
