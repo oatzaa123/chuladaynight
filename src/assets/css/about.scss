@@ -101,14 +101,16 @@ $urlImage: "../assets/images";
     }
     .right {
       color: white;
-      text-align: left;
+
       .title {
         font-family: "Kanit-SemiBold";
+        text-align: left;
         font-size: 36px;
         text-shadow: 0px 0px 6px #ffffff;
       }
       .description {
         max-width: 500px;
+        text-align: left;
         font-family: "Roboto-Bold";
         font-size: 12px;
       }
