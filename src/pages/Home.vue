@@ -28,9 +28,5 @@ export default {
         Section6,
         Section7,
     },
-    setup() {
-        console.log(document.querySelector('id'))
-        return {}
-    },
 }
 </script>

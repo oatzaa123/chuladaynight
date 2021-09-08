@@ -51,6 +51,10 @@ export default {
         background-color: #7948e6;
         padding: 15px 20px;
         border-radius: 32px;
+        &:hover {
+            color: #7948e6;
+            background-color: #fff;
+        }
     }
 }
 

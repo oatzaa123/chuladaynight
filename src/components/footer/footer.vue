@@ -109,6 +109,10 @@ export default {
                 border-radius: 20px;
                 width: 200px;
                 border: 2px solid #6268e9;
+                &:hover {
+                    background-color: #6268e9;
+                    color: #fff;
+                }
             }
         }
     }
