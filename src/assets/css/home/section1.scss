@@ -461,12 +461,23 @@ $FSnightActive: 54px;
     }
 
     .slide-dash {
+      // cursor: pointer;
+      // position: absolute;
+      // left: 50%;
+      // top: 0;
+      // height: 100%;
+      // width: 4px;
+      // border-right: 4px dashed grey;
+      // z-index: 3;
+
+      opacity: 0;
       cursor: pointer;
       position: absolute;
       left: 50%;
-      top: 0;
-      height: 100%;
-      width: 4px;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      height: 70px;
+      width: 70px;
       border-right: 4px dashed grey;
       z-index: 3;
     }
@@ -548,7 +559,8 @@ $FSnightActive: 54px;
 
     // 70%, 95% { top: random(100) + 0%; left: random(100) + 0%; opacity: 1; }
     // 95.1%, 100% { opacity: 0; }
-    0%,100% {
+    0%,
+    100% {
       top: random(100) + 0%;
       left: random(100) + 0%;
     }
