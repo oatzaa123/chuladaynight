@@ -120,13 +120,18 @@
             </div>
         </div>
     </div>
+    <FooterContacts :style="{ color: '#fff' }" />
 </template>
 
 <script>
 import { ref, computed, inject, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import useGallery from '@/hooks/useGallery'
+import FooterContacts from '@/components/footer/footer-contact'
 export default {
+    components: {
+        FooterContacts,
+    },
     setup() {
         const globalStore = inject('globalStore')
         const { data, getAll, errorMessage } = useGallery()
