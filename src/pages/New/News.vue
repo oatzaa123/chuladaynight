@@ -64,6 +64,7 @@
                 </div>
             </div>
         </div>
+        <FooterContacts v-show="!parent" />
     </div>
 </template>
 
@@ -76,11 +77,13 @@ import Paginate from '@/components/paginate'
 import axios from '@/configs/axios'
 import moment from 'moment'
 import ImageView from '@/components/ImageView'
+import FooterContacts from '@/components/footer/footer-contact'
 // import useAxios from '@/hooks/useAxios'
 export default {
     components: {
         Paginate,
         ImageView,
+        FooterContacts,
     },
     props: {
         limit: {
@@ -201,6 +204,10 @@ export default {
             color: #fff;
             border: 1px solid #7948e6;
             padding: 8px 15px;
+            &:hover {
+                color: #7948e6;
+                background-color: #fff;
+            }
             &::before {
                 content: '';
                 position: absolute;

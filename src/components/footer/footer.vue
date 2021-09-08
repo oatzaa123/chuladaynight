@@ -105,6 +105,7 @@ export default {
             .customButton {
                 font-family: 'Kanit-Medium';
                 color: #6268e9;
+                background-color: transparent;
                 font-size: 18px;
                 border-radius: 20px;
                 width: 200px;
