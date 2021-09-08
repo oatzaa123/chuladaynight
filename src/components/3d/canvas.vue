@@ -222,7 +222,7 @@ export default {
           camera.updateProjectionMatrix();
         }
 
-        if (root) root.rotation.y -= 0.010;
+        if (root) root.rotation.y -= 0.01;
 
         renderer.render(scene, camera);
 
