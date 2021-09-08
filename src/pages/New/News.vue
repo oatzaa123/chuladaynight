@@ -64,7 +64,9 @@
                 </div>
             </div>
         </div>
-        <FooterContacts v-show="!parent" />
+        <div v-show="!parent">
+            <FooterContacts />
+        </div>
     </div>
 </template>
 
