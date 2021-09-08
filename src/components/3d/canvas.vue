@@ -35,7 +35,7 @@ export default {
             const controls = new OrbitControls(camera, canvas)
             controls.target.set(0, 5, 0)
             controls.enableDamping = true
-            controls.enableZoom = true
+            controls.enableZoom = false
             controls.update()
 
             const scene = new THREE.Scene()
