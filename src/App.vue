@@ -2,7 +2,12 @@
     <div id="app">
         <Auth />
         <router-view v-slot="{ Component }">
-            <transition name="route" mode="out-in">
+            <transition
+                name="route"
+                mode="out-in"
+                @after-enter="afterEnter"
+                appear
+            >
                 <component :is="Component"> </component>
             </transition>
         </router-view>
@@ -16,9 +21,12 @@ import Auth from '@/components/Auth'
 export default {
     name: 'App',
     components: { Auth },
-    setup() {
+    setup(_, { emit }) {
         provide('globalStore', globalStore)
-        console.log(process.env.NODE_ENV)
+        const afterEnter = () => {
+            emit('scrollAfterEnter')
+        }
+        return { afterEnter }
     },
 }
 </script>
