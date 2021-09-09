@@ -33,6 +33,13 @@
                         }}
                     </p>
                     <p>
+                        <img
+                            :src="
+                                require('../../assets/images/icons/Path 115.svg')
+                            "
+                            width="20"
+                            class="hover-img"
+                        />
                         {{ $t('workshop_location') }}
                         {{
                             $i18n.locale === 'th'
@@ -41,8 +48,18 @@
                         }}
                     </p>
                     <p>
+                        <img
+                            :src="
+                                require('../../assets/images/icons/Group 850.svg')
+                            "
+                            width="10"
+                            class="hover-img"
+                        />
+                        &nbsp;
                         {{ $t('workshop_contact') }} <br />
-                        {{ item.contact.telephone }}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{
+                            item.contact.telephone
+                        }}
                     </p>
                 </div>
                 <div class="icon">
@@ -144,7 +161,6 @@ export default {
         }
 
         const openUrl = (url, value) => {
-            console.log(`${url}/${value}`)
             if (typeof value === 'string') {
                 window.open(`${url}/${value}`, '_blank')
             } else {
@@ -178,8 +194,9 @@ export default {
             font-size: 26;
             font-weight: bold;
         }
-        p {
-            margin-bottom: 2.5rem;
+        p:nth-child(2) {
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
         }
     }
     .icon {
@@ -194,6 +211,11 @@ export default {
             img {
                 margin: 0 10px;
                 cursor: pointer;
+            }
+            .hover-img {
+                margin: 0 10px;
+                filter: invert(19%) sepia(87%) saturate(4315%)
+                    hue-rotate(276deg) brightness(103%) contrast(108%);
             }
         }
     }

@@ -40,7 +40,7 @@ export default {
 
         return {
             Menu: computed(() => store.getters['showMenuList']),
-            saveLocale
+            saveLocale,
         }
     },
 }
@@ -68,6 +68,9 @@ export default {
         text-decoration: unset;
         &.router-link-active {
             color: #ffffff;
+        }
+        &:hover {
+            color: rgba(255, 255, 255, 1);
         }
     }
     .menu-lang {
