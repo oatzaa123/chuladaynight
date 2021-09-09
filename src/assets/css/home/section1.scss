@@ -132,7 +132,6 @@ $FSnightActive: 54px;
                     .n {
                         position: absolute;
                         right: -50px;
-                        bottom: -12px;
                         font-family: 'Savoye Regular';
                         font-weight: 100;
                         color: #1ba7ff;
@@ -143,7 +142,7 @@ $FSnightActive: 54px;
                     &.night {
                         margin-right: 10px;
                         .n {
-                            bottom: 45px;
+                            top: 22px;
                             right: -22px;
                             color: #b51bff;
                             text-shadow: 0px 0px 10px #b51bff;
@@ -505,7 +504,6 @@ $FSnightActive: 54px;
                         &.day .n {
                             font-size: calc(90px * #{nth($mediaSize, $i)});
                             right: calc(-50px * #{nth($mediaSize, $i)});
-                            top: 45px;
                         }
                         &.night .n {
                             font-size: calc(100px * #{nth($mediaSize, $i)});
