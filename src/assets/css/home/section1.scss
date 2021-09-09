@@ -69,16 +69,17 @@ $FSnightActive: 54px;
             }
         }
         .logo-block {
-            width: 80%;
+            // width: 80%;
             margin: auto;
             display: flex;
+            justify-content: center;
             position: absolute;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
             z-index: 2;
             .left {
-                width: 65%;
+                // width: 65%;
                 line-height: 1;
                 text-align: right;
                 font-weight: bold;
@@ -152,7 +153,7 @@ $FSnightActive: 54px;
                 }
             }
             .right {
-                width: 35%;
+                // width: 35%;
                 line-height: 1.55;
                 font-family: 'Kanit-Medium';
                 font-size: 17px;
@@ -483,8 +484,8 @@ $FSnightActive: 54px;
         }
     }
 
-    $media: 768px;
-    $mediaSize: 0.5;
+    $media: 768px 425px;
+    $mediaSize: 0.5 0.35;
     @for $i from 1 to length($media) + 1 {
         @media screen and (max-width: nth($media, $i)) {
             .section1 .logo-block {
