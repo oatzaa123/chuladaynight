@@ -135,5 +135,23 @@ export default {
             }
         }
     }
+    @media screen and (max-width: 426px) {
+        .content {
+            .vego-group .vego {
+                .vego-main,
+                .vego-flip {
+                    font-size: calc(70px * 0.5);
+                }
+            }
+            .description {
+                p {
+                    font-size: calc(18px * 0.5);
+                }
+                .customButton {
+                    font-size: calc(18px * 0.5);
+                }
+            }
+        }
+    }
 }
 </style>

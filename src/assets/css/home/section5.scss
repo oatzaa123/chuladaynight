@@ -1,43 +1,58 @@
 .section5 {
-  background-color: #030124;
-  min-height: 100vh;
-  padding: 3rem;
+    background-color: #030124;
+    min-height: 100vh;
+    padding: 3rem;
 
-  $media: 768px;
-  $mediaSize: 0.7;
-  .new-content-text:hover {
-    h3 {
-      text-decoration: underline;
+    $media: 768px;
+    $mediaSize: 0.7;
+    .new-content-text:hover {
+        h3 {
+            text-decoration: underline;
+        }
     }
-  }
-  @for $i from 1 to length($media) + 1 {
-    @media screen and (max-width: nth($media, $i)) {
-      .news .container {
-        h1 {
-          font-size: calc(58px * #{nth($mediaSize, $i)});
-        }
-        .new-content {
-          .new-content-text {
-            span {
-              font-size: calc(12px * #{nth($mediaSize, $i)});
+    @for $i from 1 to length($media) + 1 {
+        @media screen and (max-width: nth($media, $i)) {
+            .news .container {
+                h1 {
+                    font-size: calc(58px * #{nth($mediaSize, $i)});
+                }
+                .new-content {
+                    .new-content-text {
+                        span {
+                            font-size: calc(12px * #{nth($mediaSize, $i)});
+                        }
+                        h3 {
+                            font-size: calc(18px * #{nth($mediaSize, $i)});
+                        }
+                        p {
+                            font-size: calc(14px * #{nth($mediaSize, $i)});
+                        }
+                    }
+                    .new-img {
+                        height: calc(250px * #{nth($mediaSize, $i)});
+                        padding-bottom: calc(25px * #{nth($mediaSize, $i)});
+                        padding-right: calc(25px * #{nth($mediaSize, $i)});
+                    }
+                }
+                .btn-custom {
+                    font-size: calc(15px * #{nth($mediaSize, $i)});
+                }
             }
-            h3 {
-              font-size: calc(18px * #{nth($mediaSize, $i)});
-            }
-            p {
-              font-size: calc(14px * #{nth($mediaSize, $i)});
-            }
-          }
-          .new-img {
-            height: calc(250px * #{nth($mediaSize, $i)});
-            padding-bottom: calc(25px * #{nth($mediaSize, $i)});
-            padding-right: calc(25px * #{nth($mediaSize, $i)});
-          }
         }
-        .btn-custom {
-          font-size: calc(15px * #{nth($mediaSize, $i)});
+        @media screen and (max-width: nth(376px, $i)) {
+            .news .container {
+                h1 {
+                    font-size: calc(54px * #{nth($mediaSize, $i)});
+                }
+            }
         }
-      }
+        @media screen and (max-width: nth(321px, $i)) {
+            padding: 1rem;
+            .news .container {
+                h1 {
+                    font-size: calc(42px * #{nth($mediaSize, $i)});
+                }
+            }
+        }
     }
-  }
 }

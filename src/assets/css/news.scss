@@ -91,6 +91,17 @@
             top: 40%;
             text-shadow: none;
         }
+        @media screen and (max-width: 1024px) {
+            .n {
+                left: 34.5%;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            .n {
+                left: 34.5%;
+                font-size: 45px;
+            }
+        }
         .paginate-left {
             border-right: 2px solid #ba25ff;
             height: 200px;
@@ -100,6 +111,83 @@
         }
         .paginate-right {
             padding-left: 25px;
+        }
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .news {
+        .container {
+            .new-content {
+                .new-img {
+                    border-right: 0px solid #ba25ff;
+                    img {
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+                .new-content-text {
+                    border-left: 2px solid #ba25ff;
+                    margin-bottom: 0;
+                    &::before {
+                        top: 0;
+                    }
+                }
+            }
+            .n {
+                left: 18%;
+                font-size: 40px;
+            }
+            .paginate-left {
+                border-right: none;
+            }
+            .paginate-right {
+                padding-left: 25px;
+                border-left: 2px solid #ba25ff;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .news {
+        .container {
+            .n {
+                left: 14%;
+                font-size: 40px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 321px) {
+    .news {
+        .container {
+            .col-7 {
+                width: 100%;
+            }
+            .n {
+                left: 14%;
+                font-size: 30px;
+            }
+            .new-content {
+                .new-img {
+                    display: none;
+                }
+                .new-content-text {
+                    border: 0px solid #ba1bff;
+                    &::before {
+                        width: 0px;
+                        height: 0px;
+                        border: 0px solid #ba1bff;
+                    }
+                }
+            }
+            .paginate-right {
+                padding-left: 25px;
+                border-left: 0px solid #ba25ff;
+                text-align: center;
+            }
         }
     }
 }

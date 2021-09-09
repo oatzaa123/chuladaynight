@@ -61,9 +61,54 @@ export default {
 @media screen and (max-width: 768px) {
     .section-7 {
         .text {
-            font-size: 30px;
+            font-size: 25px;
             margin-right: 25px;
         }
+        .button .btn {
+            color: #fff;
+            font-family: 'Prompt-Bold';
+            font-size: 20px;
+            background-color: #7948e6;
+            padding: 15px 20px;
+            border-radius: 32px;
+            &:hover {
+                color: #7948e6;
+                background-color: #fff;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .section-7 {
+        .img {
+            margin-right: 15px;
+            img {
+                width: 70px;
+            }
+        }
+        .text {
+            font-size: 10px;
+            margin-right: 10px;
+        }
+        .button .btn {
+            color: #fff;
+            font-family: 'Prompt-Bold';
+            font-size: 10px;
+            background-color: #7948e6;
+            padding: 5px 10px;
+            border-radius: 32px;
+            &:hover {
+                color: #7948e6;
+                background-color: #fff;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .section-7 {
+        padding: 40px;
     }
 }
 </style>

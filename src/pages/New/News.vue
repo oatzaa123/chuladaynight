@@ -223,6 +223,15 @@ export default {
                 background: #ba1bff;
             }
         }
+        @media screen and (max-width: 321px) {
+            .btn-custom {
+                &::before {
+                    width: 0px;
+                    height: 0px;
+                    border: 0px solid #ba1bff;
+                }
+            }
+        }
     }
 }
 </style>
