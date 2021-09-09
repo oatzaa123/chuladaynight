@@ -3,40 +3,42 @@
     <div id="contact" class="container">
       <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
       <div class="row">
-        <div class="map col-6">
+        <div class="map col-md-6 col-sm-6 col-xs-12">
           <img :src="require('../assets/images/contact/map.png')" />
         </div>
-        <div class="contact-description col-6">
-          <div class="logo-block">
-            <div class="left">
-              <div class="logo">
-                <div class="title">CHULA</div>
-                <div class="sub">DIGITAL ARTS PARK</div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="contact-description">
+            <div class="logo-block">
+              <div class="left">
+                <div class="logo">
+                  <div class="title">CHULA</div>
+                  <div class="sub">DIGITAL ARTS PARK</div>
+                </div>
+                <div class="toggle" :class="{ day: !isNight, night: isNight }">
+                  <div class="day" :class="{ active: !isNight }">DAY</div>
+                  <div class="n">&</div>
+                  <div class="night" :class="{ active: isNight }">NIGHT</div>
+                </div>
               </div>
-              <div class="toggle" :class="{ day: !isNight, night: isNight }">
-                <div class="day" :class="{ active: !isNight }">DAY</div>
-                <div class="n">&</div>
-                <div class="night" :class="{ active: isNight }">NIGHT</div>
+              <div class="description">
+                <div class="title">Company contact</div>
+                <div class="company">{{ $t("footer_company_name") }}</div>
+                <div class="address">{{ $t("footer_company_address") }}</div>
+                <div class="address">{{ $t("footer_company_address2") }}</div>
               </div>
-            </div>
-            <div class="description">
-              <div class="title">Company contact</div>
-              <div class="company">{{ $t("footer_company_name") }}</div>
-              <div class="address">{{ $t("footer_company_address") }}</div>
-              <div class="address">{{ $t("footer_company_address2") }}</div>
-            </div>
-            <div class="email">
-              <div>{{ $t("footer_company_address3") }}</div>
-              <div>{{ $t("footer_company_address4") }}</div>
-            </div>
+              <div class="email">
+                <div>{{ $t("footer_company_address3") }}</div>
+                <div>{{ $t("footer_company_address4") }}</div>
+              </div>
 
-            <div class="icon-group">
-              <div
-                v-for="(item, index) in icon"
-                :key="index"
-                class="contact-icon"
-              >
-                <img :src="item.path" width="40" />
+              <div class="icon-group">
+                <div
+                  v-for="(item, index) in icon"
+                  :key="index"
+                  class="contact-icon"
+                >
+                  <img :src="item.path" width="40" />
+                </div>
               </div>
             </div>
           </div>
@@ -59,7 +61,7 @@
             ถนนพญาไท ได้แก่ สาย 27 29 36 36 ก 65 และ 501
           </div>
           <div class="description">
-            ถนนอังรีดูนังต์ ได้แก่ สาย 16 21 และ 141 
+            ถนนอังรีดูนังต์ ได้แก่ สาย 16 21 และ 141
           </div>
 
           <br />
