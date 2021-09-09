@@ -104,6 +104,7 @@ export default {
             rewind: true,
             pagination: false,
             autoplay: true,
+            pauseOnHover: false,
             gap: '1rem',
             perMove: 1,
             classes: {

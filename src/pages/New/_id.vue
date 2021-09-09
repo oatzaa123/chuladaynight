@@ -225,6 +225,10 @@ export default {
             padding: 0px 20px;
             width: 160px;
             height: 40px;
+            &:hover {
+                background-color: #ffffff;
+                color: #7948e6;
+            }
         }
     }
 }
