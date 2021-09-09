@@ -163,6 +163,9 @@
 @media screen and (max-width: 321px) {
     .news {
         .container {
+            .news-title {
+                padding-bottom: 1rem;
+            }
             .col-7 {
                 width: 100%;
             }
