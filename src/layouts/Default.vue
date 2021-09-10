@@ -108,10 +108,36 @@ export default {
         }
     }
 }
+
 @media screen and (max-width: 768px) {
     .default {
         .menu {
-            right: 0;
+            right: 2%;
+            img {
+                width: 50px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .default {
+        .menu {
+            right: 2%;
+            img {
+                width: 40px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .default {
+        .menu {
+            right: 2%;
+            img {
+                width: 35px;
+            }
         }
     }
 }

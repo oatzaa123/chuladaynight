@@ -184,3 +184,73 @@
         }
     }
 } // end .workshop
+
+@media screen and (max-width: 1024px) {
+    .workshop {
+        .workshop-title {
+            h1 {
+                font-size: 50px;
+            }
+            .n {
+                left: 57.8%;
+                font-size: 50px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .workshop {
+        .workshop-title {
+            h1 {
+                font-size: 40px;
+            }
+            .n {
+                left: 58%;
+                font-size: 40px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .workshop {
+        .workshop-title {
+            h1 {
+                font-size: 35px;
+            }
+            .n {
+                left: 64%;
+                font-size: 35px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .workshop {
+        .workshop-title {
+            h1 {
+                font-size: 30px;
+            }
+            .n {
+                left: 64%;
+                font-size: 30px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 321px) {
+    .workshop {
+        .workshop-title {
+            h1 {
+                font-size: 25px;
+            }
+            .n {
+                left: 64%;
+                font-size: 25px;
+            }
+        }
+    }
+}
