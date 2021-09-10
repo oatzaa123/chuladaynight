@@ -1,4 +1,6 @@
 .section2 {
+  $urlImage: "../../assets/images";
+
   padding: 2rem 0;
   min-height: 100vh;
   background-color: #030024;
@@ -12,80 +14,110 @@
   }
 
   .content {
+    margin-top: 50px;
     color: white;
-    display: flex;
+    // display: flex;
     min-height: 100vh;
     position: relative;
-    // .map {
-    //   height: 65vh;
-    //   position: absolute;
-    //   top: 60%;
-    //   left: 50%;
-    //   transform: translate(-50%, -50%);
-    // }
-    // .left-top,
-    // .right-top,
-    // .left-bottom,
-    // .right-bottom {
-    //   display: flex;
-    //   position: absolute;
-    //   padding: 25px;
-    //   p {
-    //     font-size: 12px;
-    //     font-family: "Roboto-Bold";
-    //     position: absolute;
-    //     bottom: 0;
-    //     z-index: 2;
-    //   }
-    //   .logo {
-    //     z-index: 2;
-    //   }
-    //   .path {
-    //     position: absolute;
-    //     z-index: 1;
-    //   }
-    // }
 
-    // .left-top {
-    //   top: 11.5%;
-    //   left: 7%;
-    //   p {
-    //     bottom: -10px;
-    //   }
-    //   .path {
-    //     top: 36%;
-    //     left: 48%;
-    //     transform: translate(-33%, 0%);
-    //   }
-    // }
+    .map {
+        width: 50%;
+        position: absolute;
+        top: 47%;
+        left: 55%;
+        transform: translate(-50%, -50%);
+    }
 
-    // .right-top {
-    //   top: 11.5%;
-    //   right: 9%;
-    //   .path {
-    //     top: 38%;
-    //     left: 48%;
-    //     transform: translate(-50%, -12%);
-    //   }
-    // }
-    // .left-bottom {
-    //   bottom: 8%;
-    //   left: 5%;
-    //   .path {
-    //     top: 60%;
-    //     left: 53%;
-    //     transform: translate(-33%, -50%);
-    //   }
-    // }
-    // .right-bottom {
-    //   bottom: 6%;
-    //   right: 5%;
-    //   .path {
-    //     top: 50%;
-    //     right: 50%;
-    //     transform: translate(33%, -60%);
-    //   }
-    // }
+    .left-top,
+    .right-top,
+    .left-bottom,
+    .right-bottom {
+      height: 500px;
+
+      text-align: center;
+      position: relative;
+      p {
+        position: relative;
+        z-index: 2;
+        font-size: 14px;
+      }
+      .logo {
+        position: absolute;
+        right: 50%;
+        transform: translateX(50%);
+        z-index: 2;
+        width: auto;
+        img {
+            max-width: 100%;
+        }
+      }
+      .path {
+        position: absolute;
+        z-index: 1;
+        width: auto;
+        max-width: 100%;
+      }
+    }
+
+    .left-top {
+    //   background-image: url("#{$urlImage}/home/section2/Group 654.svg");
+    //   background-repeat: no-repeat;
+    //   background-size: 90%;
+    //   background-position-x: 618%;
+    //   background-position-y: 519%;
+      .path {
+        right: 42%;
+        top: 20%;
+        transform: translateX(50%);
+      }
+    }
+
+    .right-top {
+    //   background-image: url("#{$urlImage}/home/section2/Group 654.svg");
+    //   background-repeat: no-repeat;
+    //   background-size: 90%;
+    //   background-position-x: -382%;
+    //   background-position-y: 519%;
+      .path {
+        right: 50%;
+        top: 18%;
+        transform: translateX(50%);
+      }
+    }
+
+    .left-bottom {
+    //   background-image: url("#{$urlImage}/home/section2/Group 654.svg");
+    //   background-repeat: no-repeat;
+    //   background-size: 90%;
+    //   background-position-x: 618%;
+    //   background-position-y: -564%;
+      .logo {
+        top: -16%;
+      }
+      .path {
+        right: 40%;
+        top: 0%;
+        transform: translateX(50%);
+      }
+    }
+
+    .right-bottom {
+    //   background-image: url("#{$urlImage}/home/section2/Group 654.svg");
+    //   background-repeat: no-repeat;
+    //   background-size: 90%;
+    //   background-position-x: -382%;
+    //   background-position-y: -564%;
+      .logo {
+        top: 0;
+        right: 45%;
+      }
+      .path {
+        right: 60%;
+        // top: 10%;
+        top: 0%;
+        transform: translateX(50%);
+      }
+    }
   }
 
   .star-group {
@@ -134,12 +166,22 @@
   }
 
   $media: 768px 425px;
-  $mediaSize: 0.5 0.35;
+  $mediaSize: 0.5 0.5;
   @for $i from 1 to length($media) + 1 {
     @media screen and (max-width: nth($media, $i)) {
-        .title {
+      .title {
+        font-size: calc(14px * #{nth($mediaSize, $i)});
+      }
+      .content {
+        .left-top,
+        .right-top,
+        .left-bottom,
+        .right-bottom {
+          p {
             font-size: calc(14px * #{nth($mediaSize, $i)});
+          }
         }
+      }
     }
   }
 }
