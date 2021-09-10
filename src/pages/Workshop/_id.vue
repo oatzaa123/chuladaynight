@@ -191,7 +191,7 @@ export default {
         position: relative;
         h1 {
             margin-bottom: 2.5rem;
-            font-size: 26;
+            font-size: 26px;
             font-weight: bold;
         }
         p:nth-child(2) {
@@ -216,6 +216,84 @@ export default {
                 margin: 0 10px;
                 filter: invert(19%) sepia(87%) saturate(4315%)
                     hue-rotate(276deg) brightness(103%) contrast(108%);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .main-workshop-id {
+        .workshop-content {
+            font-size: 10px;
+            h1 {
+                margin-bottom: 1.5rem;
+                font-size: 20px;
+            }
+        }
+        .icon {
+            img:nth-child(1) {
+                width: 25px;
+                height: 25px;
+            }
+            .icon-img {
+                img {
+                    width: 25px;
+                    height: 25px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .main-workshop-id {
+        .workshop-content {
+            h1 {
+                margin-bottom: 1rem;
+                font-size: 15px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .main-workshop-id {
+        .col-12 {
+            margin-top: 30px;
+            .workshop-img {
+                width: 100%;
+                height: auto;
+            }
+        }
+        .col-6 {
+            width: 100%;
+            padding-top: 10px;
+        }
+        .workshop-content {
+            h1 {
+                margin-bottom: 0.5rem;
+                font-size: 15px;
+            }
+            p:nth-child(2) {
+                padding-bottom: 0.5rem;
+            }
+            p {
+                margin-bottom: 0.5rem;
+            }
+        }
+        .icon {
+            bottom: 0;
+            right: 0;
+            img:nth-child(1) {
+                width: 20px;
+                height: 20px;
+            }
+            .icon-img {
+                img {
+                    margin: 0 5px;
+                    width: 20px;
+                    height: 20px;
+                }
             }
         }
     }

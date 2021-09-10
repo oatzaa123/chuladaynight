@@ -57,6 +57,18 @@ export default {
     height: 0px;
     overflow: hidden;
     transition: opacity 1s, height 1s;
+    @media screen and (max-width: 768px) {
+        font-size: 15px;
+        margin-top: 10px;
+    }
+    @media screen and (max-width: 426px) {
+        font-size: 13px;
+        margin-top: 10px;
+    }
+    @media screen and (max-width: 376px) {
+        font-size: 10px;
+        margin-top: 10px;
+    }
     &.show {
         opacity: 1;
         height: auto;
