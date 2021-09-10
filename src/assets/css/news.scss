@@ -98,8 +98,18 @@
         }
         @media screen and (max-width: 768px) {
             .n {
-                left: 34.5%;
-                font-size: 45px;
+                left: 36.5%;
+                font-size: 40px;
+            }
+            h1 {
+                font-size: 40px;
+            }
+            .new-content {
+                .new-img {
+                    img {
+                        width: 100%;
+                    }
+                }
             }
         }
         .paginate-left {
@@ -129,20 +139,26 @@
                 .new-content-text {
                     border-left: 2px solid #ba25ff;
                     margin-bottom: 0;
+                    p {
+                        font-size: 10px;
+                    }
                     &::before {
                         top: 0;
                     }
                 }
             }
+            h1 {
+                font-size: 35px;
+            }
             .n {
-                left: 18%;
-                font-size: 40px;
+                left: 26%;
+                font-size: 35px;
             }
             .paginate-left {
                 border-right: none;
             }
             .paginate-right {
-                padding-left: 25px;
+                padding-left: 10px;
                 border-left: 2px solid #ba25ff;
             }
         }
@@ -152,9 +168,12 @@
 @media screen and (max-width: 376px) {
     .news {
         .container {
+            h1 {
+                font-size: 30px;
+            }
             .n {
-                left: 14%;
-                font-size: 40px;
+                left: 28%;
+                font-size: 30px;
             }
         }
     }
@@ -169,9 +188,12 @@
             .col-7 {
                 width: 100%;
             }
+            h1 {
+                font-size: 25px;
+            }
             .n {
-                left: 23%;
-                font-size: 30px;
+                left: 28%;
+                font-size: 25px;
             }
             .new-content {
                 .new-img {
@@ -179,6 +201,9 @@
                 }
                 .new-content-text {
                     border: 0px solid #ba1bff;
+                    h3 {
+                        font-size: 15px;
+                    }
                     &::before {
                         width: 0px;
                         height: 0px;
@@ -190,6 +215,9 @@
                 padding-left: 25px;
                 border-left: 0px solid #ba25ff;
                 text-align: center;
+            }
+            .paginate-left {
+                height: auto;
             }
         }
     }

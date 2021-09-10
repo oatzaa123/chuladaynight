@@ -166,4 +166,15 @@ export default {
         }
     }
 }
+@media screen and (max-width: 426px) {
+    .paginate {
+        li {
+            padding: 2px 10px;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            font-size: 15px;
+        }
+    }
+}
 </style>
