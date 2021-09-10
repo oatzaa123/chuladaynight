@@ -163,5 +163,46 @@
                 }
             }
         }
+
+        @media screen and (max-width: nth(426px, $i)) {
+            .container .content {
+                .group-content {
+                    .customText {
+                        font-size: calc(61px * #{nth($mediaSize, $i)});
+                    }
+                    .sub {
+                        font-size: 23px;
+                    }
+                }
+                .customDiscription {
+                    font-size: calc(14px * #{nth($mediaSize, $i)});
+                    margin-top: 5px;
+                }
+                .btn-outline-primary {
+                    font-size: calc(16px * 0.9);
+                }
+            }
+        }
+
+        @media screen and (max-width: nth(321px, $i)) {
+            .container .content {
+                .group-content {
+                    .customText {
+                        font-size: calc(45px * #{nth($mediaSize, $i)});
+                    }
+                    .sub {
+                        font-size: 15px;
+                    }
+                }
+                .customDiscription {
+                    font-size: calc(14px * #{nth($mediaSize, $i)});
+                    margin-top: 5px;
+                }
+                .btn-outline-primary {
+                    font-size: calc(16px * 0.9);
+                    width: 130px;
+                }
+            }
+        }
     }
 }

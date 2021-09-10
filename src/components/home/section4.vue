@@ -115,6 +115,9 @@ export default {
                 768: {
                     perPage: 2,
                 },
+                426: {
+                    perPage: 1,
+                },
             },
         })
         // const slideCurrent = ref(0);
