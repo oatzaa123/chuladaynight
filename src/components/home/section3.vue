@@ -106,8 +106,8 @@ export default {
 
     const ele = document.getElementsByClassName("items");
     let isDown = false;
-    let startX;
-    let scrollLeft;
+    let startX = 0;
+    let scrollLeft = 0;
     let interval = false;
     let intervalAutoplay = false;
     let AutoplayPageX = 1;
