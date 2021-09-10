@@ -156,7 +156,7 @@ export default {
       }
     }
   }
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 426px) {
     .footer-bg {
       display: none;
     }
