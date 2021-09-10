@@ -177,4 +177,9 @@ export default {
         }
     }
 }
+@media screen and (max-width: 321px) {
+    .paginate {
+        justify-content: center;
+    }
+}
 </style>

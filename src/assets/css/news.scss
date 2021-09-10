@@ -122,6 +122,9 @@
         .paginate-right {
             padding-left: 25px;
         }
+        .paginate-right-btn {
+            padding-left: 25px;
+        }
     }
 }
 
@@ -159,6 +162,10 @@
             }
             .paginate-right {
                 padding-left: 10px;
+                border-left: 2px solid #ba25ff;
+            }
+            .paginate-right-btn {
+                padding-left: 25px;
                 border-left: 2px solid #ba25ff;
             }
         }
@@ -211,8 +218,11 @@
                     }
                 }
             }
+            .paginate-right-btn {
+                border-left: 0px solid #ba25ff;
+                text-align: center;
+            }
             .paginate-right {
-                padding-left: 25px;
                 border-left: 0px solid #ba25ff;
                 text-align: center;
             }

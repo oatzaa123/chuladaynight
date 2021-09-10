@@ -48,16 +48,17 @@
                     class="paginate-left col-5 col-sm-5"
                     :class="[parent ? 'parent' : '']"
                 ></div>
-                <div class="col-7 col-sm-7 paginate-right">
+                <div class="col-7 col-sm-7 paginate-right" v-if="!parent">
                     <Paginate
-                        v-show="!parent"
                         :totalItems="totalItems"
                         :pageLimit="pageLimit"
                         pageNeighbours="1"
                         :onPageChanged="onPageChanged"
                     />
+                </div>
+                <div class="col-7 col-sm-7 paginate-right-btn" v-if="parent">
                     <router-link to="/News">
-                        <button class="btn btn-custom" v-if="parent">
+                        <button class="btn btn-custom">
                             {{ $t('news_btn') }} &#8594;
                         </button>
                     </router-link>

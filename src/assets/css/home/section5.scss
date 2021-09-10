@@ -14,7 +14,7 @@
         @media screen and (max-width: nth($media, $i)) {
             .news .container {
                 h1 {
-                    font-size: calc(58px * #{nth($mediaSize, $i)});
+                    font-size: calc(46px * #{nth($mediaSize, $i)});
                 }
                 .new-content {
                     .new-content-text {

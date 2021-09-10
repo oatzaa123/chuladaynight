@@ -113,4 +113,35 @@ export default {
         right: 22%;
     }
 }
+
+@media screen and (max-width: 426px) {
+    .customButton {
+        width: 30px;
+        height: 30px;
+        .arrow {
+            border: 0.5px solid white;
+            width: 7px;
+            position: absolute;
+        }
+        .left {
+            border: solid white;
+            position: absolute;
+            border-width: 0 2px 2px 0;
+            padding: 2px;
+            transform: rotate(135deg);
+            -webkit-transform: rotate(135deg);
+            top: 11.5px;
+        }
+        .right {
+            border: solid white;
+            position: absolute;
+            border-width: 2px 0px 0px 2px;
+            padding: 2px;
+            transform: rotate(135deg);
+            -webkit-transform: rotate(135deg);
+            top: 11.5px;
+            right: 23%;
+        }
+    }
+}
 </style>

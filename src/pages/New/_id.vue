@@ -53,15 +53,7 @@
                 :customClassRight="customClassRight"
             >
                 <template v-slot:left-text>
-                    <span
-                        style="
-                            margin-left: 20px;
-                            font-size: 18px;
-                            font-weight: bold;
-                            color: #fff;
-                        "
-                        >{{ $t('news_id_pervious') }}</span
-                    >
+                    <span class="arrow-text">{{ $t('news_id_pervious') }}</span>
                 </template>
 
                 <template v-slot:middle-button>
@@ -71,15 +63,7 @@
                 </template>
 
                 <template v-slot:right-text>
-                    <span
-                        style="
-                            margin-right: 20px;
-                            font-size: 18px;
-                            font-weight: bold;
-                            color: #fff;
-                        "
-                        >{{ $t('news_id_next') }}</span
-                    >
+                    <span class="arrow-text">{{ $t('news_id_next') }}</span>
                 </template>
             </Arrow>
         </div>
@@ -217,6 +201,12 @@ export default {
         padding-bottom: 10rem;
         display: flex;
         justify-content: space-between;
+        .arrow-text {
+            margin-left: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+        }
         .btn-custom {
             border-radius: 20px;
             background-color: #7948e6;
@@ -228,6 +218,92 @@ export default {
             &:hover {
                 background-color: #ffffff;
                 color: #7948e6;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .news-id {
+        .container-news {
+            .news-id-img {
+                img {
+                    height: 100%;
+                    max-width: 100%;
+                    object-fit: scale-down;
+                }
+            }
+            .news-id-title {
+                .news-id-group-title {
+                    h1 {
+                        font-size: 20px;
+                        font-weight: bold;
+                    }
+                }
+            }
+            .news-id-content {
+                .news-id-content-text {
+                    font-size: 10px;
+                    font-weight: bold;
+                    margin: 15px 25px;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .news-id {
+        .news-id-footer {
+            .arrow-text {
+                margin: 0 5px;
+                font-size: 12px;
+            }
+            .btn-custom {
+                padding: 0px 0px;
+                width: 160px;
+                height: 40px;
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .news-id {
+        .container-news {
+            .news-id-title {
+                .news-id-group-title {
+                    h1 {
+                        font-size: 15px;
+                    }
+                    span {
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+        .news-id-footer {
+            .arrow-text {
+                margin: 0 5px;
+                font-size: 12px;
+            }
+            .btn-custom {
+                padding: 0px 0px;
+                width: 160px;
+                height: 40px;
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 321px) {
+    .news-id {
+        .news-id-footer {
+            .arrow-text {
+                font-size: 10px;
             }
         }
     }
