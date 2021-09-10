@@ -106,7 +106,7 @@ export default {
 
     const ele = document.getElementsByClassName("items");
     let isDown = false;
-    let startX = 0;
+    let startX = 0; 
     let scrollLeft = 0;
     let interval = false;
     let intervalAutoplay = false;
