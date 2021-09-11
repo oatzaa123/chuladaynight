@@ -28,6 +28,7 @@
           <img
             :src="require('@/assets/images/home/section2/Path 61.svg')"
             class="path"
+            :style="pathHeight"
           />
         </div>
         <div class="right-top col-6" :style="height">
@@ -42,6 +43,7 @@
           <img
             :src="require('@/assets/images/home/section2/Path 50.svg')"
             class="path"
+            :style="pathHeight"
           />
         </div>
       </div>
@@ -51,6 +53,7 @@
           <img
             :src="require('@/assets/images/home/section2/Path 124.svg')"
             class="path"
+            :style="pathWidth"
           />
           <div class="logo">
             <img
@@ -65,6 +68,7 @@
           <img
             :src="require('@/assets/images/home/section2/Path 420.svg')"
             class="path"
+            :style="pathWidth"
           />
           <div class="logo">
             <img
@@ -87,15 +91,27 @@ export default {
   setup() {
     var section2Height = "min-height: 100vh;";
     var height = "height: 500px;";
+    var pathHeight = "max-height: 500px;";
+    var pathWidth = "max-width: 500px;";
 
-    onBeforeMount(() => {
+    const setHeight = () => {
       section2Height = `min-height: ${window.innerWidth / 1.5}px;`;
       height = `height: ${window.innerWidth / 2.5}px`;
+      pathHeight = `max-height: ${window.innerWidth / 2.5 / 1.5}px`;
+      pathWidth =  `max-width: ${window.innerWidth / 2.5 / 1.5}px`;
+    };
+
+    window.addEventListener("resize", setHeight);
+
+    onBeforeMount(() => {
+      setHeight();
     });
 
     return {
       section2Height: computed(() => section2Height),
       height: computed(() => height),
+      pathHeight: computed(() => pathHeight),
+      pathWidth: computed(() => pathWidth),
     };
   },
 };
