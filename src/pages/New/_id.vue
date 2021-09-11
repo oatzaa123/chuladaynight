@@ -202,7 +202,7 @@ export default {
         display: flex;
         justify-content: space-between;
         .arrow-text {
-            margin-left: 20px;
+            margin: 20px;
             font-size: 18px;
             font-weight: bold;
             color: #fff;
