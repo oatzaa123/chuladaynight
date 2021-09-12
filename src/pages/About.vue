@@ -2,28 +2,26 @@
   <!-- <div class="about-bg" :class="{ bgnight: isNight }"></div> -->
 
   <div id="about" class="container">
-    <div class="row">
-      <div class="logo-block">
-        <!-- <div class="row"> -->
-        <div class="left col-6">
-          <div class="logo">
-            <div class="title">CHULA</div>
-            <div class="sub">DIGITAL ARTS PARK</div>
-          </div>
-          <div class="toggle" :class="{ day: !isNight, night: isNight }">
-            <div class="day" :class="{ active: !isNight }">DAY</div>
-            <div class="n">&</div>
-            <div class="night" :class="{ active: isNight }">NIGHT</div>
-          </div>
+    <div class="logo-block">
+      <!-- <div class="row"> -->
+      <div class="left col-6">
+        <div class="logo">
+          <div class="title">CHULA</div>
+          <div class="sub">DIGITAL ARTS PARK</div>
         </div>
-        <div class="right col-6">
-          <div class="title">{{ $t("about_title") }}</div>
-          <div class="description">
-            <p>{{ $t("about_description") }}</p>
-          </div>
+        <div class="toggle" :class="{ day: !isNight, night: isNight }">
+          <div class="day" :class="{ active: !isNight }">DAY</div>
+          <div class="n">&</div>
+          <div class="night" :class="{ active: isNight }">NIGHT</div>
         </div>
-        <!-- </div> -->
       </div>
+      <div class="right col-6">
+        <div class="title">{{ $t("about_title") }}</div>
+        <div class="description">
+          <p>{{ $t("about_description") }}</p>
+        </div>
+      </div>
+      <!-- </div> -->
     </div>
     <div class="row">
       <div class="about-description">

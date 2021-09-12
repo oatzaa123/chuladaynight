@@ -77,7 +77,7 @@ $urlImage: "../assets/images";
         }
         .n {
           position: absolute;
-          bottom: 35px;
+          bottom: 5px;
           right: -24px;
           font-family: "Savoye Regular";
           font-weight: 100;
@@ -256,7 +256,7 @@ $urlImage: "../assets/images";
   #about {
     .logo-block {
       .left {
-        justify-content: flex-start;
+        justify-content: center;
         .logo {
           margin-right: 15px;
           .title {
@@ -270,33 +270,34 @@ $urlImage: "../assets/images";
         }
         .toggle {
           .day {
-            font-size: 35px;
+            // font-size: 35px;
             &.active {
-              font-size: 40px;
+              //   font-size: 40px;
             }
           }
           .night {
-            font-size: 35px;
+            // font-size: 35px;
             &.active {
-              font-size: 40px;
+              //   font-size: 40px;
             }
           }
           .n {
             position: absolute;
-            right: -50px;
-            bottom: -40px;
+            right: -25px;
+            bottom: 5px;
             font-family: "Savoye Regular";
             font-weight: 100;
             color: #1ba7ff;
-            font-size: 90px;
+            font-size: 63px;
             text-shadow: 0px 0px 10px #1ba7ff;
             transition: bottom 0.25s, font-size 0.25s;
           }
           &.night {
+            margin-right: 0px;
             .n {
-              bottom: 25px;
-              right: 0px;
-              font-size: 60px;
+            //   bottom: 25px;
+            //   right: 0px;
+            //   font-size: 60px;
             }
           }
         }
@@ -353,35 +354,36 @@ $urlImage: "../assets/images";
           }
         }
         .toggle {
+            margin-right: 0px;
           .day {
-            font-size: 35px;
-            margin: 0px 0px 0px 0px;
+            font-size: 26px;
+            margin: 4px 0px 5px 0px;
             &.active {
-              font-size: 40px;
+              //   font-size: 40px;
             }
           }
           .night {
-            font-size: 35px;
+            font-size: 26px;
             &.active {
-              font-size: 40px;
+            //   font-size: 40px;
             }
           }
           .n {
             position: absolute;
-            right: -50px;
-            bottom: -40px;
+            right: -25px;
+            bottom: 0px;
             font-family: "Savoye Regular";
             font-weight: 100;
             color: #1ba7ff;
-            font-size: 90px;
+            font-size: 63px;
             text-shadow: 0px 0px 10px #1ba7ff;
             transition: bottom 0.25s, font-size 0.25s;
           }
           &.night {
             .n {
-              bottom: 28px;
-              right: 20px;
-              font-size: 40px;
+            //   bottom: 28px;
+            //   right: 20px;
+            //   font-size: 40px;
             }
           }
         }
