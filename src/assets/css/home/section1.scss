@@ -220,6 +220,16 @@ $FSnightActive: 54px;
             }
         }
 
+        @media screen and (max-width: 426px) {
+            .lang {
+                padding: 0px 10px;
+                font-size: 10px;
+                .menu-lang {
+                    font-size: 10px;
+                }
+            }
+        }
+
         .star-group {
             position: absolute;
             display: none;
