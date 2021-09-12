@@ -13,10 +13,10 @@ $urlImage: "../assets/images";
   }
 }
 #contact {
-//   position: absolute;
-//   left: 50%;
-//   top: 50%;
-//   transform: translate(-50%, -50%);
+  //   position: absolute;
+  //   left: 50%;
+  //   top: 50%;
+  //   transform: translate(-50%, -50%);
   .map {
     padding: 20px;
     text-align: right;
@@ -43,6 +43,7 @@ $urlImage: "../assets/images";
         color: #ffffff;
         display: flex;
         margin-bottom: 0px;
+        justify-content: flex-start;
         .logo {
           margin-right: 15px;
           .title {
@@ -160,5 +161,39 @@ $urlImage: "../assets/images";
 @media screen and (max-width: 768px) {
   .contact-bg {
     background-size: cover;
+  }
+}
+
+@media screen and(max-width: 425px) {
+  #contact .contact-description .logo-block .left {
+    justify-content: center;
+  }
+}
+
+@media screen and(max-width: 320px) {
+  #contact .contact-description .logo-block .left {
+    .logo {
+      .title {
+        font-size: calc(63px * 0.75);
+      }
+      .sub {
+        font-size: calc(20px * 0.75);
+      }
+    }
+    .toggle {
+      .n,
+      &.night .n {
+        font-size: calc(63px * 0.75);
+        bottom: 30px;
+        right: -19px;
+      }
+
+      .day {
+        font-size: calc(30px * 0.75);
+      }
+      .night {
+        font-size: calc(30px * 0.75);
+      }
+    }
   }
 }
