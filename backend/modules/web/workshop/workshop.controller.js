@@ -80,7 +80,7 @@ exports.addWorkshop = catchAsync(async (req, res, next) => {
         ...req.body,
         coverImage: coverImageName,
         image: imageName,
-        contact: JSON.parse(contact),
+        contact: JSON.parse(contact) || '',
     }
 
     const workshop = await Workshop.create(obj)

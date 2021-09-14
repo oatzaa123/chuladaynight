@@ -33,6 +33,16 @@
                         }}
                     </p>
                     <p>
+                        &nbsp;
+                        <img
+                            :src="
+                                require('../../assets/images/workshop/Path 471.svg')
+                            "
+                        />
+                        &nbsp;
+                        {{ item.period }}
+                    </p>
+                    <p>
                         <img
                             :src="
                                 require('../../assets/images/icons/Path 115.svg')
@@ -40,6 +50,7 @@
                             width="20"
                             class="hover-img"
                         />
+                        &nbsp;
                         {{ $t('workshop_location') }}
                         {{
                             $i18n.locale === 'th'
@@ -48,6 +59,7 @@
                         }}
                     </p>
                     <p>
+                        &nbsp;
                         <img
                             :src="
                                 require('../../assets/images/icons/Group 850.svg')
@@ -56,6 +68,8 @@
                             class="hover-img"
                         />
                         &nbsp;
+                        {{ item.staff }} <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         {{ $t('workshop_contact') }} <br />
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{
                             item.contact.telephone
@@ -190,7 +204,6 @@ export default {
         font-size: 14px;
         position: relative;
         h1 {
-            margin-bottom: 2.5rem;
             font-size: 26px;
             font-weight: bold;
         }
@@ -226,7 +239,6 @@ export default {
         .workshop-content {
             font-size: 10px;
             h1 {
-                margin-bottom: 1.5rem;
                 font-size: 20px;
             }
         }
@@ -249,7 +261,6 @@ export default {
     .main-workshop-id {
         .workshop-content {
             h1 {
-                margin-bottom: 1rem;
                 font-size: 15px;
             }
         }
@@ -271,7 +282,6 @@ export default {
         }
         .workshop-content {
             h1 {
-                margin-bottom: 0.5rem;
                 font-size: 15px;
             }
             p:nth-child(2) {

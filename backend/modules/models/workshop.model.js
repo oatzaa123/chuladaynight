@@ -11,6 +11,7 @@ const workshopSchema = mongoose.Schema({
     locationName_en: { type: String },
     period: { type: String },
     path: { type: String },
+    staff: { type: String },
     contact: {
         telephone: { type: String },
         location: {
