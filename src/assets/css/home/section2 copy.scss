@@ -1,0 +1,229 @@
+.section2 {
+  $urlImage: "../../assets/images";
+
+  padding: 2rem 0;
+  // min-height: 100vh;
+  background-color: #030024;
+  position: relative;
+  overflow: hidden;
+  .title {
+    color: white;
+    text-align: center;
+    font-family: "Roboto-Bold";
+    font-size: 14px;
+  }
+
+  .content {
+    margin-top: 50px;
+    color: white;
+    // display: flex;
+    // min-height: 100vh;
+    position: relative;
+
+    .map {
+      width: 50%;
+      position: absolute;
+      // top: 44%;
+      left: 55%;
+      top: 53%;
+    //   left: 56%;
+      transform: translate(-50%, -50%);
+    }
+
+    .left-top,
+    .right-top,
+    .left-bottom,
+    .right-bottom {
+      height: 500px;
+
+      text-align: center;
+      position: relative;
+      p {
+        position: relative;
+        z-index: 2;
+        font-size: 14px;
+        line-height: 1.5em;
+        text-overflow: ellipsis;
+        height: 3em;
+        overflow: hidden;
+      }
+      .logo {
+        position: absolute;
+        right: 50%;
+        transform: translateX(50%);
+        z-index: 2;
+        width: auto;
+        img {
+          max-width: 100%;
+          cursor: pointer;
+          transition: transform 0.5s ease-out;
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
+      }
+      .path {
+        position: absolute;
+        z-index: 1;
+        width: auto;
+        max-width: 100%;
+      }
+    }
+
+    .left-top {
+      //   background-image: url("#{$urlImage}/home/section2/Group 654.svg");
+      //   background-repeat: no-repeat;
+      //   background-size: 90%;
+      //   background-position-x: 618%;
+      //   background-position-y: 519%;
+      .path {
+        right: 42%;
+        top: 20%;
+        transform: translateX(50%);
+      }
+    }
+
+    .right-top {
+      //   background-image: url("#{$urlImage}/home/section2/Group 654.svg");
+      //   background-repeat: no-repeat;
+      //   background-size: 90%;
+      //   background-position-x: -382%;
+      //   background-position-y: 519%;
+      p {
+        width: 70%;
+        margin: auto;
+        margin-top: -5px;
+      }
+      .logo {
+        top: 5%;
+      }
+      .path {
+        right: 50%;
+        top: 18%;
+        transform: translateX(50%);
+      }
+    }
+
+    .left-bottom {
+      //   background-image: url("#{$urlImage}/home/section2/Group 654.svg");
+      //   background-repeat: no-repeat;
+      //   background-size: 90%;
+      //   background-position-x: 618%;
+      //   background-position-y: -564%;
+      .logo {
+        top: -16%;
+      }
+      .path {
+        right: 40%;
+        top: 0%;
+        transform: translateX(50%);
+      }
+    }
+
+    .right-bottom {
+      //   background-image: url("#{$urlImage}/home/section2/Group 654.svg");
+      //   background-repeat: no-repeat;
+      //   background-size: 90%;
+      //   background-position-x: -382%;
+      //   background-position-y: -564%;
+      .logo {
+        top: 0;
+        right: 45%;
+      }
+      .path {
+        right: 60%;
+        // top: 10%;
+        top: 0%;
+        transform: translateX(50%);
+      }
+    }
+  }
+
+  .star-group {
+    position: absolute;
+    display: block;
+    .blur,
+    .star {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+    }
+
+    $top: 10%, 15%, 10%, 80%, 65%;
+    $left: 10%, 38%, 97%, 8%, 86%;
+    $size: 30px, 58px, 30px, 30px, 30px;
+    $opacity: 0.6, 0.6, 0.6, 0.6, 0.6;
+    $starColor: #ef1286;
+    $blurSize: 100px, 40px, 100px, 40px, 80px;
+    $blurFilter: blur(12px), blur(12px), blur(12px), blur(4px), blur(12px);
+    $starSize: 0px, 27px, 0px, 20px, 20px;
+    $starOpacity: 1, 0.1, 1, 1, 1;
+
+    @for $i from 1 to length($top) + 1 {
+      &:nth-child(#{$i}) {
+        top: nth($top, $i);
+        left: nth($left, $i);
+        width: nth($size, $i);
+        height: nth($size, $i);
+        opacity: nth($opacity, $i);
+        .blur {
+          width: nth($blurSize, $i);
+          height: nth($blurSize, $i);
+          background: $starColor;
+          filter: nth($blurFilter, $i);
+        }
+        .star {
+          width: nth($starSize, $i);
+          height: nth($starSize, $i);
+          background: $starColor;
+          opacity: nth($starOpacity, $i);
+        }
+      }
+    }
+  }
+
+  $media: 768px 425px;
+  $mediaSize: 0.5 0.5;
+  @for $i from 1 to length($media) + 1 {
+    @media screen and (max-width: nth($media, $i)) {
+      .title {
+        font-size: calc(14px * #{nth($mediaSize, $i)});
+      }
+      .content {
+        .left-top,
+        .right-top,
+        .left-bottom,
+        .right-bottom {
+          p {
+            font-size: calc(14px * #{nth($mediaSize, $i)});
+          }
+        }
+      }
+    }
+  }
+}
+
+// @media screen and (max-width: 1024px) {
+//     .section2 {
+//         .content {
+//             .left-top {
+//                 top: 11.5%;
+//                 left: 0%;
+//             }
+//             .right-top {
+//                 top: 11.5%;
+//                 right: 0%;
+//             }
+//             .left-bottom {
+//                 bottom: 0%;
+//                 left: 0%;
+//             }
+//             .right-bottom {
+//                 bottom: 0%;
+//                 right: 0%;
+//             }
+//         }
+//     }
+// }
