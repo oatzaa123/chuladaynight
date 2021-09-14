@@ -9,6 +9,7 @@ const workshopSchema = mongoose.Schema({
     description_en: { type: String },
     locationName_th: { type: String },
     locationName_en: { type: String },
+    period: { type: String },
     path: { type: String },
     contact: {
         telephone: { type: String },

@@ -105,6 +105,7 @@ exports.updateWorkshop = async (req, res, next) => {
         locationName_en,
         locationName_th,
         oldImage,
+        period,
     } = req.body
     let coverImageName
 
@@ -200,6 +201,7 @@ exports.updateWorkshop = async (req, res, next) => {
     workshop.contact.location = JSON.parse(contact).contact.location
     workshop.locationName_th = locationName_th
     workshop.locationName_en = locationName_en
+    workshop.period = period
 
     await workshop.save()
 
