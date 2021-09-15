@@ -1,85 +1,92 @@
 <template>
-    <div class="section6">
-        <!-- <div class="container"> -->
-        <div class="header">PARTNER</div>
-        <div class="slide">
-            <splide :options="slideOptions">
-                <splide-slide
-                    v-for="(slide, index) in slides"
-                    :key="slide.src"
-                    class="slide-items"
-                >
-                    <div class="img">
-                        <img :src="slide.src" />
-                    </div>
-                    <div class="name">Partner name {{ index }}</div>
-                </splide-slide>
-            </splide>
-        </div>
-        <!-- </div> -->
+  <div class="section6">
+    <!-- <div class="container"> -->
+    <div class="header">PARTNER</div>
+    <div class="slide">
+      <splide :options="slideOptions">
+        <splide-slide
+          v-for="(slide, index) in slides"
+          :key="slide.src"
+          class="slide-items"
+        >
+          <div class="img">
+            <img :src="slide.src" />
+          </div>
+          <div class="name">Partner name {{ index }}</div>
+        </splide-slide>
+      </splide>
     </div>
+    <!-- </div> -->
+  </div>
 </template>
 
 <script>
-import { Splide, SplideSlide } from '@splidejs/vue-splide'
-import '@splidejs/splide/dist/css/themes/splide-default.min.css'
-import { reactive, toRefs } from 'vue'
+import { Splide, SplideSlide } from "@splidejs/vue-splide";
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+import { reactive, toRefs } from "vue";
 
 export default {
-    components: {
-        Splide,
-        SplideSlide,
-    },
-    setup() {
-        const state = reactive({
-            slides: [
-                {
-                    src: require('../../assets/images/home/section1/L_DN2N_20202.png'),
-                },
-                {
-                    src: require('../../assets/images/home/section1/L_DN2N_20202.png'),
-                },
-                {
-                    src: require('../../assets/images/home/section1/L_DN2N_20202.png'),
-                },
-                {
-                    src: require('../../assets/images/home/section1/L_DN2N_20202.png'),
-                },
-                {
-                    src: require('../../assets/images/home/section1/L_DN2N_20202.png'),
-                },
-                {
-                    src: require('../../assets/images/home/section1/L_DN2N_20202.png'),
-                },
-                {
-                    src: require('../../assets/images/home/section1/L_DN2N_20202.png'),
-                },
-                {
-                    src: require('../../assets/images/home/section1/L_DN2N_20202.png'),
-                },
-            ],
-            slideOptions: {
-                type: 'loop',
-                perPage: 5,
-                rewind: true,
-                pagination: false,
-                autoplay: true,
-                pauseOnHover: false,
-                breakpoints: {
-                    768: {
-                        perPage: 3,
-                    },
-                },
-            },
-        })
+  components: {
+    Splide,
+    SplideSlide,
+  },
+  setup() {
+    const state = reactive({
+      slides: [
+        {
+          src: require("../../assets/images/home/section1/L_DN2N_20202.png"),
+        },
+        {
+          src: require("../../assets/images/home/section1/L_DN2N_20202.png"),
+        },
+        {
+          src: require("../../assets/images/home/section1/L_DN2N_20202.png"),
+        },
+        {
+          src: require("../../assets/images/home/section1/L_DN2N_20202.png"),
+        },
+        {
+          src: require("../../assets/images/home/section1/L_DN2N_20202.png"),
+        },
+        {
+          src: require("../../assets/images/home/section1/L_DN2N_20202.png"),
+        },
+        {
+          src: require("../../assets/images/home/section1/L_DN2N_20202.png"),
+        },
+        {
+          src: require("../../assets/images/home/section1/L_DN2N_20202.png"),
+        },
+      ],
+      slideOptions: {
+        type: "loop",
+        perPage: 5,
+        rewind: true,
+        pagination: false,
+        autoplay: true,
+        pauseOnHover: false,
+        padding: 10,
+        breakpoints: {
+          768: {
+            perPage: 3,
+          },
+          425: {
+            perPage: 2,
+          },
+          375: {
+            perPage: 1,
+          },
+        },
+      },
+    });
 
-        return {
-            ...toRefs(state),
-        }
-    },
-}
+    return {
+      ...toRefs(state),
+    };
+  },
+};
 </script>
 
 <style lang="scss">
-@import '../../assets/css/home/section6.scss';
+@import "../../assets/css/home/section6.scss";
 </style>
