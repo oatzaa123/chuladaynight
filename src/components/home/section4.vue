@@ -1,5 +1,5 @@
 <template>
-    <div class="section4">
+    <div id="section4" class="section4">
         <div class="left-arrow">
             <button @click.prevent="onBackwardClick" class="btn customButton">
                 <div class="arrow"></div>

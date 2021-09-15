@@ -162,6 +162,7 @@ export default createStore({
         ],
         backgroundImage: null,
         isAuthenticated: localStorage.getItem('isAuthenticated') || false,
+        scrollId: '',
     },
     mutations: {
         setRangeValue: (state, payload) => {
@@ -175,6 +176,9 @@ export default createStore({
         },
         setIsAuthenticated: (state, payload) => {
             state.isAuthenticated = payload
+        },
+        setScrollId: (state, payload) => {
+            state.scrollId = payload
         },
     },
     actions: {},
