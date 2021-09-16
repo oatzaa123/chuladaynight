@@ -90,7 +90,7 @@
                             :src="
                                 require('@/assets/images/home/section2/Group 852/Group 852 copy.png')
                             "
-                            @click="goto()"
+                            @click="goto('section3')"
                         />
                         <p>
                             {{ $t('section2_rightBottom') }}
