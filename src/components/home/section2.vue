@@ -133,9 +133,7 @@ export default {
 
         const goto = (id) => {
             //   store.commit("setScrollId", id);
-            console.log('id', id)
             let top = document.getElementById(id).offsetTop
-            console.log('top', top)
             setTimeout(() => {
                 window.scrollTo(0, top)
             }, 10)
