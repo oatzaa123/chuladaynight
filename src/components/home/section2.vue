@@ -68,14 +68,12 @@
             :style="pathWidth"
           /> -->
                     <div class="logo">
-                        <a href="#section4">
-                            <img
-                                :src="
-                                    require('@/assets/images/home/section2/Group 853/Group 853 copy.png')
-                                "
-                                @click="goto('section4')"
-                            />
-                        </a>
+                        <img
+                            :src="
+                                require('@/assets/images/home/section2/Group 853/Group 853 copy.png')
+                            "
+                            @click="goto('section4')"
+                        />
 
                         <p>
                             {{ $t('section2_leftBottom') }}
@@ -108,10 +106,8 @@
 
 <script>
 import { onBeforeMount, computed, ref } from 'vue'
-import { useStore } from 'vuex'
 export default {
     setup() {
-        const store = useStore()
         var section2Height = ref('min-height: 100vh;')
 
         var topHeight = ref('height: auto;')
@@ -135,7 +131,12 @@ export default {
         }
 
         const goto = (id) => {
-            store.commit('setScrollId', id)
+            console.log(id)
+            setTimeout(() => {
+                document
+                    .getElementById(id)
+                    .scrollIntoView({ behavior: 'smooth' })
+            }, 2000)
         }
 
         window.addEventListener('resize', setHeight)
