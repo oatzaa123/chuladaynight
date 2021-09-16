@@ -65,7 +65,6 @@ export default {
         pagination: false,
         autoplay: true,
         pauseOnHover: false,
-        padding: 10,
         breakpoints: {
           768: {
             perPage: 3,
