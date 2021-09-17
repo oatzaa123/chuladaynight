@@ -73,15 +73,8 @@ exports.addArticle = catchAsync(async (req, res, next) => {
 exports.updateArticle = catchAsync(async (req, res, next) => {
     let coverImageName
     const { id } = req.params
-    const {
-        path,
-        title_en,
-        title_th,
-        description_th,
-        description_en,
-        year,
-        oldFile,
-    } = req.body
+    const { path, oldFile } = req.body
+    let newArticle = {}
 
     let article = await Article.findById(id)
 
@@ -117,21 +110,25 @@ exports.updateArticle = catchAsync(async (req, res, next) => {
                 name,
             }
 
-            article.coverImage = coverImageName
+            newArticle.coverImage = coverImageName
         }
     }
 
-    article.title_th = title_th
-    article.title_en = title_en
-    article.description_th = description_th
-    article.description_en = description_en
-    article.year = year
-    await article.save()
+    newArticle = {
+        ...newArticle,
+        ...req.body,
+    }
 
-    res.status(201).json({
+    const updatedArticle = await Article.findByIdAndUpdate(
+        { _id: id },
+        { ...newArticle, updatedAt: Date.now() },
+        { new: true }
+    )
+
+    res.status(200).json({
         status: 'success',
         data: {
-            article,
+            updatedArticle,
         },
     })
 })
