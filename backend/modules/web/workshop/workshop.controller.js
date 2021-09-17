@@ -95,22 +95,17 @@ exports.addWorkshop = catchAsync(async (req, res, next) => {
 
 exports.updateWorkshop = async (req, res, next) => {
     const { id } = req.params
-    const {
-        title_th,
-        title_en,
-        path,
-        description_th,
-        description_en,
-        contact,
-        locationName_en,
-        locationName_th,
-        oldImage,
-        period,
-    } = req.body
+    const { path, contact, oldImage } = req.body
     let coverImageName
+    let newWorkShop = {}
 
     const workshop = await Workshop.findById(id)
     if (!workshop) return next(new ErrorHandler('Data not found', 404))
+
+    if (contact) {
+        contact = JSON.parse(contact)
+        newWorkShop.contact = contact
+    }
 
     if (req.files) {
         const { coverImage, image } = req.files
@@ -149,7 +144,7 @@ exports.updateWorkshop = async (req, res, next) => {
                 name,
             }
 
-            workshop.coverImage = coverImageName
+            newWorkShop.coverImage = coverImageName
         }
 
         if (image) {
@@ -186,28 +181,24 @@ exports.updateWorkshop = async (req, res, next) => {
                 name,
             }
 
-            workshop.image = imageName
+            newWorkShop.image = imageName
         }
     }
 
-    workshop.title_th = title_th
-    workshop.title_en = title_en
-    workshop.description_th = description_th
-    workshop.description_en = description_en
-    workshop.contact.facebook = JSON.parse(contact).contact.facebook
-    workshop.contact.telephone = JSON.parse(contact).contact.telephone
-    workshop.contact.instagram = JSON.parse(contact).contact.instagram
-    workshop.contact.mailto = JSON.parse(contact).contact.mailto
-    workshop.contact.location = JSON.parse(contact).contact.location
-    workshop.locationName_th = locationName_th
-    workshop.locationName_en = locationName_en
-    workshop.period = period
+    newWorkShop = {
+        ...newWorkShop,
+        ...req.body,
+    }
 
-    await workshop.save()
+    const updatedWorkshop = await Workshop.findByIdAndUpdate(
+        { _id: id },
+        { ...newWorkShop, updatedAt: Date.now() },
+        { new: true }
+    )
 
     res.status(200).json({
         status: 'success',
-        data: workshop,
+        data: updatedWorkshop,
     })
 }
 

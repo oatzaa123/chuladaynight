@@ -175,9 +175,10 @@ exports.addNews = catchAsync(async (req, res, next) => {
 
 exports.updateNews = catchAsync(async (req, res, next) => {
     const { id } = req.params
-    const { title_th, title_en, path, description, oldFile } = req.body
+    const { path, oldFile } = req.body
     const contentImages = []
     let coverImageName
+    let newNews = {}
 
     const news = await News.findById(id)
 
@@ -215,7 +216,7 @@ exports.updateNews = catchAsync(async (req, res, next) => {
                 name,
             }
 
-            news.coverImage = coverImageName
+            newNews.coverImage = coverImageName
         }
 
         if (contentImage) {
@@ -284,18 +285,23 @@ exports.updateNews = catchAsync(async (req, res, next) => {
                 })
             }
         })
+        newNews.content = contents
     }
 
-    news.title_th = title_th
-    news.title_en = title_en
-    news.path = path
-    news.content = contents
-    news.updatedAt = Date.now()
+    newNews = {
+        ...newNews,
+        ...req.body,
+    }
 
-    await news.save()
+    const updatedNews = await News.findByIdAndUpdate(
+        { _id: id },
+        { ...newNews, updatedAt: Date.now() },
+        { new: true }
+    )
+
     res.status(200).json({
         status: 'success',
-        data: news,
+        data: updatedNews,
     })
 })
 

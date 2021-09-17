@@ -351,23 +351,23 @@ exports.addGallery = catchAsync(async (req, res, next) => {
 
 exports.updateGallery = catchAsync(async (req, res, next) => {
     let { author, path, location, description, oldFile, liveTime } = req.body
-
+    let newGallery = {}
     const { id } = req.params
 
     const gallery = await Gallery.findById(id)
 
     if (!gallery) return next(new ErrorHandler('Data not found', 404))
 
-    if (!path || !oldFile)
-        return next(new ErrorHandler('Please input required field.', 404))
+    // if (!path || !oldFile)
+    //     return next(new ErrorHandler('Please input required field.', 404))
 
     if (author) {
         author = JSON.parse(author)
-        gallery.author = author
+        newGallery.author = author
     }
     if (location) {
         location = JSON.parse(location)
-        gallery.location = location
+        newGallery.location = location
     }
 
     var contentImages = []
@@ -436,7 +436,7 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
                 name: await uploadFile(coverImage, path),
             }
 
-            gallery.coverImage = coverImageName
+            newGallery.coverImage = coverImageName
         }
         if (authorImage) {
             if (
@@ -464,7 +464,7 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
                 name: await uploadFile(authorImage, path),
             }
 
-            gallery.author.image = authorImageName
+            newGallery.author.image = authorImageName
         }
 
         if (live) {
@@ -757,13 +757,17 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
             }
         })
 
-        gallery.content = contents
+        newGallery.content = contents
     }
 
-    gallery.updatedAt = Date.now()
+    newGallery = {
+        ...newGallery,
+        ...req.body,
+    }
+
     const updatedGallery = await Gallery.findByIdAndUpdate(
         { _id: id },
-        { ...req.body, ...gallery, updatedAt: Date.now() },
+        { ...newGallery, updatedAt: Date.now() },
         { new: true }
     )
 
