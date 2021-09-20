@@ -75,7 +75,8 @@ export default {
 <style lang="scss">
 .contact {
     .contact-group {
-        margin: 50px 50px 50px;
+        // margin: 50px 50px 50px;
+        margin: 0px 50px 50px;
         padding: 30px 15px 0px;
         border-top: 1px solid;
         .address {
