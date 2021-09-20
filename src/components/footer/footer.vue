@@ -15,7 +15,7 @@
           <p>
             {{ $t("footer_description1") }} <br />
             {{ $t("footer_description2") }} <br />
-            {{ $t("footer_description3") }} 
+            {{ $t("footer_description3") }}
           </p>
           <div class="button">
             <button type="button" class="btn customButton">
