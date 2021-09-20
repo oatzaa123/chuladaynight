@@ -94,7 +94,7 @@
 import { useRouter } from 'vue-router'
 import useGallery from '@/hooks/useGallery'
 import ImageView from '@/components/ImageView'
-import { onMounted } from 'vue'
+import { onMounted, reactive } from 'vue'
 export default {
     components: { ImageView },
     setup() {
@@ -111,79 +111,83 @@ export default {
         }
 
         const ele = document.getElementsByClassName('items')
-        let isDown = false
-        let startX = 0
-        let scrollLeft = 0
-        let interval = false
-        let intervalAutoplay = false
-        let AutoplayPageX = 1
+        const state = reactive({
+            isDown: false,
+            startX: 0,
+            scrollLeft: 0,
+            interval: false,
+            intervalAutoplay: false,
+            AutoplayPageX: 1,
+        })
 
         const mousedown = (e) => {
             const slider = ele[0]
             slider.classList.add('active')
-            isDown = true
-            startX = e.pageX - slider.offsetLeft
-            scrollLeft = slider.scrollLeft
+            state.isDown = true
+            state.startX = e.pageX - slider.offsetLeft
+            state.scrollLeft = slider.scrollLeft
         }
         const mouseup = () => {
             const slider = ele[0]
-            isDown = false
+            state.isDown = false
             slider.classList.remove('active')
-            scrollLeft = slider.scrollLeft
+            state.scrollLeft = slider.scrollLeft
         }
         const mouseover = () => {
-            console.log(intervalAutoplay)
-            if (intervalAutoplay) {
-                clearInterval(intervalAutoplay)
-                intervalAutoplay = false
+            if (state.intervalAutoplay) {
+                clearInterval(state.intervalAutoplay)
+                state.intervalAutoplay = false
             }
         }
         const mouseleave = () => {
             const slider = ele[0]
-            isDown = false
+            state.isDown = false
             slider.classList.remove('active')
-            scrollLeft = slider.scrollLeft
+            state.scrollLeft = slider.scrollLeft
 
-            intervalAutoplay = false
+            state.intervalAutoplay = false
             autoPlay()
         }
         const mousemove = (e) => {
             const slider = ele[0]
-            if (!isDown) return
+            if (!state.isDown) return
             e.preventDefault()
             const x = e.pageX - slider.offsetLeft
-            const walk = (x - startX) * 1 //scroll-fast
-            slider.scrollLeft = scrollLeft - walk
+            const walk = (x - state.startX) * 1 //scroll-fast
+            slider.scrollLeft = state.scrollLeft - walk
         }
 
         const Arrow = (pageX) => {
-            if (!interval)
-                interval = setInterval(() => {
+            if (!state.interval)
+                state.interval = setInterval(() => {
                     const slider = ele[0]
-                    startX = (startX || 0) + pageX
-                    scrollLeft = (scrollLeft || 0) + pageX
-                    slider.scrollLeft = scrollLeft
+                    state.startX = (state.startX || 0) + pageX
+                    state.scrollLeft = (state.scrollLeft || 0) + pageX
+                    slider.scrollLeft = state.scrollLeft
                 }, 0)
         }
 
         const ArrowStop = () => {
-            clearInterval(interval)
-            interval = false
+            clearInterval(state.interval)
+            state.interval = false
         }
 
         const autoPlay = () => {
-            if (!intervalAutoplay)
-                intervalAutoplay = setInterval(() => {
+            if (!state.intervalAutoplay)
+                state.intervalAutoplay = setInterval(() => {
                     const slider = ele[0]
-                    startX = (startX || 0) + AutoplayPageX
-                    scrollLeft = (scrollLeft || 0) + AutoplayPageX
-                    slider.scrollLeft = scrollLeft
+                    if (slider) {
+                        state.startX = (state.startX || 0) + state.AutoplayPageX
+                        state.scrollLeft =
+                            (state.scrollLeft || 0) + state.AutoplayPageX
+                        slider.scrollLeft = state.scrollLeft
 
-                    let scrollMax = slider.scrollWidth - slider.clientWidth
-                    if (slider.scrollLeft == scrollMax) {
-                        AutoplayPageX = -1
-                    } else if (slider.scrollLeft == 0) {
-                        AutoplayPageX = 1
+                        let scrollMax = slider.scrollWidth - slider.clientWidth
+                        if (slider.scrollLeft == scrollMax) {
+                            state.AutoplayPageX = -1
+                        } else if (slider.scrollLeft == 0) {
+                            state.AutoplayPageX = 1
+                        }
                     }
                 }, 10)
         }
@@ -202,9 +206,6 @@ export default {
             mousemove,
             Arrow,
             ArrowStop,
-            isDown,
-            startX,
-            scrollLeft,
         }
     },
 }
