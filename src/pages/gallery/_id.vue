@@ -215,6 +215,8 @@
                                     data.author.image.path
                                 )
                             "
+                            width="100"
+                            height="120"
                         />
                         <img
                             v-else

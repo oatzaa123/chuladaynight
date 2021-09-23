@@ -363,12 +363,11 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
     //     return next(new ErrorHandler('Please input required field.', 404))
 
     if (author) {
-        author = JSON.parse(author)
-        newGallery.author = author
+        newGallery.author = { ...JSON.parse(author) }
     }
+
     if (location) {
-        location = JSON.parse(location)
-        newGallery.location = location
+        newGallery.location = { ...JSON.parse(location) }
     }
 
     var contentImages = []
@@ -439,57 +438,66 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
 
             newGallery.coverImage = coverImageName
         }
+
         if (authorImage) {
-            if (
-                JSON.parse(oldFile) &&
-                JSON.parse(oldFile).authorImage &&
-                fs.existsSync(
-                    paths.join(
-                        __dirname,
-                        `../../../assets/uploads/images/${path}/${
-                            JSON.parse(oldFile).authorImage
-                        }`
-                    )
-                )
-            ) {
-                fs.unlinkSync(
-                    paths.join(
-                        __dirname,
-                        `../../../assets/uploads/images/${path}/`,
-                        JSON.parse(oldFile).authorImage
-                    )
-                )
+            if (oldFile) {
+                if (JSON.parse(oldFile).authorImage) {
+                    if (
+                        fs.existsSync(
+                            paths.join(
+                                __dirname,
+                                `../../../assets/uploads/images/${path}/${
+                                    JSON.parse(oldFile).authorImage
+                                }`
+                            )
+                        )
+                    ) {
+                        fs.unlinkSync(
+                            paths.join(
+                                __dirname,
+                                `../../../assets/uploads/images/${path}/`,
+                                JSON.parse(oldFile).authorImage
+                            )
+                        )
+                    }
+                }
             }
+
             authorImageName = {
                 path,
                 name: await uploadFile(authorImage, path),
             }
 
-            newGallery.author.image = authorImageName
+            newGallery.author = {
+                ...newGallery.author,
+                image: authorImageName,
+            }
         }
 
         if (live) {
             const time = JSON.parse(liveTime).liveTime
             if (live.length > 0) {
-                if (
-                    JSON.parse(oldFile) &&
-                    JSON.parse(oldFile).liveVideo &&
-                    fs.existsSync(
-                        paths.join(
-                            __dirname,
-                            `../../../assets/uploads/videos/${path}/${
+                if (oldFile) {
+                    if (
+                        JSON.parse(oldFile) &&
+                        JSON.parse(oldFile).liveVideo &&
+                        fs.existsSync(
+                            paths.join(
+                                __dirname,
+                                `../../../assets/uploads/videos/${path}/${
+                                    JSON.parse(oldFile).liveVideo[0]
+                                }`
+                            )
+                        )
+                    ) {
+                        fs.unlinkSync(
+                            paths.join(
+                                __dirname,
+                                `../../../assets/uploads/videos/${path}/`,
                                 JSON.parse(oldFile).liveVideo[0]
-                            }`
+                            )
                         )
-                    )
-                ) {
-                    fs.unlinkSync(
-                        paths.join(
-                            __dirname,
-                            `../../../assets/uploads/videos/${path}/`,
-                            JSON.parse(oldFile).liveVideo[0]
-                        )
-                    )
+                    }
                 }
                 await Promise.all(
                     live.map(async (i, index) => {
@@ -509,25 +517,27 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
                     })
                 )
             } else {
-                if (
-                    JSON.parse(oldFile) &&
-                    JSON.parse(oldFile).liveVideo &&
-                    fs.existsSync(
-                        paths.join(
-                            __dirname,
-                            `../../../assets/uploads/images/${path}/${
+                if (oldFile) {
+                    if (
+                        JSON.parse(oldFile) &&
+                        JSON.parse(oldFile).liveVideo &&
+                        fs.existsSync(
+                            paths.join(
+                                __dirname,
+                                `../../../assets/uploads/images/${path}/${
+                                    JSON.parse(oldFile).liveVideo
+                                }`
+                            )
+                        )
+                    ) {
+                        fs.unlinkSync(
+                            paths.join(
+                                __dirname,
+                                `../../../assets/uploads/images/${path}/`,
                                 JSON.parse(oldFile).liveVideo
-                            }`
+                            )
                         )
-                    )
-                ) {
-                    fs.unlinkSync(
-                        paths.join(
-                            __dirname,
-                            `../../../assets/uploads/images/${path}/`,
-                            JSON.parse(oldFile).liveVideo
-                        )
-                    )
+                    }
                 }
                 await Promise.all(
                     time.map(async (i) => {
@@ -552,43 +562,47 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
 
     const arrModel = []
     if (contentModels.length > 0) {
-        if (typeof JSON.parse(oldFile).contentModel === 'string') {
-            if (
-                fs.existsSync(
-                    paths.join(
-                        __dirname,
-                        `../../../assets/uploads/models/${path}/${
-                            JSON.parse(oldFile).contentModel
-                        }`
-                    )
-                )
-            ) {
-                fs.unlinkSync(
-                    paths.join(
-                        __dirname,
-                        `../../../assets/uploads/models/${path}/`,
-                        JSON.parse(oldFile).contentModel
-                    )
-                )
-            }
-        } else {
-            JSON.parse(oldFile).contentModel.map((i) => {
-                if (
-                    fs.existsSync(
-                        paths.join(
-                            __dirname,
-                            `../../../assets/uploads/models/${path}/${i}`
+        if (oldFile) {
+            if (JSON.parse(oldFile).contentModel) {
+                if (typeof JSON.parse(oldFile).contentModel === 'string') {
+                    if (
+                        fs.existsSync(
+                            paths.join(
+                                __dirname,
+                                `../../../assets/uploads/models/${path}/${
+                                    JSON.parse(oldFile).contentModel
+                                }`
+                            )
                         )
-                    )
-                ) {
-                    fs.unlinkSync(
-                        paths.join(
-                            __dirname,
-                            `../../../assets/uploads/models/${path}/${i}`
+                    ) {
+                        fs.unlinkSync(
+                            paths.join(
+                                __dirname,
+                                `../../../assets/uploads/models/${path}/`,
+                                JSON.parse(oldFile).contentModel
+                            )
                         )
-                    )
+                    }
+                } else {
+                    JSON.parse(oldFile).contentModel.map((i) => {
+                        if (
+                            fs.existsSync(
+                                paths.join(
+                                    __dirname,
+                                    `../../../assets/uploads/models/${path}/${i}`
+                                )
+                            )
+                        ) {
+                            fs.unlinkSync(
+                                paths.join(
+                                    __dirname,
+                                    `../../../assets/uploads/models/${path}/${i}`
+                                )
+                            )
+                        }
+                    })
                 }
-            })
+            }
         }
         await Promise.all(
             contentModels.map(async (item) => {
@@ -612,23 +626,27 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
 
     var arrImg = []
     if (contentImages.length > 0) {
-        JSON.parse(oldFile).contentImage.map((i) => {
-            if (
-                fs.existsSync(
-                    paths.join(
-                        __dirname,
-                        `../../../assets/uploads/images/${path}/${i}`
-                    )
-                )
-            ) {
-                fs.unlinkSync(
-                    paths.join(
-                        __dirname,
-                        `../../../assets/uploads/images/${path}/${i}`
-                    )
-                )
+        if (oldFile) {
+            if (JSON.parse(oldFile).contentImage) {
+                JSON.parse(oldFile).contentImage.map((i) => {
+                    if (
+                        fs.existsSync(
+                            paths.join(
+                                __dirname,
+                                `../../../assets/uploads/images/${path}/${i}`
+                            )
+                        )
+                    ) {
+                        fs.unlinkSync(
+                            paths.join(
+                                __dirname,
+                                `../../../assets/uploads/images/${path}/${i}`
+                            )
+                        )
+                    }
+                })
             }
-        })
+        }
         await Promise.all(
             contentImages.map(async (item) => {
                 const name = await uploadFile(item, path)
@@ -651,45 +669,49 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
 
     var arrVdo = []
     if (contentVideos.length > 0) {
-        if (typeof JSON.parse(oldFile).contentVideo === 'string') {
-            if (
-                fs.existsSync(
-                    paths.join(
-                        __dirname,
-                        `../../../assets/uploads/videos/${path}/${
-                            JSON.parse(oldFile).contentVideo
-                        }`
-                    )
-                )
-            ) {
-                fs.unlinkSync(
-                    paths.join(
-                        __dirname,
-                        `../../../assets/uploads/videos/${path}/`,
-                        JSON.parse(oldFile).contentVideo
-                    )
-                )
-            }
-        }
-
-        if (JSON.parse(oldFile).contentVideo.length > 0) {
-            JSON.parse(oldFile).contentVideo.map((i) => {
-                if (
-                    fs.existsSync(
-                        paths.join(
-                            __dirname,
-                            `../../../assets/uploads/videos/${path}/${i}`
+        if (oldFile) {
+            if (JSON.parse(oldFile).contentVideo) {
+                if (typeof JSON.parse(oldFile).contentVideo === 'string') {
+                    if (
+                        fs.existsSync(
+                            paths.join(
+                                __dirname,
+                                `../../../assets/uploads/videos/${path}/${
+                                    JSON.parse(oldFile).contentVideo
+                                }`
+                            )
                         )
-                    )
-                ) {
-                    fs.unlinkSync(
-                        paths.join(
-                            __dirname,
-                            `../../../assets/uploads/videos/${path}/${i}`
+                    ) {
+                        fs.unlinkSync(
+                            paths.join(
+                                __dirname,
+                                `../../../assets/uploads/videos/${path}/`,
+                                JSON.parse(oldFile).contentVideo
+                            )
                         )
-                    )
+                    }
                 }
-            })
+
+                if (JSON.parse(oldFile).contentVideo.length > 0) {
+                    JSON.parse(oldFile).contentVideo.map((i) => {
+                        if (
+                            fs.existsSync(
+                                paths.join(
+                                    __dirname,
+                                    `../../../assets/uploads/videos/${path}/${i}`
+                                )
+                            )
+                        ) {
+                            fs.unlinkSync(
+                                paths.join(
+                                    __dirname,
+                                    `../../../assets/uploads/videos/${path}/${i}`
+                                )
+                            )
+                        }
+                    })
+                }
+            }
         }
 
         await Promise.all(
@@ -762,8 +784,8 @@ exports.updateGallery = catchAsync(async (req, res, next) => {
     }
 
     newGallery = {
-        ...newGallery,
         ...req.body,
+        ...newGallery,
     }
 
     const updatedGallery = await Gallery.findByIdAndUpdate(
