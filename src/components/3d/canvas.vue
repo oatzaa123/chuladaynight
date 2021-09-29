@@ -167,7 +167,7 @@ export default {
                             node.castShadow = true
                         }
                     })
-                    scene.add(root)
+                    // scene.add(root)
 
                     // compute the box that contains all the stuff
                     // from root and below
@@ -175,6 +175,12 @@ export default {
 
                     const boxSize = box.getSize(new THREE.Vector3()).length()
                     const boxCenter = box.getCenter(new THREE.Vector3())
+                    // root.position.add(boxCenter.multiplyScalar(-1))
+
+                    // root.position.sub(boxCenter) // center the model
+                    // root.rotation.y = Math.PI
+
+                    scene.add(root)
 
                     // set the camera to frame the box
                     frameArea(boxSize, boxSize, boxCenter, camera)
