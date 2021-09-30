@@ -343,9 +343,30 @@ export default {
                 canCancel: true,
                 loader: 'dots',
             })
+            const {
+                language,
+                userAgentData: { platform, brands },
+            } = window.navigator
             const id = route.params.id
             const res = await axios.get(`/gallery/${id}`)
+            const des = await axios.get('http://ip-api.com/json')
             gallery.value = res.data.data.gallery
+            if (des.data) {
+                const { country, query } = des.data
+                try {
+                    await axios.post('/network', {
+                        gallery_id: id,
+                        visitDate: Date.now(),
+                        ipAddress: query,
+                        country,
+                        language,
+                        OS: platform,
+                        browser: brands[0].brand,
+                    })
+                } catch (error) {
+                    console.error(error)
+                }
+            }
             loader.hide()
         } catch (error) {
             loader.hide()
