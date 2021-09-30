@@ -1,11 +1,6 @@
 <template>
   <div class="home">
-    <div class="animation-cloud"></div>
     <div class="section1" :class="{ bgnight: isNight }">
-      <div v-for="i in 7" :key="i" class="star-group">
-        <div class="blur"></div>
-        <div class="star"></div>
-      </div>
       <div
         class="overlay"
         :class="{ show: showLang }"
@@ -15,16 +10,6 @@
         <div @click.stop="showLang = !showLang">
           <span>{{ lang.toUpperCase() }}</span>
         </div>
-        <!-- &nbsp;|&nbsp;
-                <div @click="saveLocale('en')">
-                    <input
-                        type="radio"
-                        id="en"
-                        value="en"
-                        v-model="$i18n.locale"
-                    />
-                    EN
-                </div> -->
         <div class="menu-lang" :class="{ show: showLang }">
           <div @click="saveLocale('th')" @click.stop="showLang = false">
             <input type="radio" id="th" value="th" v-model="$i18n.locale" />TH
@@ -38,24 +23,16 @@
       <div class="logo-block">
         <div class="left">
           <div class="logo">
-            <div class="title">CHULA</div>
-            <div class="sub">DIGITAL ARTS PARK</div>
-          </div>
-          <div class="toggle" :class="{ day: !isNight, night: isNight }">
-            <div
-              class="day"
-              :class="{ active: !isNight }"
-              @click="bgToggle(false)"
-            >
-              DAY
-            </div>
-            <div class="n">&</div>
-            <div
-              class="night"
-              :class="{ active: isNight }"
-              @click="bgToggle(true)"
-            >
-              NIGHT
+            <img
+              width="450"
+              :src="
+                require('../../assets/images/home/section1/newbg/logo@2x.png')
+              "
+            />
+            <div class="toggle" :class="{ day: !isNight, night: isNight }">
+              <div class="day" @click="bgToggle(false)">DAY</div>
+              <div class="">&</div>
+              <div class="night" @click="bgToggle(true)">NIGHT</div>
             </div>
           </div>
         </div>
