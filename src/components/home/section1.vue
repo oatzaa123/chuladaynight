@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <div class="animation-cloud" v-if="!isNight"></div>
     <div class="section1" :class="{ bgnight: isNight }">
       <div
         class="overlay"
