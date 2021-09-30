@@ -120,17 +120,17 @@
             </div>
         </div>
     </div>
-    <FooterContacts />
+    <!-- <FooterContacts /> -->
 </template>
 
 <script>
 import { ref, computed, inject, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import useGallery from '@/hooks/useGallery'
-import FooterContacts from '@/components/footer/footer-contact'
+// import FooterContacts from '@/components/footer/footer-contact'
 export default {
     components: {
-        FooterContacts,
+        // FooterContacts,
     },
     setup() {
         const globalStore = inject('globalStore')
