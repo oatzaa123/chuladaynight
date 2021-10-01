@@ -4,7 +4,7 @@
   <div id="about" class="container">
     <div class="logo-block">
       <!-- <div class="row"> -->
-      <div class="left col-6">
+      <!-- <div class="left col-6">
         <div class="logo">
           <div class="title">CHULA</div>
           <div class="sub">DIGITAL ARTS PARK</div>
@@ -13,6 +13,21 @@
           <div class="day" :class="{ active: !isNight }">DAY</div>
           <div class="n">&</div>
           <div class="night" :class="{ active: isNight }">NIGHT</div>
+        </div>
+      </div> -->
+      <div class="left col-6">
+        <div class="logo">
+          <div class="group">
+            <img
+              width="450"
+              :src="require('../assets/images/home/section1/newbg/logo@2x.png')"
+            />
+            <div class="toggle" :class="{ day: !isNight, night: isNight }">
+              <div class="day">DAY</div>
+              <div class="">&</div>
+              <div class="night">NIGHT</div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="right col-6">

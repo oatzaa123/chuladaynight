@@ -27,79 +27,117 @@ $urlImage: "../assets/images";
     display: flex;
     flex-direction: row;
     margin-bottom: 50px;
-    .left {
+    .toggle {
       line-height: 1;
-      text-align: right;
-      font-weight: bold;
-      color: #ffffff;
-      text-shadow: 0px 0px 6px #ffffff;
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-start;
-      margin-bottom: 20px;
-      margin-right: 20px;
-      .logo {
-        margin-right: 15px;
-        .title {
-          font-family: "Kanit-Black";
-          font-size: 63px;
-          text-shadow: 0px 0px 10px #ffffff;
+      margin-top: 5px;
+      color: white;
+      font-size: 22px;
+      margin-left: 45px;
+      // cursor: pointer;
+      div {
+        float: left;
+        margin-left: 5px;
+      }
+      &.day {
+        div:nth-child(2) {
+          margin-left: 30px;
         }
-        .sub {
-          text-align: center;
-          font-size: 20px;
-          font-weight: 500;
-          margin-bottom: 20px;
-          text-shadow: 0px 0px 5px white;
+        .day {
+          color: #6268e9;
+          width: 15px;
+          border-bottom: 2px solid;
         }
       }
-      .toggle {
-        text-align: left;
-        position: relative;
-        margin-right: 30px;
-        .day {
-          transition: font-size 0.5s;
-          font-size: 30px;
-          margin: 7px 0px 5px 0px;
-          // cursor: pointer;
-          text-shadow: 0px 0px 5px white;
-          // &.active {
-          //   font-size: 64px;
-          //   margin: 9px 0px 12px 0px;
-          //   box-shadow: 0 6px 2px -2px white;
-          // }
-        }
-        .night {
-          font-size: 30px;
-          color: #e17cff;
-          transition: font-size 0.5s;
-          text-shadow: 0px 0px 10px #e17cff;
-        }
-        .n {
-          position: absolute;
-          bottom: 5px;
-          right: -24px;
-          font-family: "Savoye Regular";
-          font-weight: 100;
-          color: #1ba7ff;
-          font-size: 63px;
-          text-shadow: 0px 0px 5px #1ba7ff, 0px 0px 10px #1ba7ff;
-          transition: bottom 0.25s, font-size 0.25s;
-        }
-        &.night {
-          .n {
-            bottom: 5px;
-            right: -24px;
-            color: #b51bff;
-            text-shadow: 0px 0px 5px #b51bff, 0px 0px 10px #b51bff;
-            font-size: 63px;
-          }
+      &.night .night {
+        color: #c33289;
+        width: 15px;
+        border-bottom: 2px solid;
+      }
+    }
+    .left {
+      .logo .group {
+        width: fit-content;
+        float: right;
+        img {
+          width: 450px;
         }
       }
     }
+    // .left {
+    //   line-height: 1;
+    //   text-align: right;
+    //   font-weight: bold;
+    //   color: #ffffff;
+    //   text-shadow: 0px 0px 6px #ffffff;
+    //   display: flex;
+    //   justify-content: flex-end;
+    //   align-items: flex-start;
+    //   margin-bottom: 20px;
+    //   margin-right: 20px;
+    //   .logo {
+    //     margin-right: 15px;
+    //     .title {
+    //       font-family: "Kanit-Black";
+    //       font-size: 63px;
+    //       text-shadow: 0px 0px 10px #ffffff;
+    //     }
+    //     .sub {
+    //       text-align: center;
+    //       font-size: 20px;
+    //       font-weight: 500;
+    //       margin-bottom: 20px;
+    //       text-shadow: 0px 0px 5px white;
+    //     }
+    //   }
+    //   .toggle {
+    //     text-align: left;
+    //     position: relative;
+    //     margin-right: 30px;
+    //     .day {
+    //       transition: font-size 0.5s;
+    //       font-size: 30px;
+    //       margin: 7px 0px 5px 0px;
+    //       // cursor: pointer;
+    //       text-shadow: 0px 0px 5px white;
+    //       // &.active {
+    //       //   font-size: 64px;
+    //       //   margin: 9px 0px 12px 0px;
+    //       //   box-shadow: 0 6px 2px -2px white;
+    //       // }
+    //     }
+    //     .night {
+    //       font-size: 30px;
+    //       color: #e17cff;
+    //       transition: font-size 0.5s;
+    //       text-shadow: 0px 0px 10px #e17cff;
+    //     }
+    //     .n {
+    //       position: absolute;
+    //       bottom: 5px;
+    //       right: -24px;
+    //       font-family: "Savoye Regular";
+    //       font-weight: 100;
+    //       color: #1ba7ff;
+    //       font-size: 63px;
+    //       text-shadow: 0px 0px 5px #1ba7ff, 0px 0px 10px #1ba7ff;
+    //       transition: bottom 0.25s, font-size 0.25s;
+    //     }
+    //     &.night {
+    //       .n {
+    //         bottom: 5px;
+    //         right: -24px;
+    //         color: #b51bff;
+    //         text-shadow: 0px 0px 5px #b51bff, 0px 0px 10px #b51bff;
+    //         font-size: 63px;
+    //       }
+    //     }
+    //   }
+    // }
     .right {
       color: white;
-
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
       .title {
         font-family: "Kanit-SemiBold";
         text-align: left;
@@ -222,8 +260,15 @@ $urlImage: "../assets/images";
       .left {
         justify-content: center;
         width: 100%;
-        flex: 0 0 auto;
-        width: 100%;
+        .logo .group {
+          float: unset;
+          margin: auto;
+        }
+        .toggle {
+          font-size: 20px;
+        }
+        // flex: 0 0 auto;
+        // width: 100%;
       }
       .right {
         width: 100%;
@@ -255,53 +300,58 @@ $urlImage: "../assets/images";
 @media screen and (max-width: 426px) {
   #about {
     .logo-block {
-      .left {
-        justify-content: center;
-        .logo {
-          margin-right: 15px;
-          .title {
-            font-family: "Kanit-Black";
-            font-size: 60px;
-          }
-          .sub {
-            font-size: 18px;
-            font-weight: 500;
-          }
-        }
-        .toggle {
-          .day {
-            // font-size: 35px;
-            &.active {
-              //   font-size: 40px;
-            }
-          }
-          .night {
-            // font-size: 35px;
-            &.active {
-              //   font-size: 40px;
-            }
-          }
-          .n {
-            position: absolute;
-            right: -25px;
-            bottom: 5px;
-            font-family: "Savoye Regular";
-            font-weight: 100;
-            color: #1ba7ff;
-            font-size: 63px;
-            text-shadow: 0px 0px 10px #1ba7ff;
-            transition: bottom 0.25s, font-size 0.25s;
-          }
-          &.night {
-            margin-right: 0px;
-            .n {
-            //   bottom: 25px;
-            //   right: 0px;
-            //   font-size: 60px;
-            }
-          }
+      .left .logo .group {
+        img {
+          width: 340px;
         }
       }
+      // .left {
+      //   justify-content: center;
+      //   .logo {
+      //     margin-right: 15px;
+      //     .title {
+      //       font-family: "Kanit-Black";
+      //       font-size: 60px;
+      //     }
+      //     .sub {
+      //       font-size: 18px;
+      //       font-weight: 500;
+      //     }
+      //   }
+      //   .toggle {
+      //     .day {
+      //       // font-size: 35px;
+      //       &.active {
+      //         //   font-size: 40px;
+      //       }
+      //     }
+      //     .night {
+      //       // font-size: 35px;
+      //       &.active {
+      //         //   font-size: 40px;
+      //       }
+      //     }
+      //     .n {
+      //       position: absolute;
+      //       right: -25px;
+      //       bottom: 5px;
+      //       font-family: "Savoye Regular";
+      //       font-weight: 100;
+      //       color: #1ba7ff;
+      //       font-size: 63px;
+      //       text-shadow: 0px 0px 10px #1ba7ff;
+      //       transition: bottom 0.25s, font-size 0.25s;
+      //     }
+      //     &.night {
+      //       margin-right: 0px;
+      //       .n {
+      //         //   bottom: 25px;
+      //         //   right: 0px;
+      //         //   font-size: 60px;
+      //       }
+      //     }
+      //   }
+      // }
       .right {
         width: 100%;
         flex: 0 0 auto;
@@ -341,53 +391,58 @@ $urlImage: "../assets/images";
 @media screen and (max-width: 321px) {
   #about {
     .logo-block {
-      .left {
-        .logo {
-          margin-right: 15px;
-          .title {
-            font-family: "Kanit-Black";
-            font-size: 40px;
-          }
-          .sub {
-            font-size: 14px;
-            font-weight: 500;
-          }
-        }
-        .toggle {
-            margin-right: 0px;
-          .day {
-            font-size: 26px;
-            margin: 4px 0px 5px 0px;
-            &.active {
-              //   font-size: 40px;
-            }
-          }
-          .night {
-            font-size: 26px;
-            &.active {
-            //   font-size: 40px;
-            }
-          }
-          .n {
-            position: absolute;
-            right: -25px;
-            bottom: 0px;
-            font-family: "Savoye Regular";
-            font-weight: 100;
-            color: #1ba7ff;
-            font-size: 63px;
-            text-shadow: 0px 0px 10px #1ba7ff;
-            transition: bottom 0.25s, font-size 0.25s;
-          }
-          &.night {
-            .n {
-            //   bottom: 28px;
-            //   right: 20px;
-            //   font-size: 40px;
-            }
-          }
+      .left .logo .group {
+        img {
+          width: 280px;
         }
       }
+      // .left {
+      //   .logo {
+      //     margin-right: 15px;
+      //     .title {
+      //       font-family: "Kanit-Black";
+      //       font-size: 40px;
+      //     }
+      //     .sub {
+      //       font-size: 14px;
+      //       font-weight: 500;
+      //     }
+      //   }
+      //   .toggle {
+      //     margin-right: 0px;
+      //     .day {
+      //       font-size: 26px;
+      //       margin: 4px 0px 5px 0px;
+      //       &.active {
+      //         //   font-size: 40px;
+      //       }
+      //     }
+      //     .night {
+      //       font-size: 26px;
+      //       &.active {
+      //         //   font-size: 40px;
+      //       }
+      //     }
+      //     .n {
+      //       position: absolute;
+      //       right: -25px;
+      //       bottom: 0px;
+      //       font-family: "Savoye Regular";
+      //       font-weight: 100;
+      //       color: #1ba7ff;
+      //       font-size: 63px;
+      //       text-shadow: 0px 0px 10px #1ba7ff;
+      //       transition: bottom 0.25s, font-size 0.25s;
+      //     }
+      //     &.night {
+      //       .n {
+      //         //   bottom: 28px;
+      //         //   right: 20px;
+      //         //   font-size: 40px;
+      //       }
+      //     }
+      //   }
+      // }
       .right {
         width: 100%;
         flex: 0 0 auto;
