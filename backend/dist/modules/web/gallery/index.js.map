@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../../modules/web/gallery/index.js"],"names":[],"mappings":";;;;;;;;;;;;;;AAAA","sourcesContent":["import galleryRoutes from './gallery.routes'\r\nexport { galleryRoutes }\r\n"],"file":"index.js"}
