@@ -101,7 +101,7 @@
             <div class="d-flex">
                 <div
                     class="img-border"
-                    :class="[isNight ? 'isNight' : null]"
+                    :style="widthBorder"
                     @click="bgToggle(!isNight)"
                 ></div>
 
@@ -116,15 +116,15 @@
                         <div class="tag"></div>
                         <div class="tags"></div>
                     </div>
-                    <span class="dayTime" @click="bgToggle(false)"
+                    <span class="dayTime" @click="bgToggle(!isNight)"
                         >Day Time</span
                     >
                 </div>
             </div>
 
-            <div class="tag-toggle-reverse" v-else>
+            <div class="tag-toggle-reverse" v-if="!isNight">
                 <div class="d-flex">
-                    <span class="nightTime" @click="bgToggle(true)"
+                    <span class="nightTime" @click="bgToggle(!isNight)"
                         >Night Time</span
                     >
                     <div class="allTags">
@@ -167,6 +167,7 @@ export default {
             // rangeValue: 12,
             rangeStyle: '',
             dashStyle: '',
+            widthBorder: '',
             widthRange: '',
             leftRange: '',
             Menu: [
@@ -190,16 +191,22 @@ export default {
             var night = [...range(18, 24), ...range(0, 5)]
             var hour = new Date().getHours()
             var value = 0
+            var widthBorder = 0
 
             if (night.includes(hour)) {
                 value = 5
+                widthBorder = 3
+                bgToggle(true)
             }
 
             if (day.includes(hour)) {
                 value = 95
+                widthBorder = 93
+                bgToggle(false)
             }
 
             state.rangeStyle = `background: linear-gradient(to right, #b51bff 0%, #b51bff ${value}%, #fff ${value}%, #fff 100%);`
+            state.widthBorder = `left: ${widthBorder}%;`
             state.widthRange = `width: ${value}%;`
             state.leftRange = `left: ${value}%;`
             state.dashStyle = `left: ${value}%;`
@@ -210,7 +217,6 @@ export default {
         }
 
         const bgToggle = (boolean) => {
-            console.log(boolean)
             store.commit('setIsNight', boolean)
         }
 
@@ -265,9 +271,11 @@ export default {
                 if (isNight) {
                     state.leftRange = `left: 5%;`
                     state.widthRange = `width: 5%;`
+                    state.widthBorder = `left: 3%;`
                 } else {
                     state.leftRange = `left: 95%;`
                     state.widthRange = `width: 95%;`
+                    state.widthBorder = `left: 93%;`
                 }
             }
         )

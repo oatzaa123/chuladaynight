@@ -2,6 +2,6 @@ import axios from 'axios'
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
-axios.defaults.baseURL = 'http://localhost:5000/api_v1'
+axios.defaults.baseURL = `${process.env.VUE_APP_LOCAL_ENDPOINT}`
 
 export default axios
