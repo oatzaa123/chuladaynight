@@ -346,18 +346,20 @@ export default {
             const {
                 language,
                 userAgentData: { platform, brands },
-            } = window.navigator
+            } = navigator
             const id = route.params.id
             const res = await axios.get(`/gallery/${id}`)
-            const des = await axios.get('http://ip-api.com/json')
+            const des = await axios.get(
+                'https://ipinfo.io?token=9f0b1a358406be'
+            )
             gallery.value = res.data.data.gallery
             if (des.data) {
-                const { country, query } = des.data
+                const { country, ip } = des.data
                 try {
                     await axios.post('/network', {
                         gallery_id: id,
                         visitDate: Date.now(),
-                        ipAddress: query,
+                        ipAddress: ip,
                         country,
                         language,
                         OS: platform,

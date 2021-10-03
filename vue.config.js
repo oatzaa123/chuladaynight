@@ -10,11 +10,11 @@ module.exports = {
             fullInstall: true,
         },
     },
-    // devServer: {
-    //     proxy: 'https://www.chulaartpark.art/api_v1',
-    //     overlay: {
-    //         warnings: true,
-    //         errors: true,
-    //     },
-    // },
+    devServer: {
+        proxy: 'https://www.chulaartpark.art/api_v1',
+        overlay: {
+            warnings: true,
+            errors: true,
+        },
+    },
 }
