@@ -312,7 +312,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import Canvas from '@/components/3d/canvas'
 import ImageView from '@/components/ImageView'
-import { useLoading } from 'vue3-loading-overlay'
+// import { useLoading } from 'vue3-loading-overlay'
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 import { formatMonth } from '@/helpers/formatDate'
 import moment from 'moment'
@@ -331,18 +331,18 @@ export default {
         const select = ref(null)
         const isOpen = ref(false)
         const isLoading = ref(false)
-        let loader = useLoading()
+        // let loader = useLoading()
         let formContainer = ref(null)
 
         try {
             // getOne(route.params.id)
             isLoading.value = true
-            loader.show({
-                // Optional parameters
-                container: isLoading.value ? null : formContainer.value,
-                canCancel: true,
-                loader: 'dots',
-            })
+            // loader.show({
+            //     // Optional parameters
+            //     container: isLoading.value ? null : formContainer.value,
+            //     canCancel: true,
+            //     loader: 'dots',
+            // })
             const {
                 language,
                 userAgentData: { platform, brands },
@@ -369,9 +369,9 @@ export default {
                     console.error(error)
                 }
             }
-            loader.hide()
+            // loader.hide()
         } catch (error) {
-            loader.hide()
+            // loader.hide()
             throw new Error(error)
         }
 
