@@ -17,6 +17,7 @@
     "dotenv": "^10.0.0",
     "feather-icons": "^4.28.0",
     "moment": "^2.29.1",
+    "sweetalert2": "^11.1.8",
     "three": "^0.131.3",
     "vue": "^3.2.1",
     "vue-3d-model": "^1.4.0",

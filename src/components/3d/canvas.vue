@@ -1,11 +1,13 @@
 <template>
-    <canvas id="c"></canvas>
+    <canvas id="c" @click.ctrl="zoomModel"></canvas>
 </template>
 
 <script>
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+// import { useSwal } from '@/hooks/useSwal'
+import Swal from 'sweetalert2'
 // import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'
 // import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js'
 // import { DDSLoader } from 'three/examples/jsm/loaders/DDSLoader.js'
@@ -18,6 +20,10 @@ export default {
             type: String,
         },
     },
+    data: () => ({
+        controls: null,
+        camera: null,
+    }),
     methods: {
         async main() {
             const canvas = document.querySelector('#c')
@@ -30,11 +36,13 @@ export default {
             const near = 0.1
             const far = 100
             const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
+            this.camera = camera
             camera.position.set(0, 10, 20)
 
             const controls = new OrbitControls(camera, canvas)
+            this.controls = controls
             controls.target.set(0, 5, 0)
-            controls.enableDamping = true
+            controls.enableDamping = false
             controls.enableZoom = false
             controls.update()
 
@@ -79,31 +87,31 @@ export default {
                 // plane.rotation.set(-Math.PI / 2, 0, 0);
                 plane.rotation.x = Math.PI * -0.5
                 plane.position.set(0, -1, 0)
-                plane.receiveShadow = true
+                // plane.receiveShadow = true
                 scene.add(plane)
             }
 
-            //   {
-            //     const skyColor = 0xb1e1ff; // light blue
-            //     const groundColor = 0xb97a20; // brownish orange
-            //     const intensity = 1;
+            // {
+            //     const skyColor = 0xb1e1ff // light blue
+            //     const groundColor = 0xb97a20 // brownish orange
+            //     const intensity = 1
             //     const light = new THREE.HemisphereLight(
-            //       skyColor,
-            //       groundColor,
-            //       intensity
-            //     );
-            //     scene.add(light);
-            //   }
+            //         skyColor,
+            //         groundColor,
+            //         intensity
+            //     )
+            //     scene.add(light)
+            // }
 
-            //   {
-            //     const color = 0xffffff;
-            //     const intensity = 1;
-            //     const light = new THREE.DirectionalLight(color, intensity);
-            //     light.position.set(0, 10, 0);
-            //     light.target.position.set(-5, 0, 0);
-            //     scene.add(light);
-            //     scene.add(light.target);
-            //   }
+            // {
+            //     const color = 0xffffff
+            //     const intensity = 1
+            //     const light = new THREE.DirectionalLight(color, intensity)
+            //     light.position.set(0, 10, 0)
+            //     light.target.position.set(-5, 0, 0)
+            //     scene.add(light)
+            //     scene.add(light.target)
+            // }
 
             function frameArea(sizeToFitOnScreen, boxSize, boxCenter, camera) {
                 const halfSizeToFitOnScreen = sizeToFitOnScreen * 0.5
@@ -239,6 +247,19 @@ export default {
             }
 
             requestAnimationFrame(render)
+        },
+        zoomModel() {
+            const zoom = this.controls.enableZoom
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1000,
+                icon: 'success',
+                title: '',
+                text: !zoom ? 'Zoom is enable' : 'Zoom is disabled',
+            })
+            this.controls.enableZoom = !this.controls.enableZoom
         },
         getModel(name, path) {
             return `${process.env.VUE_APP_PATH_MODEL}/${path}/${name}`
