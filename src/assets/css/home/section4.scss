@@ -107,11 +107,29 @@
         position: absolute;
         left: 3%;
         top: 35%;
+        @media screen and (max-width: 426px) {
+            display: none;
+        }
+        @media screen and (max-width: 376px) {
+            display: none;
+        }
+        @media screen and (max-width: 321px) {
+            display: none;
+        }
     }
     .right-arrow {
         position: absolute;
         right: 3%;
         top: 35%;
+        @media screen and (max-width: 426px) {
+            display: none;
+        }
+        @media screen and (max-width: 376px) {
+            display: none;
+        }
+        @media screen and (max-width: 321px) {
+            display: none;
+        }
     }
     .customButton {
         background-color: #7948e6;
@@ -170,21 +188,36 @@
             img {
                 height: 300px;
             }
-            .container .content {
-                .group-content {
-                    .customText {
-                        font-size: calc(61px * #{nth($mediaSize, $i)});
-                    }
-                    .sub {
-                        font-size: 23px;
-                    }
+            .container {
+                .row {
+                    margin: 0 !important;
+                    padding: 20px 0px;
+                    display: block;
                 }
-                .customDiscription {
-                    font-size: calc(14px * #{nth($mediaSize, $i)});
-                    margin-top: 5px;
+                .pt-5 {
+                    padding-top: 20px !important;
                 }
-                .btn-outline-primary {
-                    font-size: calc(16px * 0.9);
+                .content {
+                    .col {
+                        text-align: center;
+                        .group-content {
+                            font-family: 'Kanit-Black';
+                            .customText {
+                                font-size: calc(61px * #{nth($mediaSize, $i)});
+                            }
+                            .sub {
+                                font-size: 23px;
+                            }
+                        }
+                        .customDiscription {
+                            text-align: left;
+                            font-size: calc(14px * #{nth($mediaSize, $i)});
+                            margin-top: 5px;
+                        }
+                        .btn-outline-primary {
+                            font-size: calc(16px * 0.9);
+                        }
+                    }
                 }
             }
         }

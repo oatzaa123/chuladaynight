@@ -43,7 +43,7 @@
                         <img
                             width="450"
                             :src="
-                                require('../../assets/images/home/section1/newbg/logo@2x.png')
+                                require('../../assets/images/home/section1/newbg/logo@2x - Copy.png')
                             "
                         />
                         <div

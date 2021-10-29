@@ -13,7 +13,7 @@
             </button>
         </div>
         <div class="container">
-            <div class="row" style="margin: 0px 16px">
+            <div class="row">
                 <!-- <CarouselSlide
           v-slot:default="{ blocksCurrent }"
           :slideCurrent="slideCurrent"

@@ -132,6 +132,12 @@
     .news {
         .container {
             .new-content {
+                .row {
+                    display: block;
+                }
+                .col-5 {
+                    width: 100%;
+                }
                 .new-img {
                     border-right: 0px solid #ba25ff;
                     img {
@@ -140,14 +146,17 @@
                     }
                 }
                 .new-content-text {
-                    border-left: 2px solid #ba25ff;
+                    border-left: 0px solid #ba25ff;
                     margin-bottom: 0;
                     p {
                         font-size: 10px;
                     }
                     &::before {
-                        top: 0;
+                        display: none;
                     }
+                }
+                .col-7 {
+                    width: 100%;
                 }
             }
             h1 {
@@ -159,14 +168,19 @@
             }
             .paginate-left {
                 border-right: none;
+                width: 0;
             }
             .paginate-right {
-                padding-left: 10px;
-                border-left: 2px solid #ba25ff;
+                padding-left: 0px;
+                border-left: 0px solid #ba25ff;
             }
             .paginate-right-btn {
-                padding-left: 25px;
-                border-left: 2px solid #ba25ff;
+                padding-left: 0px;
+                border-left: 0px solid #ba25ff;
+                width: 100%;
+                text-align: center;
+                margin-right: 0;
+                padding: 0;
             }
         }
     }
@@ -175,11 +189,47 @@
 @media screen and (max-width: 376px) {
     .news {
         .container {
+            .new-content {
+                .row {
+                    display: block;
+                }
+                .col-5 {
+                    width: 100%;
+                }
+                .new-img {
+                    border-right: 0px solid #ba25ff;
+                    img {
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+                .new-content-text {
+                    border-left: 0px solid #ba25ff;
+                    margin-bottom: 0;
+                    p {
+                        font-size: 10px;
+                    }
+                    &::before {
+                        display: none;
+                    }
+                }
+                .col-7 {
+                    width: 100%;
+                }
+            }
+            .paginate-right {
+                padding-left: 0px;
+                border-left: 0px solid #ba25ff;
+            }
+            .paginate-right-btn {
+                padding-left: 0px;
+                border-left: 0px solid #ba25ff;
+            }
             h1 {
                 font-size: 30px;
             }
             .n {
-                left: 28%;
+                left: 17%;
                 font-size: 30px;
             }
         }
@@ -192,6 +242,12 @@
             .news-title {
                 padding-bottom: 1rem;
             }
+            .row {
+                display: block;
+            }
+            .col-5 {
+                width: 100%;
+            }
             .col-7 {
                 width: 100%;
             }
@@ -199,12 +255,16 @@
                 font-size: 25px;
             }
             .n {
-                left: 28%;
+                left: 25%;
                 font-size: 25px;
             }
             .new-content {
                 .new-img {
-                    display: none;
+                    border-right: 0px solid #ba25ff;
+                    img {
+                        height: 100%;
+                        width: 100%;
+                    }
                 }
                 .new-content-text {
                     border: 0px solid #ba1bff;
@@ -215,6 +275,7 @@
                         width: 0px;
                         height: 0px;
                         border: 0px solid #ba1bff;
+                        display: none;
                     }
                 }
             }

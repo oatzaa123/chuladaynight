@@ -81,22 +81,25 @@ export default {
 
 @media screen and (max-width: 426px) {
     .section-7 {
+        display: block;
+        padding: 20px 10px;
         .img {
             margin-right: 15px;
             img {
-                width: 70px;
+                width: 170px;
             }
         }
         .text {
-            font-size: 10px;
-            margin-right: 10px;
+            font-size: 45px;
+            margin-right: 0px;
         }
         .button .btn {
+            margin: 20px 0px;
             color: #fff;
             font-family: 'Prompt-Bold';
-            font-size: 10px;
+            font-size: 22px;
             background-color: #7948e6;
-            padding: 5px 10px;
+            padding: 7px 15px;
             border-radius: 32px;
             &:hover {
                 color: #7948e6;
