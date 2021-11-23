@@ -33,7 +33,7 @@
                 </div>
               </div>
               <div class="description">
-                <div class="title">Company contact</div>
+                <div class="title">{{ $t("footer_company_title") }}</div>
                 <div class="company">
                   {{ $t("footer_company_name") }}
                 </div>
@@ -41,12 +41,15 @@
                   {{ $t("footer_company_address") }}
                 </div>
                 <div class="address">
-                  {{ $t("footer_company_address2") }}
+                  {{ `email : chulaartpark@gmail.com` }}
                 </div>
               </div>
               <div class="email">
-                <div>{{ $t("footer_company_address3") }}</div>
-                <div>{{ $t("footer_company_address4") }}</div>
+                <div>
+                  {{
+                    `facebook : www.facebook.com/Chula-Arts-Park-สวนศิลป์จุฬา-100852425447300`
+                  }}
+                </div>
               </div>
 
               <div class="icon-group">
