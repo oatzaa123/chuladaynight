@@ -1,21 +1,20 @@
-import { toRefs, reactive } from 'vue'
-import useAxios from './useAxios'
+import { toRefs, reactive } from "vue";
+import useAxios from "./useAxios";
 export default function () {
-    const articles = reactive({
-        data: [],
-        errorMessage: null,
-        isFetching: false,
-    })
-    const getAll = () => {
-        const { data, errorMessage, fetchData, isFetching } =
-            useAxios(`/article`)
+  const articles = reactive({
+    data: [],
+    errorMessage: null,
+    isFetching: false,
+  });
+  const getAll = () => {
+    const { data, errorMessage, fetchData, isFetching } = useAxios(`/article`);
 
-        fetchData()
+    fetchData();
 
-        articles.data = data
-        articles.errorMessage = errorMessage
-        articles.isFetching = isFetching
-    }
+    articles.data = data;
+    articles.errorMessage = errorMessage;
+    articles.isFetching = isFetching;
+  };
 
-    return { getAll, ...toRefs(articles) }
+  return { getAll, ...toRefs(articles) };
 }

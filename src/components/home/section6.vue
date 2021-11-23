@@ -70,7 +70,7 @@ export default {
             perPage: 3,
           },
           425: {
-            perPage: 2,
+            perPage: 1,
           },
           375: {
             perPage: 1,

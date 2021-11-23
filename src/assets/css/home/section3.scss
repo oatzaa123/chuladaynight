@@ -20,7 +20,7 @@
     display: block;
     overflow-x: scroll;
     overflow-y: hidden;
-    height: 100vh;
+    min-height: 100vh;
     &::-webkit-scrollbar {
       display: none;
     }
@@ -39,7 +39,7 @@
         url("../../assets/images/gallery/Image 1.png");
       .item {
         display: inline-block;
-        height: 100vh;
+        min-height: 100vh;
         width: 100%;
         $left: 750;
         @for $i from 1 through 500 {
@@ -192,6 +192,13 @@
     }
   }
   @media screen and (max-width: 768px) {
+    min-height: 50vh;
+    .slide-container {
+      height: 50vh;
+      .items .item {
+        height: 50vh;
+      }
+    }
     .text-container {
       .sec3-content {
         .group-title {
@@ -228,6 +235,10 @@
           .sub {
             font-size: 20px;
           }
+        }
+        .group-discription {
+          padding: 10px;
+          text-align: center;
         }
       }
     }

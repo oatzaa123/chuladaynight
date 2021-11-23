@@ -21,7 +21,7 @@
             color: #b61bff;
             left: 55.8%;
             font-size: 60px;
-            top: 35%;
+            top: 62%;
             text-shadow: none;
         }
     }
@@ -228,13 +228,14 @@
             }
             .n {
                 left: 64%;
+                top: 60%;
                 font-size: 35px;
             }
         }
         .container {
             .workshop-content {
                 img {
-                    height: calc(328px * 0.5);
+                    height: calc(328px * 0.75);
                 }
             }
         }
@@ -255,7 +256,7 @@
         .container {
             .workshop-content {
                 img {
-                    height: calc(328px * 0.25);
+                    height: calc(328px * 0.75);
                 }
             }
         }

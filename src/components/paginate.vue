@@ -1,185 +1,182 @@
 <template>
-    <!-- <slot name="data" :pageNumber="pageNumber" /> -->
-    <div class="paginate">
-        <ul v-for="(item, index) in pages" :key="index">
-            <li v-if="item === 'LEFT' || item === 'RIGHT'">
-                <a>
-                    <span aria-hidden="true">...</span>
-                </a>
-            </li>
-            <li
-                v-else
-                @click="onHandleClick(item)"
-                :class="{ active: item === +pageNumber }"
-            >
-                {{ item }}
-            </li>
-        </ul>
-    </div>
+  <!-- <slot name="data" :pageNumber="pageNumber" /> -->
+  <div class="paginate">
+    <ul v-for="(item, index) in pages" :key="index">
+      <li v-if="item === 'LEFT' || item === 'RIGHT'">
+        <a>
+          <span aria-hidden="true">...</span>
+        </a>
+      </li>
+      <li
+        v-else
+        @click="onHandleClick(item)"
+        :class="{ active: item === +pageNumber }"
+      >
+        {{ item }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref, computed, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
 export default {
-    props: ['totalItems', 'pageLimit', 'pageNeighbours', 'onPageChanged'],
-    setup(props) {
-        // console.log(props)
-        const route = useRoute()
-        const router = useRouter()
-        const pageNumber = ref(route.query.pageNumber || 1)
+  props: ["totalItems", "pageLimit", "pageNeighbours", "onPageChanged"],
+  setup(props) {
+    // console.log(props)
+    const route = useRoute();
+    const router = useRouter();
+    const pageNumber = ref(route.query.pageNumber || 1);
 
-        const totalPages = computed(() => {
-            return Math.ceil(props.totalItems / props.pageLimit)
-        })
+    const totalPages = computed(() => {
+      return Math.ceil(props.totalItems / props.pageLimit);
+    });
 
-        const LEFT_PAGE = ref('LEFT')
-        const RIGHT_PAGE = ref('RIGHT')
+    const LEFT_PAGE = ref("LEFT");
+    const RIGHT_PAGE = ref("RIGHT");
 
-        const fetchPageNumbers = () => {
-            const totalPages = Math.ceil(props.totalItems / props.pageLimit)
-            const currentPage = pageNumber.value
-            const pageNeighbours = +props.pageNeighbours
+    const fetchPageNumbers = () => {
+      const totalPages = Math.ceil(props.totalItems / props.pageLimit);
+      const currentPage = pageNumber.value;
+      const pageNeighbours = +props.pageNeighbours;
 
-            const totalNumbers = pageNeighbours * 2 + 3
-            const totalBlocks = totalNumbers + 2
+      const totalNumbers = pageNeighbours * 2 + 3;
+      const totalBlocks = totalNumbers + 2;
 
-            if (totalPages > totalBlocks) {
-                let pages = []
+      if (totalPages > totalBlocks) {
+        let pages = [];
 
-                const leftBound = currentPage - pageNeighbours
-                const rightBound = currentPage + pageNeighbours
-                const beforeLastPage = totalPages - 1
+        const leftBound = currentPage - pageNeighbours;
+        const rightBound = currentPage + pageNeighbours;
+        const beforeLastPage = totalPages - 1;
 
-                const startPage = leftBound > 2 ? leftBound : 2
-                const endPage =
-                    rightBound < beforeLastPage ? rightBound : beforeLastPage
+        const startPage = leftBound > 2 ? leftBound : 2;
+        const endPage =
+          rightBound < beforeLastPage ? rightBound : beforeLastPage;
 
-                pages = range(startPage, endPage)
+        pages = range(startPage, endPage);
 
-                const pagesCount = pages.length
-                const singleSpillOffset = totalNumbers - pagesCount - 1
+        const pagesCount = pages.length;
+        const singleSpillOffset = totalNumbers - pagesCount - 1;
 
-                const leftSpill = startPage > 2
-                const rightSpill = endPage < beforeLastPage
+        const leftSpill = startPage > 2;
+        const rightSpill = endPage < beforeLastPage;
 
-                const leftSpillPage = LEFT_PAGE.value
-                const rightSpillPage = RIGHT_PAGE.value
+        const leftSpillPage = LEFT_PAGE.value;
+        const rightSpillPage = RIGHT_PAGE.value;
 
-                if (leftSpill && !rightSpill) {
-                    const extraPages = range(
-                        startPage - singleSpillOffset,
-                        startPage - 1
-                    )
-                    pages = [leftSpillPage, ...extraPages, ...pages]
-                } else if (!leftSpill && rightSpill) {
-                    const extraPages = range(
-                        endPage + 1,
-                        endPage + singleSpillOffset
-                    )
-                    pages = [...pages, ...extraPages, rightSpillPage]
-                } else if (leftSpill && rightSpill) {
-                    pages = [leftSpillPage, ...pages, rightSpillPage]
-                }
-
-                return [1, ...pages, totalPages]
-            }
-
-            return range(1, totalPages)
+        if (leftSpill && !rightSpill) {
+          const extraPages = range(
+            startPage - singleSpillOffset,
+            startPage - 1
+          );
+          pages = [leftSpillPage, ...extraPages, ...pages];
+        } else if (!leftSpill && rightSpill) {
+          const extraPages = range(endPage + 1, endPage + singleSpillOffset);
+          pages = [...pages, ...extraPages, rightSpillPage];
+        } else if (leftSpill && rightSpill) {
+          pages = [leftSpillPage, ...pages, rightSpillPage];
         }
 
-        const range = (from, to, step = 1) => {
-            let i = from
-            const range = []
+        return [1, ...pages, totalPages];
+      }
 
-            while (i <= to) {
-                range.push(i)
-                i += step
-            }
+      return range(1, totalPages);
+    };
 
-            return range
-        }
+    const range = (from, to, step = 1) => {
+      let i = from;
+      const range = [];
 
-        const gotoPage = (page) => {
-            const currentPage = Math.max(0, Math.min(page, totalPages.value))
+      while (i <= to) {
+        range.push(i);
+        i += step;
+      }
 
-            const paginationData = {
-                currentPage,
-                totalPages: totalPages.value,
-                pageLimit: props.pageLimit,
-                totalItems: props.totalItems,
-            }
-            pageNumber.value = currentPage
+      return range;
+    };
 
-            props.onPageChanged(paginationData)
-        }
+    const gotoPage = (page) => {
+      const currentPage = Math.max(0, Math.min(page, totalPages.value));
 
-        const onHandleClick = (page) => {
-            router.push({
-                name: 'News',
-                query: { pageNumber: page },
-            })
-            gotoPage(page)
-        }
+      const paginationData = {
+        currentPage,
+        totalPages: totalPages.value,
+        pageLimit: props.pageLimit,
+        totalItems: props.totalItems,
+      };
+      pageNumber.value = currentPage;
 
-        const pages = computed(() => fetchPageNumbers())
+      props.onPageChanged(paginationData);
+    };
 
-        onMounted(() => {
-            gotoPage(route.query.pageNumber || 1)
-        })
+    const onHandleClick = (page) => {
+      router.push({
+        name: "News",
+        query: { pageNumber: page },
+      });
+      gotoPage(page);
+    };
 
-        return {
-            pageNumber: computed(() => pageNumber.value),
-            onHandleClick,
-            totalPages: totalPages.value,
-            pages,
-        }
-    },
-}
+    const pages = computed(() => fetchPageNumbers());
+
+    onMounted(() => {
+      gotoPage(route.query.pageNumber || 1);
+    });
+
+    return {
+      pageNumber: computed(() => pageNumber.value),
+      onHandleClick,
+      totalPages: totalPages.value,
+      pages,
+    };
+  },
+};
 </script>
 
 <style lang="scss">
 .paginate {
-    display: flex;
+  display: flex;
+  padding-left: 0;
+  ul {
     padding-left: 0;
-    ul {
-        padding-left: 0;
+  }
+  li {
+    list-style: none;
+    margin-right: 25px;
+    border: 1px solid transparent;
+    border-radius: 100%;
+    background-color: transparent;
+    padding: 7px 15px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    &:hover {
+      border: 1px solid white;
     }
-    li {
-        list-style: none;
-        margin-right: 25px;
+    &.active {
+      background-color: #7948e6;
+      &:hover {
         border: 1px solid transparent;
-        border-radius: 100%;
-        background-color: transparent;
-        padding: 7px 15px;
-        width: 40px;
-        height: 40px;
-        cursor: pointer;
-        &:hover {
-            border: 1px solid white;
-        }
-        &.active {
-            background-color: #7948e6;
-            &:hover {
-                border: 1px solid transparent;
-            }
-        }
+      }
     }
+  }
 }
 @media screen and (max-width: 426px) {
-    .paginate {
-        li {
-            padding: 2px 10px;
-            width: 30px;
-            height: 30px;
-            margin-right: 10px;
-            font-size: 15px;
-        }
+  .paginate {
+    li {
+      padding: 2px 10px;
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+      font-size: 15px;
     }
+  }
 }
 @media screen and (max-width: 321px) {
-    .paginate {
-        justify-content: center;
-    }
+  .paginate {
+    justify-content: center;
+  }
 }
 </style>

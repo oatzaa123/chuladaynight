@@ -299,10 +299,13 @@ $urlImage: "../assets/images";
 
 @media screen and (max-width: 426px) {
   #about {
+    margin-top: 0px;
     .logo-block {
+      margin-bottom: 0;
       .left .logo .group {
+        padding: 35px;
         img {
-          width: 340px;
+          width: 200px;
         }
       }
       // .left {
@@ -357,21 +360,33 @@ $urlImage: "../assets/images";
         flex: 0 0 auto;
         width: 100%;
         .title {
-          text-align: center;
+          text-align: left;
+          font-size: 23px;
+          padding: 15px 0;
         }
         .description {
-          text-align: center;
+          text-align: left;
           max-width: none;
         }
       }
     }
     .about-description {
+      padding: 0;
+      .header {
+        font-size: 31px;
+        text-align: left;
+      }
       .timeline {
         .timeline-item {
           div:nth-child(4) {
             .title {
-              text-align: center;
+              text-align: left;
             }
+          }
+          .year {
+            padding-left: 12px;
+            padding-bottom: 20px;
+            font-size: 31px;
           }
           .col-5 {
             width: 100%;
@@ -391,9 +406,10 @@ $urlImage: "../assets/images";
 @media screen and (max-width: 321px) {
   #about {
     .logo-block {
+      margin-bottom: 0;
       .left .logo .group {
         img {
-          width: 280px;
+          width: 200px;
         }
       }
       // .left {
@@ -448,21 +464,32 @@ $urlImage: "../assets/images";
         flex: 0 0 auto;
         width: 100%;
         .title {
-          text-align: center;
+          text-align: left;
+          font-size: 23px;
+          padding: 15px 0;
         }
         .description {
-          text-align: center;
+          text-align: left;
           max-width: none;
         }
       }
     }
     .about-description {
+      .header {
+        font-size: 31px;
+        text-align: left;
+      }
       .timeline {
         .timeline-item {
           div:nth-child(4) {
             .title {
-              text-align: center;
+              text-align: left;
             }
+          }
+          .year {
+            padding-left: 12px;
+            padding-bottom: 20px;
+            font-size: 31px;
           }
           .col-5 {
             width: 100%;

@@ -134,32 +134,56 @@ $urlImage: "../assets/images";
   .contact-bg {
     background-size: cover;
   }
-  #contact .contact-description .logo-block {
-    .left {
-      justify-content: center;
-      width: 100%;
-      .logo .group {
-        float: unset;
-        margin: auto;
-        img {
-            width: 320px;
+  #contact {
+    .map {
+      text-align: center;
+    }
+    .contact-description .logo-block {
+      .left {
+        justify-content: center;
+        width: 100%;
+        .logo .group {
+          float: unset;
+          margin: auto;
+          img {
+              width: 320px;
+              display: none;
+          }
+          .toggle {
+            display: none;
+          }
         }
-      }
-      .toggle {
-        font-size: 20px;
-        margin-left: calc(45px * 0.5 + 5px);
+        .toggle {
+          font-size: 20px;
+          margin-left: calc(45px * 0.5 + 5px);
+        }
       }
     }
   }
 }
 
-@media screen and(max-width: 425px) {
-  #contact .contact-description .logo-block .left {
-    justify-content: center;
+@media screen and(max-width: 426px) {
+  #contact .contact-description {
+    padding: 10px;
+    .logo-block {
+      .left {
+        .logo {
+          .group {
+            img {
+              display: none;
+            }
+            .toggle {
+              display: none;
+            }
+          }
+        }
+        justify-content: center;
+      }
+    }
   }
 }
 
-@media screen and(max-width: 320px) {
+@media screen and(max-width: 321px) {
   #contact .contact-description .logo-block .left {
     .logo {
       .title {
