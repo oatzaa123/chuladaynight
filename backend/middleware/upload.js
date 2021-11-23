@@ -115,6 +115,40 @@ const uploadVideo = async (file, pathFolder) => {
   return videoName;
 };
 
+const uploadSubtitle = async (file, pathFolder) => {
+  const { mimetype, name } = await file;
+  if (["text/vtt"].indexOf(mimetype) < 0) {
+    return false;
+  }
+
+  const subtitleName = `${Date.now()}.${
+    name.split(".")[name.split(".").length - 1]
+  }`;
+
+  const storePath = path.join(
+    __dirname,
+    `/../assets/uploads/videos/${pathFolder}/`,
+    subtitleName
+  );
+
+  if (
+    !fs.existsSync(
+      path.join(__dirname, `/../assets/uploads/videos/${pathFolder}/`)
+    )
+  ) {
+    fs.mkdirSync(
+      path.join(__dirname, `/../assets/uploads/videos/${pathFolder}/`)
+    );
+  }
+
+  file.mv(storePath, (err) => {
+    if (err) return false;
+  });
+
+  return videoName;
+  return subtitleName;
+};
+
 const uploadModel = async (file, pathFolder) => {
   const { mimetype, name } = await file;
   if (["model/glb", "model/gltf-binary"].indexOf(mimetype) < 0) {
@@ -148,4 +182,10 @@ const uploadModel = async (file, pathFolder) => {
   return modelName;
 };
 
-module.exports = { uploadFile, uploadFileResize, uploadVideo, uploadModel };
+module.exports = {
+  uploadFile,
+  uploadFileResize,
+  uploadVideo,
+  uploadModel,
+  uploadSubtitle,
+};

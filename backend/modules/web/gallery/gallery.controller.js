@@ -13,6 +13,7 @@ const {
   uploadFile,
   uploadVideo,
   uploadModel,
+  uploadSubtitle,
 } = require("./../../../middleware/upload");
 
 exports.getGalleries = catchAsync(async (req, res, next) => {
@@ -111,12 +112,13 @@ exports.addGallery = catchAsync(async (req, res, next) => {
     location,
     description,
     liveTime,
-    subtitleLang,
-    subtitleName,
   } = req.body;
+
+  const lang = ["th", "en", "jp", "ch"];
 
   var contentImages = [];
   var contentVideos = [];
+  var contentSubtitles = [];
   let contentModels = [];
   let descriptions = [];
   var coverImageName;
@@ -129,6 +131,7 @@ exports.addGallery = catchAsync(async (req, res, next) => {
       contentVideo,
       contentImage,
       contentModel,
+      contentSubtitle,
       live,
     } = req.files;
 
@@ -153,6 +156,14 @@ exports.addGallery = catchAsync(async (req, res, next) => {
         contentVideos = contentVideo;
       } else {
         contentVideos.push(contentVideo);
+      }
+    }
+
+    if (contentSubtitle) {
+      if (contentSubtitle.length > 0) {
+        contentSubtitles = contentSubtitle;
+      } else {
+        contentSubtitles.push(contentSubtitle);
       }
     }
 
@@ -253,17 +264,30 @@ exports.addGallery = catchAsync(async (req, res, next) => {
           return next(
             new ErrorHandler(`Can't upload video! please try again.`, 500)
           );
+
+        let subtitle = [];
+
+        for (let i = 0; i < 4; i++) {
+          console.log(i, contentSubtitles[i]);
+          const nameSubtitle = await uploadSubtitle(contentSubtitles[i], path);
+
+          console.log("nameSubtitle", nameSubtitle);
+          subtitle.push({
+            lang: lang[i],
+            name: nameSubtitle,
+          });
+        }
+
+        console.log("subtitle", subtitle);
+
+        contentSubtitles.splice(0, 4);
+
         arrVdo.push({
           path,
           contentType: "Video",
           contentValue: name,
           contentName: item.name,
-          subtitle: [
-            {
-              lang: subtitleLang,
-              subtitleName,
-            },
-          ],
+          subtitle,
         });
       })
     );
@@ -306,6 +330,7 @@ exports.addGallery = catchAsync(async (req, res, next) => {
           path: vdo[0].path,
           contentType: vdo[0].contentType,
           contentValue: vdo[0].contentValue,
+          subtitle: vdo[0].subtitle,
         });
       } else {
         const { th, en } = JSON.parse(item);
