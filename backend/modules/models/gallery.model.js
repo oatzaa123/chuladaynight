@@ -40,6 +40,10 @@ const gallerySchema = mongoose.Schema({
   coverImage: {
     path: String,
     name: String,
+    thumbnail: {
+      path: String,
+      name: String,
+    },
   },
   location: {
     latitude: String,
@@ -53,6 +57,12 @@ const gallerySchema = mongoose.Schema({
       contentValue: String,
       contentValue_th: String,
       contentValue_en: String,
+      subtitle: [
+        {
+          lang: String,
+          name: String,
+        },
+      ],
     },
   ],
   countViews: {

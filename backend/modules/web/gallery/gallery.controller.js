@@ -8,13 +8,14 @@ const readdir = util.promisify(fs.readdir);
 const unlink = util.promisify(fs.unlink);
 const rmdir = util.promisify(fs.rmdir);
 const paths = require("path");
+// const os = require("os");
 const {
   uploadFile,
   uploadVideo,
   uploadModel,
 } = require("./../../../middleware/upload");
 
-exports.getGalleries = catchAsync(async (req, res) => {
+exports.getGalleries = catchAsync(async (req, res, next) => {
   const featuresGallery = new APIFeatures(Gallery.find(), req.query)
     .filter()
     .limitFields()
@@ -80,6 +81,10 @@ exports.perviousGallery = catchAsync(async (req, res, next) => {
 
   if (!gallery) return next(new ErrorHandler("Data not found", 404));
 
+  // const perviousId = await Gallery.findOne({
+  //     createdAt: { $lt: gallery.createdAt },
+  // })
+
   const perviousId = AllGallery.findIndex((item) => item._id === gallery._id);
 
   const perviousGallery =
@@ -106,6 +111,8 @@ exports.addGallery = catchAsync(async (req, res, next) => {
     location,
     description,
     liveTime,
+    subtitleLang,
+    subtitleName,
   } = req.body;
 
   var contentImages = [];
@@ -251,6 +258,12 @@ exports.addGallery = catchAsync(async (req, res, next) => {
           contentType: "Video",
           contentValue: name,
           contentName: item.name,
+          subtitle: [
+            {
+              lang: subtitleLang,
+              subtitleName,
+            },
+          ],
         });
       })
     );
