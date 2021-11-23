@@ -145,7 +145,6 @@ const uploadSubtitle = async (file, pathFolder) => {
     if (err) return false;
   });
 
-  return videoName;
   return subtitleName;
 };
 
