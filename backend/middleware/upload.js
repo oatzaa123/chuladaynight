@@ -36,14 +36,50 @@ const uploadFile = async (file, pathFolder) => {
       return false;
     }
   });
-
-  // const img = await sharp(file.data)
-  //     .resize({ height: '500px', fit: 'fill' })
-  //     .png()
-  //     .toFile(storePath)
-
-  // return img ? imageName : null
   return imageName;
+};
+
+const uploadFileResize = async (file, pathFolder, height = 200) => {
+  const { mimetype, name } = await file;
+  if (
+    ["image/jpeg", "image/jpg", "image/png", "image/gif"].indexOf(mimetype) < 0
+  ) {
+    return false;
+  }
+
+  const imageName = `${Date.now()}.${
+    name.split(".")[name.split(".").length - 1]
+  }`;
+
+  const storePath = path.join(
+    __dirname,
+    `/../assets/uploads/images/${pathFolder}/`,
+    imageName
+  );
+
+  if (
+    !fs.existsSync(
+      path.join(__dirname, `/../assets/uploads/images/${pathFolder}/`)
+    )
+  ) {
+    fs.mkdirSync(
+      path.join(__dirname, `/../assets/uploads/images/${pathFolder}/`)
+    );
+  }
+
+  file.mv(storePath, (err) => {
+    if (err) {
+      console.log(err);
+      return false;
+    }
+  });
+
+  const img = await sharp(file.data)
+    .resize({ height, fit: "cover" })
+    .png()
+    .toFile(storePath);
+
+  return img ? imageName : null;
 };
 
 const uploadVideo = async (file, pathFolder) => {
@@ -145,4 +181,10 @@ const uploadModel = async (file, pathFolder) => {
   return modelName;
 };
 
-module.exports = { uploadFile, uploadVideo, uploadModel, uploadSubtitle };
+module.exports = {
+  uploadFile,
+  uploadFileResize,
+  uploadVideo,
+  uploadModel,
+  uploadSubtitle,
+};

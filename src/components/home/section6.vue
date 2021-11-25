@@ -5,14 +5,16 @@
     <div class="slide">
       <splide :options="slideOptions">
         <splide-slide
-          v-for="(slide, index) in slides"
-          :key="slide.src"
+          v-for="(slide, index) in slides.Partner"
+          :key="index"
           class="slide-items"
         >
           <div class="img">
-            <img :src="slide.src" />
+            <img
+              :src="getImage(slide.coverImage.name, slide.coverImage.path)"
+            />
           </div>
-          <div class="name">Partner name {{ index }}</div>
+          <div class="name">{{ slide.name }}</div>
         </splide-slide>
       </splide>
     </div>
@@ -23,7 +25,8 @@
 <script>
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-import { reactive, toRefs } from "vue";
+import { reactive, toRefs, computed } from "vue";
+import usePartner from "@/hooks/usePartner";
 
 export default {
   components: {
@@ -32,32 +35,6 @@ export default {
   },
   setup() {
     const state = reactive({
-      slides: [
-        {
-          src: require("../../assets/images/home/section1/L_DN2N_20202.png"),
-        },
-        {
-          src: require("../../assets/images/home/section1/L_DN2N_20202.png"),
-        },
-        {
-          src: require("../../assets/images/home/section1/L_DN2N_20202.png"),
-        },
-        {
-          src: require("../../assets/images/home/section1/L_DN2N_20202.png"),
-        },
-        {
-          src: require("../../assets/images/home/section1/L_DN2N_20202.png"),
-        },
-        {
-          src: require("../../assets/images/home/section1/L_DN2N_20202.png"),
-        },
-        {
-          src: require("../../assets/images/home/section1/L_DN2N_20202.png"),
-        },
-        {
-          src: require("../../assets/images/home/section1/L_DN2N_20202.png"),
-        },
-      ],
       slideOptions: {
         type: "loop",
         perPage: 5,
@@ -79,8 +56,22 @@ export default {
       },
     });
 
+    const { data, getAll, errorMessage } = usePartner();
+
+    try {
+      getAll();
+    } catch (error) {
+      throw new Error(errorMessage);
+    }
+
+    const getImage = (imageName, imagePath) => {
+      return `${process.env.VUE_APP_PATH_IMAGE}/${imagePath}/${imageName}`;
+    };
+
     return {
       ...toRefs(state),
+      getImage,
+      slides: computed(() => data.value),
     };
   },
 };
