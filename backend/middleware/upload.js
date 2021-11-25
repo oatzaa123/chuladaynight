@@ -79,13 +79,13 @@ const uploadVideo = async (file, pathFolder) => {
   return videoName;
 };
 
-const uploadSubtitle = async (file, pathFolder) => {
+const uploadSubtitle = async (file, pathFolder, index) => {
   const { mimetype, name } = await file;
   if (["text/vtt"].indexOf(mimetype) < 0) {
     return false;
   }
 
-  const subtitleName = `${Date.now()}.${
+  const subtitleName = `${Date.now()}${index}.${
     name.split(".")[name.split(".").length - 1]
   }`;
 
