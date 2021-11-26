@@ -174,19 +174,7 @@
           <div class="showreel-text">
             {{ $t("gallery_id_showreel") }}
           </div>
-          <video class="video" height="500" controls muted loop>
-            <source
-              :src="getVideo(gallery.contentValue, gallery.path)"
-              type="video/mp4"
-            />
-            <track
-              kind="captions"
-              src="http://example.com/path/to/captions.vtt"
-              srclang="en"
-              label="English"
-              default
-            />
-          </video>
+          <VideoView class="video" :options="videoOptions" />
         </div>
       </div>
       <div class="gallery-footer">
@@ -288,9 +276,10 @@ import { formatMonth } from "@/helpers/formatDate";
 import moment from "moment";
 // import useGallery from '@/hooks/useGallery'
 import axios from "@/configs/axios";
+import VideoView from "@/components/VideoView";
 export default {
   name: "Gallery-id",
-  components: { Canvas, ImageView },
+  components: { Canvas, ImageView, VideoView },
   async setup() {
     const router = useRouter();
     const route = useRoute();
@@ -301,8 +290,51 @@ export default {
     const select = ref(null);
     const isOpen = ref(false);
     const isLoading = ref(false);
+    const videoOptions = ref({
+      autoplay: true,
+      controls: true,
+      sources: [],
+      tracks: [],
+    });
     // let loader = useLoading()
     let formContainer = ref(null);
+
+    const getImage = (imageName, imagePath) => {
+      return `${process.env.VUE_APP_PATH_IMAGE}/${imagePath}/${imageName}`;
+    };
+
+    const getVideo = (videoName, videoPath) => {
+      return `${process.env.VUE_APP_PATH_VIDEO}/${videoPath}/${videoName}`;
+    };
+
+    const setVideoOption = (data) => {
+      const { contentValue, path, subtitle } = data.content.find(
+        (i) => i.contentType === "Video"
+      );
+
+      videoOptions.value.sources.push({
+        src: getVideo(contentValue, path),
+        type: "video/mp4",
+      });
+
+      if (subtitle.length > 0) {
+        subtitle.forEach((i) => {
+          console.log("i", i);
+          const language = [
+            { type: "th", name: "Thai" },
+            { type: "en", name: "English" },
+            { type: "jp", name: "Japan" },
+            { type: "ch", name: "China" },
+          ];
+          videoOptions.value.tracks.push({
+            kind: "subtitles",
+            src: getVideo(i.name, path),
+            srclang: i.lang,
+            label: language.find((lang) => lang.type === i.lang).name,
+          });
+        });
+      }
+    };
 
     try {
       // getOne(route.params.id)
@@ -321,6 +353,12 @@ export default {
       const res = await axios.get(`/gallery/${id}`);
       const des = await axios.get("https://ipinfo.io?token=9f0b1a358406be");
       gallery.value = res.data.data.gallery;
+      const isVideo = gallery.value.content.find(
+        (i) => i.contentType === "Video"
+      );
+      if (isVideo) {
+        setVideoOption(gallery.value);
+      }
       if (des.data) {
         const { country, ip } = des.data;
         try {
@@ -342,14 +380,6 @@ export default {
       // loader.hide()
       throw new Error(error);
     }
-
-    const getImage = (imageName, imagePath) => {
-      return `${process.env.VUE_APP_PATH_IMAGE}/${imagePath}/${imageName}`;
-    };
-
-    const getVideo = (videoName, videoPath) => {
-      return `${process.env.VUE_APP_PATH_VIDEO}/${videoPath}/${videoName}`;
-    };
 
     const onForwardClick = async () => {
       const id = route.params.id;
@@ -426,6 +456,7 @@ export default {
       isOpen,
       boardCast: boardCast.value,
       formatDate,
+      videoOptions: videoOptions.value,
     };
   },
 };

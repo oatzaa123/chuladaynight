@@ -19,6 +19,7 @@
     "moment": "^2.29.1",
     "sweetalert2": "^11.1.8",
     "three": "^0.131.3",
+    "video.js": "^7.17.0",
     "vue": "^3.2.1",
     "vue-3d-model": "^1.4.0",
     "vue-feather": "^2.0.0-rc",
