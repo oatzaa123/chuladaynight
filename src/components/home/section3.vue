@@ -3,7 +3,7 @@
     <div
       class="left-arrow"
       @mouseover="mouseover()"
-      @mousedown="Arrow(-1)"
+      @mousedown="Arrow(-2)"
       @mouseup="ArrowStop()"
       @mouseleave="ArrowStop()"
     >
@@ -16,7 +16,7 @@
     <div
       class="right-arrow"
       @mouseover="mouseover()"
-      @mousedown="Arrow(1)"
+      @mousedown="Arrow(2)"
       @mouseup="ArrowStop()"
       @mouseleave="ArrowStop()"
     >
