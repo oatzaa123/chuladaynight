@@ -2,6 +2,7 @@
   <div id="section3" class="section3">
     <div
       class="left-arrow"
+      @mouseover="mouseover()"
       @mousedown="Arrow(-1)"
       @mouseup="ArrowStop()"
       @mouseleave="ArrowStop()"
@@ -14,6 +15,7 @@
 
     <div
       class="right-arrow"
+      @mouseover="mouseover()"
       @mousedown="Arrow(1)"
       @mouseup="ArrowStop()"
       @mouseleave="ArrowStop()"
@@ -152,18 +154,27 @@ export default {
     };
 
     const Arrow = (pageX) => {
-      if (!state.interval)
+      if (!state.interval) {
         state.interval = setInterval(() => {
           const slider = ele[0];
           state.startX = (state.startX || 0) + pageX;
           state.scrollLeft = (state.scrollLeft || 0) + pageX;
           slider.scrollLeft = state.scrollLeft;
         }, 0);
+
+        if (state.intervalAutoplay) {
+          clearInterval(state.intervalAutoplay);
+          state.intervalAutoplay = false;
+        }
+      }
     };
 
     const ArrowStop = () => {
       clearInterval(state.interval);
       state.interval = false;
+
+      // state.intervalAutoplay = false;
+      // autoPlay();
     };
 
     const autoPlay = () => {
