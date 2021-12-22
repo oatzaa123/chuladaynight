@@ -1,278 +1,279 @@
 .default {
-    overflow: hidden;
+  overflow: hidden;
 }
 .workshop {
-    position: relative;
-    .workshop-title {
-        padding-bottom: 2rem;
-        h1 {
-            position: relative;
-            font-size: 58px;
-            font-weight: 600;
-            color: #ffffff;
-            text-align: center;
-            letter-spacing: 0px;
-            text-shadow: 1px 1px 1px white, 0 0 3px white, 0 0 3px white;
-        }
-        .n {
-            position: absolute;
-            font-family: 'Savoye Regular';
-            font-weight: 100;
-            color: #b61bff;
-            left: 55.8%;
-            font-size: 60px;
-            top: 62%;
-            text-shadow: none;
-        }
+  position: relative;
+  .workshop-title {
+    padding-bottom: 2rem;
+    h1 {
+      position: relative;
+      font-size: 58px;
+      font-weight: 600;
+      color: #ffffff;
+      text-align: center;
+      letter-spacing: 0px;
+      text-shadow: 1px 1px 1px white, 0 0 3px white, 0 0 3px white;
     }
-    .container {
-        padding-top: var(--bs-gutter-x, 0);
-        .workshop-content {
-            margin: 5px -5px;
-            img {
-                width: 100%;
-                height: auto;
-                image-rendering: auto;
-                transition: opacity 0.8s ease;
-            }
-            img:hover {
-                cursor: pointer;
-                opacity: 0.3;
-            }
-        }
+    .n {
+      position: absolute;
+      font-family: "Savoye Regular";
+      font-weight: 100;
+      color: #b61bff;
+      left: 55.8%;
+      font-size: 60px;
+      top: 62%;
+      text-shadow: none;
     }
-    .star-group {
-        position: absolute;
-        display: block;
-        .blur,
+  }
+  .container {
+    padding-top: var(--bs-gutter-x, 0);
+    .workshop-content {
+      margin: 5px -5px;
+      img {
+        width: 100%;
+        height: 100%;
+        max-height: 584px;
+        image-rendering: auto;
+        transition: opacity 0.8s ease;
+      }
+      img:hover {
+        cursor: pointer;
+        opacity: 0.3;
+      }
+    }
+  }
+  .star-group {
+    position: absolute;
+    display: block;
+    .blur,
+    .star {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+    }
+
+    $top: -1.75rem, 95%;
+    $left: -1.75rem, 100%;
+    $size: 30px, 58px;
+    $opacity: 1, 1;
+    $starColor: #ef1286;
+    $blurSize: 30px, 58px;
+    $blurFilter: blur(12px), blur(12px);
+    $starSize: 30px, 27px;
+    @for $i from 1 to length($top) + 1 {
+      &:nth-child(#{$i}) {
+        top: nth($top, $i);
+        left: nth($left, $i);
+        width: nth($size, $i);
+        height: nth($size, $i);
+        opacity: nth($opacity, $i);
+        .blur {
+          width: nth($blurSize, $i);
+          height: nth($blurSize, $i);
+          background: $starColor;
+          filter: nth($blurFilter, $i);
+        }
         .star {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
+          width: nth($starSize, $i);
+          height: nth($starSize, $i);
+          background: $starColor;
         }
+      }
+    } // end @for
 
-        $top: -1.75rem, 95%;
-        $left: -1.75rem, 100%;
-        $size: 30px, 58px;
-        $opacity: 1, 1;
-        $starColor: #ef1286;
-        $blurSize: 30px, 58px;
-        $blurFilter: blur(12px), blur(12px);
-        $starSize: 30px, 27px;
-        @for $i from 1 to length($top) + 1 {
-            &:nth-child(#{$i}) {
-                top: nth($top, $i);
-                left: nth($left, $i);
-                width: nth($size, $i);
-                height: nth($size, $i);
-                opacity: nth($opacity, $i);
-                .blur {
-                    width: nth($blurSize, $i);
-                    height: nth($blurSize, $i);
-                    background: $starColor;
-                    filter: nth($blurFilter, $i);
-                }
-                .star {
-                    width: nth($starSize, $i);
-                    height: nth($starSize, $i);
-                    background: $starColor;
-                }
-            }
-        } // end @for
-
-        &:nth-child(1) {
-            animation: animationstar_1 2s infinite;
-            .blur {
-                width: 60px;
-                height: 60px;
-                top: 25%;
-                left: 25%;
-                transform: translate(0px, 0px);
-                filter: blur(3px);
-                opacity: 0.5;
-                &::before {
-                    content: '';
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    width: 100px;
-                    height: 100px;
-                    border-radius: 50%;
-                    background: #ef1286;
-                    opacity: 0.9;
-                    filter: blur(12px);
-                }
-            }
-            .star {
-                top: 0%;
-                left: 0%;
-                transform: translate(0px, 0px);
-                box-shadow: 1px 1px 8px 3px #ef1286;
-            }
+    &:nth-child(1) {
+      animation: animationstar_1 2s infinite;
+      .blur {
+        width: 60px;
+        height: 60px;
+        top: 25%;
+        left: 25%;
+        transform: translate(0px, 0px);
+        filter: blur(3px);
+        opacity: 0.5;
+        &::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          background: #ef1286;
+          opacity: 0.9;
+          filter: blur(12px);
         }
-
-        &:nth-child(2) {
-            animation: infinite-spinning 1s infinite, totop 7s infinite;
-            .blur {
-                width: 60px;
-                height: 60px;
-                top: 25%;
-                left: -25%;
-                transform: translate(0px, 0px);
-                filter: blur(3px);
-                opacity: 0.5;
-                &::before {
-                    content: '';
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    width: 100px;
-                    height: 100px;
-                    border-radius: 50%;
-                    background: #ef1286;
-                    opacity: 0.9;
-                    filter: blur(12px);
-                }
-            }
-            .star {
-                top: 0%;
-                left: 0%;
-                transform: translate(0px, 0px);
-                box-shadow: 1px 1px 8px 3px #ef1286;
-            }
-        }
-    } // end .star-group
-
-    @keyframes animationstar_1 {
-        0% {
-            display: block;
-            opacity: 1;
-        }
-
-        50% {
-            display: block;
-            opacity: 0;
-        }
-
-        100% {
-            display: block;
-            opacity: 1;
-        }
+      }
+      .star {
+        top: 0%;
+        left: 0%;
+        transform: translate(0px, 0px);
+        box-shadow: 1px 1px 8px 3px #ef1286;
+      }
     }
 
-    @keyframes infinite-spinning {
-        from {
-            transform: rotate(0deg);
+    &:nth-child(2) {
+      animation: infinite-spinning 1s infinite, totop 7s infinite;
+      .blur {
+        width: 60px;
+        height: 60px;
+        top: 25%;
+        left: -25%;
+        transform: translate(0px, 0px);
+        filter: blur(3px);
+        opacity: 0.5;
+        &::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          background: #ef1286;
+          opacity: 0.9;
+          filter: blur(12px);
         }
-        to {
-            transform: rotate(360deg);
-        }
+      }
+      .star {
+        top: 0%;
+        left: 0%;
+        transform: translate(0px, 0px);
+        box-shadow: 1px 1px 8px 3px #ef1286;
+      }
     }
-    @keyframes totop {
-        0% {
-            top: 100%;
-        }
-        50% {
-            top: 50%;
-        }
-        100% {
-            top: 0%;
-        }
+  } // end .star-group
+
+  @keyframes animationstar_1 {
+    0% {
+      display: block;
+      opacity: 1;
     }
+
+    50% {
+      display: block;
+      opacity: 0;
+    }
+
+    100% {
+      display: block;
+      opacity: 1;
+    }
+  }
+
+  @keyframes infinite-spinning {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes totop {
+    0% {
+      top: 100%;
+    }
+    50% {
+      top: 50%;
+    }
+    100% {
+      top: 0%;
+    }
+  }
 } // end .workshop
 
 @media screen and (max-width: 1024px) {
-    .workshop {
-        .workshop-title {
-            h1 {
-                font-size: 50px;
-            }
-            .n {
-                left: 57.8%;
-                font-size: 50px;
-            }
-        }
-        .container {
-            .workshop-content {
-                img {
-                    height: calc(328px * 0.75);
-                }
-            }
-        }
+  .workshop {
+    .workshop-title {
+      h1 {
+        font-size: 50px;
+      }
+      .n {
+        left: 57.8%;
+        font-size: 50px;
+      }
     }
+    .container {
+      .workshop-content {
+        img {
+          height: calc(328px * 0.75);
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {
-    .workshop {
-        .workshop-title {
-            h1 {
-                font-size: 40px;
-            }
-            .n {
-                left: 58%;
-                font-size: 40px;
-            }
-        }
+  .workshop {
+    .workshop-title {
+      h1 {
+        font-size: 40px;
+      }
+      .n {
+        left: 58%;
+        font-size: 40px;
+      }
     }
+  }
 }
 
 @media screen and (max-width: 426px) {
-    .workshop {
-        .workshop-title {
-            h1 {
-                font-size: 35px;
-            }
-            .n {
-                left: 64%;
-                top: 60%;
-                font-size: 35px;
-            }
-        }
-        .container {
-            .workshop-content {
-                img {
-                    height: calc(328px * 0.75);
-                }
-            }
-        }
+  .workshop {
+    .workshop-title {
+      h1 {
+        font-size: 35px;
+      }
+      .n {
+        left: 64%;
+        top: 60%;
+        font-size: 35px;
+      }
     }
+    .container {
+      .workshop-content {
+        img {
+          height: calc(328px * 0.75);
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 376px) {
-    .workshop {
-        .workshop-title {
-            h1 {
-                font-size: 30px;
-            }
-            .n {
-                left: 64%;
-                font-size: 30px;
-            }
-        }
-        .container {
-            .workshop-content {
-                img {
-                    height: calc(328px * 0.75);
-                }
-            }
-        }
+  .workshop {
+    .workshop-title {
+      h1 {
+        font-size: 30px;
+      }
+      .n {
+        left: 64%;
+        font-size: 30px;
+      }
     }
+    .container {
+      .workshop-content {
+        img {
+          height: calc(328px * 0.75);
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 321px) {
-    .workshop {
-        .workshop-title {
-            h1 {
-                font-size: 25px;
-            }
-            .n {
-                left: 64%;
-                font-size: 25px;
-            }
-        }
+  .workshop {
+    .workshop-title {
+      h1 {
+        font-size: 25px;
+      }
+      .n {
+        left: 64%;
+        font-size: 25px;
+      }
     }
+  }
 }

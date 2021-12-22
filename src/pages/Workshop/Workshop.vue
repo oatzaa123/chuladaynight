@@ -1,6 +1,6 @@
 <template>
   <div class="workshop" v-if="workshop">
-    <div v-for="i in 2" :key="i" class="star-group">
+    <div v-for="i in 1" :key="i" class="star-group">
       <div class="blur"></div>
       <div class="star"></div>
     </div>

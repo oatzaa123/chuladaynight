@@ -28,6 +28,7 @@
             <img
               v-if="position === index"
               @click="goto(`pin ${index}`)"
+              @mouseover="goto(`pin ${index}`)"
               :src="require('@/assets/images/gallery/Group 295.svg')"
               class="pin pinn"
               :class="[position, { animate: animate }]"
@@ -35,6 +36,7 @@
             <img
               v-else
               @click="goto(`pin ${index}`)"
+              @mouseover="goto(`pin ${index}`)"
               :src="require('@/assets/images/gallery/Group 295 (1).svg')"
               class="pin"
               :class="[position, { animate: animate }]"

@@ -94,12 +94,9 @@
               <div class="map">
                 <img
                   @click="
-                    openUrl(
-                      `https://maps.googleapis.com/maps/api/streetview?parameters`,
-                      {
-                        lat: data.location.latitude,
-                        lng: data.location.longitude,
-                      }
+                    openStreetView(
+                      data.location.latitude,
+                      data.location.longitude
                     )
                   "
                   :src="require('../../assets/images/gallery/Group 848.svg')"
@@ -184,8 +181,6 @@
               v-if="data.author.image"
               class="profile"
               :src="getImage(data.author.image.name, data.author.image.path)"
-              width="100"
-              height="120"
             />
             <img
               v-else
@@ -423,6 +418,13 @@ export default {
       }
     };
 
+    const openStreetView = (lat, lng) => {
+      window.open(
+        `https://maps.googleapis.com/maps/api/streetview?size=600x300&location=${lat},${lng}&heading=151.78&pitch=-0.76&key=AIzaSyAhcO6KhdzstHMIab8vVuXKm0R01HyweyE`,
+        "_blank"
+      );
+    };
+
     const formatDate = (date, type) => {
       const newDate = moment(new Date(date)).format("YYYY-MM-DD HH:mm");
       return type === "title"
@@ -457,6 +459,7 @@ export default {
       boardCast: boardCast.value,
       formatDate,
       videoOptions: videoOptions.value,
+      openStreetView,
     };
   },
 };

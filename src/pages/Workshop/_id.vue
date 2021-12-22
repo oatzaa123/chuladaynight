@@ -56,7 +56,10 @@
             &nbsp;
             {{ item.staff }} <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {{ $t("workshop_contact") }} <br />
+            <span v-if="item.contact.telephone">{{
+              $t("workshop_contact")
+            }}</span>
+            <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ item.contact.telephone }}
           </p>
         </div>

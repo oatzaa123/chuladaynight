@@ -2,11 +2,11 @@
   <div class="news-id">
     <div class="container-news" ref="formContainer">
       <div class="news-id-img">
-        <ImageView
+        <!-- <ImageView
           v-if="newData.coverImage"
           :imagePath="newData.coverImage.path"
           :imageName="newData.coverImage.name"
-        />
+        /> -->
       </div>
       <div class="news-id-title">
         <div class="news-id-group-title">
@@ -151,14 +151,14 @@ export default {
 <style lang="scss">
 @import "@/assets/css/container.scss";
 .news-id {
-  padding-top: 3rem;
+  padding-top: 1rem;
   font-family: "Kanit-Regular";
   position: relative;
   .container-news {
     width: 80%;
     margin: auto;
-    padding-top: var(--bs-gutter-x, 3rem);
-    padding-bottom: var(--bs-gutter-x, 3rem);
+    padding-top: var(--bs-gutter-x, 1rem);
+    padding-bottom: var(--bs-gutter-x, 1rem);
     overflow-y: unset;
     max-height: unset;
     background-image: url("./../../assets/images/gallery/BACKGROUND.svg") !important;
