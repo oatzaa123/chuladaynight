@@ -18,14 +18,30 @@
             {{ $t("footer_description3") }}
           </p>
           <div class="button">
-            <button type="button" class="btn customButton">
+            <button
+              type="button"
+              class="btn customButton"
+              @click="
+                openUrl(
+                  'https://play.google.com/store/apps/details?id=th.co.gridwhiz.chulaartpark'
+                )
+              "
+            >
               <img
                 :src="require('@/assets/images/icons/Apple_logo_black.svg.png')"
                 width="20"
               />
               <b>App Store</b>
             </button>
-            <button type="button" class="btn customButton">
+            <button
+              type="button"
+              class="btn customButton"
+              @click="
+                openUrl(
+                  'https://apps.apple.com/nl/app/chula-art-park/id1600194621'
+                )
+              "
+            >
               <img
                 :src="require('@/assets/images/icons/Image 59.png')"
                 width="20"
@@ -49,6 +65,12 @@ import FooterContacts from "./footer-contact";
 export default {
   components: {
     FooterContacts,
+  },
+  setup() {
+    const openUrl = (url) => {
+      window.open(url, "_blank");
+    };
+    return { openUrl };
   },
 };
 </script>

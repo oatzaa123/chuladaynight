@@ -42,6 +42,49 @@ exports.getWorkshop = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.nextWorkshop = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  const AllWorkshop = await Workshop.find();
+  const workshop = AllWorkshop.find((item) => item._id.toString() === id);
+  if (!workshop) return next(new ErrorHandler("Data not found", 404));
+
+  const nextId = await Workshop.findOne({
+    createdAt: { $gt: workshop.createdAt },
+  });
+
+  const nextWorkshop = nextId
+    ? nextId
+    : AllWorkshop.find((_, index) => index === 0);
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      workshop: nextWorkshop,
+    },
+  });
+});
+
+exports.perviousWorkshop = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  const AllWorkshop = await Workshop.find();
+  const workshop = AllWorkshop.find((item) => item._id.toString() === id);
+  if (!workshop) return next(new ErrorHandler("Data not found", 404));
+
+  const perviousId = AllWorkshop.findIndex((item) => item._id === workshop._id);
+
+  const perviousWorkshop =
+    perviousId > 0
+      ? AllWorkshop.find((_, index) => index === perviousId - 1)
+      : AllWorkshop.find((_, index) => index === AllWorkshop.length - 1);
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      workshop: perviousWorkshop,
+    },
+  });
+});
+
 exports.addWorkshop = catchAsync(async (req, res, next) => {
   let coverImageName, imageName;
   const { contact, path } = req.body;

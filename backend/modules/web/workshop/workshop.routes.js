@@ -3,6 +3,8 @@ const router = express.Router();
 const {
   getWorkshops,
   getWorkshop,
+  nextWorkshop,
+  perviousWorkshop,
   addWorkshop,
   updateWorkshop,
   deleteWorkshop,
@@ -15,5 +17,8 @@ router
   .get(getWorkshop)
   .put(updateWorkshop)
   .delete(deleteWorkshop);
+
+router.route("/:id/nextWorkshop").get(nextWorkshop);
+router.route("/:id/perviousWorkshop").get(perviousWorkshop);
 
 module.exports = router;

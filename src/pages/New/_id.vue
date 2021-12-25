@@ -42,6 +42,7 @@
     <div class="news-id-footer">
       <Arrow
         name="News-id"
+        type="news"
         :customClassLeft="customClassLeft"
         :customClassRight="customClassRight"
       >

@@ -21,22 +21,26 @@ import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import axios from "@/configs/axios";
 export default {
-  props: ["customClassLeft", "customClassRight", "name"],
+  props: ["customClassLeft", "customClassRight", "name", "type"],
   async setup(props) {
     const router = useRouter();
     const route = useRoute();
-    const news = ref(null);
+    const data = ref(null);
 
     const onForwardClick = async () => {
-      const id = route.params.id;
+      const { id } = route.params;
       try {
         // nextPage(id)
-        const res = await axios.get(`/news/${id}/nextNews`);
-        news.value = res.data.data.news;
+        const url =
+          props.type === "news"
+            ? `/news/${id}/nextNews`
+            : `/workshop/${id}/nextWorkshop`;
+        const res = await axios.get(url);
+        data.value = res.data.data[props.type];
         if (res.data.data) {
           router.push({
             name: props.name,
-            params: { id: news.value._id },
+            params: { id: data.value._id },
           });
         }
       } catch (error) {
@@ -45,15 +49,19 @@ export default {
     };
 
     const onBackwardClick = async () => {
-      const id = route.params.id;
+      const { id } = route.params;
       try {
         // perviousPage(id)
-        const res = await axios.get(`/news/${id}/perviousNews`);
-        news.value = res.data.data.news;
+        const url =
+          props.type === "news"
+            ? `/news/${id}/perviousNews`
+            : `/workshop/${id}/perviousWorkshop`;
+        const res = await axios.get(url);
+        data.value = res.data.data[props.type];
         if (res.data.data) {
           router.push({
             name: props.name,
-            params: { id: news.value._id },
+            params: { id: data.value._id },
           });
         }
       } catch (error) {

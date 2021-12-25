@@ -31,7 +31,7 @@
       margin: 5px -5px;
       img {
         width: 100%;
-        height: 100%;
+        height: auto;
         max-height: 584px;
         image-rendering: auto;
         transition: opacity 0.8s ease;
@@ -197,13 +197,13 @@
         font-size: 50px;
       }
     }
-    .container {
-      .workshop-content {
-        img {
-          height: calc(328px * 0.75);
-        }
-      }
-    }
+    // .container {
+    //   .workshop-content {
+    //     img {
+    //       height: calc(328px * 0.75);
+    //     }
+    //   }
+    // }
   }
 }
 
@@ -233,13 +233,13 @@
         font-size: 35px;
       }
     }
-    .container {
-      .workshop-content {
-        img {
-          height: calc(328px * 0.75);
-        }
-      }
-    }
+    // .container {
+    //   .workshop-content {
+    //     img {
+    //       height: calc(328px * 0.75);
+    //     }
+    //   }
+    // }
   }
 }
 
@@ -254,13 +254,13 @@
         font-size: 30px;
       }
     }
-    .container {
-      .workshop-content {
-        img {
-          height: calc(328px * 0.75);
-        }
-      }
-    }
+    // .container {
+    //   .workshop-content {
+    //     img {
+    //       height: calc(328px * 0.75);
+    //     }
+    //   }
+    // }
   }
 }
 

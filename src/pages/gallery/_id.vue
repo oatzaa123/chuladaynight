@@ -242,6 +242,18 @@
                     height="35"
                   />
                   <img
+                    v-if="data.author.contact.line"
+                    @click="
+                      openUrl(
+                        'https://line.me/R/ti/p',
+                        data.author.contact.line.trim()
+                      )
+                    "
+                    :src="require('@/assets/images/icons/Group 1038.png')"
+                    width="35"
+                    height="35"
+                  />
+                  <img
                     v-if="data.author.contact.email"
                     @click="openUrl('mailto:', data.author.contact.email)"
                     :src="require('@/assets/images/icons/Group 328.svg')"
