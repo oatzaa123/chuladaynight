@@ -80,7 +80,7 @@ export default {
 @media screen and (max-width: 426px) {
   .section-7 {
     display: block;
-    padding: 20px 10px;
+    padding: 10px 20px;
     .img {
       margin-right: 15px;
       img {

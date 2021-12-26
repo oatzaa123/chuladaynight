@@ -624,7 +624,7 @@ $FSnightActive: 54px;
           }
         }
         .right {
-          margin-left: -15px;
+          // margin-left: -15px;
           font-size: calc(17px * #{nth($mediaSize, $i)});
         }
       }
@@ -646,7 +646,7 @@ $FSnightActive: 54px;
     .section1 {
       background-size: cover;
       &.bgnight {
-        background-size: cover;
+        background-size: 50% 100%, 50% auto, 105%;
       }
     }
     .sub-section1 {
