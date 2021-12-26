@@ -64,9 +64,9 @@ $FSnightActive: 54px;
         url("#{$urlImage}/home/section1/newbg/StarB@2x.png"),
         url("#{$urlImage}/home/section1/newbg/BG@2x.png");
       background-repeat: repeat-x, repeat, no-repeat;
-      background-position: 0px 0px, 0px 0px, -5px -5px;
+      background-position: 0px 0px, 0px 0px, center;
       background-attachment: fixed;
-      background-size: 50% 100%, 50% auto, cover;
+      background-size: 50% 100%, 50% auto, 105%;
 
       animation: 100s para infinite linear;
     }
