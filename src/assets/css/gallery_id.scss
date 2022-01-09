@@ -41,6 +41,8 @@
         .title-right {
           display: flex;
           text-align: end;
+          flex-direction: row;
+          flex-wrap: wrap;
           .boardcast {
             float: left;
             padding: 0px;

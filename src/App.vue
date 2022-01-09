@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Auth />
+    <!-- <Auth /> -->
     <router-view v-slot="{ Component }">
       <transition name="route" mode="out-in" @after-enter="afterEnter" appear>
         <component :is="Component"> </component>
@@ -12,10 +12,12 @@
 <script>
 import { provide } from "vue";
 import globalStore from "@/globalStore/index.js";
-import Auth from "@/components/Auth";
+// import Auth from "@/components/Auth";
 export default {
   name: "App",
-  components: { Auth },
+  components: {
+    // Auth,
+  },
   setup(_, { emit }) {
     provide("globalStore", globalStore);
     const afterEnter = () => {
