@@ -124,7 +124,13 @@
           }
         }
         p {
+          // text-align: left;
+          position: absolute;
+          // top: 60%;
+          padding: 0 20px;
           text-align: left;
+          left: 33%;
+          transform: translateX(-33%);
         }
       }
     }
@@ -150,7 +156,13 @@
           }
         }
         p {
+          // text-align: left;
+          position: absolute;
+          // top: 60%;
+          padding: 0 20px;
           text-align: left;
+          left: 33%;
+          transform: translateX(-33%);
         }
       }
     }
