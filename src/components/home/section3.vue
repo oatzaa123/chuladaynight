@@ -1,25 +1,13 @@
 <template>
   <div id="section3" class="section3">
-    <div
-      class="left-arrow"
-      @mouseover="mouseover()"
-      @mousedown="Arrow(-2)"
-      @mouseup="ArrowStop()"
-      @mouseleave="ArrowStop()"
-    >
+    <div class="left-arrow" @mousedown="Arrow(-2)" @mouseup="ArrowStop()">
       <button class="btn customButton">
         <div class="arrow"></div>
         <div class="left"></div>
       </button>
     </div>
 
-    <div
-      class="right-arrow"
-      @mouseover="mouseover()"
-      @mousedown="Arrow(2)"
-      @mouseup="ArrowStop()"
-      @mouseleave="ArrowStop()"
-    >
+    <div class="right-arrow" @mousedown="Arrow(2)" @mouseup="ArrowStop()">
       <button class="btn customButton">
         <div class="arrow"></div>
         <div class="right"></div>
@@ -42,8 +30,6 @@
         class="items"
         @mousedown="mousedown($event)"
         @mouseup="mouseup()"
-        @mouseover="mouseover()"
-        @mouseleave="mouseleave()"
         @mousemove="mousemove($event)"
       >
         <template v-if="data.Gallery">
@@ -117,6 +103,11 @@ export default {
     });
 
     const mousedown = (e) => {
+      if (state.intervalAutoplay) {
+        clearInterval(state.intervalAutoplay);
+        state.intervalAutoplay = false;
+      }
+
       const slider = ele[0];
       slider.classList.add("active");
       state.isDown = true;
@@ -128,6 +119,9 @@ export default {
       state.isDown = false;
       slider.classList.remove("active");
       state.scrollLeft = slider.scrollLeft;
+
+      state.intervalAutoplay = false;
+      autoPlay();
     };
     const mouseover = () => {
       if (state.intervalAutoplay) {
@@ -173,8 +167,8 @@ export default {
       clearInterval(state.interval);
       state.interval = false;
 
-      // state.intervalAutoplay = false;
-      // autoPlay();
+      state.intervalAutoplay = false;
+      autoPlay();
     };
 
     const autoPlay = () => {
