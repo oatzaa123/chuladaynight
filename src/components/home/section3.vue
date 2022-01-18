@@ -1,13 +1,23 @@
 <template>
   <div id="section3" class="section3">
-    <div class="left-arrow" @mousedown="Arrow(-2)" @mouseup="ArrowStop()">
+    <div
+      class="left-arrow"
+      @mousedown="Arrow(-2)"
+      @mouseup="ArrowStop()"
+      v-if="!TouchDevice"
+    >
       <button class="btn customButton">
         <div class="arrow"></div>
         <div class="left"></div>
       </button>
     </div>
 
-    <div class="right-arrow" @mousedown="Arrow(2)" @mouseup="ArrowStop()">
+    <div
+      class="right-arrow"
+      @mousedown="Arrow(2)"
+      @mouseup="ArrowStop()"
+      v-if="!TouchDevice"
+    >
       <button class="btn customButton">
         <div class="arrow"></div>
         <div class="right"></div>
@@ -92,6 +102,8 @@ export default {
       throw new Error(errorMessage);
     }
 
+    var TouchDevice = false;
+
     const ele = document.getElementsByClassName("items");
     const state = reactive({
       isDown: false,
@@ -103,6 +115,8 @@ export default {
     });
 
     const mousedown = (e) => {
+      if (TouchDevice) return;
+
       if (state.intervalAutoplay) {
         clearInterval(state.intervalAutoplay);
         state.intervalAutoplay = false;
@@ -115,6 +129,8 @@ export default {
       state.scrollLeft = slider.scrollLeft;
     };
     const mouseup = () => {
+      if (TouchDevice) return;
+
       const slider = ele[0];
       state.isDown = false;
       slider.classList.remove("active");
@@ -139,6 +155,8 @@ export default {
       autoPlay();
     };
     const mousemove = (e) => {
+      if (TouchDevice) return;
+
       const slider = ele[0];
       if (!state.isDown) return;
       e.preventDefault();
@@ -190,7 +208,18 @@ export default {
         }, 10);
     };
 
+    const checkDevice = (type) => {
+      if ("ontouchstart" in document.documentElement) {
+        TouchDevice = true;
+        console.log("🚀 ~ your device is a touch screen device.", type);
+      } else {
+        TouchDevice = false;
+        console.log("🚀 ~ your device is NOT a touch device.", type);
+      }
+    };
+
     onMounted(() => {
+      checkDevice("onMounted");
       autoPlay();
     });
 
@@ -204,6 +233,7 @@ export default {
       mousemove,
       Arrow,
       ArrowStop,
+      TouchDevice,
     };
   },
 };
