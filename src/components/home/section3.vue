@@ -219,7 +219,7 @@ export default {
     };
 
     onMounted(() => {
-      checkDevice("onMounted");
+      window.addEventListener("resize", checkDevice("onMounted"));
       autoPlay();
     });
 
