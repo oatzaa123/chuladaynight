@@ -1,62 +1,34 @@
 <template>
   <div id="section3" class="section3">
-    <div
-      class="left-arrow"
-      @mousedown="Arrow(-2)"
-      @mouseup="ArrowStop()"
-      v-if="!TouchDevice"
-    >
-      <button class="btn customButton">
+    <div class="left-arrow">
+      <button @click.prevent="onBackwardClick" class="btn customButton">
         <div class="arrow"></div>
         <div class="left"></div>
       </button>
     </div>
-
-    <div
-      class="right-arrow"
-      @mousedown="Arrow(2)"
-      @mouseup="ArrowStop()"
-      v-if="!TouchDevice"
-    >
-      <button class="btn customButton">
+    <div class="right-arrow">
+      <button @click.prevent="onForwardClick" class="btn customButton">
         <div class="arrow"></div>
         <div class="right"></div>
       </button>
     </div>
-    <!-- <div class="overlay"></div> -->
-    <!-- <div class="sec3-img" @mousedown="clickImg($event)">
-      <img
-        :src="require('@/assets/images/gallery/Image 1.png')"
-        draggable="false"
-      />
-      <img
-        :src="require('@/assets/images/gallery/Image 1.png')"
-        draggable="false"
-      />
-    </div> -->
 
-    <div class="slide-container" data-test="11">
-      <div
-        class="items"
-        @mousedown="mousedown($event)"
-        @mouseup="mouseup()"
-        @mousemove="mousemove($event)"
-      >
-        <template v-if="data.Gallery">
-          <div
-            class="item"
-            :data-length="data.Gallery.length"
-            data-fesa-num="8"
+    <div class="container">
+      <div class="row">
+        <splide :options="slideOptions" v-if="blocks.Gallery">
+          <splide-slide
+            v-for="slide in blocks.Gallery"
+            :key="slide._id"
+            class="slide-items"
           >
-            <template v-for="(i, index) in data.Gallery" :key="index">
-              <ImageView
-                v-if="i.coverImage"
-                :imagePath="i.coverImage.path"
-                :imageName="i.coverImage.name"
+            <div class="img col-sm">
+              <img
+                v-if="slide.coverImage"
+                :src="getImage(slide.coverImage.name, slide.coverImage.path)"
               />
-            </template>
-          </div>
-        </template>
+            </div>
+          </splide-slide>
+        </splide>
       </div>
     </div>
 
@@ -83,15 +55,23 @@
 </template>
 
 <script>
+import { Splide, SplideSlide } from "@splidejs/vue-splide";
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import { useRouter } from "vue-router";
 import useGallery from "@/hooks/useGallery";
-import ImageView from "@/components/ImageView";
-import { onMounted, reactive } from "vue";
+import { ref, computed } from "vue";
+// import ImageView from "@/components/ImageView";
+// import { onMounted, reactive } from "vue";
 export default {
-  components: { ImageView },
+  components: {
+    // ImageView,
+    Splide,
+    SplideSlide,
+  },
   setup() {
     const { data, getAll, errorMessage } = useGallery();
     const router = useRouter();
+
     const onPageChanged = () => {
       router.push({ name: "Gallery" });
     };
@@ -102,138 +82,51 @@ export default {
       throw new Error(errorMessage);
     }
 
-    var TouchDevice = false;
+    const getImage = (imageName, imagePath) => {
+      return `${process.env.VUE_APP_PATH_IMAGE}/${imagePath}/${imageName}`;
+    };
 
-    const ele = document.getElementsByClassName("items");
-    const state = reactive({
-      isDown: false,
-      startX: 0,
-      scrollLeft: 0,
-      interval: false,
-      intervalAutoplay: false,
-      AutoplayPageX: 1,
+    const slideOptions = ref({
+      type: "loop",
+      perPage: 2,
+      rewind: true,
+      pagination: false,
+      autoplay: true,
+      pauseOnHover: false,
+      gap: "1rem",
+      perMove: 1,
+      classes: {
+        prev: "splide__arrow--prev section3-prev",
+        next: "splide__arrow--next section3-next",
+      },
+      breakpoints: {
+        768: {
+          perPage: 2,
+        },
+        426: {
+          perPage: 1,
+        },
+      },
     });
 
-    const mousedown = (e) => {
-      if (TouchDevice) return;
-
-      if (state.intervalAutoplay) {
-        clearInterval(state.intervalAutoplay);
-        state.intervalAutoplay = false;
-      }
-
-      const slider = ele[0];
-      slider.classList.add("active");
-      state.isDown = true;
-      state.startX = e.pageX - slider.offsetLeft;
-      state.scrollLeft = slider.scrollLeft;
-    };
-    const mouseup = () => {
-      if (TouchDevice) return;
-
-      const slider = ele[0];
-      state.isDown = false;
-      slider.classList.remove("active");
-      state.scrollLeft = slider.scrollLeft;
-
-      state.intervalAutoplay = false;
-      autoPlay();
-    };
-    const mouseover = () => {
-      if (state.intervalAutoplay) {
-        clearInterval(state.intervalAutoplay);
-        state.intervalAutoplay = false;
-      }
-    };
-    const mouseleave = () => {
-      const slider = ele[0];
-      state.isDown = false;
-      slider.classList.remove("active");
-      state.scrollLeft = slider.scrollLeft;
-
-      state.intervalAutoplay = false;
-      autoPlay();
-    };
-    const mousemove = (e) => {
-      if (TouchDevice) return;
-
-      const slider = ele[0];
-      if (!state.isDown) return;
-      e.preventDefault();
-      const x = e.pageX - slider.offsetLeft;
-      const walk = (x - state.startX) * 1; //scroll-fast
-      slider.scrollLeft = state.scrollLeft - walk;
+    const onForwardClick = () => {
+      let next = document.getElementsByClassName("section3-next");
+      next[0].click();
     };
 
-    const Arrow = (pageX) => {
-      if (!state.interval) {
-        state.interval = setInterval(() => {
-          const slider = ele[0];
-          state.startX = (state.startX || 0) + pageX;
-          state.scrollLeft = (state.scrollLeft || 0) + pageX;
-          slider.scrollLeft = state.scrollLeft;
-        }, 0);
-
-        if (state.intervalAutoplay) {
-          clearInterval(state.intervalAutoplay);
-          state.intervalAutoplay = false;
-        }
-      }
+    const onBackwardClick = () => {
+      let prev = document.getElementsByClassName("section3-prev");
+      prev[0].click();
     };
-
-    const ArrowStop = () => {
-      clearInterval(state.interval);
-      state.interval = false;
-
-      state.intervalAutoplay = false;
-      autoPlay();
-    };
-
-    const autoPlay = () => {
-      if (!state.intervalAutoplay)
-        state.intervalAutoplay = setInterval(() => {
-          const slider = ele[0];
-          if (slider) {
-            state.startX = (state.startX || 0) + state.AutoplayPageX;
-            state.scrollLeft = (state.scrollLeft || 0) + state.AutoplayPageX;
-            slider.scrollLeft = state.scrollLeft;
-
-            let scrollMax = slider.scrollWidth - slider.clientWidth;
-            if (slider.scrollLeft == scrollMax) {
-              state.AutoplayPageX = -1;
-            } else if (slider.scrollLeft == 0) {
-              state.AutoplayPageX = 1;
-            }
-          }
-        }, 10);
-    };
-
-    const checkDevice = (type) => {
-      if ("ontouchstart" in document.documentElement) {
-        TouchDevice = true;
-        console.log("🚀 ~ your device is a touch screen device.", type);
-      } else {
-        TouchDevice = false;
-        console.log("🚀 ~ your device is NOT a touch device.", type);
-      }
-    };
-
-    onMounted(() => {
-      window.addEventListener("resize", checkDevice("onMounted"));
-      autoPlay();
-    });
 
     return {
       data,
+      blocks: computed(() => data.value),
       onPageChanged,
-      mousedown,
-      mouseup,
-      mouseover,
-      mouseleave,
-      mousemove,
-      Arrow,
-      ArrowStop,
-      TouchDevice,
+      getImage,
+      slideOptions,
+      onBackwardClick,
+      onForwardClick,
     };
   },
 };
