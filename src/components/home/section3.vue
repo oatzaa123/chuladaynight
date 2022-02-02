@@ -88,7 +88,7 @@ export default {
 
     const slideOptions = ref({
       type: "loop",
-      perPage: 2,
+      perPage: 3,
       rewind: true,
       pagination: false,
       autoplay: true,
